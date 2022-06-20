@@ -12,11 +12,14 @@
     </audio>
     <div class="audioPanel">
       <div style="padding-top: 1%;padding-right: 1%" class="playBtn" @click="playAudio">
-        <i style="background-color: #8c939d" v-show="audioStatus == 1" class="el-icon-video-pause el-icon--right"></i>
-        <i style="background-color: #8c939d" v-show="audioStatus == 0" class="el-icon-video-play el-icon--right"></i>
+        <i style="color: #8c939d;" v-show="audioStatus == 1" class="el-icon-video-pause el-icon--right"></i>
+        <i style="color: #8c939d;" v-show="audioStatus == 0" class="el-icon-video-play el-icon--right"></i>
+      </div>
+      <div class="duration">
+        <input type="range" ref="range" @input="onChange" @change="onChange" min="0" max="100" :value="value">
       </div>
       <div class="slidList">
-        <span style="color: #8c939d">{{fileUrl.name}}</span>
+        <span style="color: rgb(245, 245, 245)">{{fileUrl.name}}</span>
         <span class="timers">{{ videoStart }}/{{ transTime(duration) }}</span>
       </div>
     </div>
@@ -86,6 +89,13 @@
         }
         this.value = value * 100
         this.videoStart = this.transTime(this.$refs.audioRef.currentTime)
+        if (e.target.ended) {//歌曲播放结束,重置状态
+          this.audioStatus = 0
+          this.videoStart = '00:00'
+          this.value = 0
+          this.duration = 0
+          this.isToPla = false
+        }
       },
       /**
        * 音频播放时间换算
@@ -103,8 +113,9 @@
         return time
       },
       // 进度条
-      onChange(val) {
+      onChange() {
         let recordAudio = this.$refs.audioRef //获取audio元素
+        let val = this.$refs.range.value
         if (!recordAudio.paused || recordAudio.currentTime != 0) {
           recordAudio.currentTime = (recordAudio.duration * val) / 100
           this.videoStart = this.transTime((val / 100) * this.duration)
@@ -134,17 +145,36 @@
         right: 0px;
       }
     }
+  }
 
-    .slide {
-      width: 100%;
-    }
 
-    .playBtn {
-      height: 30px;
+  [type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+    outline: 0;
+    background-color: transparent;
+    width: 100%;
+  }
 
-      img {
-        height: 100%;
-      }
-    }
+  [type="range"]::-webkit-slider-runnable-track {
+    height: 3px;
+    background: #eee;
+  }
+
+  [type="range" i]::-webkit-slider-container {
+    height: 3px;
+    overflow: hidden;
+  }
+
+  [type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    margin-top: -8px;
+    border-image: linear-gradient(#f44336, #f44336) 0 fill / 0 0 0 0 / 0 0 0 1000px;
   }
 </style>
