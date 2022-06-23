@@ -11,8 +11,8 @@
             <div style="width: 100%;height: 40%">
               <table class="divBase">
                 <tr>
-                  <td style="width: 30%;color: #F5F5F5;font-size: 28px;vertical-align: top">
-                    <div style="padding-top: 15%">
+                  <td style="width: 30%;color: #F5F5F5;font-size: 28px;vertical-align: top;position: relative">
+                    <div style="top: 20%;left: 20%;position: absolute">
                       WHAT WE DO
                     </div>
                   </td>
@@ -32,65 +32,46 @@
               </table>
             </div>
             <div style="width: 100%;height: 10%;color: #F5F5F5;font-size: 18px;font-style:oblique;">
-              <table class="divBase">
+              <table class="divBase" v-if="!showVideo">
                 <tr>
-                  <td style="width: 25%;vertical-align: bottom;text-align: right">MUSIC</td>
+                  <td style="width: 12%;vertical-align: bottom;text-align: right">MUSIC</td>
                   <td style="width: 25%;vertical-align: bottom;text-align: center">SOUND DESIGN</td>
                   <td style="width: 18%;vertical-align: bottom;text-align: left">VOICE ACTING</td>
                   <td style="width: 37%;vertical-align: bottom;text-align: left">GAME AUDIO PIPELINE</td>
                 </tr>
               </table>
             </div>
-            <div style="width: 100%;height: 10%">
-              <table v-show="!watchVideoOrNot" class="divBase">
-                <tr>
-                  <td style="width: 33%;vertical-align: bottom;text-align: right">
-                    <el-button @click="watchVideoOrNot = !watchVideoOrNot" type="danger">WATCH VIDEO<i class="el-icon-caret-right el-icon--right"></i></el-button>
-                  </td>
-                  <td></td>
-                </tr>
-              </table>
-            </div>
-            <div style="width: 100%;height: 40%">
-              <table v-show="!watchVideoOrNot" class="divBase">
-                <tr>
-                  <td style="width: 40%;vertical-align: middle;text-align: right;color: #BAB9B6;">
-                    <ul>
-                      <li v-for="(item) in links">
-                        <a target="_blank" :href="item.value">{{item.key}}</a>
-                      </li>
-                    </ul>
-                  </td>
-                  <td style="color: #BAB9B6;text-align:left;vertical-align: top;">
-                    <div style="padding-top: 7%">
-                      "We've worked with Salt Sound Studio for a number of years, those gyus have agreat ear for music and help to bring the best out of each song,
-                    </div>
-                    <div style="padding-top: 2%">
-                      lt's always a pleasure to work together.
-                    </div>
-                    <div style="padding-top: 2%">
-                      We recommend anyone who wants a high quality professional sound to book SaltSound Studio."
-                    </div>
-                  </td>
-                </tr>
-              </table>
 
-              <table v-show="watchVideoOrNot" class="divBase">
+            <div style="width: 100%;height: 50%;">
+              <table class="divBase">
                 <tr>
-                  <td style="color: #BAB9B6;width: 40%;vertical-align: middle;font-style:oblique;">
-                    <div @click="watchVideoOrNot = !watchVideoOrNot">BACK TO TESTIMONIALS</div>
+                  <td style="width: 30%;height: 100%;position: relative">
+                    <ul @click="showVideo = !showVideo" v-if="showVideo">
+                      <li>MUSIC</li>
+                      <li>SOUND DESIGN</li>
+                      <li>VOICE ACTING</li>
+                      <li>GAME AUDIO PIPELINE</li>
+                    </ul>
+                    <div style="width: 100%;height: 100%;position: relative" v-if="!showVideo">
+                      <video style="position: absolute;width: 70%;left: 20%;top: 10%;height: 70%;" controls>
+                        <source :src="firstVideo"  type="video/mp4">
+                      </video>
+                    </div>
                   </td>
-                  <td style="width: 60%;text-align: left">
-                    <video width="45%" controls>
-                      <source :src="firstVideo"  type="video/mp4">
-                    </video>
+
+                  <td style="width: 70%;height: 100%;position: relative">
+                    <div style="width: 70%;height: 50%;position: absolute;left: 0;top: 15%;overflow: hidden">
+                      <div ref="carouselImgBox" class="carouselImgBox">
+                        <img style="width: 100%;height: 100%" v-for="item in carouselImgPaths" :src="item" />
+                      </div>
+                    </div>
                   </td>
                 </tr>
               </table>
             </div>
           </td>
 
-          <td style="width: 20%;">
+          <td style="width: 20%;padding-left: 2%">
             <contacts></contacts>
           </td>
         </tr>
@@ -103,23 +84,46 @@
   import toolbar from './components/toolbar'
   import contacts from './components/contacts'
 
+  import boxes from './commonScripts/moveBackground'
+
   export default {
     name: 'ourServices',
     components: { toolbar, contacts },
     data() {
       return {
+        showVideo:true,
         links:[{key:'PERFECT WORLD GAMES',value:'https://www.baidu.com'},{key:'FUN PLUS',value:'https://www.baidu.com'},{key:'TOP JOY',value:'https://www.baidu.com'},{key:'CENTURY GAMES',value:'https://www.baidu.com'}],
         watchVideoOrNot:false,
         firstVideo: require('@/assets/404_images/movie.mp4'),
+        carouselImgPaths:[require('@/assets/images/font.png'),require('@/assets/images/font2.png'),require('@/assets/images/font3.png')]
       }
+    },
+    mounted() {
+      let carouselImages = this.$refs.carouselImgBox.children;
+      let carouselIndex = 0;
+      setInterval(function() {
+          carouselImages[carouselIndex].style.display = 'none';
+          if(++carouselIndex == carouselImages.length){
+            carouselIndex = 0;
+          }
+          carouselImages[carouselIndex].style.display = 'block';
+      },5000);
     }
   }
 </script>
 
 <style scoped>
+  @import './commonCSS/moveBackground.scss';
+
   .divBase {
     width: 100%;
     height: 100%;
+  }
+
+  .carouselImgBox{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
   }
 
   >>> .el-breadcrumb__inner {
@@ -133,11 +137,17 @@
   }
 
   ul{
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    padding: 0;
     list-style-type: none;
     height: 100%;
-    padding-top: 10%;
+    width: 100%;
     text-align: left;
-    padding-left: 50%;
+    color: #F5F5F5;
+    font-size: 18px;
+    font-style:oblique;
   }
 
   li{

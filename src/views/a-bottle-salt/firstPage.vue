@@ -1,7 +1,16 @@
 <template>
   <div class="divBase">
 
-    <div style="height: 10%;width: 100%">
+<!--    <video ref="firstVideo" class="backGroundStyle">-->
+<!--      <source :src="firstVideo"  type="video/mp4">-->
+<!--    </video>-->
+    <div ref="backGroundBox" class="box">
+      <div class="image-wrap">
+        <div class="image" :style="{backgroundImage: `url(${firstPage})`}"></div>
+      </div>
+    </div>
+
+    <div style="height: 10%;width: 100%;background-color: #0D0D0D;">
       <toolbar></toolbar>
     </div>
 
@@ -10,9 +19,7 @@
         <tr>
           <td style="width: 80%;text-align: center">
             <div style="width: 100%;">
-              <video width="65%" controls>
-                <source :src="firstVideo"  type="video/mp4">
-              </video>
+
             </div>
           </td>
           <td style="width: 20%;">
@@ -32,7 +39,7 @@
           </td>
           <td style="width: 65%;text-align: right">
             <span style="color: #FFFFFF">
-              预留功能
+              <el-button style="padding: 10px 10px" type="danger">预留功能<i class="el-icon-caret-right el-icon--right"></i></el-button>
             </span>
           </td>
         </tr>
@@ -46,27 +53,80 @@
   import toolbar from './components/toolbar'
   import contacts from './components/contacts'
 
+  import boxes from './commonScripts/moveBackground'
+
   export default {
     name: 'firstPage',
     components: { toolbar,contacts },
     data() {
       return {
-        firstVideo: require('@/assets/404_images/movie.mp4'),
-        fontFamily:''
+        firstVideo: 'https://video.kekedj.com/video_kekedj_com/2021/202104/20210401/%E6%9C%80%E5%BC%BA%E7%94%B5%E9%9F%B3%E9%A5%95%E9%A4%AE%E7%9B%9B%E5%AE%B4-Alan%20Walker%20@%20Parookaville%20Festival%202019-%E8%89%BE%E4%BC%A6%E6%B2%83%E5%85%8B%E7%8E%B0%E5%9C%BA%E8%B6%85%E5%97%A8%E8%87%B3%E5%B0%8A%E6%94%B6%E8%97%8F%E7%89%88.mp4',
+        firstPage:'https://img1.baidu.com/it/u=3569420573,2690721824&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500',
+        fontFamily:'',
       }
     },
     created() {
       this.$store.commit('fontFamily/CHANGE_FONT_FAMILY','cursive');
       this.fontFamily = this.$store.getters.geFontFamily;
-    }
+    },
+    mounted(){
+      let video = this.$refs.firstVideo;
+      if(video) {
+        video.addEventListener("canplay", function() { //获取播放声音权限
+          video.play().catch(function() {
+            navigator.mediaDevices
+              .getUserMedia({ audio: true })
+              .then(function() {
+                video.play();
+              })
+              .catch(function() {
+                // 获取权限错误，则静音播放
+                video.muted = true;
+                video.play();
+              });
+          });
+        });
+        video.addEventListener('ended', function() { //视频循环播放
+          video.play();
+        });
+      }
+
+      let boxElement = this.$refs.backGroundBox;
+      boxes.push({
+        el: boxElement,
+        targetX: 0,
+        targetY: 0,
+        x: 0,
+        y: 0,
+        left: boxElement.offsetLeft,
+        top: boxElement.offsetTop,
+        size: boxElement.offsetWidth
+      });
+
+    },//end of mounted
+    methods:{
+
+    }//end methods
   }
 </script>
 
 <style scoped>
+  @import './commonCSS/moveBackground.scss';
+
   * {
     margin: 0;
     padding: 0
   }
+
+  .backGroundStyle{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index:-1;
+    object-fit:fill;
+    opacity: 0.9;
+  }
+
 
   .divBase {
     width: 100%;
