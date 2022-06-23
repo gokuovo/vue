@@ -32,12 +32,12 @@
               </table>
             </div>
             <div style="width: 100%;height: 10%;color: #F5F5F5;font-size: 18px;font-style:oblique;">
-              <table class="divBase" v-if="!showVideo">
-                <tr>
-                  <td style="width: 12%;vertical-align: bottom;text-align: right">MUSIC</td>
-                  <td style="width: 25%;vertical-align: bottom;text-align: center">SOUND DESIGN</td>
-                  <td style="width: 18%;vertical-align: bottom;text-align: left">VOICE ACTING</td>
-                  <td style="width: 37%;vertical-align: bottom;text-align: left">GAME AUDIO PIPELINE</td>
+              <table class="divBase" v-show="!showVideo">
+                <tr ref="childTr">
+                  <td @click="fontButtonClick(0)" style="width: 12%;vertical-align: bottom;text-align: right">MUSIC</td>
+                  <td @click="fontButtonClick(1)" style="width: 25%;vertical-align: bottom;text-align: center">SOUND DESIGN</td>
+                  <td @click="fontButtonClick(2)" style="width: 18%;vertical-align: bottom;text-align: left">VOICE ACTING</td>
+                  <td @click="fontButtonClick(3)" style="width: 37%;vertical-align: bottom;text-align: left">GAME AUDIO PIPELINE</td>
                 </tr>
               </table>
             </div>
@@ -47,14 +47,14 @@
                 <tr>
                   <td style="width: 30%;height: 100%;position: relative">
                     <ul @click="showVideo = !showVideo" v-if="showVideo">
-                      <li>MUSIC</li>
-                      <li>SOUND DESIGN</li>
-                      <li>VOICE ACTING</li>
-                      <li>GAME AUDIO PIPELINE</li>
+                      <li @click="fontButtonClick(0)" class="fontButton">MUSIC</li>
+                      <li @click="fontButtonClick(1)" class="fontButton">SOUND DESIGN</li>
+                      <li @click="fontButtonClick(2)" class="fontButton">VOICE ACTING</li>
+                      <li @click="fontButtonClick(3)" class="fontButton">GAME AUDIO PIPELINE</li>
                     </ul>
                     <div style="width: 100%;height: 100%;position: relative" v-if="!showVideo">
                       <video style="position: absolute;width: 70%;left: 20%;top: 10%;height: 70%;" controls>
-                        <source :src="firstVideo"  type="video/mp4">
+                        <source :src="showingInfo.firstVideo"  type="video/mp4">
                       </video>
                     </div>
                   </td>
@@ -62,7 +62,7 @@
                   <td style="width: 70%;height: 100%;position: relative">
                     <div style="width: 70%;height: 50%;position: absolute;left: 0;top: 15%;overflow: hidden">
                       <div ref="carouselImgBox" class="carouselImgBox">
-                        <img style="width: 100%;height: 100%" v-for="item in carouselImgPaths" :src="item" />
+                        <img style="width: 100%;height: 100%" v-for="item in showingInfo.carouselImgPaths" :src="item" />
                       </div>
                     </div>
                   </td>
@@ -92,28 +92,56 @@
     data() {
       return {
         showVideo:true,
-        links:[{key:'PERFECT WORLD GAMES',value:'https://www.baidu.com'},{key:'FUN PLUS',value:'https://www.baidu.com'},{key:'TOP JOY',value:'https://www.baidu.com'},{key:'CENTURY GAMES',value:'https://www.baidu.com'}],
         watchVideoOrNot:false,
-        firstVideo: require('@/assets/404_images/movie.mp4'),
-        carouselImgPaths:[require('@/assets/images/font.png'),require('@/assets/images/font2.png'),require('@/assets/images/font3.png')]
+        infoDetails:[
+          {
+            firstVideo: require('@/assets/404_images/movie.mp4'),
+            carouselImgPaths:[require('@/assets/images/font.png'),require('@/assets/images/font2.png'),require('@/assets/images/font3.png')]
+          },
+          {
+            firstVideo: require('@/assets/404_images/movie.mp4'),
+            carouselImgPaths:[require('@/assets/images/font.png'),require('@/assets/images/font2.png'),require('@/assets/images/font3.png')]
+          },
+        ],
+        showingInfo:{},
+        // links:[{key:'PERFECT WORLD GAMES',value:'https://www.baidu.com'},{key:'FUN PLUS',value:'https://www.baidu.com'},{key:'TOP JOY',value:'https://www.baidu.com'},{key:'CENTURY GAMES',value:'https://www.baidu.com'}],
       }
+    },
+    created(){
+      this.showingInfo = this.infoDetails[0];
     },
     mounted() {
       let carouselImages = this.$refs.carouselImgBox.children;
       let carouselIndex = 0;
-      setInterval(function() {
+      setInterval(function() {//循环播放图片
           carouselImages[carouselIndex].style.display = 'none';
           if(++carouselIndex == carouselImages.length){
             carouselIndex = 0;
           }
           carouselImages[carouselIndex].style.display = 'block';
       },5000);
+    },
+    methods:{
+      fontButtonClick(index){
+        let childrens = this.$refs.childTr.childNodes;
+        for(let i = 0;i < childrens.length;i++){
+          if(i == index){
+            childrens[i].style.color = 'red';
+          }else{
+            childrens[i].style.color = '#F5F5F5';
+          }
+        }
+      },
     }
   }
 </script>
 
 <style scoped>
   @import './commonCSS/moveBackground.scss';
+
+  .fontButton:hover{
+    color: red;
+  }
 
   .divBase {
     width: 100%;
