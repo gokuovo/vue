@@ -10,19 +10,25 @@
       <source :src="fileUrl.srcPath" type="audio/mpeg"/>
       您的浏览器不支持音频播放
     </audio>
-    <div class="audioPanel">
-      <div style="padding-top: 1%;padding-right: 1%" class="playBtn" @click="playAudio">
-        <i style="color: #8c939d;" v-show="audioStatus == 1" class="el-icon-video-pause el-icon--right"></i>
-        <i style="color: #8c939d;" v-show="audioStatus == 0" class="el-icon-video-play el-icon--right"></i>
-      </div>
-      <div class="duration">
-        <input type="range" ref="range" @input="onChange" @change="onChange" min="0" max="100" :value="value">
-      </div>
-      <div class="slidList">
-        <span style="color: rgb(245, 245, 245)">{{fileUrl.name}}</span>
-        <span class="timers">{{ videoStart }}/{{ transTime(duration) }}</span>
-      </div>
-    </div>
+    <table class="myAudio">
+      <tr>
+        <td style="vertical-align: bottom;">
+          <div class="audioPanel">
+            <div style="padding-top: 3%;padding-right: 1%" class="playBtn" @click="playAudio">
+              <i style="color: #8c939d;" v-show="audioStatus == 1" class="el-icon-video-pause el-icon--right"></i>
+              <i style="color: #8c939d;" v-show="audioStatus == 0" class="el-icon-video-play el-icon--right"></i>
+            </div>
+            <div class="slidList">
+              <span class="songName" style="color: rgb(245, 245, 245);font-style: italic">{{fileUrl.name}}</span>
+              <span class="timers">{{ videoStart }}/{{ transTime(duration) }}</span>
+            </div>
+          </div>
+          <div class="duration">
+            <input type="range" ref="range" @input="onChange" @change="onChange" min="0" max="100" :value="value">
+          </div>
+        </td>
+      </tr>
+    </table>
   </div>
 </template>
 
@@ -66,11 +72,11 @@
         this.duration = this.$refs.audioRef.duration
       },
       //播放暂停控制
-      playAudio(e) {
+      playAudio() {
         this.isToPla = true
         let recordAudio = this.$refs.audioRef //获取audio元素
         if (recordAudio.paused) {
-          recordAudio.play()
+          recordAudio.play();
           this.audioStatus = 1
         } else {
           recordAudio.pause()
@@ -88,7 +94,9 @@
           return
         }
         this.value = value * 100
-        this.videoStart = this.transTime(this.$refs.audioRef.currentTime)
+        if(this.$refs.audioRef) {
+          this.videoStart = this.transTime(this.$refs.audioRef.currentTime)
+        }
         if (e.target.ended) {//歌曲播放结束,重置状态
           this.audioStatus = 0
           this.videoStart = '00:00'
@@ -126,10 +134,14 @@
 </script>
 
 <style lang="scss" scoped>
+  .myAudio{
+    width: 100%;
+    height: 100%;
+  }
   .audioPanel {
     display: flex;
     align-items: center;
-    height: 40px;
+    height: 20px;
 
     .slidList {
       position: relative;
@@ -138,15 +150,16 @@
       .timers {
         color: #bdbdbd;
         font-family: PingFang SC;
-        font-size: 12px;
         text-align: left;
         position: absolute;
-        top: 10px;
+        top: 5px;
         right: 0px;
+      }
+      .songName{
+        position: absolute;
       }
     }
   }
-
 
   [type="range"] {
     -webkit-appearance: none;
@@ -158,12 +171,20 @@
   }
 
   [type="range"]::-webkit-slider-runnable-track {
-    height: 3px;
+    height: 2px;
+    background: #eee;
+  }
+  [type="range"]::-webkit-slider-runnable-track:hover {
+    height: 5px;
     background: #eee;
   }
 
   [type="range" i]::-webkit-slider-container {
-    height: 3px;
+    height: 2px;
+    overflow: hidden;
+  }
+  [type="range" i]::-webkit-slider-container:hover {
+    height: 5px;
     overflow: hidden;
   }
 
