@@ -30,20 +30,20 @@
     </div>
 
     <div style="height: 10%">
-      <table class="divBase">
-        <tr>
-          <td style="width: 15%">
-            <span :style="{'color': '#FFFFFF','font-family': fontFamily}">
-              字体（需要能更换主题字体）
-            </span>
-          </td>
-          <td style="width: 65%;text-align: right">
-            <span style="color: #FFFFFF">
-              <el-button style="padding: 10px 10px" type="danger">预留功能<i class="el-icon-caret-right el-icon--right"></i></el-button>
-            </span>
-          </td>
-        </tr>
-      </table>
+<!--      <table class="divBase">-->
+<!--        <tr>-->
+<!--          <td style="width: 15%">-->
+<!--            <span :style="{'color': '#FFFFFF','font-family': fontFamily}">-->
+<!--              字体（需要能更换主题字体）-->
+<!--            </span>-->
+<!--          </td>-->
+<!--          <td style="width: 65%;text-align: right">-->
+<!--            <span style="color: #FFFFFF">-->
+<!--              <el-button style="padding: 10px 10px" type="danger">预留功能<i class="el-icon-caret-right el-icon&#45;&#45;right"></i></el-button>-->
+<!--            </span>-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--      </table>-->
     </div>
 
   </div>

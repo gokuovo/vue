@@ -91,7 +91,7 @@
                     <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 14px;font-style: italic;">COMPANY:{{item.company}}</div>
                     <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 14px;font-style: italic;">PLATFORM:{{item.platform}}</div>
                     <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-style: italic;">
-                      <a :href="item.link" :target="item.link.indexOf('http') != -1 ? '_blank' : '_self' ">EXPLORE&emsp;<i style="color: red" class="el-icon-top-right"></i></a>
+                      <a class="linkHover" :href="item.link" :target="item.link.indexOf('http') != -1 ? '_blank' : '_self' "><span style="font-size: 13px">EXPLORE</span>&emsp;<i style="color: red" class="el-icon-top-right"></i></a>
                     </div>
                   </div>
                 </div>
@@ -384,6 +384,11 @@
     height: 100%;
   }
 
+  .linkHover:hover{
+    background-color:rgba(115,178,230,0.4);
+    border: #0a76a4 1px solid;
+  }
+
   .musicItem:hover{
     color: rgb(245, 245, 245)!important;
   }
@@ -399,8 +404,8 @@
   }
 
   .selfDefineScroll::-webkit-scrollbar {
-    width: 5px;
-    height: 10px;
+    width: 5px !important;
+    height: 5px !important;
     background-color: #b5b1b1;
   }
 
@@ -412,10 +417,12 @@
   }
 
   .selfDefineScroll::-webkit-scrollbar-thumb {
-    width: 20px;
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-    background-color: #b5b1b1;
+    opacity: 0.8;
+    height: 20px;
+    background: #d1d8e6;
+    border-radius: 19px;
+    border: 2px solid transparent;
+    background-clip: content-box;
   }
 
   * {

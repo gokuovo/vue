@@ -10,7 +10,7 @@
           <td style="width: 65%">
             <el-breadcrumb separator="   ">
               <el-breadcrumb-item :to="item.srcPath" v-for="item in breadcrumbs" :key="item.srcPath">
-                <span style="font-style: italic">{{item.name}}</span>
+                <span class="barFont" style="font-style: italic">{{item.name}}</span>
               </el-breadcrumb-item>
             </el-breadcrumb>
           </td>
@@ -80,5 +80,7 @@
 </script>
 
 <style scoped>
-
+  .barFont:hover{
+    color: red;
+  }
 </style>
