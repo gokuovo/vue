@@ -13,22 +13,21 @@
                   <div style="width: 100%;padding-top: 10%;font-style: italic">{{this.showingAlbum.key}}</div>
                 </div>
                 <div style="width: 100%;height: 60%;">
-                  <div style="height: 12%;width: 80%;background-color: #383838">
-                    <audioCom ref="children" :key="playingMusic.id" :fileUrl="playingMusic"></audioCom>
-                  </div>
-                  <div class="selfDefineScroll" style="overflow-y: auto;height: 85%;width: 80%;padding-top: 2%">
+                  <div class="selfDefineScroll" style="overflow-y: auto;height: 85%;width: 80%;">
                     <ul>
-                      <li style="width: 100%;height: 10%;margin-top: 1%" v-for="(item) in albumDetail.music">
-                        <div class="musicItem" :ref="item.id" @click="musicItemClick(item)" style="color: #8c939d;position: relative">
-                          <span style="font-size: 14px;font-style: italic">{{item.name}}</span>
+                      <li style="width: 100%;height: 15%;" v-for="(item) in albumDetail.music">
+                        <div :ref="item.id+'_audio'" class="audioDiv" style="width: 100%;height :100%;display: none;">
+                          <audioCom style="background-color: #383838;margin-bottom: 5%" :ref="item.id+'_children'" :key="item.id" :fileUrl="item"></audioCom>
+                        </div>
 
+                        <div class="musicItem" :ref="item.id" @click="musicItemClick(item)" style="color: #8c939d;position: relative;padding-top: 2%;">
+                          <span style="font-size: 14px;font-style: italic">{{item.name}}</span>
                           <audio v-show="false" :ref="item.name+item.id" controls @canplay="getDuration(item.name+item.id)">
                             <source :src="item.srcPath" type="audio/mpeg"/>
                           </audio>
                           <span v-show="false" style="font-size: 14px;font-style: italic">
                             {{addMusicId(item.name+item.id)}}
                           </span>
-
                           <span style="font-size: 14px;font-style: italic;color: #8c939d;position: absolute;right: 1%">
                             {{getMusicTime(item.name+item.id)}}
                           </span>
@@ -308,17 +307,23 @@
         playingMusic:{},
         showingAlbum: {},
         musicTimes:[],
+        showAudio:false,
       }
     },
     created() {
       if (null != this.albums && this.albums.length > 0) {
         this.showingAlbum = this.albums[0]
       }
-      this.playingMusic = this.albumDetail.music[0];
     },
     mounted(){
       for(let i = 0;i < this.musicTimes.length;i++){
         this.musicTimes[i].value = this.transTime(this.musicTimes[i].key);
+      }
+      let audioDiv = document.getElementsByClassName("audioDiv");
+      let musicItem = document.getElementsByClassName("musicItem");
+      if(audioDiv.length > 0 && musicItem.length > 0) {
+        audioDiv[0].style.display = 'block';
+        musicItem[0].style.display = 'none';
       }
     },
     methods: {
@@ -327,11 +332,22 @@
       },
 
       musicItemClick(item){
-        this.playingMusic = item;
-        let that = this;
-        window.setTimeout(function() {
-          that.$refs.children.playAudio();
-        },500);
+        let audioDiv = document.getElementsByClassName("audioDiv");
+        for(let i = 0;i < audioDiv.length;i++){
+          audioDiv[i].style.display = 'none';
+        }
+        let musicItem = document.getElementsByClassName("musicItem");
+        for(let i = 0;i < musicItem.length;i++){
+          musicItem[i].style.display = 'block';
+        }
+        this.$refs[item.id+"_audio"][0].style.display = 'block';
+        this.$refs[item.id][0].style.display = 'none';
+
+        for(let i = 0;i < this.albumDetail.music.length;i++){
+          let pauseItem = this.albumDetail.music[i].id;
+          this.$refs[pauseItem+"_children"][0].pauseAudio();
+        }
+        this.$refs[item.id+"_children"][0].playAudio();
       },
 
       transTime(value) {

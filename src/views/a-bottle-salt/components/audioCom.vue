@@ -83,6 +83,10 @@
           this.audioStatus = 0
         }
       },
+      pauseAudio(){
+        let recordAudio = this.$refs.audioRef //获取audio元素
+        recordAudio.pause()
+      },
       //更新进度条与当前播放时间
       updateProgress(e) {
         let value = e.target.currentTime / this.duration
