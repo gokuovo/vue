@@ -44,7 +44,7 @@
               <div style="width: 100%;height: 10%;color: #F5F5F5;font-size: 18px;font-style:oblique;">
                 <table class="divBase" v-show="!showVideo">
                   <tr @click="showVideo = !showVideo">
-                    <td style="width: 12%;vertical-align: bottom;text-align: right">MUSIC</td>
+                    <td style="width: 10%;vertical-align: bottom;text-align: right">MUSIC</td>
                     <td style="width: 25%;vertical-align: bottom;text-align: center">SOUND DESIGN</td>
                     <td style="width: 18%;vertical-align: bottom;text-align: left">VOICE ACTING</td>
                     <td style="width: 37%;vertical-align: bottom;text-align: left">GAME AUDIO PIPELINE</td>

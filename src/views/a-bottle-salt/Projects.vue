@@ -16,7 +16,7 @@
                   <div class="selfDefineScroll" style="overflow-y: auto;height: 85%;width: 80%;">
                     <ul>
                       <li style="width: 100%;height: 15%;" v-for="(item) in albumDetail.music">
-                        <div :ref="item.id+'_audio'" class="audioDiv" style="width: 100%;height :100%;display: none;">
+                        <div :ref="item.id+'_audio'" class="audioDiv" style="width: 100%;height :100%;display: none;max-height: 50px">
                           <audioCom style="background-color: #383838;margin-bottom: 5%" :ref="item.id+'_children'" :key="item.id" :fileUrl="item"></audioCom>
                         </div>
 

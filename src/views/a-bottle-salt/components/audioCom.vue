@@ -14,9 +14,15 @@
       <tr>
         <td style="vertical-align: bottom;">
           <div class="audioPanel">
-            <div style="padding-top: 3%;padding-right: 1%" class="playBtn" @click="playAudio">
-              <i style="color: #8c939d;" v-show="audioStatus == 1" class="el-icon-video-pause el-icon--right"></i>
-              <i style="color: #8c939d;" v-show="audioStatus == 0" class="el-icon-video-play el-icon--right"></i>
+            <div style="padding-right: 1%;font-size: 20px" class="playBtn" @click="playAudio">
+              <table style="height: 45px;">
+                <tr>
+                  <td style="vertical-align: bottom">
+                    <i style="color: #8c939d;" v-show="audioStatus == 1" class="el-icon-video-pause el-icon--right"></i>
+                    <i style="color: #8c939d;" v-show="audioStatus == 0" class="el-icon-video-play el-icon--right"></i>
+                  </td>
+                </tr>
+              </table>
             </div>
             <div class="slidList">
               <span class="songName" style="color: rgb(245, 245, 245);font-style: italic">{{fileUrl.name}}</span>
