@@ -70,8 +70,8 @@
               </div>
               <div v-if="!showLIST" class="selfDefineScroll" style="overflow-y: scroll;height: 75%;width: 80%;">
                 <ul>
-                  <li style="width: 100%;height: 33.3%" v-for="(item) in albums">
-                    <div @click="albumsClick(item)" class="divBase imgDiv"
+                  <li style="width: 100%;height: 33.3%" v-for="(item,index) in albums">
+                    <div :ref="'imgDiv_'+index" @click="albumsClick(item,index)" class="divBase imgDiv"
                          :style="{backgroundImage: `url(${item.srcPath})`}">
                     </div>
                   </li>
@@ -325,10 +325,24 @@
         audioDiv[0].style.display = 'block';
         musicItem[0].style.display = 'none';
       }
+
+      for(let i = 0;i < this.albums.length;i++){
+        if(i != 0) {
+          this.$refs["imgDiv_" + i][0].style.filter = "grayscale(1)";
+        }
+      }
+
     },
     methods: {
-      albumsClick(data) {
+      albumsClick(data,index) {
         this.showingAlbum = data;
+        for(let i = 0;i < this.albums.length;i++){
+          if(i != index) {
+            this.$refs["imgDiv_" + i][0].style.filter = "grayscale(1)";
+          }else{
+            this.$refs["imgDiv_" + i][0].style.filter = "grayscale(0)";
+          }
+        }
       },
 
       musicItemClick(item){

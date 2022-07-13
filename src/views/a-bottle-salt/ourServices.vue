@@ -65,7 +65,7 @@
                         </ul>
                       </div>
                       <div style="width: 70%;height: 100%;display: inline-block;position: relative" v-show="showVideo">
-                          <video @click="clickVideo" style="position: absolute;width: 70%;left: 20%;top: 10%;height: 70%;" controlslist="nofullscreen" controls>
+                          <video @click="clickVideo" style="position: absolute;width: 70%;left: 20%;top: 10%;height: 70%;object-fit: fill;" controlslist="nofullscreen" controls>
                             <source :src="showingInfo.firstVideo" type="video/mp4">
                           </video>
                       </div>
@@ -174,6 +174,7 @@
         if(!this.bigVideoIsClicked){
           this.showBigVideo = false;
           this.$refs.selfOpacity.style.opacity = 1;
+          this.$refs.bigVideo.pause();
         }
         this.bigVideoIsClicked = false;
       }
