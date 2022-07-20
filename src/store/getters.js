@@ -12,5 +12,6 @@ const getters = {
   permission_routes: state => state.permission.routes,
   errorLogs: state => state.errorLog.logs,
   geFontFamily: state => state.fontFamily.fontFamily,
+  getLanguage: state => state.settings.language,
 }
 export default getters
