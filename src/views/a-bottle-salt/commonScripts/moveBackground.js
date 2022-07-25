@@ -33,8 +33,8 @@
       // the mouse is in the space over the box - update the box image target
       // position dependent on how far the mouse position is from the center
       // of the box (box size/2)
-      box.targetX = (box.size / 2 - (mousePos.x - box.left)) * 0.1;
-      box.targetY = (box.size / 2 - (mousePos.y - box.top)) * 0.1;
+      box.targetX = (box.size / 2 - (mousePos.x - box.left)) * 0.05;
+      box.targetY = (box.size / 2 - (mousePos.y - box.top)) * 0.05;
     } else {
       // otherwise the box isn't being hovered, its target is 0
       box.targetX = 0;
@@ -43,8 +43,8 @@
 
     // update the image element position by lerping position to target
     // http://codepen.io/rachsmith/post/animation-tip-lerp
-    box.x += (box.targetX - box.x) * 0.2;
-    box.y += (box.targetY - box.y) * 0.2;
+    box.x += (box.targetX - box.x) * 0.1;
+    box.y += (box.targetY - box.y) * 0.1;
     // update css of image element
     box.el.children[0].children[0].style.transform = 'translate3d(' + box.x + 'px, ' + box.y + 'px, 0)';
   }
