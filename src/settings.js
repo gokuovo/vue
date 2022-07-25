@@ -33,5 +33,5 @@ module.exports = {
    */
   errorLog: 'production',
 
-  language: 'Chi'
+  language: 'En'
 }
