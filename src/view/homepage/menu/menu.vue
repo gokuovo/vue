@@ -1,31 +1,30 @@
 <template>
   <div class="container">
-    <div class="title" v-if="!editSocialId">新增social{{ editSocailId }}</div>
-    <div class="title" v-else>
-      <span>修改social</span> <span class="back" @click="back"> <i class="iconfont icon-fanhui"></i> 返回 </span>
+    <div class="title">
+      <span>修改菜单名</span> <span class="back" @click="back"> <i class="iconfont icon-fanhui"></i> 返回 </span>
     </div>
 
     <div class="wrap">
       <el-row>
         <el-col :lg="16" :md="20" :sm="24" :xs="24">
-          <el-form :model="social" status-icon ref="form" label-width="100px" @submit.prevent>
-            <el-form-item label="social名称" prop="connectType">
-              <el-input v-model="social.connectType" placeholder="请填写social名称"></el-input>
+          <el-form :model="menu" status-icon ref="form" label-width="100px" @submit.prevent>
+            <el-form-item label="菜单名En版" prop="menuNameEn">
+              <el-input v-model="menu.menuNameEn" placeholder="请填写文字En版"></el-input>
             </el-form-item>
-            <el-form-item label="图片地址" prop="imageUrl" v-if="social.connectType">
-              <img :src="social.imageUrl" style="width: 150px;height: 150px" />
+            <el-form-item label="菜单名Chi版" prop="menuNameChi">
+              <el-input v-model="menu.menuNameChi" placeholder="请填写文字Chi版"></el-input>
             </el-form-item>
-            <el-form-item label="图片地址" prop="imageUrl" v-else>
-              <upload-imgs ref="uploadEle8" :rules="rules" :multiple="true" :min-num="1" :max-num="1" :sortable="true" />
+            <el-form-item label="菜单名Jap版" prop="menuNameJap">
+              <el-input v-model="menu.menuNameJap" placeholder="请填写文字Jap版"></el-input>
             </el-form-item>
-            <el-form-item v-if="social.connectType">
-              <el-button>更换图片</el-button>
+            <el-form-item label="菜单名Spa版" prop="menuNameSpa">
+              <el-input v-model="menu.menuNameSpa"  placeholder="请填写文字Spa版"></el-input>
             </el-form-item>
-            <el-form-item label="跳转地址" prop="contactUrl">
-              <el-input v-model="social.contactUrl"  placeholder="请填写跳转地址"></el-input>
+            <el-form-item label="关联网页" prop="url">
+              <el-input v-model="menu.url" placeholder="请填写跳转url"></el-input>
             </el-form-item>
             <el-form-item label="排序" prop="sort">
-              <el-input v-model="social.sort"  placeholder="请填写排序(0,1,2...)"></el-input>
+              <el-input v-model="menu.sort" placeholder="请填写拍寻(1,2,....)"></el-input>
             </el-form-item>
             <el-form-item class="submit">
               <el-button type="primary" @click="submitForm">保 存</el-button>
@@ -41,13 +40,11 @@
 <script>
   import { reactive, ref, onMounted } from 'vue'
   import { ElMessage } from 'element-plus'
-  import { get, post } from '../../lin/plugin/axios'
-  import UploadImgs from '../../component/base/homepage/logo/index'
+  import { get, post } from '../../../lin/plugin/axios'
 
   export default {
-    components: { UploadImgs },
     props: {
-      editSocialId: {
+      editMenuId: {
         type: Number,
         default: null,
       },
@@ -55,7 +52,8 @@
     setup(props, context) {
       const form = ref(null)
       const loading = ref(false)
-      const social = reactive({ id: '',connectType: '', imageUrl: '', contactUrl: '', sort: '' })
+      const menu = reactive({ id: '', menuNameEn: '', menuNameChi: '', menuNameJap: '',menuNameSpa: '',url:'',sort: '' })
+
       const listAssign = (a, b) => Object.keys(a).forEach(key => {
         a[key] = b[key] || a[key]
       })
@@ -64,15 +62,17 @@
        * 表单规则验证
        */
       const { rules } = getRules()
+
       onMounted(() => {
-        if (props.editSocialId) {
-          getSocial()
+        if (props.editMenuId) {
+          getMenu()
         }
       })
-      const getSocial = async () => {
+
+      const getMenu = async () => {
         loading.value = true
-        const res = await get('/SaltContactUs/getSocialOne?id='+props.editSocialId)
-        listAssign(social, res)
+        const res = await get('/SaltPortalMenu/menuById?id='+props.editMenuId)
+        listAssign(menu, res)
         loading.value = false
       }
 
@@ -81,18 +81,12 @@
         form.value.resetFields()
       }
 
-
       const submitForm = async formName => {
         form.value.validate(async valid => {
           if (valid) {
             let res = {}
-            if (props.editSocialId) {
-              res = await post('/SaltContactUs/modifySocial',social)
-              context.emit('editClose')
-            } else {
-              res = await post('/SaltContactUs/addSocial',social)
-              resetForm(formName)
-            }
+            res = await post('/SaltPortalMenu/modifyMenu',menu)
+            context.emit('editClose')
             if (res.code < window.MAX_SUCCESS_CODE) {
               ElMessage.success(`${res.message}`)
             }
@@ -107,11 +101,9 @@
         context.emit('editClose')
       }
 
-
-
       return {
         back,
-        social,
+        menu,
         form,
         rules,
         resetForm,
@@ -140,35 +132,6 @@
       image: [{ validator: checkInfo, trigger: 'blur', required: true }],
     }
     return { rules }
-  }
-
-  function tableBianji(row) {
-    this.changeTanchuang = true;
-    this.changeId = row.id;
-    let form = { id: row.id };
-    let _this = this;
-    //这是 我自己封装的方法，不用理会，只看图片路径处理即可
-    this.request("url", "GET", form, function (res) {
-      if (res.code == 1) {
-        _this.changeTanchuangForm = res.data;
-        //将字符串转成数组
-        let arr = _this.changeTanchuangForm.up_file.split(",");
-        for (let i = 0; i < arr.length; i++) {
-          //创建对象，并将路径进行ip地址拼接
-          let obj = {
-            url: _this.requestUrl + arr[i],
-          };
-          //放进图片列表
-          _this.fileList2.push(obj);
-        }
-
-      } else {
-        _this.$message({
-          message: res.msg,
-          type: "error",
-        });
-      }
-    });
   }
 </script>
 

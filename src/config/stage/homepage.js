@@ -9,9 +9,19 @@ const HomepageRouter = {
   inNav: true,
   children: [
     {
+      title: '门户菜单列表',
+      type: 'view',
+      name: 'menu',
+      route: '/homepage/menu',
+      filePath: 'view/homepage/menu/menu-list.vue',
+      inNav: true,
+      icon: 'iconfont icon-upload',
+      permission: null,
+    },
+    {
       title: 'logo上传',
       type: 'view',
-      name: 'LogoUpload',
+      name: 'Logo',
       route: '/homepage/logo',
       filePath: 'view/homepage/logo/upload-image',
       inNav: true,

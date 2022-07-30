@@ -3,110 +3,83 @@
     <!-- 列表页面 -->
     <div class="container" v-if="!showEdit">
       <div class="header">
-        <div class="title">social图标列表</div>
+        <div class="title">Menu列表</div>
       </div>
       <!-- 表格 -->
-      <el-table :data="social" v-loading="loading">
+      <el-table :data="menu" v-loading="loading">
         <el-table-column type="index" :index="indexMethod" label="序号" width="100"></el-table-column>
-        <el-table-column prop="connectType" label="social类型"></el-table-column>
-        <el-table-column prop="imageUrl" label="social图标">
-          <template v-slot="scope" >
-            <el-image :src="scope.row.imageUrl" style="width: 60px;height: 60px"
-            ></el-image>
-          </template>
-        </el-table-column>
-        <el-table-column prop="contactUrl" label="social跳转地址"></el-table-column>
+        <el-table-column prop="menuNameEn" label="菜单名En版"></el-table-column>
+        <el-table-column prop="menuNameChi" label="菜单名Chi版"></el-table-column>
+        <el-table-column prop="menuNameJap" label="菜单名Jap版"></el-table-column>
+        <el-table-column prop="menuNameSpa" label="菜单名Spa版"></el-table-column>
+        <el-table-column prop="url" label="跳转网页"></el-table-column>
         <el-table-column prop="sort" label="排序"></el-table-column>
         <el-table-column label="操作" fixed="right" width="275">
           <template #default="scope">
             <el-button plain size="small" type="primary" @click="handleEdit(scope.row.id)">编辑</el-button>
-                        <el-button
-                          plain
-                          size="small"
-                          type="danger"
-                          @click="handleDelete(scope.row.id)"
-                          v-permission="{ permission: '删除文字', type: 'disabled' }"
-                        >删除</el-button
-                        >
           </template>
         </el-table-column>
       </el-table>
     </div>
 
     <!-- 编辑页面 -->
-    <social v-else @editClose="editClose" :editSocialId="editSocialId"></social>
+    <Menu v-else @editClose="editClose" :editMenuId="editMenuId"></Menu>
   </div>
 </template>
 
 <script>
   import { onMounted, ref } from 'vue'
   import { ElMessageBox, ElMessage } from 'element-plus'
-  import { get, post } from '../../lin/plugin/axios'
-  import Social from './social'
+  import Menu from './menu'
+  import { get, post } from '../../../lin/plugin/axios'
 
   export default {
     components: {
-      Social,
+      Menu,
     },
     setup() {
-      const social = ref([])
-      const editSocialId = ref(1)
+      const menu = ref([])
+      const editMenuId = ref(1)
       const loading = ref(false)
       const showEdit = ref(false)
 
       onMounted(() => {
-        getSocial()
+        getMenu()
       })
 
-      const getSocial = async () => {
+      const getMenu = async () => {
         try {
           loading.value = true
-          social.value = await get('/SaltContactUs/getSocial')
+          menu.value = await get('/SaltPortalMenu/listMenu')
           loading.value = false
         } catch (error) {
           loading.value = false
           if (error.code === 10020) {
-            Social.value = []
+            Menu.value = []
           }
         }
       }
 
       const handleEdit = id => {
         showEdit.value = true
-        editSocialId.value = id
+        editMenuId.value = id
       }
-
-      const handleDelete = id => {
-        ElMessageBox.confirm('此操作将永久删除该段文字, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning',
-        }).then(async () => {
-          const res = await post(`/SaltContactUs/deleteSocial?id=`+id)
-          if (res.code < window.MAX_SUCCESS_CODE) {
-            getSocial()
-            ElMessage.success(`${res.message}`)
-          }
-        })
-      }
-
 
       const editClose = () => {
         showEdit.value = false
-        getSocial()
+        getMenu()
       }
 
       const indexMethod = index => index + 1
 
       return {
-        social,
+        menu,
         loading,
         showEdit,
         editClose,
         handleEdit,
-        editSocialId,
+        editMenuId,
         indexMethod,
-        handleDelete,
       }
     },
   }

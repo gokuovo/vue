@@ -9,22 +9,22 @@
         <el-col :lg="16" :md="20" :sm="24" :xs="24">
           <el-form :model="contactus" status-icon ref="form" label-width="100px" @submit.prevent>
             <el-form-item label="电话" prop="tel">
-              <el-input v-model="contactus.tel" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请填写文字En版"></el-input>
+              <el-input v-model="contactus.tel" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请填写电话"></el-input>
             </el-form-item>
             <el-form-item label="地址En版" prop="addressEn">
-              <el-input v-model="contactus.addressEn" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请填写文字Chi版"></el-input>
+              <el-input v-model="contactus.addressEn" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请填写地址En版"></el-input>
             </el-form-item>
             <el-form-item label="地址Chi版" prop="addressChi">
-              <el-input v-model="contactus.addressChi" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请填写文字Jap版"></el-input>
+              <el-input v-model="contactus.addressChi" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请填写地址Chi版"></el-input>
             </el-form-item>
             <el-form-item label="地址Jap版" prop="addressJap">
-              <el-input v-model="contactus.addressJap" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请填写文字Spa版"></el-input>
+              <el-input v-model="contactus.addressJap" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请填写地址Jap版"></el-input>
             </el-form-item>
             <el-form-item label="地址Spa版" prop="addressSpa">
-              <el-input v-model="contactus.addressSpa" placeholder="请填写备注"></el-input>
+              <el-input v-model="contactus.addressSpa" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请填写地址Spa版"></el-input>
             </el-form-item>
             <el-form-item label="mail" prop="mail">
-              <el-input v-model="contactus.mail" placeholder="请填写备注"></el-input>
+              <el-input v-model="contactus.mail" placeholder="请填写邮箱"></el-input>
             </el-form-item>
             <el-form-item class="submit">
               <el-button type="primary" @click="submitForm">保 存</el-button>
@@ -40,7 +40,6 @@
 <script>
   import { reactive, ref, onMounted } from 'vue'
   import { ElMessage } from 'element-plus'
-  import bookModel from '@/model/book'
   import { get, post } from '../../lin/plugin/axios'
 
   export default {

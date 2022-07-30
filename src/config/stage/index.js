@@ -53,11 +53,12 @@ let homeRouter = [
   // adminConfig,
   homepageConfig,
   OurserviceRouter,
-  ContactUsRouter,
-  NewsRouter,
-  PartnerRouter,
   ProjectRouter,
   TeamRouter,
+  NewsRouter,
+  ContactUsRouter,
+  PartnerRouter,
+
 ]
 
 // 接入插件
