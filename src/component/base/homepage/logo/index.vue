@@ -86,7 +86,7 @@ todo: 文件判断使用 serveWorker 优化性能
 
 <script>
 import { post } from '@/lin/plugin/axios'
-import { getFileType, checkIsAnimated, isEmptyObj, createId } from './utils'
+import { getFileType, checkIsAnimated, isEmptyObj, createId } from '../utils'
 
 /**
  * 本地图像通过验证后构造的信息对象
@@ -469,7 +469,7 @@ export default {
       uploadList.forEach((item, index) => {
         data[`file_${index}`] = item.img.file
       })
-      return post('SaltHomepage/logo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ', data)
+      return post('/cms/file?imageType='+"01", data)
         .then(res => {
           if (!Array.isArray(res) || res.length === 0) {
             throw new Error('图像上传失败')

@@ -11,16 +11,16 @@ import TeamRouter from './team'
 
 // eslint-disable-next-line import/no-mutable-exports
 let homeRouter = [
-  // {
-  //   title: '林间有风',
-  //   type: 'view',
-  //   name: Symbol('about'),
-  //   route: '/about',
-  //   filePath: 'view/about/about.vue',
-  //   inNav: true,
-  //   icon: 'iconfont icon-iconset0103',
-  //   order: 1,
-  // },
+  {
+    title: 'Salt',
+    type: 'view',
+    name: Symbol('about'),
+    route: '/about',
+    filePath: 'view/about/about.vue',
+    inNav: true,
+    icon: 'iconfont icon-iconset0103',
+    order: 1,
+  },
   // {
   //   title: '日志管理',
   //   type: 'view',
@@ -56,7 +56,7 @@ let homeRouter = [
   ContactUsRouter,
   NewsRouter,
   PartnerRouter,
-  ProjectRouter,
+  // ProjectRouter,
   TeamRouter,
 ]
 
