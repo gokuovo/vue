@@ -62,7 +62,7 @@ export default {
       // 构造为文件对象
       const file = new File([blob], 'avatar.jpg', { type: 'image/jpeg' })
 
-      return post('/cms/file', {
+      return post('/cms/file?imageType='+"0", {
         file,
       }).then(res => {
         // 清空输入框
