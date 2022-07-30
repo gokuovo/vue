@@ -82,14 +82,14 @@ _axios.interceptors.request.use(
 
     // step2: permission 处理
     if (reqConfig.url === 'cms/user/refresh') {
-      const refreshToken = getToken('refresh_token')
-      if (refreshToken) {
-        reqConfig.headers.Authorization = refreshToken
+      const refresh_token = getToken('refresh_token')
+      if (refresh_token) {
+        reqConfig.headers.Authorization = refresh_token
       }
     } else {
-      const accessToken = getToken('access_token')
-      if (accessToken) {
-        reqConfig.headers.Authorization = accessToken
+      const refresh_token = getToken('access_token')
+      if (refresh_token) {
+        reqConfig.headers.Authorization = refresh_token
       }
     }
 

@@ -56,7 +56,7 @@ let homeRouter = [
   ContactUsRouter,
   NewsRouter,
   PartnerRouter,
-  // ProjectRouter,
+  ProjectRouter,
   TeamRouter,
 ]
 

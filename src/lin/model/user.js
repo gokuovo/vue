@@ -42,7 +42,7 @@ export default class User {
         tag,
       },
     })
-    saveTokens(tokens.access_token, tokens.refresh_token)
+    saveTokens(tokens.accessToken, tokens.refreshToken)
     return tokens
   }
 
