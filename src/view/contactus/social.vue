@@ -19,7 +19,9 @@
               <upload-imgs ref="uploadEle8" :rules="rules" :multiple="true" :min-num="1" :max-num="1" :sortable="true" />
             </el-form-item>
             <el-form-item v-if="social.connectType">
-              <el-button>更换图片</el-button>
+              <el-upload>
+                <el-button size="mini" type="primary">选取文件</el-button>
+              </el-upload>
             </el-form-item>
             <el-form-item label="跳转地址" prop="contactUrl">
               <el-input v-model="social.contactUrl"  placeholder="请填写跳转地址"></el-input>

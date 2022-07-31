@@ -15,7 +15,7 @@ const HomepageRouter = {
       route: '/homepage/menu',
       filePath: 'view/homepage/menu/menu-list.vue',
       inNav: true,
-      icon: 'iconfont icon-upload',
+      icon: 'iconfont icon-jiemiansheji',
       permission: null,
     },
     {

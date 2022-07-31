@@ -16,24 +16,16 @@
 <!--              <el-input v-model="partners.partner_url" placeholder="请输入友商图标"></el-input>-->
 <!--            </el-form-item>-->
 
-            <el-form-item label="友商图标"  prop="partnerUrl">
-              <el-upload
-               ref="upload"
-               action="localhost:5000/cms/file?imageType=16"
-               name="picture"
-               list-type="picture-card"
-               :limit="1"
-               :file-list="fileList"
-               :on-exceed="onExceed"
-               :before-upload="beforeUpload"
-               :on-preview="handlePreview"
-               :on-success="handleSuccess"
-               :on-remove="handleRemove">
-                <i class="el-icon-plus"></i>
+            <el-form-item label="友商图标" prop="partnersUrl" v-if="partners.id">
+              <img :src="partners.partnerUrl" style="width: 150px;height: 150px" />
+            </el-form-item>
+            <el-form-item label="友商图标" prop="partnersUrl" v-else>
+              <upload-imgs ref="uploadEle8" :rules="rules" :multiple="true" :min-num="1" :max-num="1" :sortable="true" />
+            </el-form-item>
+            <el-form-item v-if="partners.id">
+              <el-upload :action="'localhost:5000/cms/file'">
+                <el-button size="mini" type="primary">选取文件</el-button>
               </el-upload>
-              <el-dialog :visible.sync="dialogVisible">
-                <img width="100%" :src="partner_url" alt="">
-              </el-dialog>
             </el-form-item>
 
             <el-form-item label="友商官网" prop="image">
@@ -57,8 +49,10 @@
   import { reactive, ref, onMounted } from 'vue'
   import { ElMessage } from 'element-plus'
   import { get, post } from '../../lin/plugin/axios'
+  import UploadImgs from '../../component/base/homepage/logo/index'
 
   export default {
+    components: { UploadImgs },
     methods:{
       //图片回显
       handleAvatarSuccess(res, file) {

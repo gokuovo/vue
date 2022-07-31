@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="title" v-if="!editPartnersId">新增员工信息{{ editPartnersId }}</div>
+    <div class="title" v-if="!editStaffId">新增员工信息{{ editStaffId }}</div>
     <div class="title" v-else>
       <span>修改员工信息</span> <span class="back" @click="back"> <i class="iconfont icon-fanhui"></i> 返回 </span>
     </div>
@@ -8,18 +8,56 @@
     <div class="wrap">
       <el-row>
         <el-col :lg="16" :md="20" :sm="24" :xs="24">
-          <el-form :model="social" status-icon ref="form" label-width="100px" @submit.prevent>
-            <el-form-item label="social名称" prop="connectType">
-              <el-input v-model="social.connectType" placeholder="请填写social名称"></el-input>
+          <el-form :model="staff" status-icon ref="form" label-width="100px" @submit.prevent>
+            <el-form-item label="员工姓名En" prop="staffNameEn">
+              <el-input v-model="staff.staffNameEn" placeholder="请填写员工姓名En"></el-input>
             </el-form-item>
-            <el-form-item label="图片地址" prop="imageUrl">
-              <el-input v-model="social.imageUrl"  placeholder="请填写图片地址"></el-input>
+            <el-form-item label="员工姓名Chi" prop="staffNameChi">
+              <el-input v-model="staff.staffNameChi" placeholder="请填写员工姓名Chi"></el-input>
             </el-form-item>
-            <el-form-item label="跳转地址" prop="contactUrl">
-              <el-input v-model="social.contactUrl"  placeholder="请填写跳转地址"></el-input>
+            <el-form-item label="员工姓名Jap" prop="staffNameJap">
+              <el-input v-model="staff.staffNameJap" placeholder="请填写员工姓名Jap"></el-input>
+            </el-form-item>
+            <el-form-item label="员工姓名Spa" prop="staffNameSpa">
+              <el-input v-model="staff.staffNameSpa" placeholder="请填写员工姓名Spa"></el-input>
+            </el-form-item>
+            <el-form-item label="员工职务En" prop="staffPostEn">
+              <el-input v-model="staff.staffPostEn" placeholder="请填写员工职务En"></el-input>
+            </el-form-item>
+            <el-form-item label="员工职务Chi" prop="staffPostChi">
+              <el-input v-model="staff.staffPostChi" placeholder="请填写员工职务Chi"></el-input>
+            </el-form-item>
+            <el-form-item label="员工职务Jap" prop="staffPostJap">
+              <el-input v-model="staff.staffPostJap" placeholder="请填写员工职务Jap"></el-input>
+            </el-form-item>
+            <el-form-item label="员工职务Spa" prop="staffPostSpa">
+              <el-input v-model="staff.staffPostSpa" placeholder="请填写员工职务Spa"></el-input>
+            </el-form-item>
+            <el-form-item label="员工表述En" prop="staffDescEn">
+              <el-input v-model="staff.staffDescEn" placeholder="请填写员工表述En"></el-input>
+            </el-form-item>
+            <el-form-item label="员工表述Chi" prop="staffDescChi">
+              <el-input v-model="staff.staffDescChi" placeholder="请填写员工表述Chi"></el-input>
+            </el-form-item>
+            <el-form-item label="员工表述Jap" prop="staffDescJap">
+              <el-input v-model="staff.staffDescJap" placeholder="请填写员工表述Jap"></el-input>
+            </el-form-item>
+            <el-form-item label="员工表述Spa" prop="staffDescSpa">
+              <el-input v-model="staff.staffDescSpa" placeholder="请填写员工表述Spa"></el-input>
+            </el-form-item>
+            <el-form-item label="员工图片" v-if="staff.id">
+              <img :src="staff.staffImage" style="width: 150px;height: 150px" />
+            </el-form-item>
+            <el-form-item label="员工图片" prop="staffImage" v-else>
+              <upload-imgs ref="uploadEle8" :rules="rules" :multiple="true" :min-num="1" :max-num="1" :sortable="true" />
+            </el-form-item>
+            <el-form-item v-if="staff.id">
+              <el-upload>
+                <el-button size="mini" type="primary">选取文件</el-button>
+              </el-upload>
             </el-form-item>
             <el-form-item label="排序" prop="sort">
-              <el-input v-model="social.sort"  placeholder="请填写排序(0,1,2...)"></el-input>
+              <el-input v-model="staff.sort"  placeholder="请填写排序(0,1,2...)"></el-input>
             </el-form-item>
             <el-form-item class="submit">
               <el-button type="primary" @click="submitForm">保 存</el-button>
@@ -40,7 +78,7 @@
 
   export default {
     props: {
-      editSocialId: {
+      editStaffId: {
         type: Number,
         default: null,
       },
@@ -48,7 +86,10 @@
     setup(props, context) {
       const form = ref(null)
       const loading = ref(false)
-      const social = reactive({ id: '',contactType: '', imageUrl: '', contactUrl: '', sort: '' })
+      const staff = reactive({ id: '',staffNameEn: '', staffNameChi: '', staffNameJap: '', staffNameSpa: '',
+        staffPostEn: '',staffPostChi: '',staffPostJap: '',staffPostSpa: '',
+        staffDescEn: '',staffDescChi: '',staffDescJap: '',staffDescSpa: '',
+        staffImage: '',sort: ''})
 
       const listAssign = (a, b) => Object.keys(a).forEach(key => {
         a[key] = b[key] || a[key]
@@ -60,15 +101,15 @@
       const { rules } = getRules()
 
       onMounted(() => {
-        if (props.editSocialId) {
-          getSocial()
+        if (props.editStaffId) {
+          getStaff()
         }
       })
 
-      const getSocial = async () => {
+      const getStaff = async () => {
         loading.value = true
-        const res = await get('/SaltContactUs/getSocialOne?id='+props.editSocialId)
-        listAssign(social, res)
+        const res = await get('/SaltTeam/getStaffOne?id='+props.editStaffId)
+        listAssign(staff, res)
         loading.value = false
       }
 
@@ -82,11 +123,11 @@
         form.value.validate(async valid => {
           if (valid) {
             let res = {}
-            if (props.editSocialId) {
-              res = await post('/SaltContactUs/modifySocial',social)
+            if (props.editStaffId) {
+              res = await post('/SaltTeam/modifyStaff',staff)
               context.emit('editClose')
             } else {
-              res = await post('/SaltContactUs/addSocial',social)
+              res = await post('/SaltTeam/addStaff',staff)
               resetForm(formName)
             }
             if (res.code < window.MAX_SUCCESS_CODE) {
@@ -105,7 +146,7 @@
 
       return {
         back,
-        social,
+        staff,
         form,
         rules,
         resetForm,

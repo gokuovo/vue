@@ -20,7 +20,12 @@
         <el-table-column prop="staffDescChi" label="表述chi版"></el-table-column>
         <el-table-column prop="staffDescJap" label="表述jap版"></el-table-column>
         <el-table-column prop="staffDescSpa" label="表述spa版"></el-table-column>
-        <el-table-column prop="staffImage" label="员工图片"></el-table-column>
+        <el-table-column label="员工图片">
+          <template v-slot="scope" >
+            <el-image :src="scope.row.staffImage" style="width: 60px;height: 60px;" :preview-src-list="scope.row.staffImage"
+            ></el-image>
+          </template>
+        </el-table-column>
         <el-table-column prop="sort" label="排序"></el-table-column>
         <el-table-column label="操作" fixed="right" width="275">
           <template #default="scope">
