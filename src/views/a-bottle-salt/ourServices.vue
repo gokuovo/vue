@@ -3,7 +3,7 @@
 
     <div @click="bigVideoDivClick" v-show="showBigVideo" style="position: absolute;width: 100%;height: 100%;z-index: 2;">
       <video @click="bigVideoClick" ref="bigVideo" style="position: absolute;width: 60%;left: 15%;top: 20%;height: 70%;object-fit: fill;" controlslist="nofullscreen" controls>
-        <source :src="showingInfo.firstVideo" type="video/mp4">
+        <source :src="firstVideo" type="video/mp4">
       </video>
     </div>
 
@@ -21,33 +21,31 @@
                   <tr>
                     <td style="width: 30%;color: #F5F5F5;font-size: 28px;vertical-align: top;position: relative">
                       <div style="top: 20%;left: 20%;position: absolute">
-                        WHAT WE DO
+                        {{this.whatWeDo}}
                       </div>
                     </td>
-                    <td style="width: 50%;color: #BAB9B6;text-align: left;vertical-align: top">
+                    <td style="width: 50%;color: #BAB9B6;text-align: left;vertical-align: top;font-size: 18px">
                       <div style="padding-top: 10%">
-                        We hold high standard for our works.
+                        {{this.whatWeDoText1}}
                       </div>
                       <div style="padding-top: 5%">
-                        We see every game and film as art; based on that we design, compose our music that fits in
-                        "three element" as the core.
+                        {{this.whatWeDoText2}}
                       </div>
                       <div style="padding-top: 5%">
-                        Therefore, our music and audio projects have won many awards in IGF,
-                        IMGA,INDIEPLAY,GMGC,CMA，ANIWow and so on.
+                        {{this.whatWeDoText3}}
                       </div>
                     </td>
                     <td style="width: 20%"></td>
                   </tr>
                 </table>
               </div>
-              <div style="width: 100%;height: 10%;color: #F5F5F5;font-size: 18px;font-style:oblique;">
+              <div style="width: 100%;height: 10%;color: #F5F5F5;font-size: 20px;font-style:oblique;">
                 <table class="divBase" v-show="!showVideo">
                   <tr @click="showVideo = !showVideo">
-                    <td style="width: 10%;vertical-align: bottom;text-align: right">MUSIC</td>
-                    <td style="width: 25%;vertical-align: bottom;text-align: center">SOUND DESIGN</td>
-                    <td style="width: 18%;vertical-align: bottom;text-align: left">VOICE ACTING</td>
-                    <td style="width: 37%;vertical-align: bottom;text-align: left">GAME AUDIO PIPELINE</td>
+                    <td @click="fontButtonClick(0)" style="width: 10%;vertical-align: bottom;text-align: right">MUSIC</td>
+                    <td @click="fontButtonClick(1)" style="width: 25%;vertical-align: bottom;text-align: center">SOUND DESIGN</td>
+                    <td @click="fontButtonClick(2)" style="width: 18%;vertical-align: bottom;text-align: left">VOICE ACTING</td>
+                    <td @click="fontButtonClick(3)" style="width: 37%;vertical-align: bottom;text-align: left">GAME AUDIO PIPELINE</td>
                   </tr>
                 </table>
               </div>
@@ -56,7 +54,7 @@
                 <table class="divBase">
                   <tr>
                     <td style="width: 60%;height: 100%;position: relative">
-                      <div style="width: 30%;height: 100%;display: inline-block">
+                      <div style="width: 30%;height: 100%;display: inline-block;font-size: 20px;">
                         <ul ref="childTr" v-show="showVideo">
                           <li @click="fontButtonClick(0)" class="fontButton">MUSIC</li>
                           <li @click="fontButtonClick(1)" class="fontButton">SOUND DESIGN</li>
@@ -66,7 +64,7 @@
                       </div>
                       <div style="width: 70%;height: 100%;display: inline-block;position: relative" v-show="showVideo">
                           <video @click="clickVideo" style="position: absolute;width: 70%;left: 20%;top: 10%;height: 70%;object-fit: fill;" controlslist="nofullscreen" controls>
-                            <source :src="showingInfo.firstVideo" type="video/mp4">
+                            <source :src="firstVideo" type="video/mp4">
                           </video>
                       </div>
                     </td>
@@ -75,7 +73,7 @@
                       <div v-show="showVideo"
                            style="width: 90%;height: 50%;position: absolute;left: 0;top: 15%;overflow: hidden">
                         <div ref="carouselImgBox" class="carouselImgBox">
-                          <img style="width: 100%;height: 100%" v-for="item in showingInfo.carouselImgPaths"
+                          <img style="width: 100%;height: 100%" v-for="item in carouselImgPaths"
                                :src="item"/>
                         </div>
                       </div>
@@ -98,40 +96,45 @@
 <script>
   import toolbar from './components/toolbar'
   import contacts from './components/contacts'
-  import { findStorageByUserId } from './requestScript/OurService'
-
   import boxes from './commonScripts/moveBackground'
+
+  import { getVideo,getRotation,getWord } from './requestScript/OurService'
 
   export default {
     name: 'ourServices',
     components: { toolbar, contacts },
     data() {
       return {
+        whatWeDo:'WHAT WE DO',
+        whatWeDoText1:'We hold high standard for our works.',
+        whatWeDoText2:'We see every game and film as art; based on that we design, compose our music that fits in "three element" as the core.',
+        whatWeDoText3:'Therefore, our music and audio projects have won many awards in IGF,\n' +
+          '                        IMGA,INDIEPLAY,GMGC,CMA，ANIWow and so on.',
         showVideo: false,
         bigVideoIsClicked:false,
         showBigVideo: false,
-        infoDetails: [
-          {
-            firstVideo: require('@/assets/404_images/movie.mp4'),
-            carouselImgPaths: [require('@/assets/images/font.png'), require('@/assets/images/font2.png'), require('@/assets/images/font3.png')]
-          },
-          {
-            firstVideo: require('@/assets/404_images/movie.mp4'),
-            carouselImgPaths: [require('@/assets/images/font.png'), require('@/assets/images/font2.png'), require('@/assets/images/font3.png')]
-          }
-        ],
-        showingInfo: {}
-        // links:[{key:'PERFECT WORLD GAMES',value:'https://www.baidu.com'},{key:'FUN PLUS',value:'https://www.baidu.com'},{key:'TOP JOY',value:'https://www.baidu.com'},{key:'CENTURY GAMES',value:'https://www.baidu.com'}],
+        firstVideo: require('@/assets/404_images/movie.mp4'),
+        carouselImgPaths: [require('@/assets/images/font.png'), require('@/assets/images/font2.png'), require('@/assets/images/font3.png')],
       }
     },
     created() {
-      // findStorageByUserId({
-      //   userId: 1
-      // }).then(resp => {
-      //   console.log(resp)
-      // })
-
-      this.showingInfo = this.infoDetails[0]
+      getWord().then(resp =>{
+        if(resp.data.length > 0){
+          for(let i = 0;i < resp.data.length;i++){
+            if(resp.data[i].wordType == "WhatWeDo"){
+              this.whatWeDo = resp.data[i]["wordText"+this.$store.getters.getLanguage];
+            }else{
+              let text = resp.data[i]["wordText"+this.$store.getters.getLanguage];
+              let textArr = text.split('\n');
+              if(textArr.length == 3){
+                this.whatWeDoText1 = textArr[0];
+                this.whatWeDoText2 = textArr[1];
+                this.whatWeDoText3 = textArr[2];
+              }
+            }
+          }
+        }
+      })
     },
     mounted() {
       let carouselImages = this.$refs.carouselImgBox.children
@@ -156,6 +159,19 @@
             childrens[i].style.color = '#F5F5F5'
           }
         }
+
+        let videoType = '0'+(index+1);
+        getVideo({videoType:videoType}).then(resp =>{
+          if(resp.data != ""){
+            this.firstVideo = resp.data;
+          }
+        });
+
+        getRotation({code:index}).then(resp =>{
+          if(resp.data.length > 0){
+            this.carouselImgPaths = resp.data;
+          }
+        })
       },
 
       clickVideo(){
