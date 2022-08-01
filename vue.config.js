@@ -1,4 +1,5 @@
 const path = require('path')
+const port = process.env.port || process.env.npm_config_port || 8080 // dev port
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -27,12 +28,13 @@ module.exports = {
   },
   devServer: {
     open: true,
+    port: port,
     proxy: {
-      [process.env.VUE_APP_BASE_API]: {
+      [process.env.VUE_APP_BASE_URL]: {
         target: `http://127.0.0.1:5000`,
         changeOrigin: true,
         pathRewrite: {
-          ['^' + process.env.VUE_APP_BASE_API]: '',
+          ['^' + process.env.VUE_APP_BASE_URL]: '',
         },
       },
     },
