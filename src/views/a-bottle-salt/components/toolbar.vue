@@ -1,86 +1,118 @@
 <template>
-    <div style="width: 100%;height: 100%">
-      <table style="width: 100%;height: 100%">
-        <tr>
-          <td style="width: 15%;" @click="backToFirstPage">
-            <div style="position: relative;height: 100%;width: 100%">
-              <img style="position: absolute;width: 100%;height: 100%" :src="firstImg"/>
-            </div>
-          </td>
-          <td style="width: 65%">
-            <el-breadcrumb separator="   ">
-              <el-breadcrumb-item :to="item.srcPath" v-for="item in breadcrumbs" :key="item.srcPath">
-                <span class="barFont" style="font-style: italic">{{item.name}}</span>
-              </el-breadcrumb-item>
-            </el-breadcrumb>
-          </td>
-          <td style="width: 20%">
-            <el-dropdown>
-              <el-button type="primary">
-                <span style="font-style: italic">Language</span>
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </el-button>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>
-                  <span style="font-style: italic">EN</span>
-                </el-dropdown-item>
-                <el-dropdown-item>
-                  <span style="font-style: italic">CN</span>
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </td>
-        </tr>
-      </table>
-    </div>
+  <div style="width: 100%;height: 100%">
+    <table style="width: 100%;height: 100%">
+      <tr>
+        <td style="width: 15%;" @click="backToFirstPage">
+          <div style="position: relative;height: 100%;width: 100%">
+            <img style="position: absolute;width: 100%;height: 100%" :src="$store.getters.getLogo"/>
+          </div>
+        </td>
+        <td style="width: 65%">
+          <el-breadcrumb separator="   ">
+            <el-breadcrumb-item :to="item.url" v-for="item in breadcrumbs" :key="item.url">
+              <span class="barFont" style="font-style: italic">{{item['menuName'+$store.getters.getLanguage]}}</span>
+            </el-breadcrumb-item>
+          </el-breadcrumb>
+        </td>
+        <td style="width: 20%">
+          <el-dropdown @command="handleCommand">
+            <el-button type="primary">
+              <span style="font-style: italic">Language</span>
+              <i class="el-icon-arrow-down el-icon--right"></i>
+            </el-button>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="Chi">
+                <span style="font-style: italic">CN</span>
+              </el-dropdown-item>
+              <el-dropdown-item command="En">
+                <span style="font-style: italic">EN</span>
+              </el-dropdown-item>
+              <el-dropdown-item command="Spa">
+                <span style="font-style: italic">SPA</span>
+              </el-dropdown-item>
+              <el-dropdown-item command="Jap">
+                <span style="font-style: italic">JAP</span>
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </td>
+      </tr>
+    </table>
+  </div>
 </template>
 
 <script>
+  import { getMenu, getLogo } from '../requestScript/Toolbar'
+
   export default {
     name: 'toolbar',
-    data(){
+    inject: ['reload'],
+    data() {
       return {
-        firstImg: require('@/assets/images/salt.png'),
-        breadcrumbs:[
+        breadcrumbs: [
           {
-            name:'OUR SERVICE',
-            srcPath:'/ourServices'
+            menuNameEn: 'OUR SERVICE',
+            url: '/ourServices'
           },
           {
-            name:'PROJECT',
-            srcPath:'/Projects'
+            menuNameEn: 'PROJECTS',
+            url: '/Projects'
           },
           {
-            name:'TEAM',
-            srcPath:'/Team'
+            menuNameEn: 'TEAM',
+            url: '/Team'
           },
           {
-            name:'NEWS',
-            srcPath:'/News'
+            menuNameEn: 'NEWS',
+            url: '/News'
           },
           {
-            name:'CONTACT US',
-            srcPath:'/Contacts'
+            menuNameEn: 'CONTACT US',
+            url: '/Contacts'
           },
           {
-            name:'PARTNERS',
-            srcPath:'/Partners'
+            menuNameEn: 'PARTNERS',
+            url: '/Partners'
           }
-        ]
+        ],
       }
     },
-    methods:{
+    beforeCreate(){
+      getLogo().then(resp => {
+        if (resp.data != '' && this.$store.getters.getLogo == '') {
+          this.$store.dispatch('settings/changeLogo', resp.data)
+        }
+      })
+    },
+    created() {
+      getMenu().then(resp => {
+        if (resp.data.length > 0) {
+          this.breadcrumbs = resp.data
+        }
+      })
+    },
+    methods: {
 
-      backToFirstPage(){
-        this.$router.push('/');
+      backToFirstPage() {
+        this.$router.push('/')
       },
+
+      handleCommand(command) {
+        this.$store.dispatch('settings/changeLanguage', command)
+        this.$router.push('/')
+        this.reload()
+      }
 
     }
   }
 </script>
 
 <style scoped>
-  .barFont:hover{
+  .barFont:hover {
     color: red;
+  }
+
+  .el-breadcrumb{
+    font-size: 18px!important;
   }
 </style>
