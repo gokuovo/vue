@@ -31,9 +31,7 @@
       upLoadFile(imageCode) {
         let upLoadFileList = this.$refs.uploadBtn.files;
         if (upLoadFileList.length > 0) {//防止上次文件之后再次选择同样的文件，然后取消文件上传的bug
-          if (upLoadFileList[0].name.indexOf(".mp4") != -1) {
             this.sendFileUpload(imageCode,upLoadFileList);
-          }
         }
       },
 
@@ -44,7 +42,9 @@
         let that = this;
         //文件上传后台方法
         fileUpload(formData, {'Content-Type': 'multipart/form-data'}).then(resp => {
-          console.log(resp);
+          that.$message.success("上传成功");
+          location.reload()
+          console.log(resp.data[0].url)
         }).catch(error => {
           that.$message.error("上传文件失败! ! !");
         })

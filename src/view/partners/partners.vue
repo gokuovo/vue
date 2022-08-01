@@ -20,12 +20,10 @@
               <img :src="partners.partnerUrl" style="width: 150px;height: 150px" />
             </el-form-item>
             <el-form-item label="友商图标" prop="partnersUrl" v-else>
-              <upload-imgs ref="uploadEle8" :rules="rules" :multiple="true" :min-num="1" :max-num="1" :sortable="true" />
+              <input class="fileUploaderClass" type='file' name="uploadBtn" ref="uploadBtn" @change="upLoadFile(partners.id)"/>
             </el-form-item>
             <el-form-item v-if="partners.id">
-              <el-upload :action="'localhost:5000/cms/file'">
-                <el-button size="mini" type="primary">选取文件</el-button>
-              </el-upload>
+                <input class="fileUploaderClass" type='file' name="uploadBtn" ref="uploadBtn" @change="upLoadFile(partners.id)"/>
             </el-form-item>
 
             <el-form-item label="友商官网" prop="image">
@@ -50,10 +48,32 @@
   import { ElMessage } from 'element-plus'
   import { get, post } from '../../lin/plugin/axios'
   import UploadImgs from '../../component/base/homepage/logo/index'
+  import {fileUpload} from '@/utils/saltFile'
 
   export default {
     components: { UploadImgs },
     methods:{
+      upLoadFile(id) {
+        let upLoadFileList = this.$refs.uploadBtn.files;
+        if (upLoadFileList.length > 0) {//防止上次文件之后再次选择同样的文件，然后取消文件上传的bug
+          this.sendFileUpload(id,upLoadFileList);
+        }
+      },
+
+      sendFileUpload(id,upLoadFileList) {
+        let formData = new window.FormData();
+        formData.append('file', upLoadFileList[0]);
+        formData.append('fileType', 'partners');
+        formData.append('id', id);
+        let that = this;
+        //文件上传后台方法
+        fileUpload(formData, {'Content-Type': 'multipart/form-data'}).then(resp => {
+          that.$message.success("上传成功");
+          console.log(resp.data[0].url)
+        }).catch(error => {
+          that.$message.error("上传文件失败! ! !");
+        })
+      },
       //图片回显
       handleAvatarSuccess(res, file) {
         console.log(res)
