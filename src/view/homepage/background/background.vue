@@ -9,8 +9,8 @@
         <el-form-item label="当前背景图">
             <img :src="background.imageUrl" style="width: 180px;heigth:160px;" />
         </el-form-item>
-        <el-form-item label="logo上传">
-          <upload-imgs ref="uploadEle8" :rules="rules" :multiple="true" :min-num="1" :max-num="1" :sortable="true" />
+        <el-form-item label="背景图上传">
+          <input class="fileUploaderClass" type='file' name="uploadBtn" ref="uploadBtn" @change="upLoadFile(background.imageCode)"/>
         </el-form-item>
       </el-form>
     </div>
@@ -21,12 +21,35 @@
   import UploadImgs from '@/component/base/homepage/background'
   import { reactive, ref, onMounted } from 'vue'
   import { get, post } from '../../../lin/plugin/axios'
+  import {fileUpload} from '@/utils/Partners'
 
   export default {
     components: {
       UploadImgs,
     },
     methods:{
+      upLoadFile(imageCode) {
+        let upLoadFileList = this.$refs.uploadBtn.files;
+        if (upLoadFileList.length > 0) {//防止上次文件之后再次选择同样的文件，然后取消文件上传的bug
+          if (upLoadFileList[0].name.indexOf(".mp4") != -1) {
+            this.sendFileUpload(imageCode,upLoadFileList);
+          }
+        }
+      },
+
+      sendFileUpload(imageCode,upLoadFileList) {
+        let formData = new window.FormData();
+        formData.append('file', upLoadFileList[0]);
+        formData.append('imageType', imageCode);
+        let that = this;
+        //文件上传后台方法
+        fileUpload(formData, {'Content-Type': 'multipart/form-data'}).then(resp => {
+          console.log(resp);
+        }).catch(error => {
+          that.$message.error("上传文件失败! ! !");
+        })
+      },
+
       //图片回显
       handleAvatarSuccess(res, file) {
         this.imageUrl = res.data.final_fileName
