@@ -16,8 +16,8 @@
           <td style="width: 80%;height: 100%">
             <div class="divBase selfDefineScroll" style="height: 60%;width: 80%;overflow-y: auto;margin-left: 5%">
               <div v-for="(item) in partners" style="display: inline-block;position: relative;width: 18%;height: 35%;margin-left: 1%;margin-top: 5%">
-                <a :href="item.link" :target="item.link.indexOf('http') != -1 ? '_blank' : '_self' ">
-                  <img class="linkHover"  style="position: absolute;width: 100%;height: 100%" :src="item.img" />
+                <a :href="item.partnerLink" :target="item.partnerLink.indexOf('http') != -1 ? '_blank' : '_self' ">
+                  <img class="linkHover"  style="position: absolute;width: 100%;height: 100%" :src="item.partnerUrl" />
                 </a>
               </div>
             </div>
@@ -34,8 +34,9 @@
 <script>
   import toolbar from './components/toolbar'
   import contacts from './components/contacts'
-
   import boxes from './commonScripts/moveBackground'
+
+  import {getAllPartners,getContactImage_back} from './requestScript/Partners'
 
   export default {
     name: 'Partners',
@@ -46,67 +47,82 @@
         partners:[
           {
             id:1,
-            img:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
-            link:'http://www.baidu.com'
+            partnerUrl:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
+            partnerLink:'http://www.baidu.com'
           },
           {
             id:2,
-            img:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
-            link:'/ourServices'
+            partnerUrl:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
+            partnerLink:'/ourServices'
           },
           {
             id:1,
-            img:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
-            link:'http://www.baidu.com'
+            partnerUrl:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
+            partnerLink:'http://www.baidu.com'
           },
           {
             id:2,
-            img:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
-            link:'/ourServices'
+            partnerUrl:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
+            partnerLink:'/ourServices'
           },
           {
             id:1,
-            img:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
-            link:'http://www.baidu.com'
+            partnerUrl:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
+            partnerLink:'http://www.baidu.com'
           },
           {
             id:2,
-            img:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
-            link:'/ourServices'
+            partnerUrl:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
+            partnerLink:'/ourServices'
           },
           {
             id:1,
-            img:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
-            link:'http://www.baidu.com'
+            partnerUrl:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
+            partnerLink:'http://www.baidu.com'
           },
           {
             id:2,
-            img:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
-            link:'/ourServices'
+            partnerUrl:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
+            partnerLink:'/ourServices'
           },
           {
             id:1,
-            img:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
-            link:'http://www.baidu.com'
+            partnerUrl:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
+            partnerLink:'http://www.baidu.com'
           },
           {
             id:2,
-            img:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
-            link:'/ourServices'
+            partnerUrl:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
+            partnerLink:'/ourServices'
           },
           {
             id:1,
-            img:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
-            link:'http://www.baidu.com'
+            partnerUrl:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
+            partnerLink:'http://www.baidu.com'
           },
           {
             id:2,
-            img:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
-            link:'/ourServices'
+            partnerUrl:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
+            partnerLink:'/ourServices'
           },
 
         ]
       }
+    },
+    created(){
+      getAllPartners().then(resp =>{
+        resp = resp.data;
+        if(resp.length > 0){
+          this.partners = resp;
+        }
+      });
+
+      getContactImage_back({imageCode:'09'}).then(resp =>{
+        resp = resp.data;
+        if(resp.length > 0){
+          this.firstImg = resp[0].imageUrl;
+        }
+      });
     },
     mounted() {
 
@@ -122,7 +138,7 @@
         top: boxElement.offsetTop,
         size: boxElement.offsetWidth
       })
-    }
+    },
   }
 </script>
 
