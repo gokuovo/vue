@@ -25,7 +25,23 @@ module.exports = {
       },
     },
   },
-  devServer: {},
+  devServer: {
+    open: true,
+    proxy: {
+      [process.env.VUE_APP_BASE_API]: {
+        target: `http://127.0.0.1:5000`,
+        changeOrigin: true,
+        pathRewrite: {
+          ['^' + process.env.VUE_APP_BASE_API]: '',
+        },
+      },
+    },
+    // overlay: {
+    //   warnings: false,
+    //   errors: true
+    // },
+    // before: require('./mock/mock-server.js')
+  },
   // node_modules依赖项es6语法未转换问题
   transpileDependencies: ['vuex-persist'],
 }
