@@ -21,4 +21,10 @@ export default {
 
   sidebarLevel: appConfig.sidebarLevel || 3,
   defaultRoute: appConfig.defaultRoute || '/about',
+
+  videoPreview: {
+    videoPreviewVisible: false, //  视频查看组件显隐状态
+    videoPreviewList: [], //  视频列表
+    defaultActiveIndex: 0, //  默认当前打开的视频的索引
+  },
 }

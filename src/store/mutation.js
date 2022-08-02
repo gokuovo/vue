@@ -40,4 +40,21 @@ export default {
   [types.SET_REFRESH_OPTION](state, option) {
     state.refreshOptions = option
   },
+
+  /**
+   * 存储视频预览组件所需要的数据
+   * @param {object} state Vuex 的 state 对象
+   * @param {object} data 视频数据
+   */
+  setVideoPreviewData(state, data) {
+    if (data.videoPreviewVisible) {
+      state.videoPreview.videoPreviewVisible = data.videoPreviewVisible
+      state.videoPreview.videoPreviewList = data.videoPreviewList
+      state.videoPreview.defaultActiveIndex = data.activeIndex
+    } else {
+      state.videoPreview.videoPreviewVisible = false
+      state.videoPreview.videoPreviewList = []
+      state.videoPreview.defaultActiveIndex = 0
+    }
+  },
 }

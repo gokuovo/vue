@@ -33,7 +33,7 @@ const OurserviceRouter = {
       type: 'view',
       name: 'VideoList',
       route: '/view/ourservice/videolist',
-      filePath: 'view/ourservice/video.vue',
+      filePath: 'view/ourservice/video-list.vue',
       inNav: true,
       icon: 'iconfont icon-jiemiansheji',
       permission: null,

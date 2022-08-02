@@ -29,10 +29,13 @@
     "moment": "^2.24.0",
     "photoswipe": "^4.1.2",
     "screenfull": "^4.2.0",
+    "stylus": "^0.58.1",
+    "stylus-loader": "^7.0.0",
     "swiper": "^6.4.5",
     "vue": "^3.2.24",
     "vue-picture-cropper": "^0.1.9",
     "vue-router": "^4.0.10",
+    "vue-video-player": "^5.0.2",
     "vuex": "^4.0.2",
     "vuex-persist": "^2.0.1"
   },
