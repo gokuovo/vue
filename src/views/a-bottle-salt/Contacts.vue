@@ -20,10 +20,10 @@
         <tr>
           <td style="width: 33%;height: 100%">
             <div style="width: 60%;height: 30%;color: #BAB9B6;font-size: 14px;font-style: italic;">
-              PHONE NUMBER：<span style="font-size: 12px;color: #8c939d">{{contacts.phone}}</span>
+              PHONE NUMBER：<span style="font-size: 12px;color: #8c939d">{{contacts.tel}}</span>
             </div>
             <div style="width: 60%;height: 70%;color: #8c939d;font-size: 12px;font-style: italic;">
-              {{contacts.address}}
+              {{contacts['address'+$store.getters.getLanguage]}}
             </div>
           </td>
           <td style="width: 33%;height: 100%">
@@ -31,9 +31,9 @@
               OUR SOCIAL：
             </div>
             <div style="width: 100%;height: 70%;color: #8c939d;font-size: 12px;font-style: italic;">
-              <el-tooltip v-for="(item) in contactImages" class="item" effect="dark" :content="item.content" placement="top-start">
+              <el-tooltip v-for="(item) in contactImages" class="item" effect="dark" :content="item.noti" placement="top-start">
                 <div style="width: 10%;height: 20%;position: relative;display: inline-block;padding-left: 5%">
-                  <img style="position: absolute;width: 75%;height: 100%" :src="item.img"/>
+                  <img style="position: absolute;width: 75%;height: 100%" :src="item.imageUrl"/>
                 </div>
               </el-tooltip>
             </div>
@@ -43,7 +43,7 @@
               E-MAIL：
             </div>
             <div style="width: 60%;height: 70%;color: #8c939d;font-size: 12px;font-style: italic;">
-              {{contacts.email}}
+              {{contacts.mail}}
             </div>
           </td>
         </tr>
@@ -55,8 +55,9 @@
 <script>
   import toolbar from './components/toolbar'
   import contacts from './components/contacts'
-
   import boxes from './commonScripts/moveBackground'
+
+  import {getContactImage_back,getContact} from './requestScript/Contacts'
 
   export default {
     name: 'Contacts',
@@ -67,28 +68,61 @@
         secondImg: 'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
         contacts: {
           id: 1,
-          phone: '1866 - 56 -33 -202',
-          address: 'ROOM 1109,BUILDING #61,YUANYANGTIANDI,MID RD.EAST 4TH RING,CHAOYANG DISTRICT,BEIJING',
-          email: 'SALTSTUDIO@YEAH.NET'
+          tel: '1866 - 56 -33 -202',
+          addressEn: 'ROOM 1109,BUILDING #61,YUANYANGTIANDI,MID RD.EAST 4TH RING,CHAOYANG DISTRICT,BEIJING',
+          mail: 'SALTSTUDIO@YEAH.NET'
         },
         contactImages: [
           {
             id: 1,
-            img: 'require(\'@/assets/images/twitter.jpeg\')',
-            content: 'twitter'
+            imageUrl: 'require(\'@/assets/images/twitter.jpeg\')',
+            noti: 'twitter'
           },
           {
             id: 2,
-            img: 'require(\'@/assets/images/twitter.jpeg\')',
-            content: 'twitter'
+            imageUrl: 'require(\'@/assets/images/twitter.jpeg\')',
+            noti: 'twitter'
           },
           {
             id: 3,
-            img: 'require(\'@/assets/images/twitter.jpeg\')',
-            content: 'twitter'
+            imageUrl: 'require(\'@/assets/images/twitter.jpeg\')',
+            noti: 'twitter'
           },
         ]
       }
+    },
+    created(){
+      //可动背景图
+      getContactImage_back({imageCode:'10'}).then(resp =>{
+        resp = resp.data;
+        if(resp.length > 0){
+          this.firstImg = resp[0].imageUrl.replaceAll('\\','\/');
+        }
+      });
+
+      //背景图
+      getContactImage_back({imageCode:'06'}).then(resp =>{
+        resp = resp.data;
+        if(resp.length > 0){
+          this.secondImg = resp[0].imageUrl;
+        }
+      });
+
+      //联系地址等信息
+      getContact().then(resp =>{
+        if(resp.data){
+          this.contacts = resp.data;
+        }
+      });
+
+      //获取图标
+      getContactImage_back({imageCode:'11'}).then(resp =>{
+        resp = resp.data;
+        if(resp.length > 0){
+          this.contactImages = resp;
+        }
+      });
+
     },
     mounted() {
 
