@@ -137,7 +137,7 @@
 
       getImagesByImageCode({imageCode:'08'}).then(resp =>{
         if(resp.data.length > 0){
-          this.firstImg = resp.data[0].imageUrl;
+          this.firstImg = resp.data[0].imageUrl.replaceAll('\\','\/');
         }
       })
     },

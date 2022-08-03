@@ -60,21 +60,21 @@
       //首页背景图下层
       getImagesByImageCode({imageCode:'02'}).then(resp =>{
         if(resp.data.length > 0){
-          this.secondImg = resp.data[0].imageUrl;
+          this.secondImg = resp.data[0].imageUrl.replaceAll('\\','\/');
         }
       })
 
       //首页背景图上层
       getImagesByImageCode({imageCode:'03'}).then(resp =>{
         if(resp.data.length > 0){
-          this.thirdImg = resp.data[0].imageUrl;
+          this.thirdImg = resp.data[0].imageUrl.replaceAll('\\','\/');
         }
       })
 
       //首页背景动图
       getImagesByImageCode({imageCode:'16'}).then(resp =>{
         if(resp.data.length > 0){
-          this.firstPage = resp.data[0].imageUrl;
+          this.firstPage = resp.data[0].imageUrl.replaceAll('\\','\/');
         }
       })
     },
