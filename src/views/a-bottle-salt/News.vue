@@ -16,13 +16,13 @@
           <td style="width: 80%;height: 100%;padding: 6% 0">
             <div class="divBase selfDefineScroll" style="overflow-y: auto;padding-left: 6%">
               <div v-for="(item) in newsData"  style="display: inline-block;width: 50%;height: 25%;position: relative;margin-bottom: 3%">
-                <img style="width: 25%;height: 100%;position: absolute" :src="item.img" />
+                <img style="width: 25%;height: 100%;position: absolute" :src="item.url" />
                 <div style="width: 60%;height: 100%;position: absolute;left: 30%">
                   <table class="divBase">
                     <tr>
                       <td class="divBase" style="vertical-align: middle">
-                        <div style="width: 100%;height: auto;color: #BAB9B6;font-size: 16px;font-style: italic;margin-bottom: 3%">{{item.title}}</div>
-                        <div style="width: 100%;height: auto;color: rgb(140 140 140);font-size: 14px;font-style: italic;margin-bottom: 3%">DATE:{{item.date}}</div>
+                        <div style="width: 100%;height: auto;color: #BAB9B6;font-size: 16px;font-style: italic;margin-bottom: 3%">{{item['title'+$store.getters.getLanguage]}}</div>
+                        <div style="width: 100%;height: auto;color: rgb(140 140 140);font-size: 14px;font-style: italic;margin-bottom: 3%">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
                         <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-style: italic;">
                           <a class="linkHover" :href="item.link" :target="item.link.indexOf('http') != -1 ? '_blank' : '_self' "><span style="font-size: 13px">EXPLORE</span>&emsp;<i style="color: red" class="el-icon-top-right"></i></a>
                         </div>
@@ -57,8 +57,9 @@
 <script>
   import toolbar from './components/toolbar'
   import contacts from './components/contacts'
-
   import boxes from './commonScripts/moveBackground'
+
+  import {getNews,getWorkLogNews,getImagesByImageCode} from './requestScript/News'
 
   export default {
     name: 'News',
@@ -69,73 +70,101 @@
         newsData:[
           {
             id: 1,
-            title: 'MELTING GAMES COLLABORATION',
-            date: '20 May,2022',
-            img:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
+            titleEn: 'MELTING GAMES COLLABORATION',
+            dateEn: '20 May,2022',
+            url:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
             link:'http://www.baidu.com'
           },
           {
             id: 2,
-            title: 'THE NEWS WEST LIMITED VINYL RELEASE',
-            date: '20 May,2022',
-            img:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
+            titleEn: 'THE NEWS WEST LIMITED VINYL RELEASE',
+            dateEn: '20 May,2022',
+            url:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
             link:'/ourServices'
           },
           {
             id: 3,
-            title: 'METHOD MAN RELEASES NEW SONG FOR \'EVIL DEAD: THE GAMES\'',
-            date: '20 May,2022',
-            img:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
+            titleEn: 'METHOD MAN RELEASES NEW SONG FOR \'EVIL DEAD: THE GAMES\'',
+            dateEn: '20 May,2022',
+            url:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
             link:'http://www.baidu.com'
           },
           {
             id: 4,
-            title: 'MELTING GAMES COLLABORATION',
-            date: '20 May,2022',
-            img:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
+            titleEn: 'MELTING GAMES COLLABORATION',
+            dateEn: '20 May,2022',
+            url:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
             link:'/ourServices'
           },
           {
             id: 5,
-            title: 'MELTING GAMES COLLABORATION',
-            date: '20 May,2022',
-            img:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
+            titleEn: 'MELTING GAMES COLLABORATION',
+            dateEn: '20 May,2022',
+            url:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
             link:'http://www.baidu.com'
           },
           {
             id: 6,
-            title: 'MELTING GAMES COLLABORATION',
-            date: '20 May,2022',
-            img:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
+            titleEn: 'MELTING GAMES COLLABORATION',
+            dateEn: '20 May,2022',
+            url:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
             link:'/ourServices'
           },
           {
             id: 7,
-            title: 'MELTING GAMES COLLABORATION',
-            date: '20 May,2022',
-            img:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
+            titleEn: 'MELTING GAMES COLLABORATION',
+            dateEn: '20 May,2022',
+            url:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
             link:'http://www.baidu.com'
           },
           {
             id: 8,
-            title: 'MELTING GAMES COLLABORATION',
-            date: '20 May,2022',
-            img:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
+            titleEn: 'MELTING GAMES COLLABORATION',
+            dateEn: '20 May,2022',
+            url:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
             link:'/ourServices'
           },
         ]
       }
     },
+    created(){
+      getNews().then(resp => {
+        resp = resp.data;
+        if(resp.length > 0){
+          this.newsData = resp;
+        }
+      })
+
+      getImagesByImageCode({imageCode:'08'}).then(resp =>{
+        if(resp.data.length > 0){
+          this.firstImg = resp.data[0].imageUrl;
+        }
+      })
+    },
     methods: {
       changeShowNewsData(type){
-        console.log(type);
         this.newsData.sort(function() {
           return Math.random() > 0.5 ? -1 : 1;
         });
+
+        if(type == 1){
+          getNews().then(resp => {
+            resp = resp.data;
+            if(resp.length > 0){
+              this.newsData = resp;
+            }
+          })
+        }else{
+          getWorkLogNews().then(resp => {
+            resp = resp.data;
+            if(resp.length > 0){
+              this.newsData = resp;
+            }
+          })
+        }
       }
     },
     mounted() {
-
       //背景图移动起来
       let boxElement = this.$refs.backGroundBox
       boxes.push({
