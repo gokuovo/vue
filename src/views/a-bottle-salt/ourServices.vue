@@ -2,8 +2,8 @@
   <div class="divBase">
 
     <div @click="bigVideoDivClick" v-show="showBigVideo" style="position: absolute;width: 100%;height: 100%;z-index: 2;">
-      <video @click="bigVideoClick" ref="bigVideo" style="position: absolute;width: 60%;left: 15%;top: 20%;height: 70%;object-fit: fill;" controlslist="nofullscreen" controls>
-        <source :src="firstVideo" type="video/mp4">
+      <video :src="firstVideo" @click="bigVideoClick" ref="bigVideo" style="position: absolute;width: 60%;left: 15%;top: 20%;height: 70%;object-fit: fill;" controlslist="nofullscreen" controls>
+        <source type="video/mp4">
       </video>
     </div>
 
@@ -63,8 +63,8 @@
                         </ul>
                       </div>
                       <div style="width: 70%;height: 100%;display: inline-block;position: relative" v-show="showVideo">
-                          <video @click="clickVideo" style="position: absolute;width: 70%;left: 20%;top: 10%;height: 70%;object-fit: fill;" controlslist="nofullscreen" controls>
-                            <source :src="firstVideo" type="video/mp4">
+                          <video :src="firstVideo" @click="clickVideo" style="position: absolute;width: 70%;left: 20%;top: 10%;height: 70%;object-fit: fill;" controlslist="nofullscreen" controls>
+                            <source type="video/mp4">
                           </video>
                       </div>
                     </td>
@@ -140,11 +140,13 @@
       let carouselImages = this.$refs.carouselImgBox.children
       let carouselIndex = 0
       setInterval(function() {//循环播放图片
-        carouselImages[carouselIndex].style.display = 'none'
-        if (++carouselIndex == carouselImages.length) {
-          carouselIndex = 0
+        if(carouselImages.length > 0) {
+          carouselImages[carouselIndex].style.display = 'none'
+          if (++carouselIndex == carouselImages.length) {
+            carouselIndex = 0
+          }
+          carouselImages[carouselIndex].style.display = 'block'
         }
-        carouselImages[carouselIndex].style.display = 'block'
       }, 5000)
 
     },
