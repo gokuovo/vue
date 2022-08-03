@@ -10,7 +10,7 @@
             <div v-if="!showLIST" style="height: 100%;width: 60%;display: inline-block;">
               <div v-if="showMusic" style="width: 100%;height: 80%;padding-left: 10%">
                 <div style="width: 100%;height: 30%;color: #F5F5F5;font-size: 26px">
-                  <div style="width: 100%;padding-top: 10%;font-style: italic">{{this.showingAlbum.key}}</div>
+                  <div style="width: 100%;padding-top: 10%;font-style: italic">{{this.showingAlbum['title'+$store.getters.getLanguage]}}</div>
                 </div>
                 <div style="width: 100%;height: 60%;">
                   <div class="selfDefineScroll" style="overflow-y: auto;height: 85%;width: 80%;">
@@ -21,15 +21,15 @@
                         </div>
 
                         <div class="musicItem" :ref="item.id" @click="musicItemClick(item)" style="color: #8c939d;position: relative;padding-top: 2%;">
-                          <span style="font-size: 14px;font-style: italic">{{item.name}}</span>
-                          <audio v-show="false" :ref="item.name+item.id" controls @canplay="getDuration(item.name+item.id)">
-                            <source :src="item.srcPath" type="audio/mpeg"/>
+                          <span style="font-size: 14px;font-style: italic">{{item.title}}</span>
+                          <audio v-show="false" :ref="item.title+item.id" controls @canplay="getDuration(item.title+item.id)">
+                            <source :src="item.url" type="audio/mpeg"/>
                           </audio>
                           <span v-show="false" style="font-size: 14px;font-style: italic">
-                            {{addMusicId(item.name+item.id)}}
+                            {{addMusicId(item.title+item.id)}}
                           </span>
                           <span style="font-size: 14px;font-style: italic;color: #8c939d;position: absolute;right: 1%">
-                            {{getMusicTime(item.name+item.id)}}
+                            {{getMusicTime(item.title+item.id)}}
                           </span>
                         </div>
                       </li>
@@ -39,7 +39,7 @@
               </div>
               <div v-if="showSFX" style="position: relative;width: 100%;height: 80%;">
                 <video style="position: absolute;width: 80%;height: 80%;margin: 5% 5%;left: 4%;" controls>
-                  <source :src="albumDetail.video[0].srcPath"  type="video/mp4">
+                  <source :src="albumDetail.video[0].url"  type="video/mp4">
                 </video>
               </div>
               <div style="width: 100%;height: 20%;color: #F5F5F5;font-size: 16px;padding-top: 5%">
@@ -57,14 +57,14 @@
 
             <div v-if="!showLIST" style="height: 100%;width: 40%;display: inline-block;position: absolute">
               <div v-if="!showLIST" style="height: 25%;width: 80%;background-color: #383838;color: #F5F5F5;font-size: 16px;font-style: italic;padding-left: 5%">
-                <div style="width: 100%;height: 25%;padding-top: 5%">{{showingAlbum.key}}</div>
+                <div style="width: 100%;height: 25%;padding-top: 5%">{{showingAlbum['title'+$store.getters.getLanguage]}}</div>
                 <div style="width: 100%;height: 75%;position: relative;padding-top: 2%">
-                  <img style="width: 25%;height: 75%;position: absolute" :src="showingAlbum.srcPath"/>
+                  <img style="width: 25%;height: 75%;position: absolute" :src="showingAlbum['imgSrc'+$store.getters.getLanguage]"/>
                   <div style="width: 75%;height: 75%;position: absolute;left: 30%">
-                    <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">RELEASE：<span style="font-size: 12px">{{showingAlbum.release}}</span></div>
-                    <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">DEVELOPER：<span style="font-size: 12px">{{showingAlbum.developer}}</span></div>
-                    <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">PUBLISHER：<span style="font-size: 12px">{{showingAlbum.publisher}}</span></div>
-                    <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">PLATFORM：<span style="font-size: 12px">{{showingAlbum.platform}}</span></div>
+                    <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">RELEASE：<span style="font-size: 12px">{{showingAlbum['release'+$store.getters.getLanguage]}}</span></div>
+                    <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">DEVELOPER：<span style="font-size: 12px">{{showingAlbum['developer'+$store.getters.getLanguage]}}</span></div>
+                    <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">PUBLISHER：<span style="font-size: 12px">{{showingAlbum['publisher'+$store.getters.getLanguage]}}</span></div>
+                    <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">PLATFORM：<span style="font-size: 12px">{{showingAlbum['platform'+$store.getters.getLanguage]}}</span></div>
                   </div>
                 </div>
               </div>
@@ -72,7 +72,7 @@
                 <ul>
                   <li style="width: 100%;height: 33.3%" v-for="(item,index) in albums">
                     <div :ref="'imgDiv_'+index" @click="albumsClick(item,index)" class="divBase imgDiv"
-                         :style="{backgroundImage: `url(${item.srcPath})`}">
+                         :style="{backgroundImage: `url(${item['imgSrc'+$store.getters.getLanguage]})`}">
                     </div>
                   </li>
                 </ul>
@@ -83,12 +83,12 @@
             <div v-if="showLIST" class="divBase">
               <div class="selfDefineScroll" style="width: 100%;height: 80%;overflow-y: auto;">
                 <div v-for="(item) in albumList" style="width: 50%;height: 27%;display: inline-block;position: relative;padding-left: 6%;margin-top: 2%;">
-                  <img style="width: 25%;height: 100%;position: absolute" :src="item.img" />
+                  <img style="width: 25%;height: 100%;position: absolute" :src="item.url" />
                   <div style="width: 60%;height: 100%;position: absolute;left: 40%">
-                    <div style="width: 100%;height: 20%;color: #BAB9B6;font-size: 16px;font-style: italic;">{{item.name}}</div>
-                    <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 14px;font-style: italic;">DATE:{{item.date}}</div>
-                    <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 14px;font-style: italic;">COMPANY:{{item.company}}</div>
-                    <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 14px;font-style: italic;">PLATFORM:{{item.platform}}</div>
+                    <div style="width: 100%;height: 20%;color: #BAB9B6;font-size: 16px;font-style: italic;">{{item['title'+$store.getters.getLanguage]}}</div>
+                    <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 14px;font-style: italic;">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
+                    <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 14px;font-style: italic;">COMPANY:{{item['company'+$store.getters.getLanguage]}}</div>
+                    <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 14px;font-style: italic;">PLATFORM:{{item['platform'+$store.getters.getLanguage]}}</div>
                     <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-style: italic;">
                       <a class="linkHover" :href="item.link" :target="item.link.indexOf('http') != -1 ? '_blank' : '_self' "><span style="font-size: 13px">EXPLORE</span>&emsp;<i style="color: red" class="el-icon-top-right"></i></a>
                     </div>
@@ -125,6 +125,8 @@
   import contacts from './components/contacts'
   import audioCom from './components/audioCom'
 
+  import {getAlbum,getProject,getList} from './requestScript/Project'
+
   export default {
     name: 'Projects',
     components: { toolbar, contacts, audioCom },
@@ -132,172 +134,172 @@
       return {
         albums: [
           {
-            key: 'MORNING',
-            release: '20 Feb,2022',
-            developer:'Wild Kid Games',
-            publisher:'Indienova',
-            platform:'IOS,Android,Stream,Switch',
-            srcPath: 'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
-            albumDetailId: ''
+            titleEn: 'MORNING',
+            releaseEn: '20 Feb,2022',
+            developerEn:'Wild Kid Games',
+            publisherEn:'Indienova',
+            platformEn:'IOS,Android,Stream,Switch',
+            imgSrcEn: 'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
+            id: '1'
           },
           {
-            key: 'CLOCK',
-            release: '19 Feb,2022',
-            developer:'Wild Kid Games',
-            publisher:'Indienova',
-            platform:'IOS,Android,Stream,Switch',
-            srcPath: 'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
-            albumDetailId: ''
+            titleEn: 'CLOCK',
+            releaseEn: '19 Feb,2022',
+            developerEn:'Wild Kid Games',
+            publisherEn:'Indienova',
+            platformEn:'IOS,Android,Stream,Switch',
+            imgSrcEn: 'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
+            id: '2'
           },
           {
-            key: 'MORNING',
-            release: '18 Feb,2022',
-            developer:'Wild Kid Games',
-            publisher:'Indienova',
-            platform:'IOS,Android,Stream,Switch',
-            srcPath: 'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
-            albumDetailId: ''
+            titleEn: 'MORNING',
+            releaseEn: '18 Feb,2022',
+            developerEn:'Wild Kid Games',
+            publisherEn:'Indienova',
+            platformEn:'IOS,Android,Stream,Switch',
+            imgSrcEn: 'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
+            id: '3'
           },
           {
-            key: 'CLOCK',
-            release: '17 Feb,2022',
-            developer:'Wild Kid Games',
-            publisher:'Indienova',
-            platform:'IOS,Android,Stream,Switch',
-            srcPath: 'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
-            albumDetailId: ''
+            titleEn: 'CLOCK',
+            releaseEn: '17 Feb,2022',
+            developerEn:'Wild Kid Games',
+            publisherEn:'Indienova',
+            platformEn:'IOS,Android,Stream,Switch',
+            imgSrcEn: 'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
+            id: '4'
           },
           {
-            key: 'MORNING',
-            release: '16 Feb,2022',
-            developer:'Wild Kid Games',
-            publisher:'Indienova',
-            platform:'IOS,Android,Stream,Switch',
-            srcPath: 'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
-            albumDetailId: ''
+            titleEn: 'MORNING',
+            releaseEn: '16 Feb,2022',
+            developerEn:'Wild Kid Games',
+            publisherEn:'Indienova',
+            platformEn:'IOS,Android,Stream,Switch',
+            imgSrcEn: 'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
+            id: '5'
           }
         ],
         albumDetail: {
           music: [
             {
               id:1,
-              name: 'PAST IN THE DREAM',
-              srcPath: 'https://96.f.1ting.com/local_to_cube_202004121813/96kmp3/2021/10/29/29c_cjl/01.mp3'
+              title: 'PAST IN THE DREAM',
+              url: 'https://96.f.1ting.com/local_to_cube_202004121813/96kmp3/2021/10/29/29c_cjl/01.mp3'
             },
             {
               id:2,
-              name: 'SEE WEIRD THINGS',
-              srcPath: 'https://96.f.1ting.com/local_to_cube_202004121813/96kmp3/2021/11/17/17k_tx/01.mp3'
+              title: 'SEE WEIRD THINGS',
+              url: 'https://96.f.1ting.com/local_to_cube_202004121813/96kmp3/2021/11/17/17k_tx/01.mp3'
             },
             {
               id:3,
-              name: 'PAST IN THE DREAM',
-              srcPath: 'https://96.f.1ting.com/local_to_cube_202004121813/96kmp3/2021/11/17/17k_tx/01.mp3'
+              title: 'PAST IN THE DREAM',
+              url: 'https://96.f.1ting.com/local_to_cube_202004121813/96kmp3/2021/11/17/17k_tx/01.mp3'
             },
             {
               id:4,
-              name: 'SEE WEIRD THINGS',
-              srcPath: 'https://96.f.1ting.com/local_to_cube_202004121813/96kmp3/2021/10/29/29c_cjl/01.mp3'
+              title: 'SEE WEIRD THINGS',
+              url: 'https://96.f.1ting.com/local_to_cube_202004121813/96kmp3/2021/10/29/29c_cjl/01.mp3'
             },
             {
               id:5,
-              name: 'PAST IN THE DREAM',
-              srcPath: 'https://96.f.1ting.com/local_to_cube_202004121813/96kmp3/2021/11/17/17k_tx/01.mp3'
+              title: 'PAST IN THE DREAM',
+              url: 'https://96.f.1ting.com/local_to_cube_202004121813/96kmp3/2021/11/17/17k_tx/01.mp3'
             },
             {
               id:6,
-              name: 'SEE WEIRD THINGS',
-              srcPath: 'https://96.f.1ting.com/local_to_cube_202004121813/96kmp3/2021/10/29/29c_cjl/01.mp3'
+              title: 'SEE WEIRD THINGS',
+              url: 'https://96.f.1ting.com/local_to_cube_202004121813/96kmp3/2021/10/29/29c_cjl/01.mp3'
             },
             {
               id:7,
-              name: 'PAST IN THE DREAM',
-              srcPath: 'https://96.f.1ting.com/local_to_cube_202004121813/96kmp3/2021/11/17/17k_tx/01.mp3'
+              title: 'PAST IN THE DREAM',
+              url: 'https://96.f.1ting.com/local_to_cube_202004121813/96kmp3/2021/11/17/17k_tx/01.mp3'
             },
             {
               id:8,
-              name: 'SEE WEIRD THINGS',
-              srcPath: 'https://96.f.1ting.com/local_to_cube_202004121813/96kmp3/2021/10/29/29c_cjl/01.mp3'
+              title: 'SEE WEIRD THINGS',
+              url: 'https://96.f.1ting.com/local_to_cube_202004121813/96kmp3/2021/10/29/29c_cjl/01.mp3'
             }
           ],
           video:[
             {
-              name: 'SEE WEIRD THINGS_Video',
-              srcPath: 'https://video.kekedj.com/video_kekedj_com/2021/202104/20210401/%E6%9C%80%E5%BC%BA%E7%94%B5%E9%9F%B3%E9%A5%95%E9%A4%AE%E7%9B%9B%E5%AE%B4-Alan%20Walker%20@%20Parookaville%20Festival%202019-%E8%89%BE%E4%BC%A6%E6%B2%83%E5%85%8B%E7%8E%B0%E5%9C%BA%E8%B6%85%E5%97%A8%E8%87%B3%E5%B0%8A%E6%94%B6%E8%97%8F%E7%89%88.mp4'
+              title: 'SEE WEIRD THINGS_Video',
+              url: 'https://video.kekedj.com/video_kekedj_com/2021/202104/20210401/%E6%9C%80%E5%BC%BA%E7%94%B5%E9%9F%B3%E9%A5%95%E9%A4%AE%E7%9B%9B%E5%AE%B4-Alan%20Walker%20@%20Parookaville%20Festival%202019-%E8%89%BE%E4%BC%A6%E6%B2%83%E5%85%8B%E7%8E%B0%E5%9C%BA%E8%B6%85%E5%97%A8%E8%87%B3%E5%B0%8A%E6%94%B6%E8%97%8F%E7%89%88.mp4'
             }
           ]
         },
         albumList:[
           {
             id:1,
-            img:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
-            name:'INFINITE LAGRANGE',
-            date:'20 Jan,2022',
-            company:'infinity',
-            platform:'IOS,Android,Stream,Switch',
+            url:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
+            titleEn:'INFINITE LAGRANGE',
+            dateEn:'20 Jan,2022',
+            companyEn:'infinity',
+            platformEn:'IOS,Android,Stream,Switch',
             link:'http://www.baidu.com'
           },
           {
             id:2,
-            img:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
-            name:'INFINITE LAGRANGE',
-            date:'20 Jan,2022',
-            company:'infinity',
-            platform:'IOS,Android,Stream,Switch',
+            url:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
+            titleEn:'INFINITE LAGRANGE',
+            dateEn:'20 Jan,2022',
+            companyEn:'infinity',
+            platformEn:'IOS,Android,Stream,Switch',
             link:'/ourServices'
           },
           {
             id:3,
-            img:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
-            name:'INFINITE LAGRANGE',
-            date:'20 Jan,2022',
-            company:'infinity',
-            platform:'IOS,Android,Stream,Switch',
+            url:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
+            titleEn:'INFINITE LAGRANGE',
+            dateEn:'20 Jan,2022',
+            companyEn:'infinity',
+            platformEn:'IOS,Android,Stream,Switch',
             link:''
           },
           {
             id:4,
-            img:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
-            name:'INFINITE LAGRANGE',
-            date:'20 Jan,2022',
-            company:'infinity',
-            platform:'IOS,Android,Stream,Switch',
+            url:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
+            titleEn:'INFINITE LAGRANGE',
+            dateEn:'20 Jan,2022',
+            companyEn:'infinity',
+            platformEn:'IOS,Android,Stream,Switch',
             link:''
           },
           {
             id:5,
-            img:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
-            name:'INFINITE LAGRANGE',
-            date:'20 Jan,2022',
-            company:'infinity',
-            platform:'IOS,Android,Stream,Switch',
+            url:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
+            titleEn:'INFINITE LAGRANGE',
+            dateEn:'20 Jan,2022',
+            companyEn:'infinity',
+            platformEn:'IOS,Android,Stream,Switch',
             link:''
           },
           {
             id:6,
-            img:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
-            name:'INFINITE LAGRANGE',
-            date:'20 Jan,2022',
-            company:'infinity',
-            platform:'IOS,Android,Stream,Switch',
+            url:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
+            titleEn:'INFINITE LAGRANGE',
+            dateEn:'20 Jan,2022',
+            companyEn:'infinity',
+            platformEn:'IOS,Android,Stream,Switch',
             link:''
           },
           {
             id:7,
-            img:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
-            name:'INFINITE LAGRANGE',
-            date:'20 Jan,2022',
-            company:'infinity',
-            platform:'IOS,Android,Stream,Switch',
+            url:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
+            titleEn:'INFINITE LAGRANGE',
+            dateEn:'20 Jan,2022',
+            companyEn:'infinity',
+            platformEn:'IOS,Android,Stream,Switch',
             link:''
           },
           {
             id:8,
-            img:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
-            name:'INFINITE LAGRANGE',
-            date:'20 Jan,2022',
-            company:'infinity',
-            platform:'IOS,Android,Stream,Switch',
+            url:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
+            titleEn:'INFINITE LAGRANGE',
+            dateEn:'20 Jan,2022',
+            companyEn:'infinity',
+            platformEn:'IOS,Android,Stream,Switch',
             link:''
           }
         ],
@@ -314,6 +316,37 @@
       if (null != this.albums && this.albums.length > 0) {
         this.showingAlbum = this.albums[0]
       }
+
+      getAlbum().then(resp =>{
+        if(resp.data.length > 0){
+          this.albums = resp.data;
+          this.showingAlbum = this.albums[0];
+          //默认显示第一张专辑下面的音乐和视频
+          let id = this.albums[0].id;
+          getProject(id).then(resp =>{
+            resp = resp.data;
+            if(resp.length > 0){
+              let musicList = [];
+              let videoList = [];
+              for(let i = 0;i < resp.length;i++){
+                if(resp[i].type == 0){
+                  musicList.push(resp[i]);
+                }else{
+                  videoList.push(resp[i]);
+                }
+              }
+              this.albumDetail.music = musicList;
+              this.albumDetail.video = videoList;
+            }
+          });
+        }
+      });
+
+      getList().then(resp =>{
+        if(resp.data.length > 0){
+          this.albumList = resp.data;
+        }
+      });
     },
     mounted(){
       for(let i = 0;i < this.musicTimes.length;i++){
@@ -343,6 +376,24 @@
             this.$refs["imgDiv_" + i][0].style.filter = "grayscale(0)";
           }
         }
+
+        let id = data.id;
+        getProject(id).then(resp =>{
+          resp = resp.data;
+          if(resp.length > 0){
+            let musicList = [];
+            let videoList = [];
+            for(let i = 0;i < resp.length;i++){
+              if(resp[i].type == 0){
+                musicList.push(resp[i]);
+              }else{
+                videoList.push(resp[i]);
+              }
+            }
+            this.albumDetail.music = musicList;
+            this.albumDetail.video = videoList;
+          }
+        });
       },
 
       musicItemClick(item){
