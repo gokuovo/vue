@@ -120,7 +120,7 @@
       getContactImage_back({imageCode:'09'}).then(resp =>{
         resp = resp.data;
         if(resp.length > 0){
-          this.firstImg = resp[0].imageUrl;
+          this.firstImg = resp[0].imageUrl.replaceAll('\\','\/');
         }
       });
     },
