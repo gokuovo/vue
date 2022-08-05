@@ -4,24 +4,15 @@
     <div class="title" v-else>
       <span>修改social</span> <span class="back" @click="back"> <i class="iconfont icon-fanhui"></i> 返回 </span>
     </div>
-
-    <div class="wrap">
+    <div class="wrap" v-if="!showEdit">
       <el-row>
         <el-col :lg="16" :md="20" :sm="24" :xs="24">
           <el-form :model="social" status-icon ref="form" label-width="100px" @submit.prevent>
             <el-form-item label="social名称" prop="connectType">
               <el-input v-model="social.connectType" placeholder="请填写social名称"></el-input>
             </el-form-item>
-            <el-form-item label="图片地址" prop="imageUrl" v-if="social.connectType">
+            <el-form-item label="当前配图" prop="imageUrl" v-if="social.id">
               <img :src="social.imageUrl" style="width: 150px;height: 150px" />
-            </el-form-item>
-            <el-form-item label="图片地址" prop="imageUrl" v-else>
-              <upload-imgs ref="uploadEle8" :rules="rules" :multiple="true" :min-num="1" :max-num="1" :sortable="true" />
-            </el-form-item>
-            <el-form-item v-if="social.connectType">
-              <el-upload>
-                <el-button size="mini" type="primary">选取文件</el-button>
-              </el-upload>
             </el-form-item>
             <el-form-item label="跳转地址" prop="contactUrl">
               <el-input v-model="social.contactUrl"  placeholder="请填写跳转地址"></el-input>
@@ -30,13 +21,16 @@
               <el-input v-model="social.sort"  placeholder="请填写排序(0,1,2...)"></el-input>
             </el-form-item>
             <el-form-item class="submit">
-              <el-button type="primary" @click="submitForm">保 存</el-button>
+              <el-button v-if="social.id" type="primary" @click="submitForm">保 存</el-button>
+              <el-button v-else type="primary" @click="submitForm">新 增</el-button>
               <el-button @click="resetForm">重 置</el-button>
+              <el-button v-if="social.id" plain type="primary" @click="handleEdit(social.id)">更改配图</el-button>
             </el-form-item>
           </el-form>
         </el-col>
       </el-row>
     </div>
+    <social-file v-else @editClose="editClose" :editSocialId="editSocialId"></social-file>
   </div>
 </template>
 
@@ -45,9 +39,10 @@
   import { ElMessage } from 'element-plus'
   import { get, post } from '../../lin/plugin/axios'
   import UploadImgs from '../../component/base/homepage/logo/index'
+  import SocialFile from './social-file'
 
   export default {
-    components: { UploadImgs },
+    components: { SocialFile, UploadImgs },
     props: {
       editSocialId: {
         type: Number,
@@ -55,8 +50,10 @@
       },
     },
     setup(props, context) {
+      const editSocialId = ref(1)
       const form = ref(null)
       const loading = ref(false)
+      const showEdit = ref(false)
       const social = reactive({ id: '',connectType: '', imageUrl: '', contactUrl: '', sort: '' })
       const listAssign = (a, b) => Object.keys(a).forEach(key => {
         a[key] = b[key] || a[key]
@@ -83,6 +80,11 @@
         form.value.resetFields()
       }
 
+      const handleEdit = id => {
+        showEdit.value = true
+        editSocialId.value = id
+      }
+
 
       const submitForm = async formName => {
         form.value.validate(async valid => {
@@ -93,6 +95,8 @@
               context.emit('editClose')
             } else {
               res = await post('/SaltContactUs/addSocial',social)
+              handleEdit(res.id)
+              console.log(editSocialId)
               resetForm(formName)
             }
             if (res.code < window.MAX_SUCCESS_CODE) {
@@ -118,6 +122,9 @@
         rules,
         resetForm,
         submitForm,
+        editSocialId,
+        handleEdit,
+        showEdit,
       }
     },
   }

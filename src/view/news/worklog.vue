@@ -5,7 +5,7 @@
       <span>修改WORKLOG信息</span> <span class="back" @click="back"> <i class="iconfont icon-fanhui"></i> 返回 </span>
     </div>
 
-    <div class="wrap">
+    <div class="wrap" v-if="!showEdit">
       <el-row>
         <el-col :lg="16" :md="20" :sm="24" :xs="24">
           <el-form :model="worklog" status-icon ref="form" label-width="100px" @submit.prevent :rules="rules">
@@ -36,14 +36,6 @@
             <el-form-item label="worklog配图" prop="url" v-if="worklog.id">
               <img :src="worklog.url" style="width: 150px;height: 150px" />
             </el-form-item>
-            <el-form-item label="worklog配图" prop="url" v-else>
-              <upload-imgs ref="uploadEle8" :rules="rules" :multiple="true" :min-num="1" :max-num="1" :sortable="true" />
-            </el-form-item>
-            <el-form-item v-if="worklog.id">
-              <el-upload :action="'localhost:5000/cms/file'">
-                <el-button size="mini" type="primary">选取文件</el-button>
-              </el-upload>
-            </el-form-item>
             <el-form-item label="跳转链接" prop="image">
               <el-input v-model="worklog.link" placeholder="请输入跳转链接"></el-input>
             </el-form-item>
@@ -51,13 +43,16 @@
               <el-input v-model="worklog.sort" placeholder="请输入排序(1,2,3....)"></el-input>
             </el-form-item>
             <el-form-item class="submit">
-              <el-button type="primary" @click="submitForm">保 存</el-button>
+              <el-button v-if="worklog.id" type="primary" @click="submitForm">保 存</el-button>
+              <el-button v-else type="primary" @click="submitForm">新 增</el-button>
               <el-button @click="resetForm">重 置</el-button>
+              <el-button v-if="worklog.id" plain type="primary" @click="handleEdit(worklog.id)">更改配图</el-button>
             </el-form-item>
           </el-form>
         </el-col>
       </el-row>
     </div>
+    <worklog-file v-else @editClose="editClose" :editWorklogId="editWorklogId"></worklog-file>
   </div>
 </template>
 
@@ -66,9 +61,10 @@
   import { ElMessage } from 'element-plus'
   import { get, post } from '../../lin/plugin/axios'
   import UploadImgs from '../../component/base/homepage/logo/index'
+  import worklogFile from "./worklog-file"
 
   export default {
-    components: { UploadImgs },
+    components: { worklogFile,UploadImgs },
     methods:{
       //图片回显
       handleAvatarSuccess(res, file) {
@@ -93,6 +89,8 @@
       },
     },
     setup(props, context) {
+      const showEdit = ref(false)
+      const editWorklogId = ref(1)
       const form = ref(null)
       const loading = ref(false)
       const worklog = reactive({id:'',titleEn:'',titleChi:'',titleJap:'',titleSpa:'', dateEn:'',dateChi:'',dateJap:'',dateSpa:'', url:'',link:'',sort:''})
@@ -124,6 +122,11 @@
         form.value.resetFields()
       }
 
+      const handleEdit = id => {
+        showEdit.value = true
+        editWorklogId.value = id
+      }
+
       const submitForm = async formName => {
         form.value.validate(async valid => {
           if (valid) {
@@ -133,6 +136,7 @@
               context.emit('editClose')
             } else {
               res = await post("/SaltNews/addWorklog", worklog)
+              handleEdit(res.id)
               resetForm(formName)
             }
             if (res.code < window.MAX_SUCCESS_CODE) {
@@ -156,6 +160,9 @@
         rules,
         resetForm,
         submitForm,
+        handleEdit,
+        showEdit,
+        editWorklogId,
       }
     },
   }

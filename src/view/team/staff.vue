@@ -5,7 +5,7 @@
       <span>修改员工信息</span> <span class="back" @click="back"> <i class="iconfont icon-fanhui"></i> 返回 </span>
     </div>
 
-    <div class="wrap">
+    <div class="wrap" v-if="!showEdit">
       <el-row>
         <el-col :lg="16" :md="20" :sm="24" :xs="24">
           <el-form :model="staff" status-icon ref="form" label-width="100px" @submit.prevent>
@@ -48,35 +48,32 @@
             <el-form-item label="员工图片" v-if="staff.id">
               <img :src="staff.staffImage" style="width: 150px;height: 150px" />
             </el-form-item>
-            <el-form-item label="员工图片" prop="staffImage" v-else>
-              <upload-imgs ref="uploadEle8" :rules="rules" :multiple="true" :min-num="1" :max-num="1" :sortable="true" />
-            </el-form-item>
-            <el-form-item v-if="staff.id">
-              <el-upload>
-                <el-button size="mini" type="primary">选取文件</el-button>
-              </el-upload>
-            </el-form-item>
             <el-form-item label="排序" prop="sort">
               <el-input v-model="staff.sort"  placeholder="请填写排序(0,1,2...)"></el-input>
             </el-form-item>
             <el-form-item class="submit">
-              <el-button type="primary" @click="submitForm">保 存</el-button>
+              <el-button v-if="staff.id" type="primary" @click="submitForm">保 存</el-button>
+              <el-button v-else type="primary" @click="submitForm">新 增</el-button>
               <el-button @click="resetForm">重 置</el-button>
+              <el-button v-if="staff.id" plain type="primary" @click="handleEdit(staff.id)">更改配图</el-button>
             </el-form-item>
           </el-form>
         </el-col>
       </el-row>
     </div>
+    <staff-file v-else @editClose="editClose" :editStaffId="editStaffId"></staff-file>
   </div>
 </template>
 
 <script>
   import { reactive, ref, onMounted } from 'vue'
   import { ElMessage } from 'element-plus'
-  import bookModel from '@/model/book'
   import { get, post } from '../../lin/plugin/axios'
+  import staffFile from "./staff-file"
+
 
   export default {
+    components: { staffFile },
     props: {
       editStaffId: {
         type: Number,
@@ -84,6 +81,8 @@
       },
     },
     setup(props, context) {
+      const showEdit = ref(false)
+      const editStaffId = ref(1)
       const form = ref(null)
       const loading = ref(false)
       const staff = reactive({ id: '',staffNameEn: '', staffNameChi: '', staffNameJap: '', staffNameSpa: '',
@@ -118,6 +117,11 @@
         form.value.resetFields()
       }
 
+      const handleEdit = id => {
+        showEdit.value = true
+        editStaffId.value = id
+      }
+
 
       const submitForm = async formName => {
         form.value.validate(async valid => {
@@ -128,6 +132,7 @@
               context.emit('editClose')
             } else {
               res = await post('/SaltTeam/addStaff',staff)
+              handleEdit(res.id)
               resetForm(formName)
             }
             if (res.code < window.MAX_SUCCESS_CODE) {
@@ -151,6 +156,9 @@
         rules,
         resetForm,
         submitForm,
+        handleEdit,
+        showEdit,
+        editStaffId,
       }
     },
   }

@@ -92,7 +92,7 @@
           cancelButtonText: '取消',
           type: 'warning',
         }).then(async () => {
-          const res = await post(`/SaltContactUs/deleteSocial?id=`+id)
+          const res = await post(`/SaltTeam/deleteStaff?id=`+id)
           if (res.code < window.MAX_SUCCESS_CODE) {
             getStaff()
             ElMessage.success(`${res.message}`)

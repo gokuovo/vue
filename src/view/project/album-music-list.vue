@@ -9,19 +9,12 @@
       <el-table :data="albumMusic" v-loading="loading">
         <el-table-column type="index" :index="indexMethod" label="序号" width="100"></el-table-column>
         <el-table-column prop="title" label="音乐名"></el-table-column>
-<!--        <el-table-column label="友商图标">-->
-<!--          <template v-slot="scope" >-->
-<!--            <el-image :src="scope.row.partnerUrl" style="width: 60px;height: 60px;" :preview-src-list="scope.row.partnerUrl"-->
-<!--            ></el-image>-->
-<!--          </template>-->
-<!--        </el-table-column>-->
         <el-table-column prop="album" label="所属专辑"></el-table-column>
-        <el-table-column label="操作" fixed="right" width="275">
+        <el-table-column label="操作" fixed="right" width="350">
           <template #default="scope">
             <el-button plain size="small" type="primary" @click="handleEdit(scope.row.id)">编辑</el-button>
-            <audio ref="music" src="">
-              <el-button plain size="small" type="primary" @click="handleEdit(scope.row.id)">播放</el-button>
-            </audio>
+            <el-button size="small" type="primary" @click="clickVideo(scope.row.url)">播放</el-button>
+            <el-button plain size="small" type="primary" @click="handleEdit2(scope.row.id)">更换音乐</el-button>
             <el-button
               plain
               size="small"
@@ -36,7 +29,9 @@
     </div>
 
     <!-- 编辑页面 -->
-    <AlbumMusic v-else @editClose="editClose" :editAlbumMusicId="editAlbumMusicId"></AlbumMusic>
+    <AlbumMusic v-if="page==1" @editClose="editClose" :editAlbumMusicId="editAlbumMusicId"></AlbumMusic>
+    <album-music-file v-else-if="page==2" @editClose="editClose" :editAlbumMusicId="editAlbumMusicId"></album-music-file>
+    <video-preview></video-preview>
   </div>
 </template>
 
@@ -45,12 +40,36 @@
   import { ElMessageBox, ElMessage } from 'element-plus'
   import AlbumMusic from './album-music'
   import { get, post } from '../../lin/plugin/axios'
+  import AlbumMusicFile from './album-music-file'
+  // 引入视频预览组件
+  import VideoPreview from '../videoCommon/VideoPreview'
 
   export default {
     components: {
+      VideoPreview,
+      AlbumMusicFile,
       AlbumMusic,
     },
+    methods: {
+      clickVideo(url) {
+        const data = {
+          videoPreviewVisible: true,
+          videoPreviewList: [
+            {
+              size: '123',
+              fileUrl: url,
+              downloadLink: '123',
+              fileName: 'text',
+              extendName: '123',
+            },
+          ],
+          activeIndex: 0,
+        }
+        this.$store.commit('setVideoPreviewData', data)
+      },
+    },
     setup() {
+      const page = ref(null)
       const albumMusic = ref([])
       const editAlbumMusicId = ref(1)
       const loading = ref(false)
@@ -63,7 +82,7 @@
       const getAlbumMusic = async () => {
         try {
           loading.value = true
-          albumMusic.value = await get("/SaltProject/getProjecteByAlbum?album="+"0")
+          albumMusic.value = await get("/SaltProject/getProjectByType?type="+"0")
           loading.value = false
         } catch (error) {
           loading.value = false
@@ -76,6 +95,12 @@
       const handleEdit = id => {
         showEdit.value = true
         editAlbumMusicId.value = id
+        page.value = 1
+      }
+      const handleEdit2 = id => {
+        showEdit.value = true
+        editAlbumMusicId.value = id
+        page.value = 2
       }
 
       const handleDelete = id => {
@@ -84,7 +109,7 @@
           cancelButtonText: '取消',
           type: 'warning',
         }).then(async () => {
-          const res = await post("/SaltProject/deletePartners?id="+id)
+          const res = await post("/SaltProject/deleteMusic?id="+id)
           if (res.code < window.MAX_SUCCESS_CODE) {
             getAlbumMusic()
             ElMessage.success(`${res.message}`)
@@ -94,6 +119,7 @@
 
       const editClose = () => {
         showEdit.value = false
+        page.value = null
         getAlbumMusic()
       }
 
@@ -108,6 +134,8 @@
         editAlbumMusicId,
         indexMethod,
         handleDelete,
+        handleEdit2,
+        page,
       }
     },
     methods: {

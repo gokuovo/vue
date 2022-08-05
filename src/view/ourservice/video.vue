@@ -1,103 +1,162 @@
 <template>
-  <el-tab-pane label="业务视频" name="second">
-    <el-form ref="form" :model="form" label-width="80px">
-      <el-form-item label="上传视频">
-        <el-upload
-          class="avatar-uploader el-upload--text"
-          :drag="Plus"
-          action="http://localhost:8001/api/uploadVideo3"
-          multiple
-          :show-file-list="false"
-          :data="{ SavePath: this.Path.url }"
-          :on-success="handleVideoSuccess"
-          :before-upload="beforeUploadVideo"
-          :on-progress="uploadVideoProcess"
-        >
-          <i v-if="Plus" class="el-icon-upload"></i>
-          <div v-if="Plus" class="el-upload__text">
-            将文件拖到此处，或<em>点击上传</em>
-          </div>
-          <el-progress
-            v-if="videoFlag == true"
-            type="circle"
-            :percentage="videoUploadPercent"
-            style="margin-top: 30px"
-          ></el-progress>
-          <div class="el-upload__tip" slot="tip">
-            只能上传mp4/flv/avi文件，且不超过300M
-          </div>
-        </el-upload>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit">立即创建</el-button>
-      </el-form-item>
-    </el-form>
-  </el-tab-pane>
+  <div class="container">
+    <div class="title">
+      <span>编辑名字</span> <span class="back" @click="back"> <i class="iconfont icon-fanhui"></i> 返回 </span>
+    </div>
+
+    <div class="wrap">
+      <el-row>
+        <el-col :lg="16" :md="20" :sm="24" :xs="24">
+          <el-form :model="word" status-icon ref="form" label-width="100px" @submit.prevent>
+            <el-form-item label="名字En版" prop="wordTextEn">
+              <el-input v-model="word.wordTextEn" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请填写文字En版"></el-input>
+            </el-form-item>
+            <el-form-item label="名字Chi版" prop="wordTextChi">
+              <el-input v-model="word.wordTextChi" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请填写文字Chi版"></el-input>
+            </el-form-item>
+            <el-form-item label="名字Jap版" prop="wordTextJap">
+              <el-input v-model="word.wordTextJap" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请填写文字Jap版"></el-input>
+            </el-form-item>
+            <el-form-item label="名字Spa版" prop="wordTextSpa">
+              <el-input v-model="word.wordTextSpa" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请填写文字Spa版"></el-input>
+            </el-form-item>
+            <el-form-item label="备注" prop="wordTextChi">
+              <el-input v-model="word.noti" placeholder="请填写备注"></el-input>
+            </el-form-item>
+            <el-form-item class="submit">
+              <el-button type="primary" @click="submitForm">保 存</el-button>
+              <el-button @click="resetForm">重 置</el-button>
+            </el-form-item>
+          </el-form>
+        </el-col>
+      </el-row>
+    </div>
+  </div>
 </template>
 
 <script>
+  import { reactive, ref, onMounted } from 'vue'
+  import { ElMessage } from 'element-plus'
+  import { get, post } from '../../lin/plugin/axios'
+
   export default {
-    name: 'video',
-    data() {
-      return {
-        //视频部分
-        videoForm: {
-          videoId: '',
-          videoUrl: ''
-        },
-        videoFlag: false,
-        Plus: true,
-        //上传视频时带的参数，这个地址就是后端保存磁盘的地址。可以更改。不建议放F盘，有的电脑可能没有F盘，只有C和D
-        Path: {
-          url: 'D:/video/videoUpload'
-        },
-        videoUploadPercent: 0
-      };
+    props: {
+      editWordId: {
+        type: Number,
+        default: null,
+      },
     },
-    methods:{
-      //视频部分
-      // 视频上传前执行
-      beforeUploadVideo (file) {
-        //文件大小
-        const isLt300M = file.size / 1024 / 1024 < 300
-        //视频后缀检查
-        if (['video/mp4', 'video/ogg', 'video/flv', 'video/avi', 'video/wmv', 'video/rmvb'].indexOf(file.type) === -1) {
-          this.$message.error('请上传正确的视频格式')
-          return false
+    setup(props, context) {
+      const images = ref([])
+      const form = ref(null)
+      const loading = ref(false)
+      const word = reactive({ id: '', wordTextEn: '', wordTextChi: '', wordTextJap: '',wordTextSpa: '',noti: '' })
+
+      const listAssign = (a, b) => Object.keys(a).forEach(key => {
+        a[key] = b[key] || a[key]
+      })
+
+      /**
+       * 表单规则验证
+       */
+      const { rules } = getRules()
+
+      onMounted(() => {
+        if (props.editWordId) {
+          getWord()
         }
-        if (!isLt300M) {
-          this.$message.error('上传视频大小不能超过300MB哦!')
-          return false
-        }
-      },
-      // 视频上传过程中执行
-      uploadVideoProcess (event, file, fileList) {
-        this.Plus = false
-        this.videoFlag = true
-        this.videoUploadPercent =+ file.percentage.toFixed(0)
-      },
-      // 视频上传成功是执行
-      handleVideoSuccess (res, file) {
-        this.Plus = false
-        this.videoUploadPercent = 100
-        console.log(res)
-        // 如果为200代表视频保存成功
-        if (res.resCode === '200') {
-          // 接收视频传回来的名称和保存地址
-          // 至于怎么使用看你啦~
-          this.videoForm.videoId = res.newVidoeName
-          this.videoForm.videoUrl = res.VideoUrl
-          this.$message.success('视频上传成功！')
-        } else {
-          this.$message.error('视频上传失败，请重新上传！')
-        }
+      })
+
+      const getWord = async () => {
+        loading.value = true
+        const res = await get('/SaltOurService/getWordOne?id='+props.editWordId)
+        listAssign(word, res)
+        loading.value = false
       }
 
-    },
+      // 重置表单
+      const resetForm = () => {
+        form.value.resetFields()
+      }
 
+      const submitForm = async formName => {
+        form.value.validate(async valid => {
+          if (valid) {
+            let res = {}
+            res = await post('/SaltOurService/modifyWord',word)
+            context.emit('editClose')
+            if (res.code < window.MAX_SUCCESS_CODE) {
+              ElMessage.success(`${res.message}`)
+            }
+          } else {
+            console.error('error submit!!')
+            ElMessage.error('请将信息填写完整')
+          }
+        })
+      }
+
+      const back = () => {
+        context.emit('editClose')
+      }
+
+      return {
+        back,
+        word,
+        form,
+        rules,
+        resetForm,
+        submitForm,
+      }
+    },
+  }
+
+  /**
+   * 表单验证规则
+   */
+  function getRules() {
+    /**
+     * 验证回调函数
+     */
+    const checkInfo = (rule, value, callback) => {
+      if (!value) {
+        callback(new Error('信息不能为空'))
+      }
+      callback()
+    }
+    const rules = {
+      title: [{ validator: checkInfo, trigger: 'blur', required: true }],
+      author: [{ validator: checkInfo, trigger: 'blur', required: true }],
+      summary: [{ validator: checkInfo, trigger: 'blur', required: true }],
+      image: [{ validator: checkInfo, trigger: 'blur', required: true }],
+    }
+    return { rules }
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  .container {
+    .title {
+      height: 59px;
+      line-height: 59px;
+      color: $parent-title-color;
+      font-size: 16px;
+      font-weight: 500;
+      text-indent: 40px;
+      border-bottom: 1px solid #dae1ec;
 
+      .back {
+        float: right;
+        margin-right: 40px;
+        cursor: pointer;
+      }
+    }
+
+    .wrap {
+      padding: 20px;
+    }
+
+    .submit {
+      float: left;
+    }
+  }
 </style>

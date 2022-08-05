@@ -8,22 +8,22 @@
       <!-- 表格 -->
       <el-table :data="list" v-loading="loading">
         <el-table-column type="index" :index="indexMethod" label="序号" width="100"></el-table-column>
-        <el-table-column prop="titleEn" label="标题En"></el-table-column>
-        <el-table-column prop="titleChi" label="标题Chi"></el-table-column>
-        <el-table-column prop="titleJap" label="标题Jap"></el-table-column>
-        <el-table-column prop="titleSpa" label="标题Spa"></el-table-column>
-        <el-table-column prop="dateEn" label="发布日期En"></el-table-column>
-        <el-table-column prop="dateChi" label="发布日期Chi"></el-table-column>
-        <el-table-column prop="dateJap" label="发布日期Jap"></el-table-column>
-        <el-table-column prop="dateSpa" label="发布日期Spa"></el-table-column>
-        <el-table-column prop="companyEn" label="公司名En"></el-table-column>
-        <el-table-column prop="companyChi" label="公司名Chi"></el-table-column>
-        <el-table-column prop="companyJap" label="公司名Jap"></el-table-column>
-        <el-table-column prop="companySpa" label="公司名Spa"></el-table-column>
-        <el-table-column prop="platformEn" label="平台En"></el-table-column>
-        <el-table-column prop="platformChi" label="平台Chi"></el-table-column>
-        <el-table-column prop="platformJap" label="平台Jap"></el-table-column>
-        <el-table-column prop="platformSpa" label="平台Spa"></el-table-column>
+        <el-table-column prop="titleEn" label="标题"></el-table-column>
+<!--        <el-table-column prop="titleChi" label="标题Chi"></el-table-column>-->
+<!--        <el-table-column prop="titleJap" label="标题Jap"></el-table-column>-->
+<!--        <el-table-column prop="titleSpa" label="标题Spa"></el-table-column>-->
+        <el-table-column prop="dateEn" label="发布日期"></el-table-column>
+<!--        <el-table-column prop="dateChi" label="发布日期Chi"></el-table-column>-->
+<!--        <el-table-column prop="dateJap" label="发布日期Jap"></el-table-column>-->
+<!--        <el-table-column prop="dateSpa" label="发布日期Spa"></el-table-column>-->
+        <el-table-column prop="companyEn" label="公司名"></el-table-column>
+<!--        <el-table-column prop="companyChi" label="公司名Chi"></el-table-column>-->
+<!--        <el-table-column prop="companyJap" label="公司名Jap"></el-table-column>-->
+<!--        <el-table-column prop="companySpa" label="公司名Spa"></el-table-column>-->
+        <el-table-column prop="platformEn" label="平台"></el-table-column>
+<!--        <el-table-column prop="platformChi" label="平台Chi"></el-table-column>-->
+<!--        <el-table-column prop="platformJap" label="平台Jap"></el-table-column>-->
+<!--        <el-table-column prop="platformSpa" label="平台Spa"></el-table-column>-->
         <el-table-column label="list配图">
           <template v-slot="scope" >
             <el-image :src="scope.row.url" style="width: 60px;height: 60px;"
@@ -43,13 +43,15 @@
               v-permission="{ permission: '删除友商', type: 'disabled' }"
             >删除</el-button
             >
+            <el-button plain size="small" type="primary" @click="handleEdit2(scope.row.id)">更换配图</el-button>
           </template>
         </el-table-column>
       </el-table>
     </div>
 
     <!-- 编辑页面 -->
-    <List v-else @editClose="editClose" :editListId="editListId"></List>
+    <List v-if="page==1" @editClose="editClose" :editListId="editListId"></List>
+    <list-file v-else-if="page==2" @editClose="editClose" :editListId="editListId"></list-file>
   </div>
 </template>
 
@@ -58,12 +60,15 @@
   import { ElMessageBox, ElMessage } from 'element-plus'
   import { get, post } from '../../lin/plugin/axios'
   import List from './list'
+  import ListFile from './list-file'
 
   export default {
     components: {
+      ListFile,
       List,
     },
     setup() {
+      const page = ref(null)
       const list = ref([])
       const editListId = ref(1)
       const loading = ref(false)
@@ -89,6 +94,12 @@
       const handleEdit = id => {
         showEdit.value = true
         editListId.value = id
+        page.value = 1
+      }
+      const handleEdit2 = id => {
+        showEdit.value = true
+        editListId.value = id
+        page.value = 2
       }
 
       const handleDelete = id => {
@@ -107,6 +118,7 @@
 
       const editClose = () => {
         showEdit.value = false
+        page.value = null
         getList()
       }
 
@@ -121,6 +133,8 @@
         editListId,
         indexMethod,
         handleDelete,
+        handleEdit2,
+        page,
       }
     },
     methods: {

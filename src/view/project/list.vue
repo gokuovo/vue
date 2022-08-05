@@ -5,68 +5,60 @@
       <span>修改LIST信息</span> <span class="back" @click="back"> <i class="iconfont icon-fanhui"></i> 返回 </span>
     </div>
 
-    <div class="wrap">
+    <div class="wrap" v-if="!showEdit">
       <el-row>
         <el-col :lg="16" :md="20" :sm="24" :xs="24">
           <el-form :model="list" status-icon ref="form" label-width="100px" @submit.prevent :rules="rules">
-            <el-form-item label="标题En" prop="titleEn">
-              <el-input v-model="list.titleEn" placeholder="请输入标题En"></el-input>
+            <el-form-item label="标题" prop="titleEn">
+              <el-input v-model="list.titleEn" placeholder="请输入标题"></el-input>
             </el-form-item>
-            <el-form-item label="标题Chi" prop="titleChi">
-              <el-input v-model="list.titleChi" placeholder="请输入标题Chi"></el-input>
+<!--            <el-form-item label="标题Chi" prop="titleChi">-->
+<!--              <el-input v-model="list.titleChi" placeholder="请输入标题Chi"></el-input>-->
+<!--            </el-form-item>-->
+<!--            <el-form-item label="标题Jap" prop="titleJap">-->
+<!--              <el-input v-model="list.titleJap" placeholder="请输入标题Jap"></el-input>-->
+<!--            </el-form-item>-->
+<!--            <el-form-item label="标题Spa" prop="titleSpa">-->
+<!--              <el-input v-model="list.titleSpa" placeholder="请输入标题Spa"></el-input>-->
+<!--            </el-form-item>-->
+            <el-form-item label="发布时间" prop="dateEn">
+              <el-input v-model="list.dateEn" placeholder="请输入发布时间"></el-input>
             </el-form-item>
-            <el-form-item label="标题Jap" prop="titleJap">
-              <el-input v-model="list.titleJap" placeholder="请输入标题Jap"></el-input>
+<!--            <el-form-item label="发布时间Chi" prop="dateChi">-->
+<!--              <el-input v-model="list.dateChi" placeholder="请输入发布时间Chi"></el-input>-->
+<!--            </el-form-item>-->
+<!--            <el-form-item label="发布时间Jap" prop="dateJap">-->
+<!--              <el-input v-model="list.dateJap" placeholder="请输入发布时间Jap"></el-input>-->
+<!--            </el-form-item>-->
+<!--            <el-form-item label="发布时间Spa" prop="dateSpa">-->
+<!--              <el-input v-model="list.dateSpa" placeholder="请输入发布时间Spa"></el-input>-->
+<!--            </el-form-item>-->
+            <el-form-item label="公司" prop="company">
+              <el-input v-model="list.companyEn" placeholder="请输入公司"></el-input>
             </el-form-item>
-            <el-form-item label="标题Spa" prop="titleSpa">
-              <el-input v-model="list.titleSpa" placeholder="请输入标题Spa"></el-input>
+<!--            <el-form-item label="公司Chi" prop="companyChi">-->
+<!--              <el-input v-model="list.companyChi" placeholder="请输入公司Chi"></el-input>-->
+<!--            </el-form-item>-->
+<!--            <el-form-item label="公司Jap" prop="companyJap">-->
+<!--              <el-input v-model="list.companyJap" placeholder="请输入公司Jap"></el-input>-->
+<!--            </el-form-item>-->
+<!--            <el-form-item label="公司Spa" prop="companySpa">-->
+<!--              <el-input v-model="list.companySpa" placeholder="请输入公司Spa"></el-input>-->
+<!--            </el-form-item>-->
+            <el-form-item label="平台" prop="platformEn">
+              <el-input v-model="list.platformEn" placeholder="请输入平台"></el-input>
             </el-form-item>
-            <el-form-item label="发布时间En" prop="dateEn">
-              <el-input v-model="list.dateEn" placeholder="请输入发布时间En"></el-input>
-            </el-form-item>
-            <el-form-item label="发布时间Chi" prop="dateChi">
-              <el-input v-model="list.dateChi" placeholder="请输入发布时间Chi"></el-input>
-            </el-form-item>
-            <el-form-item label="发布时间Jap" prop="dateJap">
-              <el-input v-model="list.dateJap" placeholder="请输入发布时间Jap"></el-input>
-            </el-form-item>
-            <el-form-item label="发布时间Spa" prop="dateSpa">
-              <el-input v-model="list.dateSpa" placeholder="请输入发布时间Spa"></el-input>
-            </el-form-item>
-            <el-form-item label="公司En" prop="companyEn">
-              <el-input v-model="list.companyEn" placeholder="请输入公司En"></el-input>
-            </el-form-item>
-            <el-form-item label="公司Chi" prop="companyChi">
-              <el-input v-model="list.companyChi" placeholder="请输入公司Chi"></el-input>
-            </el-form-item>
-            <el-form-item label="公司Jap" prop="companyJap">
-              <el-input v-model="list.companyJap" placeholder="请输入公司Jap"></el-input>
-            </el-form-item>
-            <el-form-item label="公司Spa" prop="companySpa">
-              <el-input v-model="list.companySpa" placeholder="请输入公司Spa"></el-input>
-            </el-form-item>
-            <el-form-item label="平台En" prop="platformEn">
-              <el-input v-model="list.platformEn" placeholder="请输入平台En"></el-input>
-            </el-form-item>
-            <el-form-item label="平台Chi" prop="platformChi">
-              <el-input v-model="list.platformChi" placeholder="请输入平台Chi"></el-input>
-            </el-form-item>
-            <el-form-item label="平台Jap" prop="platformJap">
-              <el-input v-model="list.platformJap" placeholder="请输入平台Jap"></el-input>
-            </el-form-item>
-            <el-form-item label="平台Spa" prop="platformSpa">
-              <el-input v-model="list.platformSpa" placeholder="请输入平台Spa"></el-input>
-            </el-form-item>
+<!--            <el-form-item label="平台Chi" prop="platformChi">-->
+<!--              <el-input v-model="list.platformChi" placeholder="请输入平台Chi"></el-input>-->
+<!--            </el-form-item>-->
+<!--            <el-form-item label="平台Jap" prop="platformJap">-->
+<!--              <el-input v-model="list.platformJap" placeholder="请输入平台Jap"></el-input>-->
+<!--            </el-form-item>-->
+<!--            <el-form-item label="平台Spa" prop="platformSpa">-->
+<!--              <el-input v-model="list.platformSpa" placeholder="请输入平台Spa"></el-input>-->
+<!--            </el-form-item>-->
             <el-form-item label="list配图" prop="url" v-if="list.id">
               <img :src="list.url" style="width: 150px;height: 150px" />
-            </el-form-item>
-            <el-form-item label="list配图" prop="url" v-else>
-              <upload-imgs ref="uploadEle8" :rules="rules" :multiple="true" :min-num="1" :max-num="1" :sortable="true" />
-            </el-form-item>
-            <el-form-item v-if="list.id">
-              <el-upload :action="'localhost:5000/cms/file'">
-                <el-button size="mini" type="primary">选取文件</el-button>
-              </el-upload>
             </el-form-item>
             <el-form-item label="跳转链接" prop="image">
               <el-input v-model="list.link" placeholder="请输入跳转链接"></el-input>
@@ -75,13 +67,15 @@
               <el-input v-model="list.sort" placeholder="请输入排序(1,2,3....)"></el-input>
             </el-form-item>
             <el-form-item class="submit">
-              <el-button type="primary" @click="submitForm">保 存</el-button>
+              <el-button v-if="list.id" type="primary" @click="submitForm">保 存</el-button>
+              <el-button v-else type="primary" @click="submitForm">新 增</el-button>
               <el-button @click="resetForm">重 置</el-button>
             </el-form-item>
           </el-form>
         </el-col>
       </el-row>
     </div>
+    <list-file v-else @editClose="editClose" :editListId="editListId"></list-file>
   </div>
 </template>
 
@@ -90,9 +84,10 @@
   import { ElMessage } from 'element-plus'
   import { get, post } from '../../lin/plugin/axios'
   import UploadImgs from '../../component/base/homepage/logo/index'
+  import ListFile from './list-file'
 
   export default {
-    components: { UploadImgs },
+    components: { ListFile, UploadImgs },
     methods:{
       //图片回显
       handleAvatarSuccess(res, file) {
@@ -117,6 +112,8 @@
       },
     },
     setup(props, context) {
+      const showEdit = ref(false)
+      const editListId = ref(1)
       const form = ref(null)
       const loading = ref(false)
       const list = reactive({id:'',titleEn:'',titleChi:'',titleJap:'',titleSpa:'', dateEn:'',dateChi:'',dateJap:'',dateSpa:'',
@@ -148,6 +145,10 @@
       const resetForm = () => {
         form.value.resetFields()
       }
+      const handleEdit = id => {
+        showEdit.value = true
+        editListId.value = id
+      }
 
       const submitForm = async formName => {
         form.value.validate(async valid => {
@@ -158,6 +159,7 @@
               context.emit('editClose')
             } else {
               res = await post("/SaltProject/addList", list)
+              handleEdit(res.id)
               resetForm(formName)
             }
             if (res.code < window.MAX_SUCCESS_CODE) {
@@ -181,6 +183,8 @@
         rules,
         resetForm,
         submitForm,
+        showEdit,
+        editListId,
       }
     },
   }

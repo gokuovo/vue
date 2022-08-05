@@ -1,11 +1,10 @@
 <template>
   <div class="container">
-    <div class="title" v-if="!editPartnersId">新增友商信息{{ editPartnersId }}</div>
-    <div class="title" v-else>
-      <span>修改友商信息</span> <span class="back" @click="back"> <i class="iconfont icon-fanhui"></i> 返回 </span>
+    <div class="title">
+      <span>友商信息填写</span> <span class="back" @click="back"> <i class="iconfont icon-fanhui"></i> 返回 </span>
     </div>
 
-    <div class="wrap">
+    <div class="wrap" v-if="!showEdit">
       <el-row>
         <el-col :lg="16" :md="20" :sm="24" :xs="24">
           <el-form :model="partners" status-icon ref="form" label-width="100px" @submit.prevent :rules="rules">
@@ -19,12 +18,6 @@
             <el-form-item label="友商图标" prop="partnersUrl" v-if="partners.id">
               <img :src="partners.partnerUrl" style="width: 150px;height: 150px" />
             </el-form-item>
-            <el-form-item label="友商图标" prop="partnersUrl" v-else>
-              <input class="fileUploaderClass" type='file' name="uploadBtn" ref="uploadBtn" @change="upLoadFile(partners.id)"/>
-            </el-form-item>
-            <el-form-item v-if="partners.id">
-                <input class="fileUploaderClass" type='file' name="uploadBtn" ref="uploadBtn" @change="upLoadFile(partners.id)"/>
-            </el-form-item>
 
             <el-form-item label="友商官网" prop="image">
               <el-input v-model="partners.partnerLink" placeholder="请输入友商官网"></el-input>
@@ -35,11 +28,13 @@
             <el-form-item class="submit">
               <el-button type="primary" @click="submitForm">保 存</el-button>
               <el-button @click="resetForm">重 置</el-button>
+              <el-button v-if="partners.id" plain type="primary" @click="handleEdit(partners.id)">更改配图</el-button>
             </el-form-item>
           </el-form>
         </el-col>
       </el-row>
     </div>
+    <partners-file v-else @editClose="editClose" :editPartnersId="editPartnersId"></partners-file>
   </div>
 </template>
 
@@ -49,31 +44,11 @@
   import { get, post } from '../../lin/plugin/axios'
   import UploadImgs from '../../component/base/homepage/logo/index'
   import {fileUpload} from '@/utils/saltFile'
+  import PartnersFile from './partners-file'
 
   export default {
-    components: { UploadImgs },
+    components: { PartnersFile, UploadImgs },
     methods:{
-      upLoadFile(id) {
-        let upLoadFileList = this.$refs.uploadBtn.files;
-        if (upLoadFileList.length > 0) {//防止上次文件之后再次选择同样的文件，然后取消文件上传的bug
-          this.sendFileUpload(id,upLoadFileList);
-        }
-      },
-
-      sendFileUpload(id,upLoadFileList) {
-        let formData = new window.FormData();
-        formData.append('file', upLoadFileList[0]);
-        formData.append('fileType', 'partners');
-        formData.append('id', id);
-        let that = this;
-        //文件上传后台方法
-        fileUpload(formData, {'Content-Type': 'multipart/form-data'}).then(resp => {
-          that.$message.success("上传成功");
-          console.log(resp.data[0].url)
-        }).catch(error => {
-          that.$message.error("上传文件失败! ! !");
-        })
-      },
       //图片回显
       handleAvatarSuccess(res, file) {
         console.log(res)
@@ -95,11 +70,14 @@
         type: Number,
         default: null,
       },
+      partnersUrl: '',
     },
     setup(props, context) {
       const form = ref(null)
       const loading = ref(false)
-      const partners = reactive({id:'', partnerName: '', partnerUrl: '', partnerLink: '', sort: '' })
+      let partners = reactive({id:'', partnerName: '', partnerUrl: '', partnerLink: '', sort: '' })
+      const showEdit = ref(false)
+      const editPartnersId = ref(1)
 
       const listAssign = (a, b) => Object.keys(a).forEach(key => {
         a[key] = b[key] || a[key]
@@ -123,6 +101,11 @@
         loading.value = false
       }
 
+      const handleEdit = id => {
+        showEdit.value = true
+        editPartnersId.value = id
+      }
+
       // 重置表单
       const resetForm = () => {
         form.value.resetFields()
@@ -136,7 +119,10 @@
               res = await post("/SaltPartners/modifyPartners", partners)
               context.emit('editClose')
             } else {
+              partners.partnerUrl = props.partnersUrl
               res = await post("/SaltPartners/addPartners", partners)
+              console.log(res)
+              handleEdit(res.id)
               resetForm(formName)
             }
             if (res.code < window.MAX_SUCCESS_CODE) {
@@ -160,6 +146,9 @@
         rules,
         resetForm,
         submitForm,
+        showEdit,
+        handleEdit,
+        editPartnersId,
       }
     },
   }
