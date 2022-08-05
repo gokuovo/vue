@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getToken } from '@/lin/util/token'
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 
@@ -10,13 +11,13 @@ const service = axios.create({
   timeout: 300000,
 })
 
+const refresh_token = getToken('access_token')
+
 // 请求拦截器
-service.interceptors.request.use(
-  config =>
-    // console.log("文件模块请求：");
-    // console.log(config);
-    config,
-)
+service.interceptors.request.use(config => {
+  config.headers.Authorization = refresh_token
+  return config
+})
 
 // 请求响应拦截器
 service.interceptors.response.use(
