@@ -10,8 +10,7 @@
         <el-table-column type="index" :index="indexMethod" label="序号" width="100"></el-table-column>
         <el-table-column label="轮播图">
           <template v-slot="scope" >
-            <el-image :src="scope.row.imageUrl"
-            ></el-image>
+            <el-image :src="scope.row.imageUrl" @click="imgClick()"></el-image>
           </template>
         </el-table-column>
         <el-table-column prop="imageCode" label="图片类型"></el-table-column>
@@ -25,6 +24,10 @@
 
     <!-- 编辑页面 -->
     <Rotation v-else @editClose="editClose" :editRotationId="editRotationId"></Rotation>
+
+    <div>
+      <ImgPreview></ImgPreview>
+    </div>
   </div>
 </template>
 
@@ -32,10 +35,12 @@
   import { onMounted, ref } from 'vue'
   import Rotation from './rotation'
   import { get } from '../../lin/plugin/axios'
+  import ImgPreview from '@/view/videoCommon/ImgPreview'
 
   export default {
     components: {
       Rotation,
+      ImgPreview
     },
     setup() {
       const ratation = ref([])
@@ -83,11 +88,26 @@
       }
     },
     methods: {
-      preview(url) {
-        this.$imagePreview({
-          images: url,
-        })
-      },
+      // preview(url) {
+      //   this.$imagePreview({
+      //     images: url,
+      //   })
+      // },
+      imgClick(){
+        let data = {
+          imgPreviewVisible: true,
+          imgPreviewList: this.ratation.map((row) => {
+            return {
+              fileUrl: row.imageUrl,
+              downloadLink: row.imageUrl,
+              fileName: row.imageCode,
+              extendName: row.imageCode
+            }
+          }),
+          activeIndex: 0
+        }
+        this.$store.commit('setImgPreviewData', data);
+      }
     },
   }
 </script>

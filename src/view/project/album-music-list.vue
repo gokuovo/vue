@@ -32,6 +32,10 @@
     <AlbumMusic v-if="page==1" @editClose="editClose" :editAlbumMusicId="editAlbumMusicId"></AlbumMusic>
     <album-music-file v-else-if="page==2" @editClose="editClose" :editAlbumMusicId="editAlbumMusicId"></album-music-file>
     <video-preview></video-preview>
+
+    <div>
+      <ImgPreview></ImgPreview>
+    </div>
   </div>
 </template>
 
@@ -43,12 +47,14 @@
   import AlbumMusicFile from './album-music-file'
   // 引入视频预览组件
   import VideoPreview from '../videoCommon/VideoPreview'
+  import ImgPreview from '@/view/videoCommon/ImgPreview'
 
   export default {
     components: {
       VideoPreview,
       AlbumMusicFile,
       AlbumMusic,
+      ImgPreview
     },
     methods: {
       clickVideo(url) {
@@ -139,11 +145,6 @@
       }
     },
     methods: {
-      preview(url) {
-        this.$imagePreview({
-          images: url,
-        })
-      },
     },
   }
 </script>

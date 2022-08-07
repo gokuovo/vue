@@ -26,8 +26,7 @@
 <!--        <el-table-column prop="platformSpa" label="平台Spa"></el-table-column>-->
         <el-table-column label="list配图">
           <template v-slot="scope" >
-            <el-image :src="scope.row.url" style="width: 60px;height: 60px;"
-            ></el-image>
+            <el-image @click="imgClick()" :src="scope.row.url" style="width: 60px;height: 60px;"></el-image>
           </template>
         </el-table-column>
         <el-table-column prop="link" label="跳转链接"></el-table-column>
@@ -52,6 +51,10 @@
     <!-- 编辑页面 -->
     <List v-if="page==1" @editClose="editClose" :editListId="editListId"></List>
     <list-file v-else-if="page==2" @editClose="editClose" :editListId="editListId"></list-file>
+
+    <div>
+      <ImgPreview></ImgPreview>
+    </div>
   </div>
 </template>
 
@@ -61,11 +64,13 @@
   import { get, post } from '../../lin/plugin/axios'
   import List from './list'
   import ListFile from './list-file'
+  import ImgPreview from '@/view/videoCommon/ImgPreview'
 
   export default {
     components: {
       ListFile,
       List,
+      ImgPreview
     },
     setup() {
       const page = ref(null)
@@ -138,11 +143,21 @@
       }
     },
     methods: {
-      preview(url) {
-        this.$imagePreview({
-          images: url,
-        })
-      },
+      imgClick(){
+        let data = {
+          imgPreviewVisible: true,
+          imgPreviewList: this.list.map((row) => {
+            return {
+              fileUrl: row.url,
+              downloadLink: row.url,
+              fileName: row.companyEn,
+              extendName: row.companyEn
+            }
+          }),
+          activeIndex: 0
+        }
+        this.$store.commit('setImgPreviewData', data);
+      }
     },
   }
 </script>

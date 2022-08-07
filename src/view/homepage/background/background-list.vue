@@ -10,8 +10,7 @@
         <el-table-column type="index" :index="indexMethod" label="序号" width="100"></el-table-column>
         <el-table-column label="背景图">
           <template v-slot="scope" >
-            <el-image :src="scope.row.imageUrl" style="width: 60px;height: 60px;" :preview-src-list="scope.row.imageUrl"
-            ></el-image>
+            <el-image @click="imgClick()" :src="scope.row.imageUrl" style="width: 60px;height: 60px;" :preview-src-list="scope.row.imageUrl"></el-image>
           </template>
         </el-table-column>
         <el-table-column prop="imageCode" label="图片类型"></el-table-column>
@@ -25,6 +24,10 @@
 
     <!-- 编辑页面 -->
     <Background v-else @editClose="editClose" :editBackgroundId="editBackgroundId"></Background>
+
+    <div>
+      <ImgPreview></ImgPreview>
+    </div>
   </div>
 </template>
 
@@ -32,10 +35,12 @@
   import { onMounted, ref } from 'vue'
   import Background from './background'
   import { get } from '../../../lin/plugin/axios'
+  import ImgPreview from '@/view/videoCommon/ImgPreview'
 
   export default {
     components: {
       Background,
+      ImgPreview
     },
     setup() {
       const background = ref([])
@@ -83,11 +88,21 @@
       }
     },
     methods: {
-      preview(url) {
-        this.$imagePreview({
-          images: url,
-        })
-      },
+      imgClick(){
+        let data = {
+          imgPreviewVisible: true,
+          imgPreviewList: this.background.map((row) => {
+            return {
+              fileUrl: row.imageUrl,
+              downloadLink: row.imageUrl,
+              fileName: row.imageCode,
+              extendName: row.imageCode
+            }
+          }),
+          activeIndex: 0
+        }
+        this.$store.commit('setImgPreviewData', data);
+      }
     },
   }
 </script>

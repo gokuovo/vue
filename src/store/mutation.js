@@ -57,4 +57,21 @@ export default {
       state.videoPreview.defaultActiveIndex = 0
     }
   },
+
+  /**
+   * 存储图片预览组件所需要的数据
+   * @param {object} state Vuex 的 state 对象
+   * @param {object} data 图片数据
+   */
+  setImgPreviewData(state, data) {
+    if(data.imgPreviewVisible) {
+      state.imgPreview.imgPreviewVisible = data.imgPreviewVisible
+      state.imgPreview.imgPreviewList = data.imgPreviewList
+      state.imgPreview.defaultActiveIndex = data.activeIndex
+    } else {
+      state.imgPreview.imgPreviewVisible = data.false
+      state.imgPreview.imgPreviewList = []
+      state.imgPreview.defaultActiveIndex = 0
+    }
+  }
 }

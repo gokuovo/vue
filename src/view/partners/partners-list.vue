@@ -11,8 +11,7 @@
         <el-table-column prop="partnerName" label="友商"></el-table-column>
         <el-table-column label="友商图标">
           <template v-slot="scope" >
-            <el-image :src="scope.row.partnerUrl" style="width: 60px;height: 60px;" :preview-src-list="scope.row.partnerUrl"
-            ></el-image>
+            <el-image @click="imgClick()" :src="scope.row.partnerUrl" style="width: 60px;height: 60px;" :preview-src-list="scope.row.partnerUrl"></el-image>
           </template>
         </el-table-column>
         <el-table-column prop="partnerLink" label="友商官网"></el-table-column>
@@ -35,6 +34,10 @@
 
     <!-- 编辑页面 -->
     <Partners v-else @editClose="editClose" :editPartnersId="editPartnersId"></Partners>
+
+    <div>
+      <ImgPreview></ImgPreview>
+    </div>
   </div>
 </template>
 
@@ -43,10 +46,12 @@
   import { ElMessageBox, ElMessage } from 'element-plus'
   import Partners from './partners'
   import { get, post } from '../../lin/plugin/axios'
+  import ImgPreview from '@/view/videoCommon/ImgPreview'
 
   export default {
     components: {
       Partners,
+      ImgPreview
     },
     setup() {
       const partners = ref([])
@@ -109,11 +114,21 @@
       }
     },
     methods: {
-      preview(url) {
-        this.$imagePreview({
-          images: url,
-        })
-      },
+      imgClick(){
+        let data = {
+          imgPreviewVisible: true,
+          imgPreviewList: this.partners.map((row) => {
+            return {
+              fileUrl: row.partnerUrl,
+              downloadLink: row.partnerUrl,
+              fileName: row.partnerName,
+              extendName: row.partnerName
+            }
+          }),
+          activeIndex: 0
+        }
+        this.$store.commit('setImgPreviewData', data);
+      }
     },
   }
 </script>

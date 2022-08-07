@@ -18,8 +18,7 @@
         <el-table-column prop="dateSpa" label="发布日期Spa"></el-table-column>
         <el-table-column label="worklog配图">
           <template v-slot="scope" >
-            <el-image :src="scope.row.url" style="width: 60px;height: 60px;"
-            ></el-image>
+            <el-image @click="imgClick()" :src="scope.row.url" style="width: 60px;height: 60px;"></el-image>
           </template>
         </el-table-column>
         <el-table-column prop="link" label="跳转链接"></el-table-column>
@@ -42,6 +41,10 @@
 
     <!-- 编辑页面 -->
     <Worklog v-else @editClose="editClose" :editWorklogId="editWorklogId"></Worklog>
+
+    <div>
+      <ImgPreview></ImgPreview>
+    </div>
   </div>
 </template>
 
@@ -50,10 +53,12 @@
   import { ElMessageBox, ElMessage } from 'element-plus'
   import Worklog from './worklog'
   import { get, post } from '../../lin/plugin/axios'
+  import ImgPreview from '@/view/videoCommon/ImgPreview'
 
   export default {
     components: {
       Worklog,
+      ImgPreview
     },
     setup() {
       const worklog = ref([])
@@ -116,11 +121,21 @@
       }
     },
     methods: {
-      preview(url) {
-        this.$imagePreview({
-          images: url,
-        })
-      },
+      imgClick(){
+        let data = {
+          imgPreviewVisible: true,
+          imgPreviewList: this.worklog.map((row) => {
+            return {
+              fileUrl: row.url,
+              downloadLink: row.url,
+              fileName: row.titleEn,
+              extendName: row.titleEn
+            }
+          }),
+          activeIndex: 0
+        }
+        this.$store.commit('setImgPreviewData', data);
+      }
     },
   }
 </script>

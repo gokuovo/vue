@@ -27,4 +27,10 @@ export default {
     videoPreviewList: [], //  视频列表
     defaultActiveIndex: 0, //  默认当前打开的视频的索引
   },
+
+  imgPreview: {
+    imgPreviewVisible: false,
+    imgPreviewList: [],
+    defaultActiveIndex: 0,
+  },
 }
