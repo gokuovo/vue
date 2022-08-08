@@ -55,7 +55,7 @@
       },
     },
     props: {
-      editPartnersId: {
+      partnersId: {
         type: Number,
         default: null,
       },
@@ -75,14 +75,14 @@
       const { rules } = getRules()
 
       onMounted(() => {
-        if (props.editPartnersId) {
+        if (props.partnersId) {
           getPartners()
         }
       })
 
       const getPartners = async () => {
         loading.value = true
-        const res = await get("/SaltPartners/selectPartner?id="+props.editPartnersId)
+        const res = await get("/SaltPartners/selectPartner?id="+props.partnersId)
         listAssign(partners, res)
         loading.value = false
       }

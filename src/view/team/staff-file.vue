@@ -55,7 +55,7 @@
       },
     },
     props: {
-      editStaffId: {
+      staffId: {
         type: Number,
         default: null,
       },
@@ -77,14 +77,14 @@
       const { rules } = getRules()
 
       onMounted(() => {
-        if (props.editStaffId) {
+        if (props.staffId) {
           getStaff()
         }
       })
 
       const getStaff = async () => {
         loading.value = true
-        const res = await get('/SaltTeam/getStaffOne?id='+props.editStaffId)
+        const res = await get('/SaltTeam/getStaffOne?id='+props.staffId)
         listAssign(staff, res)
         loading.value = false
       }

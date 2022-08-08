@@ -61,7 +61,7 @@
         </el-col>
       </el-row>
     </div>
-    <staff-file v-else @editClose="editClose" :editStaffId="editStaffId"></staff-file>
+    <staff-file v-else @editClose="editClose" :staffId="staffId"></staff-file>
   </div>
 </template>
 
@@ -81,6 +81,7 @@
       },
     },
     setup(props, context) {
+      const staffId = ref(1)
       const showEdit = ref(false)
       const form = ref(null)
       const loading = ref(false)
@@ -118,7 +119,7 @@
 
       const handleEdit = id => {
         showEdit.value = true
-        editStaffId.value = id
+        staffId.value = id
       }
 
 
@@ -131,6 +132,7 @@
               context.emit('editClose')
             } else {
               res = await post('/SaltTeam/addStaff',staff)
+              console.log(res.id)
               handleEdit(res.id)
               resetForm(formName)
             }
@@ -157,6 +159,7 @@
         submitForm,
         handleEdit,
         showEdit,
+        staffId,
       }
     },
   }

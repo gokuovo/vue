@@ -30,7 +30,7 @@
         </el-col>
       </el-row>
     </div>
-    <social-file v-else @editClose="editClose" :editSocialId="editSocialId"></social-file>
+    <social-file v-else @editClose="editClose" :socialId="socialId"></social-file>
   </div>
 </template>
 
@@ -50,6 +50,7 @@
       },
     },
     setup(props, context) {
+      const socialId = ref(1)
       const form = ref(null)
       const loading = ref(false)
       const showEdit = ref(false)
@@ -81,7 +82,7 @@
 
       const handleEdit = id => {
         showEdit.value = true
-        editSocialId.value = id
+        socialId.value = id
       }
 
 
@@ -95,7 +96,6 @@
             } else {
               res = await post('/SaltContactUs/addSocial',social)
               handleEdit(res.id)
-              console.log(editSocialId)
               resetForm(formName)
             }
             if (res.code < window.MAX_SUCCESS_CODE) {
@@ -123,6 +123,7 @@
         submitForm,
         handleEdit,
         showEdit,
+        socialId,
       }
     },
   }

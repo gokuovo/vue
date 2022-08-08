@@ -1,7 +1,8 @@
 <template>
   <div class="container">
-    <div class="title">
-      <span>友商信息填写</span> <span class="back" @click="back"> <i class="iconfont icon-fanhui"></i> 返回 </span>
+    <div class="title" v-if="!editPartnersId">新增友商信息{{ editPartnersId }}</div>
+    <div class="title" v-else>
+      <span>修改友商信息</span> <span class="back" @click="back"> <i class="iconfont icon-fanhui"></i> 返回 </span>
     </div>
 
     <div class="wrap" v-if="!showEdit">
@@ -26,7 +27,8 @@
               <el-input v-model="partners.sort" placeholder="请输入排序(1,2,3....)"></el-input>
             </el-form-item>
             <el-form-item class="submit">
-              <el-button type="primary" @click="submitForm">保存并添加logo</el-button>
+              <el-button v-if="partners.id" type="primary" @click="submitForm">保存</el-button>
+              <el-button v-else type="primary" @click="submitForm">保存并添加logo</el-button>
               <el-button @click="resetForm">重 置</el-button>
               <el-button v-if="partners.id" plain type="primary" @click="handleEdit(partners.id)">更改配图</el-button>
             </el-form-item>
@@ -34,7 +36,7 @@
         </el-col>
       </el-row>
     </div>
-    <partners-file v-else @editClose="editClose" :editPartnersId="editPartnersId"></partners-file>
+    <partners-file v-else @editClose="editClose" :partnersId="partnersId"></partners-file>
   </div>
 </template>
 
@@ -73,6 +75,7 @@
       partnersUrl: '',
     },
     setup(props, context) {
+      const partnersId = ref(1)
       const form = ref(null)
       const loading = ref(false)
       let partners = reactive({id:'', partnerName: '', partnerUrl: '', partnerLink: '', sort: '' })
@@ -102,7 +105,7 @@
 
       const handleEdit = id => {
         showEdit.value = true
-        editPartnersId.value = id
+        partnersId.value = id
       }
 
       // 重置表单
@@ -147,6 +150,7 @@
         submitForm,
         showEdit,
         handleEdit,
+        partnersId,
       }
     },
   }

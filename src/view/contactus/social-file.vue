@@ -55,7 +55,7 @@
       },
     },
     props: {
-      editSocialId: {
+      socialId: {
         type: Number,
         default: null,
       },
@@ -75,14 +75,14 @@
       const { rules } = getRules()
 
       onMounted(() => {
-        if (props.editSocialId) {
+        if (props.socialId) {
           getSocial()
         }
       })
 
       const getSocial = async () => {
         loading.value = true
-        const res = await get('/SaltContactUs/getSocialOne?id='+props.editSocialId)
+        const res = await get('/SaltContactUs/getSocialOne?id='+props.socialId)
         listAssign(social, res)
         loading.value = false
       }
