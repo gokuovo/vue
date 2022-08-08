@@ -5,12 +5,24 @@
       <div class="header">
         <div class="title">轮播图列表</div>
       </div>
+      <div>
+        <div class="title">
+          <el-form>
+            <el-form-item label="根据轮播图类型查询">
+              <el-select size="medium" filterable  v-model="imageType" placeholder="请选择">
+               <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+              </el-select>
+              <el-button @click="search(imageType)">查询</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
+      </div>
       <!-- 表格 -->
       <el-table :data="ratation" v-loading="loading">
         <el-table-column type="index" :index="indexMethod" label="序号" width="100"></el-table-column>
         <el-table-column label="轮播图">
           <template v-slot="scope" >
-            <el-image :src="scope.row.imageUrl" @click="imgClick()"></el-image>
+            <el-image :src="scope.row.imageUrl" @click="imgClick()" style="width: 320px;height: 180px"></el-image>
           </template>
         </el-table-column>
         <el-table-column prop="imageCode" label="图片类型"></el-table-column>
@@ -43,7 +55,8 @@
       ImgPreview
     },
     setup() {
-      const ratation = ref([])
+      const imageType = ref(null)
+      let ratation = ref([])
       const editRotationId = ref(1)
       const loading = ref(false)
       const showEdit = ref(false)
@@ -54,9 +67,9 @@
 
       const getRotation = async () => {
         try {
-          loading.value = true
-          ratation.value = await get("/SaltOurService/getRotationList")
-          loading.value = false
+            loading.value = true
+            ratation.value = await get("/SaltOurService/getRotationList")
+            loading.value = false
         } catch (error) {
           loading.value = false
           if (error.code === 10020) {
@@ -69,6 +82,17 @@
         showEdit.value = true
         editRotationId.value = id
       }
+
+      const search = imageType => {
+        try {console.log(get("/SaltOurService/getRotationByType?type="+imageType))
+        } catch (error) {
+          loading.value = false
+          if (error.code === 10020) {
+            ratation.value = []
+          }
+        }
+      }
+
 
       const editClose = () => {
         showEdit.value = false
@@ -85,6 +109,26 @@
         handleEdit,
         editRotationId,
         indexMethod,
+        imageType,
+        search,
+        options: [
+          {
+            value: '12',
+            label: 'music轮播图',
+          },
+          {
+            value: '13',
+            label: 'SoundDesign轮播图',
+          },
+          {
+            value: '14',
+            label: 'VoiceActing轮播图',
+          },
+          {
+            value: '15',
+            label: 'GameAudioPipeline轮播图',
+          },
+        ],
       }
     },
     methods: {
