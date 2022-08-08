@@ -62,7 +62,6 @@
     },
     setup(props, context) {
       const showEdit = ref(false)
-      const editAlbumVideoId = ref(1)
       const form = ref(null)
       const loading = ref(false)
       const albumVideo = reactive({id:'',title:'',url:'',album:'',type:''})
@@ -132,7 +131,6 @@
         resetForm,
         submitForm,
         showEdit,
-        editAlbumVideoId,
       }
     },
   }

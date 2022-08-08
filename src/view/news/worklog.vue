@@ -90,7 +90,6 @@
     },
     setup(props, context) {
       const showEdit = ref(false)
-      const editWorklogId = ref(1)
       const form = ref(null)
       const loading = ref(false)
       const worklog = reactive({id:'',titleEn:'',titleChi:'',titleJap:'',titleSpa:'', dateEn:'',dateChi:'',dateJap:'',dateSpa:'', url:'',link:'',sort:''})
@@ -162,7 +161,6 @@
         submitForm,
         handleEdit,
         showEdit,
-        editWorklogId,
       }
     },
   }

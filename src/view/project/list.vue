@@ -113,7 +113,6 @@
     },
     setup(props, context) {
       const showEdit = ref(false)
-      const editListId = ref(1)
       const form = ref(null)
       const loading = ref(false)
       const list = reactive({id:'',titleEn:'',titleChi:'',titleJap:'',titleSpa:'', dateEn:'',dateChi:'',dateJap:'',dateSpa:'',
@@ -184,7 +183,6 @@
         resetForm,
         submitForm,
         showEdit,
-        editListId,
       }
     },
   }

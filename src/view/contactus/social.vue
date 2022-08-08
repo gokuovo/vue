@@ -22,7 +22,7 @@
             </el-form-item>
             <el-form-item class="submit">
               <el-button v-if="social.id" type="primary" @click="submitForm">保 存</el-button>
-              <el-button v-else type="primary" @click="submitForm">新 增</el-button>
+              <el-button v-else type="primary" @click="submitForm">新增并添加配图</el-button>
               <el-button @click="resetForm">重 置</el-button>
               <el-button v-if="social.id" plain type="primary" @click="handleEdit(social.id)">更改配图</el-button>
             </el-form-item>
@@ -50,7 +50,6 @@
       },
     },
     setup(props, context) {
-      const editSocialId = ref(1)
       const form = ref(null)
       const loading = ref(false)
       const showEdit = ref(false)
@@ -122,7 +121,6 @@
         rules,
         resetForm,
         submitForm,
-        editSocialId,
         handleEdit,
         showEdit,
       }

@@ -484,6 +484,7 @@ export default {
             const remoteData = resObj[`file_${index}`]
             item.cb(remoteData)
           })
+          location.reload()
         })
         .catch(err => {
           uploadList.forEach(item => {

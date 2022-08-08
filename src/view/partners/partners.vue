@@ -26,7 +26,7 @@
               <el-input v-model="partners.sort" placeholder="请输入排序(1,2,3....)"></el-input>
             </el-form-item>
             <el-form-item class="submit">
-              <el-button type="primary" @click="submitForm">保 存</el-button>
+              <el-button type="primary" @click="submitForm">保存并添加logo</el-button>
               <el-button @click="resetForm">重 置</el-button>
               <el-button v-if="partners.id" plain type="primary" @click="handleEdit(partners.id)">更改配图</el-button>
             </el-form-item>
@@ -77,7 +77,6 @@
       const loading = ref(false)
       let partners = reactive({id:'', partnerName: '', partnerUrl: '', partnerLink: '', sort: '' })
       const showEdit = ref(false)
-      const editPartnersId = ref(1)
 
       const listAssign = (a, b) => Object.keys(a).forEach(key => {
         a[key] = b[key] || a[key]
@@ -148,7 +147,6 @@
         submitForm,
         showEdit,
         handleEdit,
-        editPartnersId,
       }
     },
   }

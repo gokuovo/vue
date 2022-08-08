@@ -122,7 +122,6 @@
     },
     setup(props, context) {
       const showEdit = ref(false)
-      const editAlbumId = ref(1)
       const form = ref(null)
       const loading = ref(false)
       // const album = reactive({id:'',titleEn:'',titleChi:'',titleJap:'',titleSpa:'', releaseEn:'',releaseChi:'',releaseJap:'',releaseSpa:'',
@@ -199,7 +198,6 @@
         submitForm,
         handleEdit,
         showEdit,
-        editAlbumId,
       }
     },
   }

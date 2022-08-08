@@ -90,7 +90,6 @@
     },
     setup(props, context) {
       const showEdit = ref(false)
-      const editNewsId = ref(1)
       const form = ref(null)
       const loading = ref(false)
       const news = reactive({id:'',titleEn:'',titleChi:'',titleJap:'',titleSpa:'', dateEn:'',dateChi:'',dateJap:'',dateSpa:'', url:'',link:'',sort:''})
@@ -159,7 +158,6 @@
         rules,
         resetForm,
         submitForm,
-        editNewsId,
         showEdit,
         handleEdit,
 

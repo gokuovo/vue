@@ -82,7 +82,6 @@
     },
     setup(props, context) {
       const showEdit = ref(false)
-      const editStaffId = ref(1)
       const form = ref(null)
       const loading = ref(false)
       const staff = reactive({ id: '',staffNameEn: '', staffNameChi: '', staffNameJap: '', staffNameSpa: '',
@@ -158,7 +157,6 @@
         submitForm,
         handleEdit,
         showEdit,
-        editStaffId,
       }
     },
   }
