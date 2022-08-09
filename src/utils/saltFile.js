@@ -31,3 +31,19 @@ export function fileUpload(data,headers) {
     headers:headers
   })
 }
+
+export function fileUploads(data,headers) {
+  return request({
+    url: '/partnersFile/files',
+    method: 'post',
+    data: data,
+    headers:headers
+  })
+}
+
+export function getAlbumList() {
+  return request({
+    url: '/SaltProject/getAlbumMusicList',
+    method: 'get'
+  })
+}

@@ -89,6 +89,16 @@ const ProjectRouter = {
       icon: 'iconfont icon-upload',
       permission: null,
     },
+    {
+      title: '批量上传音乐',
+      type: 'view',
+      name: 'addMusics',
+      route: '/project/addMusics',
+      filePath: 'view/project/addMusics.vue',
+      inNav: true,
+      icon: 'iconfont icon-upload',
+      permission: null,
+    },
   ],
 }
 
