@@ -83,8 +83,11 @@
         editRotationId.value = id
       }
 
-      const search = imageType => {
-        try {console.log(get("/SaltOurService/getRotationByType?type="+imageType))
+      async function search(imageType) {
+        try {
+          loading.value = true
+          ratation.value =await get("/SaltOurService/getRotationByType?type="+imageType)
+          loading.value = false
         } catch (error) {
           loading.value = false
           if (error.code === 10020) {
