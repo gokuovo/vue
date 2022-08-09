@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="title" v-if="!editAlbumVideoId">新增LIST信息{{ editAlbumVideoId }}</div>
+    <div class="title" v-if="!editAlbumVideoId">新增专辑视频信息{{ editAlbumVideoId }}</div>
     <div class="title" v-else>
       <span>修改专辑视频信息</span> <span class="back" @click="back"> <i class="iconfont icon-fanhui"></i> 返回 </span>
     </div>
@@ -13,7 +13,9 @@
               <el-input v-model="albumVideo.title" placeholder="请输入标题"></el-input>
             </el-form-item>
             <el-form-item label="所属专辑" prop="album">
-              <el-input v-model="albumVideo.album" placeholder="请输入公司"></el-input>
+              <el-select size="medium"  v-model="albumVideo.album" placeholder="请选择">
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+              </el-select>
             </el-form-item>
             <el-form-item class="submit">
               <el-button v-if="albumVideo.id" type="primary" @click="submitForm">保 存</el-button>
@@ -24,7 +26,7 @@
         </el-col>
       </el-row>
     </div>
-    <album-video-file v-else @editClose="editClose" :editAlbumVideoId="editAlbumVideoId"></album-video-file>
+    <album-video-file v-else @editClose="editClose" :albumVideoId="albumVideoId"></album-video-file>
   </div>
 </template>
 
@@ -61,6 +63,8 @@
       },
     },
     setup(props, context) {
+      const albumVideoId = ref(1)
+      const options = ref([])
       const showEdit = ref(false)
       const form = ref(null)
       const loading = ref(false)
@@ -79,6 +83,7 @@
         if (props.editAlbumVideoId) {
           getAlbumVideo()
         }
+        getOption()
       })
 
       const getAlbumVideo = async () => {
@@ -86,6 +91,19 @@
         const res = await get("/SaltProject/getMusicOne?id="+props.editAlbumVideoId)
         listAssign(albumVideo, res)
         loading.value = false
+      }
+
+      const getOption = async () => {
+        try {
+          loading.value = true
+          options.value = await get("/SaltProject/getAlbumVideoList")
+          loading.value = false
+        } catch (error) {
+          loading.value = false
+          if (error.code === 10020) {
+            albumVideo.value = []
+          }
+        }
       }
 
       // 重置表单
@@ -131,6 +149,8 @@
         resetForm,
         submitForm,
         showEdit,
+        options,
+        albumVideoId,
       }
     },
   }

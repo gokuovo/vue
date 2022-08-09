@@ -56,7 +56,7 @@
       },
     },
     props: {
-      editListId: {
+      listId: {
         type: Number,
         default: null,
       },
@@ -76,14 +76,14 @@
       const { rules } = getRules()
 
       onMounted(() => {
-        if (props.editListId) {
+        if (props.listId) {
           getList()
         }
       })
 
       const getList = async () => {
         loading.value = true
-        const res = await get('/SaltProject/getListOne?id='+props.editListId)
+        const res = await get('/SaltProject/getListOne?id='+props.listId)
         listAssign(list, res)
         console.log(list)
         loading.value = false

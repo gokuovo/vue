@@ -68,14 +68,14 @@
             </el-form-item>
             <el-form-item class="submit">
               <el-button v-if="list.id" type="primary" @click="submitForm">保 存</el-button>
-              <el-button v-else type="primary" @click="submitForm">新 增</el-button>
+              <el-button v-else type="primary" @click="submitForm">新增并添加配图</el-button>
               <el-button @click="resetForm">重 置</el-button>
             </el-form-item>
           </el-form>
         </el-col>
       </el-row>
     </div>
-    <list-file v-else @editClose="editClose" :editListId="editListId"></list-file>
+    <list-file v-else @editClose="editClose" :listId="listId"></list-file>
   </div>
 </template>
 
@@ -112,6 +112,7 @@
       },
     },
     setup(props, context) {
+      const  listId = ref(1);
       const showEdit = ref(false)
       const form = ref(null)
       const loading = ref(false)
@@ -146,7 +147,7 @@
       }
       const handleEdit = id => {
         showEdit.value = true
-        editListId.value = id
+        listId.value = id
       }
 
       const submitForm = async formName => {
@@ -183,6 +184,7 @@
         resetForm,
         submitForm,
         showEdit,
+        listId,
       }
     },
   }

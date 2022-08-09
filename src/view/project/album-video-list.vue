@@ -30,7 +30,7 @@
 
     <!-- 编辑页面 -->
     <AlbumVideo v-if="page==1" @editClose="editClose" :editAlbumVideoId="editAlbumVideoId"></AlbumVideo>
-    <album-video-file v-else-if="page==2" @editClose="editClose" :editAlbumVideoId="editAlbumVideoId"></album-video-file>
+    <album-video-file v-else-if="page==2" @editClose="editClose" :albumVideoId="albumVideoId"></album-video-file>
     <video-preview></video-preview>
   </div>
 </template>
@@ -71,6 +71,7 @@
       },
     },
     setup() {
+      const albumVideoId = ref(1)
       const page = ref(null)
       const albumVideo = ref([])
       const editAlbumVideoId = ref(1)
@@ -101,7 +102,7 @@
       }
       const handleEdit2 = id => {
         showEdit.value = true
-        editAlbumVideoId.value = id
+        albumVideoId.value = id
         page.value = 2
       }
 
@@ -138,6 +139,7 @@
         handleDelete,
         handleEdit2,
         page,
+        albumVideoId,
       }
     },
   }

@@ -51,7 +51,7 @@
       },
     },
     props: {
-      editAlbumVideoId: {
+      albumVideoId: {
         type: Number,
         default: null,
       },
@@ -70,14 +70,14 @@
       const { rules } = getRules()
 
       onMounted(() => {
-        if (props.editAlbumVideoId) {
+        if (props.albumVideoId) {
           getAlbumVideo()
         }
       })
 
       const getAlbumVideo = async () => {
         loading.value = true
-        const res = await get('/SaltProject/getMusicOne?id='+props.editAlbumVideoId)
+        const res = await get('/SaltProject/getMusicOne?id='+props.albumVideoId)
         listAssign(albumVideo, res)
         loading.value = false
       }
