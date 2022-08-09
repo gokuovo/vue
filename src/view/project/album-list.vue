@@ -35,6 +35,7 @@
           </template>
         </el-table-column>
         <el-table-column prop="sort" label="排序"></el-table-column>
+        <el-table-column prop="type" label="专辑分类"></el-table-column>
         <el-table-column label="操作" fixed="right" width="275">
           <template #default="scope">
             <el-button plain size="small" type="primary" @click="handleEdit(scope.row.id)">编辑</el-button>
@@ -54,7 +55,7 @@
 
     <!-- 编辑页面 -->
     <album v-if="page==1"  @editClose="editClose" :editAlbumId="editAlbumId"></album>
-    <album-file v-else-if="page==2" @editClose="editClose" :editAlbumId="editAlbumId"></album-file>
+    <album-file v-else-if="page==2" @editClose="editClose" :albumId="editAlbumId"></album-file>
   </div>
 </template>
 

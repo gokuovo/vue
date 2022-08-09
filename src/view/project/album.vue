@@ -72,19 +72,25 @@
             <el-form-item label="album配图" prop="imgSrc" v-if="album.id">
               <img :src="album.imgSrc" style="width: 150px;height: 150px" />
             </el-form-item>
-            <el-form-item label="排序" prop="image">
+            <el-form-item label="排序" prop="sort">
               <el-input v-model="album.sort" placeholder="请输入排序(1,2,3....)"></el-input>
+            </el-form-item>
+            <el-form-item label="专辑类别" prop="type">
+              <el-input v-model="album.type" v-if="album.id" disabled></el-input>
+              <el-select v-else size="medium"  v-model="album.type" placeholder="请选择">
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+              </el-select>
             </el-form-item>
             <el-form-item class="submit">
               <el-button v-if="album.id" type="primary" @click="submitForm">保 存</el-button>
-              <el-button v-else type="primary" @click="submitForm">新 增</el-button>
+              <el-button v-else type="primary" @click="submitForm">新增并添加封面</el-button>
               <el-button @click="resetForm">重 置</el-button>
             </el-form-item>
           </el-form>
         </el-col>
       </el-row>
     </div>
-    <album-file v-else @editClose="editClose" :editAlbumId="editAlbumId"></album-file>
+    <album-file v-else @editClose="editClose" :albumId="albumId"></album-file>
   </div>
 </template>
 
@@ -121,6 +127,7 @@
       },
     },
     setup(props, context) {
+      const albumId = ref(1)
       const showEdit = ref(false)
       const form = ref(null)
       const loading = ref(false)
@@ -129,7 +136,7 @@
       //   platformEn:'',platformChi:'',platformJap:'',platformSpa:'', imgSrc:'',sort:''})
       const album = reactive({id:'',titleEn:'', releaseEn:'',
         developerEn:'',publisherEn:'',
-        platformEn:'', imgSrc:'',sort:''})
+        platformEn:'', imgSrc:'',sort:'',type:''})
 
       const listAssign = (a, b) => Object.keys(a).forEach(key => {
         a[key] = b[key] || a[key]
@@ -159,7 +166,7 @@
       }
       const handleEdit = id => {
         showEdit.value = true
-        editAlbumId.value = id
+        albumId.value = id
       }
 
       const submitForm = async formName => {
@@ -198,6 +205,17 @@
         submitForm,
         handleEdit,
         showEdit,
+        albumId,
+        options: [
+          {
+            value: '0',
+            label: '音乐专辑',
+          },
+          {
+            value: '1',
+            label: '视频专辑',
+          },
+        ],
       }
     },
   }

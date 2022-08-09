@@ -56,7 +56,7 @@
       },
     },
     props: {
-      editAlbumId: {
+      albumId: {
         type: Number,
         default: null,
       },
@@ -80,14 +80,14 @@
       const { rules } = getRules()
 
       onMounted(() => {
-        if (props.editAlbumId) {
+        if (props.albumId) {
           getAlbum()
         }
       })
 
       const getAlbum = async () => {
         loading.value = true
-        const res = await get('/SaltProject/getAlbumOne?id='+props.editAlbumId)
+        const res = await get('/SaltProject/getAlbumOne?id='+props.albumId)
         listAssign(album, res)
         console.log(album)
         loading.value = false
