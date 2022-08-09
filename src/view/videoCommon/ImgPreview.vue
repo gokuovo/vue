@@ -219,9 +219,9 @@
     top: 0;
     right: 0;
     bottom: 0;
-    left: 0;
+    left: 20%;
     overflow: auto;
-    width: 100%;
+    width: 56%;
     height: 100%;
     z-index: 2010;
     text-align: center;
@@ -257,11 +257,11 @@
     .tip-wrapper {
       position: fixed;
       top: 0;
-      left: 0;
+      left: 20%;
       z-index: 2011;
-      background: rgba(0, 0, 0, 0.5);
+
       padding: 0 48px;
-      width: 100%;
+      width: 50%;
       height: 48px;
       line-height: 48px;
       color: #fff;
@@ -358,11 +358,11 @@
     }
 
     .pre-icon {
-      left: 64px;
+      left: 25%;
     }
 
     .next-icon {
-      right: 64px;
+      right: 25%;
     }
 
     .zoom-bar {
