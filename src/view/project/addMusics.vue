@@ -39,10 +39,10 @@
           let formData = new window.FormData()
           for (let i = 0; i < upLoadFileList.length; i++) {  // 每个file append到formData里
             formData.append('files', upLoadFileList[i]);
-            formData.append('album', this.album);
-            formData.append('fileType', 'musics');
             formData.append('id', '');
           }
+          formData.append('album', this.album);
+          formData.append('fileType', 'musics');
           fileUploads(formData, {'Content-Type': 'multipart/form-data'}).then(resp => {
             console.log(resp);
             this.$message.success("上传文件夹成功! ! !");
