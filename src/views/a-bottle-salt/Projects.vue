@@ -38,15 +38,15 @@
                 </div>
               </div>
               <div v-if="showSFX" style="position: relative;width: 100%;height: 80%;">
-                <video style="position: absolute;width: 80%;height: 80%;margin: 5% 5%;left: 4%;" controls>
-                  <source :src="albumDetail.video[0].url"  type="video/mp4">
+                <video :src="albumDetail.video != undefined ? (albumDetail.video[0] != undefined ? albumDetail.video[0].url.replaceAll('\\','\/') : '') : ''" style="position: absolute;width: 80%;height: 80%;margin: 5% 5%;left: 4%;" controls>
+                  <source type="video/mp4">
                 </video>
               </div>
               <div style="width: 100%;height: 20%;color: #F5F5F5;font-size: 16px;padding-top: 5%">
-                <el-button @click="showMusic = true;showSFX = false;showLIST = false" class="buttonStyle" type="danger">
+                <el-button @click="clickMusic()" class="buttonStyle" type="danger">
                   <span style="font-style: italic">MUSIC</span>
                 </el-button>
-                <el-button @click="showMusic = false;showSFX = true;showLIST = false" class="buttonStyle" type="danger">
+                <el-button @click="clickSfx()" class="buttonStyle" type="danger">
                   <span style="font-style: italic">SFX</span>
                 </el-button>
                 <el-button @click="showMusic = false;showSFX = false;showLIST = true" class="buttonStyle" type="danger">
@@ -59,7 +59,7 @@
               <div v-if="!showLIST" style="height: 25%;width: 80%;background-color: #383838;color: #F5F5F5;font-size: 16px;font-style: italic;padding-left: 5%">
                 <div style="width: 100%;height: 25%;padding-top: 5%">{{showingAlbum['title'+$store.getters.getLanguage]}}</div>
                 <div style="width: 100%;height: 75%;position: relative;padding-top: 2%">
-                  <img style="width: 25%;height: 75%;position: absolute" :src="showingAlbum['imgSrc'+$store.getters.getLanguage]"/>
+                  <img style="width: 25%;height: 75%;position: absolute" :src="showingAlbum.imgSrc.replaceAll('\\','\/')"/>
                   <div style="width: 75%;height: 75%;position: absolute;left: 30%">
                     <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">RELEASE：<span style="font-size: 12px">{{showingAlbum['release'+$store.getters.getLanguage]}}</span></div>
                     <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">DEVELOPER：<span style="font-size: 12px">{{showingAlbum['developer'+$store.getters.getLanguage]}}</span></div>
@@ -72,7 +72,7 @@
                 <ul>
                   <li style="width: 100%;height: 33.3%" v-for="(item,index) in albums">
                     <div :ref="'imgDiv_'+index" @click="albumsClick(item,index)" class="divBase imgDiv"
-                         :style="{backgroundImage: `url(${item['imgSrc'+$store.getters.getLanguage]})`}">
+                         :style="{backgroundImage: `url(${item.imgSrc.replaceAll('\\','\/')})`}">
                     </div>
                   </li>
                 </ul>
@@ -90,17 +90,17 @@
                     <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 14px;font-style: italic;">COMPANY:{{item['company'+$store.getters.getLanguage]}}</div>
                     <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 14px;font-style: italic;">PLATFORM:{{item['platform'+$store.getters.getLanguage]}}</div>
                     <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-style: italic;">
-                      <a class="linkHover" :href="item.link" :target="item.link.indexOf('http') != -1 ? '_blank' : '_self' "><span style="font-size: 13px">EXPLORE</span>&emsp;<i style="color: red" class="el-icon-top-right"></i></a>
+                      <a class="linkHover" :href="item.link" :target="null != item.link ? (item.link.indexOf('http') != -1 ? '_blank' : '_self') : '_blank' "><span style="font-size: 13px">EXPLORE</span>&emsp;<i style="color: red" class="el-icon-top-right"></i></a>
                     </div>
                   </div>
                 </div>
 
               </div>
               <div style="width: 70%;height: 20%;color: #F5F5F5;font-size: 16px;padding-top: 3.5%">
-                <el-button @click="showMusic = true;showSFX = false;showLIST = false" class="buttonStyle" type="danger">
+                <el-button @click="clickMusic()" class="buttonStyle" type="danger">
                   MUSIC
                 </el-button>
-                <el-button @click="showMusic = false;showSFX = true;showLIST = false" class="buttonStyle" type="danger">
+                <el-button @click="clickSfx()" class="buttonStyle" type="danger">
                   SFX
                 </el-button>
                 <el-button @click="showMusic = false;showSFX = false;showLIST = true" class="buttonStyle" type="danger">
@@ -310,6 +310,8 @@
         showingAlbum: {},
         musicTimes:[],
         showAudio:false,
+        musicAlbum: [],
+        videoAlbum: [],
       }
     },
     created() {
@@ -319,23 +321,49 @@
 
       getAlbum().then(resp =>{
         if(resp.data.length > 0){
-          this.albums = resp.data;
+          //过滤出来音乐专辑
+          for(let i = 0; i < resp.data.length;i++){
+            if(resp.data[i].type == "音乐专辑"){
+              this.musicAlbum.push(resp.data[i]);
+            }else{
+              this.videoAlbum.push(resp.data[i]);
+            }
+          }
+          this.albums = this.musicAlbum;
           this.showingAlbum = this.albums[0];
-          //默认显示第一张专辑下面的音乐和视频
+          //默认显示第一张专辑下面的音乐
           let id = this.albums[0].id;
           getProject(id).then(resp =>{
             resp = resp.data;
             if(resp.length > 0){
               let musicList = [];
-              let videoList = [];
               for(let i = 0;i < resp.length;i++){
-                if(resp[i].type == 0){
-                  musicList.push(resp[i]);
-                }else{
-                  videoList.push(resp[i]);
-                }
+                musicList.push(resp[i]);
               }
               this.albumDetail.music = musicList;
+              //样式补全
+              let audioDiv = document.getElementsByClassName("audioDiv");
+              let musicItem = document.getElementsByClassName("musicItem");
+              if(audioDiv.length > 0 && musicItem.length > 0) {
+                audioDiv[0].style.display = 'block';
+                musicItem[0].style.display = 'none';
+              }
+              for(let i = 0;i < this.albums.length;i++){
+                if(i != 0) {
+                  this.$refs["imgDiv_" + i][0].style.filter = "grayscale(1)";
+                }
+              }
+            }
+          });
+          //获取视频专辑的视频
+          let vId = this.videoAlbum[0].id;
+          getProject(vId).then(resp =>{
+            resp = resp.data;
+            if(resp.length > 0){
+              let videoList = [];
+              for(let i = 0;i < resp.length;i++){
+                videoList.push(resp[i]);
+              }
               this.albumDetail.video = videoList;
             }
           });
@@ -367,16 +395,45 @@
 
     },
     methods: {
-      albumsClick(data,index) {
-        this.showingAlbum = data;
-        for(let i = 0;i < this.albums.length;i++){
-          if(i != index) {
-            this.$refs["imgDiv_" + i][0].style.filter = "grayscale(1)";
-          }else{
-            this.$refs["imgDiv_" + i][0].style.filter = "grayscale(0)";
+      fullStyle(index){
+        let that = this;
+        window.setTimeout(function() {
+          let audioDiv = document.getElementsByClassName("audioDiv");
+          let musicItem = document.getElementsByClassName("musicItem");
+          if(audioDiv.length > 0 && musicItem.length > 0) {
+            audioDiv[0].style.display = 'block';
+            musicItem[0].style.display = 'none';
           }
-        }
 
+          for(let i = 0;i < that.albums.length;i++){
+            if(i != 0) {
+              that.$refs["imgDiv_" + i][0].style.filter = "grayscale(1)";
+            }
+          }
+
+          for(let i = 0;i < that.albums.length;i++){
+            if(i != index) {
+              that.$refs["imgDiv_" + i][0].style.filter = "grayscale(1)";
+            }else{
+              that.$refs["imgDiv_" + i][0].style.filter = "grayscale(0)";
+            }
+          }
+        },100);
+      },
+      clickMusic(){
+        this.showMusic = true;this.showSFX = false;this.showLIST = false
+        this.albums = this.musicAlbum;
+        this.showingAlbum = this.albums[0];
+        this.albumsClick(this.albums[0],0);
+      },
+      clickSfx(){
+        this.showMusic = false;this.showSFX = true;this.showLIST = false;
+        this.albums = this.videoAlbum;
+        this.showingAlbum = this.albums[0];
+        this.albumsClick(this.albums[0],0);
+      },
+
+      albumsClick(data,index) {
         let id = data.id;
         getProject(id).then(resp =>{
           resp = resp.data;
@@ -386,12 +443,18 @@
             for(let i = 0;i < resp.length;i++){
               if(resp[i].type == 0){
                 musicList.push(resp[i]);
+                this.albumDetail.video = [];
               }else{
                 videoList.push(resp[i]);
+                this.albumDetail.music = [];
               }
             }
             this.albumDetail.music = musicList;
             this.albumDetail.video = videoList;
+            this.fullStyle(index);
+          }else{
+            this.albumDetail.music = [];
+            this.albumDetail.video = [];
           }
         });
       },
