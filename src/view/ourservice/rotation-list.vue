@@ -29,6 +29,14 @@
         <el-table-column label="操作" fixed="right" width="275">
           <template #default="scope">
             <el-button plain size="small" type="primary" @click="handleEdit(scope.row.id)">编辑</el-button>
+            <el-button
+              plain
+              size="small"
+              type="danger"
+              @click="handleDelete(scope.row.id)"
+              v-permission="{ permission: '删除文字', type: 'disabled' }"
+            >删除</el-button
+            >
           </template>
         </el-table-column>
       </el-table>
@@ -46,8 +54,9 @@
 <script>
   import { onMounted, ref } from 'vue'
   import Rotation from './rotation'
-  import { get } from '../../lin/plugin/axios'
+  import { get, post } from '../../lin/plugin/axios'
   import ImgPreview from '@/view/videoCommon/ImgPreview'
+  import { ElMessage, ElMessageBox } from 'element-plus'
 
   export default {
     components: {
@@ -96,6 +105,20 @@
         }
       }
 
+      const handleDelete = id => {
+        ElMessageBox.confirm('此操作将永久删除该轮播图, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+        }).then(async () => {
+          const res = await post("/SaltOurService/deleteRotation?id="+id)
+          if (res.code < window.MAX_SUCCESS_CODE) {
+            getRotation()
+            ElMessage.success(`${res.message}`)
+          }
+        })
+      }
+
 
       const editClose = () => {
         showEdit.value = false
@@ -113,6 +136,7 @@
         editRotationId,
         indexMethod,
         imageType,
+        handleDelete,
         search,
         options: [
           {

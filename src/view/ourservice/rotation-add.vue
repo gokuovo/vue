@@ -1,20 +1,13 @@
 <template>
   <div class="container">
     <div class="title">
-      <span>修改轮播图</span> <span class="back" @click="back"> <i class="iconfont icon-fanhui"></i> 返回 </span>
+      <span>新增轮播图</span> <span class="back" @click="back"> <i class="iconfont icon-fanhui"></i> 返回 </span>
     </div>
 
     <div class="lin-wrap">
       <el-form label-width="220px">
-        <el-form-item label="当前轮播图">
-          <div style="width: 320px;">
-            <img :src="rotation.imageUrl" />
-          </div>
-        </el-form-item>
         <el-form-item label="轮播图上传">
-          <div>
-            <input class="fileUploaderClass" type='file' name="uploadBtn" ref="uploadBtn" @change="upLoadFile(rotation.imageCode,rotation.id)"/>
-          </div>
+          <input class="fileUploaderClass" type='file' name="uploadBtn" ref="uploadBtn" @change="upLoadFile(rotation)"/>
         </el-form-item>
       </el-form>
     </div>
@@ -22,32 +15,34 @@
 </template>
 
 <script>
+  import UploadImgs from '@/component/base/homepage/background'
   import { reactive, ref, onMounted } from 'vue'
   import { get, post } from '../../lin/plugin/axios'
-  import {fileUpload} from '@/utils/saltFile'
+  import {fileUpload} from '@/utils/Partners'
 
   export default {
     components: {
+      UploadImgs,
     },
     methods:{
-      upLoadFile(imageCode,id) {
+      upLoadFile(imageCode) {
         let upLoadFileList = this.$refs.uploadBtn.files;
         if (upLoadFileList.length > 0) {//防止上次文件之后再次选择同样的文件，然后取消文件上传的bug
-          this.sendFileUpload(imageCode,upLoadFileList,id);
+          this.sendFileUpload(imageCode,upLoadFileList);
         }
       },
 
-      sendFileUpload(imageCode,upLoadFileList,id) {
+      sendFileUpload(imageCode,upLoadFileList) {
+        console.log(imageCode)
         let formData = new window.FormData();
         formData.append('file', upLoadFileList[0]);
-        formData.append('fileType', imageCode);
-        formData.append("id",id)
+        formData.append('imageType', imageCode);
         let that = this;
         //文件上传后台方法
         fileUpload(formData, {'Content-Type': 'multipart/form-data'}).then(resp => {
           that.$message.success("上传成功");
-          console.log(resp);
           location.reload()
+          console.log(resp);
         }).catch(error => {
           that.$message.error("上传文件失败! ! !");
         })
@@ -68,7 +63,7 @@
       },
     },
     props: {
-      editRotationId: {
+      rotation: {
         type: Number,
         default: null,
       },
@@ -76,8 +71,6 @@
     setup(props, context) {
       const form = ref(null)
       const loading = ref(false)
-      const rotation = reactive({id:'', imageCode: '', imageUrl: ''})
-
       const listAssign = (a, b) => Object.keys(a).forEach(key => {
         a[key] = b[key] || a[key]
       })
@@ -88,17 +81,7 @@
       const { rules } = getRules()
 
       onMounted(() => {
-        if (props.editRotationId) {
-          getRotation()
-        }
       })
-
-      const getRotation = async () => {
-        loading.value = true
-        const res = await get("/SaltHomepage/getBackgroundById?id="+props.editRotationId)
-        listAssign(rotation, res)
-        loading.value = false
-      }
 
       // 重置表单
       const resetForm = () => {
@@ -106,12 +89,12 @@
       }
 
       const back = () => {
-        context.emit('editClose')
+        // context.emit('editClose')
+        location.reload()
       }
 
       return {
         back,
-        rotation,
         form,
         rules,
         resetForm,

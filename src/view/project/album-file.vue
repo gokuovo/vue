@@ -1,13 +1,15 @@
 <template>
   <div class="container">
     <div class="title">
-      <span>上传配图</span> <span class="back" @click="back"> <i class="iconfont icon-fanhui"></i> 返回 </span>
+      <span>上传配图</span> <span class="back" @click="back" v-if="album.imgSrc"> <i class="iconfont icon-fanhui"></i> 返回 </span>
     </div>
 
     <div class="lin-wrap">
       <el-form label-width="220px">
         <el-form-item label="当前配图" v-if="album.imgSrc">
-          <img :src="album.imgSrc" />
+          <div style="width: 320px;">
+            <img :src="album.imgSrc" />
+          </div>
         </el-form-item>
         <el-form-item label="当前配图" v-else>
           <span>当前无配图</span>

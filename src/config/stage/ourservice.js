@@ -38,6 +38,16 @@ const OurserviceRouter = {
       icon: 'iconfont icon-jiemiansheji',
       permission: null,
     },
+    {
+      title: '新增轮播图',
+      type: 'view',
+      name: 'addRotation',
+      route: '/view/ourservice/rotation',
+      filePath: 'view/ourservice/rotation-option.vue',
+      inNav: true,
+      icon: 'iconfont icon-jia',
+      permission: null,
+    },
   ],
 }
 

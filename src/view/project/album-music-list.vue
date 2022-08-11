@@ -5,6 +5,18 @@
       <div class="header">
         <div class="title">音乐列表</div>
       </div>
+      <div>
+        <div class="title">
+          <el-form>
+            <el-form-item label="根据专辑查询">
+              <el-select size="medium" filterable  v-model="albumType" placeholder="请选择">
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+              </el-select>
+              <el-button @click="search(albumType)">查询</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
+      </div>
       <!-- 表格 -->
       <el-table :data="albumMusic" v-loading="loading">
         <el-table-column type="index" :index="indexMethod" label="序号" width="100"></el-table-column>
@@ -48,6 +60,7 @@
   // 引入视频预览组件
   import VideoPreview from '../videoCommon/VideoPreview'
   import ImgPreview from '@/view/videoCommon/ImgPreview'
+  import Album from './album'
 
   export default {
     components: {
@@ -75,14 +88,17 @@
       },
     },
     setup() {
+      const albumType = ref(null)
+      let options = ref([])
       const page = ref(null)
-      const albumMusic = ref([])
+      let albumMusic = ref([])
       const editAlbumMusicId = ref(1)
       const loading = ref(false)
       const showEdit = ref(false)
 
       onMounted(() => {
         getAlbumMusic()
+        getMusicAlbum()
       })
 
       const getAlbumMusic = async () => {
@@ -94,6 +110,19 @@
           loading.value = false
           if (error.code === 10020) {
             albumMusic.value = []
+          }
+        }
+      }
+
+      const getMusicAlbum = async () => {
+        try {
+          loading.value = true
+          options.value = await get('/SaltProject/getAlbumMusicList')
+          loading.value = false
+        } catch (error) {
+          loading.value = false
+          if (error.code === 10020) {
+            Album.value = []
           }
         }
       }
@@ -129,6 +158,18 @@
         getAlbumMusic()
       }
 
+      async function search(albumType) {
+        try {
+          loading.value = true
+          albumMusic.value =await get("/SaltProject/getMusicByType?type="+albumType)
+          loading.value = false
+        } catch (error) {
+          loading.value = false
+          if (error.code === 10020) {
+            ratation.value = []
+          }
+        }
+      }
       const indexMethod = index => index + 1
 
       return {
@@ -142,6 +183,9 @@
         handleDelete,
         handleEdit2,
         page,
+        albumType,
+        options,
+        search,
       }
     },
     methods: {
