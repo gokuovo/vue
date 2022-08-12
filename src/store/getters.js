@@ -13,5 +13,6 @@ const getters = {
   errorLogs: state => state.errorLog.logs,
   geFontFamily: state => state.fontFamily.fontFamily,
   getLanguage: state => state.settings.language,
+  getLogo: state => state.settings.logo,
 }
 export default getters

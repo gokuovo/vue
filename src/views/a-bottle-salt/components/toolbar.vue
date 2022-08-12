@@ -17,21 +17,21 @@
         <td style="width: 20%">
           <el-dropdown @command="handleCommand">
             <el-button type="primary">
-              <span style="font-style: italic">Language</span>
+              <span class="selfFont">Language</span>
               <i class="el-icon-arrow-down el-icon--right"></i>
             </el-button>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="Chi">
-                <span style="font-style: italic">CN</span>
+                <span class="selfFont">CN</span>
               </el-dropdown-item>
               <el-dropdown-item command="En">
                 <span style="font-style: italic">EN</span>
               </el-dropdown-item>
               <el-dropdown-item command="Spa">
-                <span style="font-style: italic">SPA</span>
+                <span class="selfFont">SPA</span>
               </el-dropdown-item>
               <el-dropdown-item command="Jap">
-                <span style="font-style: italic">JAP</span>
+                <span class="selfFont">JAP</span>
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
@@ -108,8 +108,18 @@
 </script>
 
 <style scoped>
+
+  .barFont{
+    font-family: DIN-BoldItalic;
+  }
+
   .barFont:hover {
     color: red;
+  }
+
+  .selfFont{
+    font-family: DIN-BoldItalic;
+    font-style: italic
   }
 
   .el-breadcrumb{

@@ -20,7 +20,7 @@
                 <div style="width: 60%;height: 100%;position: absolute;left: 30%">
                   <table class="divBase">
                     <tr>
-                      <td class="divBase" style="vertical-align: middle">
+                      <td class="divBase BoldItalic" style="vertical-align: middle">
                         <div style="width: 100%;height: auto;color: #BAB9B6;font-size: 16px;font-style: italic;margin-bottom: 3%">{{item['title'+$store.getters.getLanguage]}}</div>
                         <div style="width: 100%;height: auto;color: rgb(140 140 140);font-size: 14px;font-style: italic;margin-bottom: 3%">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
                         <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-style: italic;">
@@ -183,6 +183,11 @@
 
 <style scoped>
   @import './commonCSS/moveBackground.scss';
+
+  .BoldItalic{
+    font-family: DIN-BoldItalic;
+    font-style: italic
+  }
 
   .buttonStyle {
     padding: 5px 5px;

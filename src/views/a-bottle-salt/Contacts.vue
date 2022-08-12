@@ -19,15 +19,15 @@
       <table class="divBase">
         <tr>
           <td style="width: 33%;height: 100%">
-            <div style="width: 60%;height: 30%;color: #BAB9B6;font-size: 14px;font-style: italic;">
+            <div class="BoldItalic" style="width: 60%;height: 30%;color: #BAB9B6;font-size: 14px;">
               PHONE NUMBER：<span style="font-size: 12px;color: #8c939d">{{contacts.tel}}</span>
             </div>
-            <div style="width: 60%;height: 70%;color: #8c939d;font-size: 12px;font-style: italic;">
+            <div class="BoldItalic" style="width: 60%;height: 70%;color: #8c939d;font-size: 12px;">
               {{contacts['address'+$store.getters.getLanguage]}}
             </div>
           </td>
           <td style="width: 33%;height: 100%">
-            <div style="width: 60%;height: 30%;color: #BAB9B6;font-size: 14px;font-style: italic;">
+            <div class="BoldItalic" style="width: 60%;height: 30%;color: #BAB9B6;font-size: 14px;">
               OUR SOCIAL：
             </div>
             <div style="width: 100%;height: 70%;color: #8c939d;font-size: 12px;font-style: italic;">
@@ -39,10 +39,10 @@
             </div>
           </td>
           <td style="width: 33%;height: 100%">
-            <div style="width: 60%;height: 30%;color: #BAB9B6;font-size: 14px;font-style: italic;">
+            <div class="BoldItalic" style="width: 60%;height: 30%;color: #BAB9B6;font-size: 14px;">
               E-MAIL：
             </div>
-            <div style="width: 60%;height: 70%;color: #8c939d;font-size: 12px;font-style: italic;">
+            <div class="BoldItalic" style="width: 60%;height: 70%;color: #8c939d;font-size: 12px;">
               {{contacts.mail}}
             </div>
           </td>
@@ -144,6 +144,11 @@
 
 <style scoped>
   @import './commonCSS/moveBackground.scss';
+
+  .BoldItalic{
+    font-family: DIN-BoldItalic;
+    font-style: italic
+  }
 
   .divBase {
     width: 100%;

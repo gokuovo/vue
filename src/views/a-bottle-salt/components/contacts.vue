@@ -1,40 +1,41 @@
 <template>
-    <div style="width: 100%;height: 100%;padding-top: 60%">
-      <el-tooltip class="item" effect="dark" :content="contacts.twitter" placement="top-start">
-        <div style="width: 10%;height: 15%">
-          <img :src="require('@/assets/images/twitter.jpeg')"/>
-        </div>
-      </el-tooltip>
-      <el-tooltip class="item" effect="dark" :content="contacts.facebook" placement="top-start">
-        <div style="width: 10%;height: 15%">
-          <img :src="require('@/assets/images/twitter.jpeg')"/>
-        </div>
-      </el-tooltip>
-      <el-tooltip class="item" effect="dark" :content="contacts.ins" placement="top-start">
-        <div style="width: 10%;height: 15%">
-          <img :src="require('@/assets/images/twitter.jpeg')"/>
-        </div>
-      </el-tooltip>
-      <el-tooltip class="item" effect="dark" :content="contacts.weChat" placement="top-start">
-        <div style="width: 10%;height: 15%">
-          <img :src="require('@/assets/images/twitter.jpeg')"/>
-        </div>
-      </el-tooltip>
+    <div ref="divTag" style="width: 100%;height: 100%;">
+      <div style="width: 10%;height: 15%" v-for="(item) in contacts">
+          <div>
+            <img :src="item.image_url"/>
+          </div>
+      </div>
     </div>
 </template>
 
 <script>
+  import {getSocialSix} from '../requestScript/Contacts'
+
   export default {
     name: 'contacts',
     data(){
       return {
-        contacts:{
-          twitter:'推特联系方式',
-          facebook:'脸书联系方式',
-          ins:'ins联系方式',
-          weChat:'微信联系方式'
-        },
+        contacts:[
+          {image_url:'2'},
+          {image_url:'2'},
+          {image_url:'2'},
+          {image_url:'2'},
+        ],
       }
+    },
+    created() {
+      getSocialSix().then(resp =>{
+        if(resp.data.list > 0){
+          this.contacts = resp.data.list;
+        }
+      });
+    },
+    mounted() {
+      //计算联系方式图标距上边距
+      let size = this.contacts ? 10 - this.contacts.length : 6;
+      this.$refs.divTag.style.paddingTop = 10*size+"%";
+
+
     }
   }
 </script>

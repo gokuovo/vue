@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Vue Element Admin',
+  title: 'SALT SOUND STUDIO',
 
   /**
    * @type {boolean} true | false

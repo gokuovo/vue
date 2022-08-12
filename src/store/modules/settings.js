@@ -10,6 +10,7 @@ const state = {
   fixedHeader: fixedHeader,
   sidebarLogo: sidebarLogo,
   language: language,
+  logo:'',
 }
 
 const mutations = {
@@ -22,6 +23,9 @@ const mutations = {
   CHANGE_LANGUAGE: (state, language) => {
     state.language = language
   },
+  CHANGE_LOGO: (state, logo) => {
+    state.logo = logo
+  },
 }
 
 const actions = {
@@ -30,6 +34,9 @@ const actions = {
   },
   changeLanguage({ commit }, language) {
     commit('CHANGE_LANGUAGE', language)
+  },
+  changeLogo({ commit }, logo) {
+    commit('CHANGE_LOGO', logo)
   },
 }
 

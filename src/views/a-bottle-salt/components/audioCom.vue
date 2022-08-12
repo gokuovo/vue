@@ -7,7 +7,7 @@
       style="display: none"
       @canplay="getDuration"
     >
-      <source :src="fileUrl.srcPath" type="audio/mpeg"/>
+      <source :src="fileUrl.url" type="audio/mpeg"/>
       您的浏览器不支持音频播放
     </audio>
     <table class="myAudio">
@@ -25,8 +25,8 @@
               </table>
             </div>
             <div class="slidList">
-              <span class="songName" style="color: rgb(245, 245, 245);font-style: italic">{{fileUrl.name}}</span>
-              <span class="timers">{{ videoStart }}/{{ transTime(duration) }}</span>
+              <span class="songName BoldItalic" style="color: rgb(245, 245, 245);">{{fileUrl.title}}</span>
+              <span class="timers BoldItalic">{{ videoStart }}/{{ transTime(duration) }}</span>
             </div>
           </div>
           <div class="duration">
@@ -43,7 +43,7 @@
     props: {
       fileUrl: {
         srcPath: '',
-        name: ''
+        title: ''
       }
 
     },
@@ -144,6 +144,11 @@
 </script>
 
 <style lang="scss" scoped>
+  .BoldItalic{
+    font-family: DIN-BoldItalic;
+    font-style: italic
+  }
+
   .myAudio{
     width: 100%;
     height: 100%;
@@ -159,7 +164,6 @@
 
       .timers {
         color: #bdbdbd;
-        font-family: PingFang SC;
         text-align: left;
         position: absolute;
         top: 5px;

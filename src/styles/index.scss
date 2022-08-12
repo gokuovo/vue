@@ -5,6 +5,16 @@
 @import './sidebar.scss';
 @import './btn.scss';
 
+@font-face {
+  font-family: DIN-BoldItalic;
+  src: url("../assets/fontFiles/DIN-BoldItalic.otf");
+}
+
+@font-face {
+  font-family: inter;
+  src: url("../assets/fontFiles/Inter-Regular.woff");
+}
+
 body {
   height: 100%;
   -moz-osx-font-smoothing: grayscale;

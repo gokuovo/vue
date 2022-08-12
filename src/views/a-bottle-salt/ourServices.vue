@@ -20,18 +20,18 @@
                 <table class="divBase">
                   <tr>
                     <td style="width: 30%;color: #F5F5F5;font-size: 28px;vertical-align: top;position: relative">
-                      <div style="top: 20%;left: 20%;position: absolute">
+                      <div class="BoldItalic" style="top: 20%;left: 20%;position: absolute">
                         {{this.whatWeDo}}
                       </div>
                     </td>
                     <td style="width: 50%;color: #BAB9B6;text-align: left;vertical-align: top;font-size: 18px">
-                      <div style="padding-top: 10%">
+                      <div class="inter" style="padding-top: 10%">
                         {{this.whatWeDoText1}}
                       </div>
-                      <div style="padding-top: 5%">
+                      <div class="inter" style="padding-top: 5%">
                         {{this.whatWeDoText2}}
                       </div>
-                      <div style="padding-top: 5%">
+                      <div class="inter" style="padding-top: 5%">
                         {{this.whatWeDoText3}}
                       </div>
                     </td>
@@ -42,10 +42,10 @@
               <div style="width: 100%;height: 10%;color: #F5F5F5;font-size: 20px;font-style:oblique;">
                 <table class="divBase" v-show="!showVideo">
                   <tr @click="showVideo = !showVideo">
-                    <td @click="fontButtonClick(0)" style="width: 10%;vertical-align: bottom;text-align: right">MUSIC</td>
-                    <td @click="fontButtonClick(1)" style="width: 25%;vertical-align: bottom;text-align: center">SOUND DESIGN</td>
-                    <td @click="fontButtonClick(2)" style="width: 18%;vertical-align: bottom;text-align: left">VOICE ACTING</td>
-                    <td @click="fontButtonClick(3)" style="width: 37%;vertical-align: bottom;text-align: left">GAME AUDIO PIPELINE</td>
+                    <td @click="fontButtonClick(0)" class="BoldItalic" style="width: 10%;vertical-align: bottom;text-align: right">MUSIC</td>
+                    <td @click="fontButtonClick(1)" class="BoldItalic" style="width: 25%;vertical-align: bottom;text-align: center">SOUND DESIGN</td>
+                    <td @click="fontButtonClick(2)" class="BoldItalic" style="width: 18%;vertical-align: bottom;text-align: left">VOICE ACTING</td>
+                    <td @click="fontButtonClick(3)" class="BoldItalic" style="width: 37%;vertical-align: bottom;text-align: left">GAME AUDIO PIPELINE</td>
                   </tr>
                 </table>
               </div>
@@ -56,10 +56,10 @@
                     <td style="width: 60%;height: 100%;position: relative">
                       <div style="width: 30%;height: 100%;display: inline-block;font-size: 20px;">
                         <ul ref="childTr" v-show="showVideo">
-                          <li @click="fontButtonClick(0)" class="fontButton">MUSIC</li>
-                          <li @click="fontButtonClick(1)" class="fontButton">SOUND DESIGN</li>
-                          <li @click="fontButtonClick(2)" class="fontButton">VOICE ACTING</li>
-                          <li @click="fontButtonClick(3)" class="fontButton">GAME AUDIO PIPELINE</li>
+                          <li @click="fontButtonClick(0)" class="fontButton BoldItalic">MUSIC</li>
+                          <li @click="fontButtonClick(1)" class="fontButton BoldItalic">SOUND DESIGN</li>
+                          <li @click="fontButtonClick(2)" class="fontButton BoldItalic">VOICE ACTING</li>
+                          <li @click="fontButtonClick(3)" class="fontButton BoldItalic">GAME AUDIO PIPELINE</li>
                         </ul>
                       </div>
                       <div style="width: 70%;height: 100%;display: inline-block;position: relative" v-show="showVideo">
@@ -202,6 +202,16 @@
 
 <style scoped>
   @import './commonCSS/moveBackground.scss';
+
+  .BoldItalic{
+    font-family: DIN-BoldItalic;
+    font-style: italic
+  }
+
+  .inter{
+    font-family: inter;
+    font-style: normal;
+  }
 
   .fontButton:hover {
     color: red;

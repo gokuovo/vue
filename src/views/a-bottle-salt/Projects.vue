@@ -10,7 +10,7 @@
             <div v-if="!showLIST" style="height: 100%;width: 60%;display: inline-block;">
               <div v-if="showMusic" style="width: 100%;height: 80%;padding-left: 10%">
                 <div style="width: 100%;height: 30%;color: #F5F5F5;font-size: 26px">
-                  <div style="width: 100%;padding-top: 10%;font-style: italic">{{this.showingAlbum['title'+$store.getters.getLanguage]}}</div>
+                  <div class="BoldItalic" style="width: 100%;padding-top: 10%;">{{this.showingAlbum['title'+$store.getters.getLanguage]}}</div>
                 </div>
                 <div style="width: 100%;height: 60%;">
                   <div class="selfDefineScroll" style="overflow-y: auto;height: 85%;width: 80%;">
@@ -21,14 +21,14 @@
                         </div>
 
                         <div class="musicItem" :ref="item.id" @click="musicItemClick(item)" style="color: #8c939d;position: relative;padding-top: 2%;">
-                          <span style="font-size: 14px;font-style: italic">{{item.title}}</span>
+                          <span class="BoldItalic" style="font-size: 14px;">{{item.title}}</span>
                           <audio v-show="false" :ref="item.title+item.id" controls @canplay="getDuration(item.title+item.id)">
                             <source :src="item.url" type="audio/mpeg"/>
                           </audio>
-                          <span v-show="false" style="font-size: 14px;font-style: italic">
+                          <span class="BoldItalic" v-show="false" style="font-size: 14px;">
                             {{addMusicId(item.title+item.id)}}
                           </span>
-                          <span style="font-size: 14px;font-style: italic;color: #8c939d;position: absolute;right: 1%">
+                          <span class="BoldItalic" style="font-size: 14px;color: #8c939d;position: absolute;right: 1%">
                             {{getMusicTime(item.title+item.id)}}
                           </span>
                         </div>
@@ -44,23 +44,23 @@
               </div>
               <div style="width: 100%;height: 20%;color: #F5F5F5;font-size: 16px;padding-top: 5%">
                 <el-button @click="clickMusic()" class="buttonStyle" type="danger">
-                  <span style="font-style: italic">MUSIC</span>
+                  <span class="BoldItalic">MUSIC</span>
                 </el-button>
                 <el-button @click="clickSfx()" class="buttonStyle" type="danger">
-                  <span style="font-style: italic">SFX</span>
+                  <span class="BoldItalic">SFX</span>
                 </el-button>
                 <el-button @click="showMusic = false;showSFX = false;showLIST = true" class="buttonStyle" type="danger">
-                  <span style="font-style: italic">LIST</span>
+                  <span class="BoldItalic">LIST</span>
                 </el-button>
               </div>
             </div>
 
             <div v-if="!showLIST" style="height: 100%;width: 40%;display: inline-block;position: absolute">
               <div v-if="!showLIST" style="height: 25%;width: 80%;background-color: #383838;color: #F5F5F5;font-size: 16px;font-style: italic;padding-left: 5%">
-                <div style="width: 100%;height: 25%;padding-top: 5%">{{showingAlbum['title'+$store.getters.getLanguage]}}</div>
+                <div class="BoldItalic" style="width: 100%;height: 25%;padding-top: 5%">{{showingAlbum['title'+$store.getters.getLanguage]}}</div>
                 <div style="width: 100%;height: 75%;position: relative;padding-top: 2%">
                   <img style="width: 25%;height: 75%;position: absolute" :src="showingAlbum.imgSrc.replaceAll('\\','\/')"/>
-                  <div style="width: 75%;height: 75%;position: absolute;left: 30%">
+                  <div class="BoldItalic" style="width: 75%;height: 75%;position: absolute;left: 30%">
                     <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">RELEASE：<span style="font-size: 12px">{{showingAlbum['release'+$store.getters.getLanguage]}}</span></div>
                     <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">DEVELOPER：<span style="font-size: 12px">{{showingAlbum['developer'+$store.getters.getLanguage]}}</span></div>
                     <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">PUBLISHER：<span style="font-size: 12px">{{showingAlbum['publisher'+$store.getters.getLanguage]}}</span></div>
@@ -84,7 +84,7 @@
               <div class="selfDefineScroll" style="width: 100%;height: 80%;overflow-y: auto;">
                 <div v-for="(item) in albumList" style="width: 50%;height: 27%;display: inline-block;position: relative;padding-left: 6%;margin-top: 2%;">
                   <img style="width: 25%;height: 100%;position: absolute" :src="item.url" />
-                  <div style="width: 60%;height: 100%;position: absolute;left: 40%">
+                  <div class="BoldItalic" style="width: 60%;height: 100%;position: absolute;left: 40%">
                     <div style="width: 100%;height: 20%;color: #BAB9B6;font-size: 16px;font-style: italic;">{{item['title'+$store.getters.getLanguage]}}</div>
                     <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 14px;font-style: italic;">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
                     <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 14px;font-style: italic;">COMPANY:{{item['company'+$store.getters.getLanguage]}}</div>
@@ -523,6 +523,11 @@
 </script>
 
 <style scoped>
+  .BoldItalic{
+    font-family: DIN-BoldItalic;
+    font-style: italic
+  }
+
   .divBase {
     width: 100%;
     height: 100%;

@@ -16,7 +16,7 @@
                   <div :ref="item.id+'_code'" style="position: absolute;width: 100%;height: 100%;display: none;background: #0D0D0D">
                     <table class="divBase">
                       <tr>
-                        <td style="text-align: center;font-style: italic">
+                        <td class="BoldItalic" style="text-align: center;">
                           <div style="color: #F88E5A;font-size: 16px">{{item['staffName'+$store.getters.getLanguage]}}</div>
                           <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{item['staffPost'+$store.getters.getLanguage]}}</div>
                           <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{item['staffDesc'+$store.getters.getLanguage]}}</div>
@@ -167,6 +167,11 @@
   }
 </style>
 <style scoped>
+  .BoldItalic{
+    font-family: DIN-BoldItalic;
+    font-style: italic
+  }
+
   >>> .el-breadcrumb__inner{
     color: #BDBBB7!important;
   }
