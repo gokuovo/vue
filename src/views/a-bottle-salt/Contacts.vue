@@ -64,30 +64,11 @@
     components: { toolbar, contacts },
     data() {
       return {
-        firstImg: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fphoto%2F2009-4-13%2F200904112336058564.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1658928800&t=8913213d93980e32fae1222eda918e7f',
-        secondImg: 'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
+        firstImg: '',
+        secondImg: '',
         contacts: {
-          id: 1,
-          tel: '1866 - 56 -33 -202',
-          addressEn: 'ROOM 1109,BUILDING #61,YUANYANGTIANDI,MID RD.EAST 4TH RING,CHAOYANG DISTRICT,BEIJING',
-          mail: 'SALTSTUDIO@YEAH.NET'
         },
         contactImages: [
-          {
-            id: 1,
-            imageUrl: 'require(\'@/assets/images/twitter.jpeg\')',
-            noti: 'twitter'
-          },
-          {
-            id: 2,
-            imageUrl: 'require(\'@/assets/images/twitter.jpeg\')',
-            noti: 'twitter'
-          },
-          {
-            id: 3,
-            imageUrl: 'require(\'@/assets/images/twitter.jpeg\')',
-            noti: 'twitter'
-          },
         ]
       }
     },

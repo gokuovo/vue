@@ -66,64 +66,8 @@
     components: { toolbar,contacts },
     data(){
       return {
-        firstImg: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fphoto%2F2009-4-13%2F200904112336058564.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1658928800&t=8913213d93980e32fae1222eda918e7f',
+        firstImg: '',
         newsData:[
-          {
-            id: 1,
-            titleEn: 'MELTING GAMES COLLABORATION',
-            dateEn: '20 May,2022',
-            url:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
-            link:'http://www.baidu.com'
-          },
-          {
-            id: 2,
-            titleEn: 'THE NEWS WEST LIMITED VINYL RELEASE',
-            dateEn: '20 May,2022',
-            url:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
-            link:'/ourServices'
-          },
-          {
-            id: 3,
-            titleEn: 'METHOD MAN RELEASES NEW SONG FOR \'EVIL DEAD: THE GAMES\'',
-            dateEn: '20 May,2022',
-            url:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
-            link:'http://www.baidu.com'
-          },
-          {
-            id: 4,
-            titleEn: 'MELTING GAMES COLLABORATION',
-            dateEn: '20 May,2022',
-            url:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
-            link:'/ourServices'
-          },
-          {
-            id: 5,
-            titleEn: 'MELTING GAMES COLLABORATION',
-            dateEn: '20 May,2022',
-            url:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
-            link:'http://www.baidu.com'
-          },
-          {
-            id: 6,
-            titleEn: 'MELTING GAMES COLLABORATION',
-            dateEn: '20 May,2022',
-            url:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
-            link:'/ourServices'
-          },
-          {
-            id: 7,
-            titleEn: 'MELTING GAMES COLLABORATION',
-            dateEn: '20 May,2022',
-            url:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444',
-            link:'http://www.baidu.com'
-          },
-          {
-            id: 8,
-            titleEn: 'MELTING GAMES COLLABORATION',
-            dateEn: '20 May,2022',
-            url:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500',
-            link:'/ourServices'
-          },
         ]
       }
     },

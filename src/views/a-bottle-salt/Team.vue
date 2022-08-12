@@ -50,36 +50,6 @@
     data(){
       return {
         teamImages:[
-          {
-            id:1,
-            height:30,
-            staffNameEn:"AMY LEE",
-            staffPostEn:'SINGER',
-            staffDescEn:'"Hey there!Nice to greet you here"',
-            staffImage:'https://img2.baidu.com/it/u=1881155221,3484897707&fm=253&fmt=auto&app=138&f=JPEG?w=790&h=444'
-          },
-          {
-            id:2,
-            height:40,
-            staffNameEn:"JAKE MA",
-            staffPostEn:'DANCER',
-            staffDescEn:'"Hey there!Nice to meet you here"',
-            staffImage:'https://img1.baidu.com/it/u=3098127009,1379997600&fm=253&fmt=auto&app=138&f=JPEG?w=1179&h=500'
-          },
-          {
-            id:3,
-            height:50,
-            staffNameEn:"MIKE LI",
-            staffPostEn:'CODER',
-            staffDescEn:'"Hey there!Nice to greet you here"'
-          },
-          {
-            id:4,
-            height:35,
-            staffNameEn:"AMY LEE",
-            staffPostEn:'SINGER',
-            staffDescEn:'"Hey there!Nice to greet you here"'
-          }
         ],
         counts:32,
         staffName: 'staffNameEn',

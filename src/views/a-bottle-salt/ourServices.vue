@@ -104,16 +104,15 @@
     components: { toolbar, contacts },
     data() {
       return {
-        whatWeDo:'WHAT WE DO',
-        whatWeDoText1:'We hold high standard for our works.',
-        whatWeDoText2:'We see every game and film as art; based on that we design, compose our music that fits in "three element" as the core.',
-        whatWeDoText3:'Therefore, our music and audio projects have won many awards in IGF,\n' +
-          '                        IMGA,INDIEPLAY,GMGC,CMA，ANIWow and so on.',
+        whatWeDo:'',
+        whatWeDoText1:'',
+        whatWeDoText2:'',
+        whatWeDoText3:'',
         showVideo: false,
         bigVideoIsClicked:false,
         showBigVideo: false,
-        firstVideo: require('@/assets/404_images/movie.mp4'),
-        carouselImgPaths: [require('@/assets/images/font.png'), require('@/assets/images/font2.png'), require('@/assets/images/font3.png')],
+        firstVideo: '',
+        carouselImgPaths: [],
       }
     },
     created() {
