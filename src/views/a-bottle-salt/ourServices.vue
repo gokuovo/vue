@@ -55,14 +55,14 @@
                   <tr>
                     <td style="width: 60%;height: 100%;position: relative">
                       <div style="width: 30%;height: 100%;display: inline-block;font-size: 20px;">
-                        <ul ref="childTr" v-show="showVideo">
+                        <ul class="divAnimate" ref="childTr" v-show="showVideo">
                           <li @click="fontButtonClick(0)" class="fontButton BoldItalic">MUSIC</li>
                           <li @click="fontButtonClick(1)" class="fontButton BoldItalic">SOUND DESIGN</li>
                           <li @click="fontButtonClick(2)" class="fontButton BoldItalic">VOICE ACTING</li>
                           <li @click="fontButtonClick(3)" class="fontButton BoldItalic">GAME AUDIO PIPELINE</li>
                         </ul>
                       </div>
-                      <div style="width: 70%;height: 100%;display: inline-block;position: relative" v-show="showVideo">
+                      <div class="divAnimate" style="width: 70%;height: 100%;display: inline-block;position: relative" v-show="showVideo">
                           <video :src="firstVideo" @click="clickVideo" style="position: absolute;width: 70%;left: 20%;top: 10%;height: 70%;object-fit: fill;" controlslist="nofullscreen" controls>
                             <source type="video/mp4">
                           </video>
@@ -70,8 +70,7 @@
                     </td>
 
                     <td style="width: 40%;height: 100%;position: relative">
-                      <div v-show="showVideo"
-                           style="width: 90%;height: 50%;position: absolute;left: 0;top: 15%;overflow: hidden">
+                      <div class="divAnimate" v-show="showVideo" style="width: 90%;height: 50%;position: absolute;left: 0;top: 15%;overflow: hidden">
                         <div ref="carouselImgBox" class="carouselImgBox">
                           <img style="width: 100%;height: 100%" v-for="item in carouselImgPaths"
                                :src="item"/>
@@ -206,6 +205,14 @@
   .BoldItalic{
     font-family: DIN-BoldItalic;
     font-style: italic
+  }
+
+  .divAnimate{
+    animation:animateNum 3s 1;
+  }
+  @keyframes animateNum{
+    0%{opacity: 0;}
+    100%{opacity: 1;}
   }
 
   .inter{
