@@ -15,15 +15,15 @@
                 <div style="width: 100%;height: 60%;">
                   <div class="selfDefineScroll" style="overflow-y: auto;height: 85%;width: 80%;">
                     <ul>
-                      <li style="width: 100%;height: 15%;" v-for="(item) in albumDetail.music">
+                      <li style="width: 100%;height: 15%;" v-for="(item) in showAlbumMusic">
                         <div :ref="item.id+'_audio'" class="audioDiv" style="width: 100%;height :100%;display: none;max-height: 50px">
                           <audioCom style="background-color: #383838;margin-bottom: 5%" :ref="item.id+'_children'" :key="item.id" :fileUrl="item"></audioCom>
                         </div>
 
                         <div class="musicItem" :ref="item.id" @click="musicItemClick(item)" style="color: #8c939d;position: relative;padding-top: 2%;">
                           <span class="BoldItalic" style="font-size: 14px;">{{item.title}}</span>
-                          <audio v-show="false" :ref="item.title+item.id" controls @canplay="getDuration(item.title+item.id)">
-                            <source :src="item.url" type="audio/mpeg"/>
+                          <audio :src="item.url" v-show="false" :ref="item.title+item.id" controls @canplay="getDuration(item.title+item.id)">
+                            <source type="audio/mpeg"/>
                           </audio>
                           <span class="BoldItalic" v-show="false" style="font-size: 14px;">
                             {{addMusicId(item.title+item.id)}}
@@ -38,7 +38,7 @@
                 </div>
               </div>
               <div v-if="showSFX" style="position: relative;width: 100%;height: 80%;">
-                <video :src="albumDetail.video != undefined ? (albumDetail.video[0] != undefined ? albumDetail.video[0].url.replaceAll('\\','\/') : '') : ''" style="position: absolute;width: 80%;height: 80%;margin: 5% 5%;left: 4%;" controls>
+                <video :src="showAlbumVideo != undefined ? (showAlbumVideo[0] != undefined ? showAlbumVideo[0].url.replaceAll('\\','\/') : '') : ''" style="position: absolute;width: 80%;height: 80%;margin: 5% 5%;left: 4%;" controls>
                   <source type="video/mp4">
                 </video>
               </div>
@@ -59,7 +59,7 @@
               <div v-if="!showLIST" style="height: 25%;width: 80%;background-color: #383838;color: #F5F5F5;font-size: 16px;font-style: italic;padding-left: 5%">
                 <div class="BoldItalic" style="width: 100%;height: 25%;padding-top: 5%">{{showingAlbum['title'+$store.getters.getLanguage]}}</div>
                 <div style="width: 100%;height: 75%;position: relative;padding-top: 2%">
-                  <img style="width: 25%;height: 75%;position: absolute" :src="showingAlbum.imgSrc.replaceAll('\\','\/')"/>
+                  <img style="width: 25%;height: 75%;position: absolute" :src="undefined == showingAlbum.imgSrc ? '' : showingAlbum.imgSrc.replaceAll('\\','\/')"/>
                   <div class="BoldItalic" style="width: 75%;height: 75%;position: absolute;left: 30%">
                     <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">RELEASE：<span style="font-size: 12px">{{showingAlbum['release'+$store.getters.getLanguage]}}</span></div>
                     <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">DEVELOPER：<span style="font-size: 12px">{{showingAlbum['developer'+$store.getters.getLanguage]}}</span></div>
@@ -72,7 +72,7 @@
                 <ul>
                   <li style="width: 100%;height: 33.3%" v-for="(item,index) in albums">
                     <div :ref="'imgDiv_'+index" @click="albumsClick(item,index)" class="divBase imgDiv"
-                         :style="{backgroundImage: `url(${item.imgSrc.replaceAll('\\','\/')})`}">
+                         :style="{backgroundImage: `url(${undefined == item.imgSrc ? '' : item.imgSrc.replaceAll('\\','\/')})`}">
                     </div>
                   </li>
                 </ul>
@@ -140,6 +140,8 @@
           video:[
           ]
         },
+        showAlbumMusic:[],
+        showAlbumVideo:[],
         albumList:[
         ],
         showMusic: true,
@@ -179,19 +181,10 @@
               for(let i = 0;i < resp.length;i++){
                 musicList.push(resp[i]);
               }
-              this.albumDetail.music = musicList;
+              this.showAlbumMusic = musicList;
               //样式补全
-              let audioDiv = document.getElementsByClassName("audioDiv");
-              let musicItem = document.getElementsByClassName("musicItem");
-              if(audioDiv.length > 0 && musicItem.length > 0) {
-                audioDiv[0].style.display = 'block';
-                musicItem[0].style.display = 'none';
-              }
-              for(let i = 0;i < this.albums.length;i++){
-                if(i != 0) {
-                  this.$refs["imgDiv_" + i][0].style.filter = "grayscale(1)";
-                }
-              }
+              this.fullStyle(0);
+              this.musicItemClick(this.showAlbumMusic);
             }
           });
           //获取视频专辑的视频
@@ -203,7 +196,7 @@
               for(let i = 0;i < resp.length;i++){
                 videoList.push(resp[i]);
               }
-              this.albumDetail.video = videoList;
+              this.showAlbumVideo = videoList;
             }
           });
         }
@@ -219,19 +212,6 @@
       for(let i = 0;i < this.musicTimes.length;i++){
         this.musicTimes[i].value = this.transTime(this.musicTimes[i].key);
       }
-      let audioDiv = document.getElementsByClassName("audioDiv");
-      let musicItem = document.getElementsByClassName("musicItem");
-      if(audioDiv.length > 0 && musicItem.length > 0) {
-        audioDiv[0].style.display = 'block';
-        musicItem[0].style.display = 'none';
-      }
-
-      for(let i = 0;i < this.albums.length;i++){
-        if(i != 0) {
-          this.$refs["imgDiv_" + i][0].style.filter = "grayscale(1)";
-        }
-      }
-
     },
     methods: {
       fullStyle(index){
@@ -249,7 +229,6 @@
               that.$refs["imgDiv_" + i][0].style.filter = "grayscale(1)";
             }
           }
-
           for(let i = 0;i < that.albums.length;i++){
             if(i != index) {
               that.$refs["imgDiv_" + i][0].style.filter = "grayscale(1)";
@@ -259,11 +238,13 @@
           }
         },100);
       },
+
       clickMusic(){
         this.showMusic = true;this.showSFX = false;this.showLIST = false
         this.albums = this.musicAlbum;
         this.showingAlbum = this.albums[0];
         this.albumsClick(this.albums[0],0);
+        this.musicItemClick(this.showAlbumMusic);
       },
       clickSfx(){
         this.showMusic = false;this.showSFX = true;this.showLIST = false;
@@ -273,6 +254,7 @@
       },
 
       albumsClick(data,index) {
+        this.showingAlbum = data;
         let id = data.id;
         getProject(id).then(resp =>{
           resp = resp.data;
@@ -282,18 +264,19 @@
             for(let i = 0;i < resp.length;i++){
               if(resp[i].type == 0){
                 musicList.push(resp[i]);
-                this.albumDetail.video = [];
+                this.showAlbumVideo = [];
               }else{
                 videoList.push(resp[i]);
-                this.albumDetail.music = [];
+                this.showAlbumMusic = [];
               }
             }
-            this.albumDetail.music = musicList;
-            this.albumDetail.video = videoList;
+            this.showAlbumMusic = musicList;
+            this.showAlbumVideo = videoList;
+            this.musicItemClick(this.showAlbumMusic);
             this.fullStyle(index);
           }else{
-            this.albumDetail.music = [];
-            this.albumDetail.video = [];
+            this.showAlbumMusic = [];
+            this.showAlbumVideo = [];
           }
         });
       },
@@ -307,14 +290,22 @@
         for(let i = 0;i < musicItem.length;i++){
           musicItem[i].style.display = 'block';
         }
-        this.$refs[item.id+"_audio"][0].style.display = 'block';
-        this.$refs[item.id][0].style.display = 'none';
-
-        for(let i = 0;i < this.albumDetail.music.length;i++){
-          let pauseItem = this.albumDetail.music[i].id;
-          this.$refs[pauseItem+"_children"][0].pauseAudio();
+        if(this.$refs[item.id+"_audio"]) {
+          this.$refs[item.id + "_audio"][0].style.display = 'block';
         }
-        this.$refs[item.id+"_children"][0].playAudio();
+        if(this.$refs[item.id]) {
+          this.$refs[item.id][0].style.display = 'none';
+        }
+
+        for(let i = 0;i < this.showAlbumMusic.length;i++){
+          let pauseItem = this.showAlbumMusic[i].id;
+          if(undefined != this.$refs[pauseItem+"_children"] && this.$refs[pauseItem+"_children"].length > 0) {
+            this.$refs[pauseItem + "_children"][0].pauseAudio();
+          }
+        }
+        if(undefined != this.$refs[item.id+"_children"] && this.$refs[item.id+"_children"].length > 0) {
+          this.$refs[item.id + "_children"][0].playAudio();
+        }
       },
 
       transTime(value) {
@@ -349,9 +340,9 @@
         this.musicTimes.push({key:refId,value:""});
       },
 
-      getMusicTime(key){
+      getMusicTime(refId){
         for(let i = 0;i < this.musicTimes.length;i++){
-          if(this.musicTimes[i].key == key){
+          if(this.musicTimes[i].key == refId){
             return this.musicTimes[i].value;
           }
         }
