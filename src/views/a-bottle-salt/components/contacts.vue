@@ -2,7 +2,7 @@
     <div ref="divTag" style="width: 100%;height: 100%;">
       <div style="width: 10%;height: 15%" v-for="(item) in contacts">
           <div>
-            <img :src="item.image_url"/>
+            <a :href="item.contactUrl" target="_blank"><img :src="item.imageUrl"/></a>
           </div>
       </div>
     </div>
@@ -16,17 +16,13 @@
     data(){
       return {
         contacts:[
-          {image_url:'2'},
-          {image_url:'2'},
-          {image_url:'2'},
-          {image_url:'2'},
         ],
       }
     },
     created() {
       getSocialSix().then(resp =>{
-        if(resp.data.list > 0){
-          this.contacts = resp.data.list;
+        if(resp.data.length > 0){
+          this.contacts = resp.data;
         }
       });
     },
