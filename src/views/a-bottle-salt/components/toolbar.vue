@@ -15,26 +15,28 @@
           </el-breadcrumb>
         </td>
         <td style="width: 20%">
-          <el-dropdown @command="handleCommand">
-            <el-button type="primary">
-              <span class="selfFont">Language</span>
-              <i class="el-icon-arrow-down el-icon--right"></i>
-            </el-button>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="Chi">
-                <span class="selfFont">CN</span>
-              </el-dropdown-item>
-              <el-dropdown-item command="En">
-                <span style="font-style: italic">EN</span>
-              </el-dropdown-item>
-              <el-dropdown-item command="Spa">
-                <span class="selfFont">SPA</span>
-              </el-dropdown-item>
-              <el-dropdown-item command="Jap">
-                <span class="selfFont">JAP</span>
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+          <div style="padding-left: 15%;">
+            <el-dropdown @command="handleCommand">
+              <el-button type="primary">
+                <span class="selfFont">Language</span>
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </el-button>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="Chi">
+                  <span class="selfFont">CN</span>
+                </el-dropdown-item>
+                <el-dropdown-item command="En">
+                  <span style="font-style: italic">EN</span>
+                </el-dropdown-item>
+                <el-dropdown-item command="Spa">
+                  <span class="selfFont">SPA</span>
+                </el-dropdown-item>
+                <el-dropdown-item command="Jap">
+                  <span class="selfFont">JAP</span>
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
         </td>
       </tr>
     </table>
