@@ -1,5 +1,5 @@
 <template>
-  <div class="divBase">
+  <div style="width: 90rem;height: 100%">
 
 <!--    <video ref="firstVideo" class="backGroundStyle">-->
 <!--      <source :src="firstVideo"  type="video/mp4">-->
