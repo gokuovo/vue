@@ -14,12 +14,12 @@
       <tr>
         <td style="vertical-align: bottom;">
           <div class="audioPanel">
-            <div style="padding-right: 1%;font-size: 20px" class="playBtn" @click="playAudio">
-              <table style="height: 45px;">
+            <div style="padding-right: 0.3rem;" class="playBtn" @click="playAudio">
+              <table style="height: 2.875rem;">
                 <tr>
                   <td style="vertical-align: bottom">
-                    <i style="color: #8c939d;" v-show="audioStatus == 1" class="el-icon-video-pause el-icon--right"></i>
-                    <i style="color: #8c939d;" v-show="audioStatus == 0" class="el-icon-video-play el-icon--right"></i>
+                    <i style="color: #8c939d;font-size: 1.5rem" v-show="audioStatus == 1" class="el-icon-video-pause el-icon--right"></i>
+                    <i style="color: #8c939d;font-size: 1.5rem" v-show="audioStatus == 0" class="el-icon-video-play el-icon--right"></i>
                   </td>
                 </tr>
               </table>
@@ -146,7 +146,8 @@
 <style lang="scss" scoped>
   .BoldItalic{
     font-family: DIN-BoldItalic;
-    font-style: italic
+    font-style: italic;
+    font-size: 1rem;
   }
 
   .myAudio{
