@@ -1,12 +1,8 @@
 <template>
-    <div ref="divTag" style="width: 100%;height: 100%;">
-      <div style="width: 100%;height: 100%;padding-left: 30%">
-        <div style="width: 15%;height: 15%" v-for="(item) in contacts">
-            <div>
-              <a :href="item.contactUrl" target="_blank"><img :src="item.imageUrl"/></a>
-            </div>
+    <div style="width: 100%;height: 100%;position: relative">
+        <div style="width: 15%;height: 15%;position: absolute;right: 6rem;margin-top: 40%" v-for="(item,index) in contacts" :style="{top : `${(index+1) * 10}%`}">
+            <a :href="item.contactUrl" target="_blank"><img :src="item.imageUrl"/></a>
         </div>
-      </div>
     </div>
 </template>
 
@@ -26,8 +22,8 @@
         if(resp.data.length > 0){
           this.contacts = resp.data;
           //计算联系方式图标距上边距
-          let size = this.contacts ? 10 - this.contacts.length : 6;
-          this.$refs.divTag.style.paddingTop = 10*size+"%";
+          // let size = this.contacts ? 10 - this.contacts.length : 6;
+          // this.$refs.divTag.style.paddingTop = 10*size+"%";
         }
       });
     },

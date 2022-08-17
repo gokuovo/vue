@@ -10,17 +10,17 @@
       </div>
     </div>
 
-    <div style="height: 10%;width: 100%;background-color: #0D0D0D;">
+    <div style="height: 10%;width: 90rem;background-color: #0D0D0D;">
       <toolbar></toolbar>
     </div>
 
-    <div style="height: 90%">
-      <table class="divBase">
+    <div style="width: 90rem;height: 90%">
+      <table style="width: 100%;height: 100%">
         <tr>
           <td style="width: 80%;text-align: center">
-            <div style="width: 80%;height: 80%;position: relative">
-              <img :src="secondImg" style="position: absolute;width: 100%;height: 100%;left: 10%" />
-              <img :src="thirdImg" style="position: absolute;width: 20%;height: 15%;left: 15%;bottom: 5%;" />
+            <div style="width: 100%;height: 80%;position: relative">
+              <img :src="secondImg" style="position: absolute;width: 80%;height: 100%;left: 7rem" />
+              <img :src="thirdImg" style="position: absolute;width: 20%;;height: 15%;left: 10rem;bottom: 3rem;" />
             </div>
           </td>
           <td style="width: 20%;">
@@ -125,6 +125,11 @@
   * {
     margin: 0;
     padding: 0
+  }
+
+  table{
+    border-collapse:collapse;
+    border-spacing: 0;
   }
 
   .backGroundStyle{
