@@ -140,7 +140,7 @@
   }
 
   .barFont:hover {
-    animation: change 1.5s linear 0s;
+    animation: change 1s linear 0s;
     animation-iteration-count: 1;
     animation-fill-mode:forwards;
   }
