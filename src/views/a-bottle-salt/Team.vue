@@ -1,11 +1,10 @@
 <template>
-  <div class="divBase">
-    <div style="height: 10%;width: 100%">
+  <div style="width: 90rem;height: 100%">
+    <div style="height: 10%;width: 90rem">
       <toolbar></toolbar>
-      <span :style="{'--text':counts}"></span>
     </div>
 
-    <div style="height: 90%;width: 100%">
+    <div style="height: 90%;width: 90rem">
       <table class="divBase">
         <tr>
           <td style="height: 100%;width: 80%;">
@@ -69,37 +68,42 @@
               resp.push(temp);
             }
           }
-          let arrHeight1 = [30,40,32,38];let arrHeight2 = [25,45,33,37];let arrHeight3 = [28,42,29,41];let arrHeight4 = [35,35,27,43];
+          let arrHeight1 = [35,45,32,38];let arrHeight2 = [39,31,33,37];let arrHeight3 = [40,40,29,41];let arrHeight4 = [36,34,27,43];
           let sumHeight1 = 0;let sumHeight2 = 0;let sumHeight3 = 0;let sumHeight4 = 0;
           let count = resp.length / 4;
-          let index = 0;
-          let i = 0;
-          for(;i < count;i++){
+          let index = 0;let countIndex = 0;
+          for(let i = 0;i < count;i++){
             if(i+1 == count){
               index = i % 4;
-              resp[i*4].height = arrHeight1[index];
+              resp[countIndex].height = arrHeight1[index];
               sumHeight1 += arrHeight1[index];
-              resp[i*4 + 1].height = sumHeight1 - sumHeight2;
-              resp[i*4 + 2].height = sumHeight1 - sumHeight3;
-              resp[i*4 + 3].height = sumHeight1 - sumHeight4;
+              resp[count + countIndex].height = sumHeight1 - sumHeight2;
+              resp[count*2 + countIndex].height = sumHeight1 - sumHeight3;
+              resp[count*3 + countIndex].height = sumHeight1 - sumHeight4;
             }else{
               index = i % 4;
-              resp[i*4].height = arrHeight1[index];
+              resp[countIndex].height = arrHeight1[index];
               sumHeight1 += arrHeight1[index];
-              resp[i*4 + 1].height = arrHeight2[index];
+              resp[count + countIndex].height = arrHeight2[index];
               sumHeight2 += arrHeight2[index];
-              resp[i*4 + 2].height = arrHeight3[index];
+              resp[count*2 + countIndex].height = arrHeight3[index];
               sumHeight3 += arrHeight3[index];
-              resp[i*4 + 3].height = arrHeight4[index];
+              resp[count*3 + countIndex].height = arrHeight4[index];
               sumHeight4 += arrHeight4[index];
+              countIndex++;
             }
           }
           this.teamImages = resp;
-          let children = this.$refs.gContainer.children;
-          for(let i = 0;i < children.length;i++){
-            children[i].style.height = this.teamImages[i].height+"vh";
-            children[i].style.background = "rgb("+this.getRandom(0,255)+","+this.getRandom(0,255)+","+this.getRandom(0,255)+")";
-          }
+          let that = this;
+          window.setTimeout(function() {
+            let arr = [].slice.call(document.getElementsByClassName("g-item"));
+            for(let i = 0;i < arr.length;i++){
+              arr[i].style.height = that.teamImages[i].height+"vh";
+              if(that.teamImages[i].id == undefined) {
+                arr[i].style.background = "rgb(" + that.getRandom(0, 255) + "," + that.getRandom(0, 255) + "," + that.getRandom(0, 255) + ")";
+              }
+            }
+          },100);
         }
       });
     },
@@ -125,7 +129,7 @@
     column-count: 4;
     column-gap: 0;
     width: 100%;
-    padding-left: 7%;
+    padding-left: 7rem;
   }
 
   .g-item {
