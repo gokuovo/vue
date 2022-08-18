@@ -1,62 +1,69 @@
 <template>
-  <div class="divBase">
-    <div style="height: 10%;width: 100%">
+  <div style="width: 90rem;height: 100%">
+    <div style="width: 90rem;height: 10%;">
       <toolbar></toolbar>
     </div>
-    <div style="height: 90%;width: 100%">
+
+    <div style="height: 90%;width: 90rem;">
       <table class="divBase">
         <tr >
           <td style="height: 100%;width: 80%;position: relative">
             <div v-if="!showLIST" style="height: 100%;width: 60%;display: inline-block;">
-              <div v-if="showMusic" style="width: 100%;height: 80%;padding-left: 10%">
-                <div style="width: 100%;height: 30%;color: #F5F5F5;font-size: 26px">
-                  <div class="BoldItalic" style="width: 100%;padding-top: 10%;">{{this.showingAlbum['title'+$store.getters.getLanguage]}}</div>
+              <div v-if="showMusic" style="width: 100%;height: 80%;position: relative">
+                <div style="width: 100%;height: 30%;color: #F5F5F5;font-size: 2.625rem;position: absolute;left: 7rem;top: 4rem">
+                  <div class="BoldItalic" style="width: 100%;">{{this.showingAlbum['title'+$store.getters.getLanguage]}}</div>
                 </div>
-                <div style="width: 100%;height: 60%;">
+                <div style="width: 100%;height: 60%;position: absolute;left: 7rem;top: 10rem">
                   <div class="selfDefineScroll" style="overflow-y: auto;height: 85%;width: 80%;">
                     <ul>
-                      <li style="width: 100%;height: 15%;" v-for="(item) in showAlbumMusic">
-                        <div :ref="item.id+'_audio'" class="audioDiv" style="width: 100%;height :100%;display: none;max-height: 50px">
-                          <audioCom style="background-color: #383838;margin-bottom: 5%" :ref="item.id+'_children'" :key="item.id" :fileUrl="item"></audioCom>
-                        </div>
+                      <li style="width: 100%;height: 15%;position: relative" v-for="(item) in showAlbumMusic">
+                        <div style="width: 100%;height: 100%;position: absolute;top: 0rem">
+                          <div :ref="item.id+'_audio'" class="audioDiv" style="width: 100%;height :100%;display: none;">
+                            <audioCom style="background-color: #383838;" :ref="item.id+'_children'" :key="item.id" :fileUrl="item"></audioCom>
+                          </div>
 
-                        <div class="musicItem" :ref="item.id" @click="musicItemClick(item)" style="color: #8c939d;position: relative;padding-top: 2%;">
-                          <span class="BoldItalic" style="font-size: 14px;">{{item.title}}</span>
-                          <audio :src="item.url" v-show="false" :ref="item.title+item.id" controls @canplay="getDuration(item.title+item.id)">
-                            <source type="audio/mpeg"/>
-                          </audio>
-                          <span class="BoldItalic" v-show="false" style="font-size: 14px;">
-                            {{addMusicId(item.title+item.id)}}
-                          </span>
-                          <span class="BoldItalic" style="font-size: 14px;color: #8c939d;position: absolute;right: 1%">
-                            {{getMusicTime(item.title+item.id)}}
-                          </span>
+                          <div class="musicItem" :ref="item.id" @click="musicItemClick(item)" style="color: #8c939d;position: relative;padding-top: 1rem;font-size: 1rem">
+                            <span class="BoldItalic">{{item.title}}</span>
+                            <audio :src="item.url" v-show="false" :ref="item.title+item.id" controls @canplay="getDuration(item.title+item.id)">
+                              <source type="audio/mpeg"/>
+                            </audio>
+                            <span class="BoldItalic" v-show="false">
+                              {{addMusicId(item.title+item.id)}}
+                            </span>
+                            <span class="BoldItalic" style="color: #8c939d;position: absolute;right: 0.5rem">
+                              {{getMusicTime(item.title+item.id)}}
+                            </span>
+                          </div>
                         </div>
                       </li>
                     </ul>
                   </div>
                 </div>
               </div>
+
               <div v-if="showSFX" style="position: relative;width: 100%;height: 80%;">
-                <video :src="showAlbumVideo != undefined ? (showAlbumVideo[0] != undefined ? showAlbumVideo[0].url.replaceAll('\\','\/') : '') : ''" style="position: absolute;width: 80%;height: 80%;margin: 5% 5%;left: 4%;" controls>
+                <video :src="showAlbumVideo != undefined ? (showAlbumVideo[0] != undefined ? showAlbumVideo[0].url.replaceAll('\\','\/') : '') : ''"
+                       style="position: absolute;width: 50rem;height: 80%;top: 3rem;object-fit: fill;" controls>
                   <source type="video/mp4">
                 </video>
               </div>
-              <div style="width: 100%;height: 20%;color: #F5F5F5;font-size: 16px;padding-top: 5%">
-                <el-button @click="clickMusic()" class="buttonStyle" type="danger">
-                  <span class="BoldItalic">MUSIC</span>
+
+              <div style="width: 100%;height: 20%;color: #F5F5F5;font-size: 1rem;padding-top: 1rem">
+                <el-button style="margin-left: 7rem;" @click="clickMusic(0)" class="buttonStyle" type="danger">
+                  <span style="font-size: 0.875rem;" class="BoldItalic">MUSIC</span>
                 </el-button>
-                <el-button @click="clickSfx()" class="buttonStyle" type="danger">
-                  <span class="BoldItalic">SFX</span>
+                <el-button style="margin-left: 2rem;" @click="clickSfx(1)" class="buttonStyle" type="danger">
+                  <span style="font-size: 0.875rem;" class="BoldItalic">SFX</span>
                 </el-button>
-                <el-button @click="showMusic = false;showSFX = false;showLIST = true" class="buttonStyle" type="danger">
-                  <span class="BoldItalic">LIST</span>
+                <el-button style="margin-left: 2rem;" @click="clickList(2)" class="buttonStyle" type="danger">
+                  <span style="font-size: 0.875rem;" class="BoldItalic">LIST</span>
                 </el-button>
               </div>
+
             </div>
 
-            <div v-if="!showLIST" style="height: 100%;width: 40%;display: inline-block;position: absolute">
-              <div v-if="!showLIST" style="height: 25%;width: 80%;background-color: #383838;color: #F5F5F5;font-size: 16px;font-style: italic;padding-left: 5%">
+            <div v-if="!showLIST" style="height: 100%;width: 40%;display: inline-block;position: absolute;left: 50rem;">
+              <div v-if="!showLIST" style="height: 25%;width: 80%;background-color: #383838;color: #F5F5F5;font-size: 16px;font-style: italic;padding-left: 1.5rem">
                 <div class="BoldItalic" style="width: 100%;height: 25%;padding-top: 5%">{{showingAlbum['title'+$store.getters.getLanguage]}}</div>
                 <div style="width: 100%;height: 75%;position: relative;padding-top: 2%">
                   <img style="width: 25%;height: 75%;position: absolute" :src="undefined == showingAlbum.imgSrc ? '' : showingAlbum.imgSrc.replaceAll('\\','\/')"/>
@@ -77,34 +84,33 @@
                   </li>
                 </ul>
               </div>
-
             </div>
 
             <div v-if="showLIST" class="divBase">
               <div class="selfDefineScroll" style="width: 100%;height: 80%;overflow-y: auto;">
-                <div v-for="(item) in albumList" style="width: 50%;height: 27%;display: inline-block;position: relative;padding-left: 6%;margin-top: 2%;">
+                <div v-for="(item) in albumList" style="width: 50%;height: 27%;display: inline-block;position: relative;padding-left: 7rem;margin-top: 2%;">
                   <img style="width: 25%;height: 100%;position: absolute" :src="item.url" />
-                  <div class="BoldItalic" style="width: 60%;height: 100%;position: absolute;left: 40%">
-                    <div style="width: 100%;height: 20%;color: #BAB9B6;font-size: 16px;font-style: italic;">{{item['title'+$store.getters.getLanguage]}}</div>
-                    <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 14px;font-style: italic;">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
-                    <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 14px;font-style: italic;">COMPANY:{{item['company'+$store.getters.getLanguage]}}</div>
-                    <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 14px;font-style: italic;">PLATFORM:{{item['platform'+$store.getters.getLanguage]}}</div>
+                  <div class="BoldItalic" style="width: 50%;height: 100%;position: absolute;left: 17rem">
+                    <div style="width: 100%;height: 20%;color: #BAB9B6;font-size: 1.125rem;font-style: italic;">{{item['title'+$store.getters.getLanguage]}}</div>
+                    <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 0.875rem;font-style: italic;">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
+                    <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 0.875rem;font-style: italic;">COMPANY:{{item['company'+$store.getters.getLanguage]}}</div>
+                    <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 0.875rem;font-style: italic;">PLATFORM:{{item['platform'+$store.getters.getLanguage]}}</div>
                     <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-style: italic;">
-                      <a class="linkHover" :href="item.link" :target="null != item.link ? (item.link.indexOf('http') != -1 ? '_blank' : '_self') : '_blank' "><span style="font-size: 13px">EXPLORE</span>&emsp;<i style="color: red" class="el-icon-top-right"></i></a>
+                      <a class="linkHover" :href="item.link" :target="null != item.link ? (item.link.indexOf('http') != -1 ? '_blank' : '_self') : '_blank' "><span style="font-size: 0.75rem">EXPLORE</span>&emsp;<i style="color: red;font-size: 1rem" class="el-icon-top-right"></i></a>
                     </div>
                   </div>
                 </div>
 
               </div>
-              <div style="width: 70%;height: 20%;color: #F5F5F5;font-size: 16px;padding-top: 3.5%">
-                <el-button @click="clickMusic()" class="buttonStyle" type="danger">
-                  MUSIC
+              <div class="BoldItalic" style="width: 70%;height: 20%;color: #F5F5F5;font-size: 1rem;padding-top: 1rem">
+                <el-button style="margin-left: 7rem;" @click="clickMusic(0)" class="buttonStyle" type="danger">
+                  <span style="font-size: 0.875rem;" class="BoldItalic">MUSIC</span>
                 </el-button>
-                <el-button @click="clickSfx()" class="buttonStyle" type="danger">
-                  SFX
+                <el-button style="margin-left: 2rem;" @click="clickSfx(1)" class="buttonStyle" type="danger">
+                  <span style="font-size: 0.875rem;" class="BoldItalic">SFX</span>
                 </el-button>
-                <el-button @click="showMusic = false;showSFX = false;showLIST = true" class="buttonStyle" type="danger">
-                  LIST
+                <el-button style="margin-left: 2rem;" @click="clickList(2)" class="buttonStyle" type="danger">
+                  <span style="font-size: 0.875rem;" class="BoldItalic">LIST</span>
                 </el-button>
               </div>
             </div>
@@ -212,6 +218,8 @@
       for(let i = 0;i < this.musicTimes.length;i++){
         this.musicTimes[i].value = this.transTime(this.musicTimes[i].key);
       }
+      let elements = document.getElementsByClassName("buttonStyle");
+      elements[0].style.backgroundColor = "#ff6d6d";
     },
     methods: {
       fullStyle(index){
@@ -238,19 +246,39 @@
           }
         },100);
       },
+      buttonStyle(index){
+        window.setTimeout(function() {
+          let elements = document.getElementsByClassName("buttonStyle");
+          for(let i = 0;i < 3;i++){
+            if(i == index) {
+              elements[i].style.backgroundColor = "#ff6d6d";
+            }else{
+              elements[i].style.backgroundColor = "unset";
+            }
+          }
+        },100);
+      },
 
-      clickMusic(){
+      clickMusic(index){
         this.showMusic = true;this.showSFX = false;this.showLIST = false
         this.albums = this.musicAlbum;
         this.showingAlbum = this.albums[0];
         this.albumsClick(this.albums[0],0);
         this.musicItemClick(this.showAlbumMusic);
+        this.buttonStyle(index);
       },
-      clickSfx(){
+      clickSfx(index){
         this.showMusic = false;this.showSFX = true;this.showLIST = false;
         this.albums = this.videoAlbum;
         this.showingAlbum = this.albums[0];
         this.albumsClick(this.albums[0],0);
+        this.buttonStyle(index);
+      },
+      clickList(index){
+        this.showMusic = false;
+        this.showSFX = false;
+        this.showLIST = true
+        this.buttonStyle(index);
       },
 
       albumsClick(data,index) {
@@ -353,6 +381,31 @@
 </script>
 
 <style scoped>
+  >>>.el-button--danger{
+    background-color: unset;
+    border: none;
+  }
+  .el-button--danger:hover {
+    animation: change 1s linear 0s;
+    animation-iteration-count: 1;
+    animation-fill-mode:forwards;
+  }
+
+  @keyframes change {
+    0% {
+      color: rgba(189,187,183,0.1)
+    }
+    30%{
+      color:rgba(248,197,182,0.3)
+    }
+    50% {
+      color: rgba(247,149,123,0.5)
+    }
+    80% {
+      color: rgba(255,101,59,0.8)
+    }
+    100% {color: rgba(248,81,35,1);}
+  }
   .BoldItalic{
     font-family: DIN-BoldItalic;
     font-style: italic
@@ -379,7 +432,6 @@
 
   .buttonStyle {
     padding: 5px 5px;
-    margin-left: 10%
   }
 
   .selfDefineScroll::-webkit-scrollbar {
