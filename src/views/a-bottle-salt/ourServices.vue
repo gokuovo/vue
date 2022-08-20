@@ -71,10 +71,10 @@
                       </video>
                     </td>
 
-                    <td style="width: 30%;height: 100%;position: relative">
+                    <td style="width: 50%;height: 100%;position: relative">
                       <div class="divAnimate" v-show="showVideo" style="width: 90%;height: 50%;position: absolute;left: 0;top: 3rem;overflow: hidden">
                         <div ref="carouselImgBox" class="carouselImgBox">
-                          <img style="width: 100%;height: 100%" v-for="item in carouselImgPaths" :src="item"/>
+                          <img class="imgStyle" v-for="item in carouselImgPaths" :src="item"/>
                         </div>
                       </div>
                     </td>
@@ -201,6 +201,15 @@
 
 <style scoped>
   @import './commonCSS/moveBackground.scss';
+
+  .imgStyle{
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
   .BoldItalic{
     font-family: DIN-BoldItalic;
