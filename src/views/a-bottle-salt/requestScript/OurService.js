@@ -8,6 +8,15 @@ export function getVideo(query) {
   })
 }
 
+export function getVideoList() {
+  return request({
+    url: '/SaltOurService/getVideoList',
+    method: 'get'
+  })
+}
+
+
+
 
 export function getRotation(query) {
   return request({

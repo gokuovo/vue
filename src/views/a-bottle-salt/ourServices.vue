@@ -2,7 +2,7 @@
   <div style="width: 90rem;height: 100%">
 
     <div @click="bigVideoDivClick" v-show="showBigVideo" style="position: absolute;width: 100%;height: 100%;z-index: 2;">
-      <video :src="firstVideo" @click="bigVideoClick" ref="bigVideo" style="position: absolute;width: 60%;left: 15%;top: 20%;height: 70%;object-fit: fill;" controlslist="nofullscreen" controls>
+      <video :src="firstVideo.videoUrl" @click="bigVideoClick" ref="bigVideo" style="position: absolute;width: 60%;left: 15%;top: 20%;height: 70%;object-fit: fill;" controlslist="nofullscreen" controls>
         <source type="video/mp4">
       </video>
     </div>
@@ -65,7 +65,7 @@
                       </div>
 
 
-                      <video v-show="showVideo" class="divAnimate" :src="firstVideo" @click="clickVideo"
+                      <video v-show="showVideo" class="divAnimate" :src="firstVideo.videoUrl" @click="clickVideo"
                              style="object-fit: fill;position: absolute;width: 40%;height: 70%;top: 2rem;left: 25rem" controlslist="nofullscreen" controls>
                         <source type="video/mp4">
                       </video>
@@ -98,7 +98,7 @@
   import contacts from './components/contacts'
   import boxes from './commonScripts/moveBackground'
 
-  import { getVideo,getRotation,getWord } from './requestScript/OurService'
+  import { getRotation,getWord,getVideoList } from './requestScript/OurService'
 
   export default {
     name: 'ourServices',
@@ -161,10 +161,14 @@
           }
         }
 
-        let videoType = '0'+(index+1);
-        getVideo({videoType:videoType}).then(resp =>{
+        getVideoList().then(resp =>{
           if(resp.data != ""){
-            this.firstVideo = resp.data;
+            for(let i = 0;i < resp.data.length;i++){
+              if(index+1 == resp.data[i].id){
+                this.firstVideo = resp.data[i];
+              }
+            }
+
           }
         });
 
