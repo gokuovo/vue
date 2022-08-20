@@ -85,31 +85,38 @@ export const constantRoutes = [
   // },
   {
     path: '/',
-    component: () => import('@/views/a-bottle-salt/firstPage')
+    component: () => import('@/views/a-bottle-salt/firstPage'),
+    meta: {index: 1}
   },
   {
     path: '/ourServices',
-    component: () => import('@/views/a-bottle-salt/ourServices')
+    component: () => import('@/views/a-bottle-salt/ourServices'),
+    meta: {index: 2}
   },
   {
     path: '/Projects',
-    component: () => import('@/views/a-bottle-salt/Projects')
+    component: () => import('@/views/a-bottle-salt/Projects'),
+    meta: {index: 3}
   },
   {
     path: '/Team',
-    component: () => import('@/views/a-bottle-salt/Team')
+    component: () => import('@/views/a-bottle-salt/Team'),
+    meta: {index: 4}
   },
   {
     path: '/News',
-    component: () => import('@/views/a-bottle-salt/News')
+    component: () => import('@/views/a-bottle-salt/News'),
+    meta: {index: 5}
   },
   {
     path: '/Contacts',
-    component: () => import('@/views/a-bottle-salt/Contacts')
+    component: () => import('@/views/a-bottle-salt/Contacts'),
+    meta: {index: 6}
   },
   {
     path: '/Partners',
-    component: () => import('@/views/a-bottle-salt/Partners')
+    component: () => import('@/views/a-bottle-salt/Partners'),
+    meta: {index: 7}
   },
   // {
   //   path: '/documentation',
