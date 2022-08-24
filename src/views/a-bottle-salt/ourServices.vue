@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 90rem;height: 100%">
+  <div class="alignCenter" style="width: 90rem;height: 100%">
 
     <div @click="bigVideoDivClick" v-show="showBigVideo" style="position: absolute;width: 100%;height: 100%;z-index: 2;">
       <video :src="firstVideo.videoUrl" @click="bigVideoClick" ref="bigVideo" style="position: absolute;width: 60%;left: 15%;top: 20%;height: 70%;object-fit: fill;" controlslist="nofullscreen" controls>
@@ -205,6 +205,18 @@
 
 <style scoped>
   @import './commonCSS/moveBackground.scss';
+
+  .alignCenter{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    max-height: 900px;
+    min-width: 1100px;
+    min-height: 600px;
+  }
 
   .imgStyle{
     max-width: 100%;

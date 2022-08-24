@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 90rem;height: 100%">
+  <div class="alignCenter" style="width: 90rem;height: 100%">
     <div ref="backGroundBox" class="box">
       <div class="image-wrap">
         <div class="image" :style="{backgroundImage: `url(${firstImg})`}"></div>
@@ -83,6 +83,18 @@
 
 <style scoped>
   @import './commonCSS/moveBackground.scss';
+
+  .alignCenter{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    max-height: 900px;
+    min-width: 1100px;
+    min-height: 600px;
+  }
 
   .divBase {
     width: 100%;

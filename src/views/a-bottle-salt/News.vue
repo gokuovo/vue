@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 90rem;height: 100%">
+  <div class="alignCenter" style="width: 90rem;height: 100%">
     <div ref="backGroundBox" class="box">
       <div class="image-wrap">
         <div class="image" :style="{backgroundImage: `url(${firstImg})`}"></div>
@@ -15,6 +15,7 @@
         <tr>
           <td style="width: 80%;height: 100%;padding: 6% 0">
             <div class="divBase selfDefineScroll" style="overflow-y: auto;padding-left: 7rem">
+
               <div v-for="(item) in newsData"  style="display: inline-block;width: 50%;height: 25%;position: relative;margin-bottom: 3%">
                 <img style="width: 25%;height: 100%;position: absolute" :src="item.url" />
                 <div style="width: 60%;height: 100%;position: absolute;left: 30%">
@@ -29,9 +30,9 @@
                       </td>
                     </tr>
                   </table>
-
                 </div>
               </div>
+
             </div>
           </td>
           <td style="width: 20%;">
@@ -143,6 +144,19 @@
 
 <style scoped>
   @import './commonCSS/moveBackground.scss';
+
+  .alignCenter{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    max-height: 900px;
+    min-width: 1100px;
+    min-height: 600px;
+  }
+
   >>>.el-button--danger{
     background-color: unset;
     border: none;

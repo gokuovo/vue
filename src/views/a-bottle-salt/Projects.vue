@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 90rem;height: 100%">
+  <div class="alignCenter" style="width: 90rem;height: 100%">
     <div style="width: 90rem;height: 10%;">
       <toolbar></toolbar>
     </div>
@@ -381,6 +381,19 @@
 </script>
 
 <style scoped>
+
+  .alignCenter{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    max-height: 900px;
+    min-width: 1100px;
+    min-height: 600px;
+  }
+
   >>>.el-button--danger{
     background-color: unset;
     border: none;
