@@ -1,5 +1,5 @@
 <template>
-  <div class="alignCenter" style="width: 90rem;height: 100%">
+  <div ref="alignCenter" class="alignCenter" style="width: 90rem;height: 100%">
 
     <div @click="bigVideoDivClick" v-show="showBigVideo" style="position: absolute;width: 100%;height: 100%;z-index: 2;">
       <video :src="firstVideo.videoUrl" @click="bigVideoClick" ref="bigVideo" style="position: absolute;width: 60%;left: 15%;top: 20%;height: 70%;object-fit: fill;" controlslist="nofullscreen" controls>
@@ -116,6 +116,11 @@
         carouselImgPaths: [],
       }
     },
+    watch:{
+      "$store.state.fontFamily.maxHeight":function() {
+        this.$refs.alignCenter.style.maxHeight = this.$store.getters.geMaxHeight+'px';
+      }
+    },
     created() {
       getWord().then(resp =>{
         if(resp.data.length > 0){
@@ -213,9 +218,8 @@
     right: 0;
     bottom: 0;
     margin: auto;
-    max-height: 900px;
     min-width: 1100px;
-    min-height: 600px;
+    min-height: 687px;
   }
 
   .imgStyle{

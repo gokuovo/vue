@@ -1,5 +1,5 @@
 <template>
-  <div class="alignCenter" style="width: 90rem;height: 100%">
+  <div ref="alignCenter" class="alignCenter" style="width: 90rem;height: 100%">
     <div style="width: 90rem;height: 10%;">
       <toolbar></toolbar>
     </div>
@@ -159,6 +159,11 @@
         showAudio:false,
         musicAlbum: [],
         videoAlbum: [],
+      }
+    },
+    watch:{
+      "$store.state.fontFamily.maxHeight":function() {
+        this.$refs.alignCenter.style.maxHeight = this.$store.getters.geMaxHeight+'px';
       }
     },
     created() {
@@ -389,9 +394,8 @@
     right: 0;
     bottom: 0;
     margin: auto;
-    max-height: 900px;
     min-width: 1100px;
-    min-height: 600px;
+    min-height: 687px;
   }
 
   >>>.el-button--danger{

@@ -1,5 +1,5 @@
 <template>
-  <div class="alignCenter" style="width: 90rem;height: 100%">
+  <div ref="alignCenter" class="alignCenter" style="width: 90rem;height: 100%">
     <div style="height: 10%;width: 90rem">
       <toolbar></toolbar>
     </div>
@@ -54,8 +54,10 @@
         staffName: 'staffNameEn',
       }
     },
-    created(){
-
+    watch:{
+      "$store.state.fontFamily.maxHeight":function() {
+        this.$refs.alignCenter.style.maxHeight = this.$store.getters.geMaxHeight+'px';
+      }
     },
     mounted(){
       getTeam().then(resp =>{
@@ -68,7 +70,7 @@
               resp.push(temp);
             }
           }
-          let arrHeight1 = [35,45,32,38];let arrHeight2 = [39,31,33,37];let arrHeight3 = [40,40,29,41];let arrHeight4 = [36,34,27,43];
+          let arrHeight1 = [40,60,46,54];let arrHeight2 = [55,45,58,42];let arrHeight3 = [50,50,47,53];let arrHeight4 = [58,42,57,43];
           let sumHeight1 = 0;let sumHeight2 = 0;let sumHeight3 = 0;let sumHeight4 = 0;
           let count = resp.length / 4;
           let index = 0;let countIndex = 0;
@@ -98,7 +100,7 @@
           window.setTimeout(function() {
             let arr = [].slice.call(document.getElementsByClassName("g-item"));
             for(let i = 0;i < arr.length;i++){
-              arr[i].style.height = that.teamImages[i].height+"vh";
+              arr[i].style.height = that.teamImages[i].height+"%";
               if(that.teamImages[i].id == undefined) {
                 arr[i].style.background = "rgb(" + that.getRandom(0, 255) + "," + that.getRandom(0, 255) + "," + that.getRandom(0, 255) + ")";
               }
@@ -131,9 +133,8 @@
     right: 0;
     bottom: 0;
     margin: auto;
-    max-height: 900px;
     min-width: 1100px;
-    min-height: 600px;
+    min-height: 687px;
   }
 
   /*@import "./commonCSS/teamImage.scss";*/
@@ -141,7 +142,9 @@
     column-count: 4;
     column-gap: 0;
     width: 100%;
+    height: 100%;
     padding-left: 7rem;
+    position: relative;
   }
 
   .g-item {
@@ -149,7 +152,6 @@
     width: 100%;
     break-inside: avoid;
     min-height: 200px;
-    max-height: 600px;
   }
 </style>
 <style scoped>

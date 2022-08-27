@@ -1,5 +1,5 @@
 <template>
-  <div class="alignCenter" style="width: 90rem;height: 100%">
+  <div ref="alignCenter" class="alignCenter" style="width: 90rem;height: 100%">
     <div ref="backGroundBox" class="box">
       <div class="image-wrap">
         <div class="image" :style="{backgroundImage: `url(${firstImg})`}"></div>
@@ -70,6 +70,11 @@
         firstImg: '',
         newsData:[
         ]
+      }
+    },
+    watch:{
+      "$store.state.fontFamily.maxHeight":function() {
+        this.$refs.alignCenter.style.maxHeight = this.$store.getters.geMaxHeight+'px';
       }
     },
     created(){
@@ -152,9 +157,8 @@
     right: 0;
     bottom: 0;
     margin: auto;
-    max-height: 900px;
     min-width: 1100px;
-    min-height: 600px;
+    min-height: 687px;
   }
 
   >>>.el-button--danger{

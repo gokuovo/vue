@@ -14,5 +14,6 @@ const getters = {
   geFontFamily: state => state.fontFamily.fontFamily,
   getLanguage: state => state.settings.language,
   getLogo: state => state.settings.logo,
+  geMaxHeight: state => state.fontFamily.maxHeight,
 }
 export default getters
