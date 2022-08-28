@@ -22,7 +22,7 @@
                             <audioCom style="background-color: #383838;" :ref="item.id+'_children'" :key="item.id" :fileUrl="item"></audioCom>
                           </div>
 
-                          <div class="musicItem" :ref="item.id" @click="musicItemClick(item)" style="color: #8c939d;position: relative;padding-top: 1rem;font-size: 1rem">
+                          <div class="musicItem" :ref="item.id" @click="musicItemClick(item)" style="color: #8c939d;position: relative;padding-top: 1rem;font-size: 0.875rem">
                             <span class="BoldItalic">{{item.title}}</span>
                             <audio :src="item.url" v-show="false" :ref="item.title+item.id" controls @canplay="getDuration(item.title+item.id)">
                               <source type="audio/mpeg"/>
@@ -48,14 +48,14 @@
                 </video>
               </div>
 
-              <div style="width: 100%;height: 20%;color: #F5F5F5;font-size: 1rem;padding-top: 1rem">
-                <el-button style="margin-left: 7rem;" @click="clickMusic(0)" class="buttonStyle" type="danger">
+              <div style="width: 100%;height: 20%;color: #E3E1DB;font-size: 1rem;padding-top: 1rem">
+                <el-button style="margin-left: 7rem;" @click="clickMusic(0)" class="buttonStyle anation" type="danger">
                   <span style="font-size: 0.875rem;" class="BoldItalic">MUSIC</span>
                 </el-button>
-                <el-button style="margin-left: 2rem;" @click="clickSfx(1)" class="buttonStyle" type="danger">
+                <el-button style="margin-left: 2rem;" @click="clickSfx(1)" class="buttonStyle anation" type="danger">
                   <span style="font-size: 0.875rem;" class="BoldItalic">SFX</span>
                 </el-button>
-                <el-button style="margin-left: 2rem;" @click="clickList(2)" class="buttonStyle" type="danger">
+                <el-button style="margin-left: 2rem;" @click="clickList(2)" class="buttonStyle anation" type="danger">
                   <span style="font-size: 0.875rem;" class="BoldItalic">LIST</span>
                 </el-button>
               </div>
@@ -63,11 +63,11 @@
             </div>
 
             <div v-if="!showLIST" style="height: 100%;width: 40%;display: inline-block;position: absolute;left: 50rem;">
-              <div v-if="!showLIST" style="height: 25%;width: 80%;background-color: #383838;color: #F5F5F5;font-size: 16px;font-style: italic;padding-left: 1.5rem">
+              <div v-if="!showLIST" style="height: 25%;width: 90%;background-color: #383838;color: #F5F5F5;font-size: 16px;font-style: italic;padding-left: 1.5rem">
                 <div class="BoldItalic" style="width: 100%;height: 25%;padding-top: 5%">{{showingAlbum['title'+$store.getters.getLanguage]}}</div>
                 <div style="width: 100%;height: 75%;position: relative;padding-top: 2%">
-                  <img style="width: 25%;height: 75%;position: absolute" :src="undefined == showingAlbum.imgSrc ? '' : showingAlbum.imgSrc.replaceAll('\\','\/')"/>
-                  <div class="BoldItalic" style="width: 75%;height: 75%;position: absolute;left: 30%">
+                  <img style="width: 30%;height: 70%;position: absolute" :src="undefined == showingAlbum.imgSrc ? '' : showingAlbum.imgSrc.replaceAll('\\','\/')"/>
+                  <div class="BoldItalic" style="width: 75%;height: 75%;position: absolute;left: 40%">
                     <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">RELEASE：<span style="font-size: 12px">{{showingAlbum['release'+$store.getters.getLanguage]}}</span></div>
                     <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">DEVELOPER：<span style="font-size: 12px">{{showingAlbum['developer'+$store.getters.getLanguage]}}</span></div>
                     <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">PUBLISHER：<span style="font-size: 12px">{{showingAlbum['publisher'+$store.getters.getLanguage]}}</span></div>
@@ -75,7 +75,7 @@
                   </div>
                 </div>
               </div>
-              <div v-if="!showLIST" class="selfDefineScroll" style="overflow-y: scroll;height: 75%;width: 80%;">
+              <div v-if="!showLIST" class="selfDefineScroll" style="overflow-y: scroll;height: 75%;width: 90%;">
                 <ul>
                   <li style="width: 100%;height: 33.3%" v-for="(item,index) in albums">
                     <div :ref="'imgDiv_'+index" @click="albumsClick(item,index)" class="divBase imgDiv"
@@ -89,8 +89,8 @@
             <div v-if="showLIST" class="divBase">
               <div class="selfDefineScroll" style="width: 100%;height: 80%;overflow-y: auto;">
                 <div v-for="(item) in albumList" style="width: 50%;height: 27%;display: inline-block;position: relative;padding-left: 7rem;margin-top: 2%;">
-                  <img style="width: 25%;height: 100%;position: absolute" :src="item.url" />
-                  <div class="BoldItalic" style="width: 50%;height: 100%;position: absolute;left: 17rem">
+                  <img style="width: 28%;height: 90%;position: absolute" :src="item.url" />
+                  <div class="BoldItalic" style="width: 49%;height: 100%;position: absolute;left: 18rem">
                     <div style="width: 100%;height: 20%;color: #BAB9B6;font-size: 1.125rem;font-style: italic;">{{item['title'+$store.getters.getLanguage]}}</div>
                     <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 0.875rem;font-style: italic;">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
                     <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 0.875rem;font-style: italic;">COMPANY:{{item['company'+$store.getters.getLanguage]}}</div>
@@ -102,14 +102,14 @@
                 </div>
 
               </div>
-              <div class="BoldItalic" style="width: 70%;height: 20%;color: #F5F5F5;font-size: 1rem;padding-top: 1rem">
-                <el-button style="margin-left: 7rem;" @click="clickMusic(0)" class="buttonStyle" type="danger">
+              <div class="BoldItalic" style="width: 70%;height: 20%;color: #E3E1DB;font-size: 1rem;padding-top: 1rem">
+                <el-button style="margin-left: 7rem;" @click="clickMusic(0)" class="buttonStyle anation" type="danger">
                   <span style="font-size: 0.875rem;" class="BoldItalic">MUSIC</span>
                 </el-button>
-                <el-button style="margin-left: 2rem;" @click="clickSfx(1)" class="buttonStyle" type="danger">
+                <el-button style="margin-left: 2rem;" @click="clickSfx(1)" class="buttonStyle anation" type="danger">
                   <span style="font-size: 0.875rem;" class="BoldItalic">SFX</span>
                 </el-button>
-                <el-button style="margin-left: 2rem;" @click="clickList(2)" class="buttonStyle" type="danger">
+                <el-button style="margin-left: 2rem;" @click="clickList(2)" class="buttonStyle anation" type="danger">
                   <span style="font-size: 0.875rem;" class="BoldItalic">LIST</span>
                 </el-button>
               </div>
@@ -224,7 +224,8 @@
         this.musicTimes[i].value = this.transTime(this.musicTimes[i].key);
       }
       let elements = document.getElementsByClassName("buttonStyle");
-      elements[0].style.backgroundColor = "#ff6d6d";
+      elements[0].style.backgroundColor = "#BE4123";
+      elements[0].classList.remove("anation");
     },
     methods: {
       fullStyle(index){
@@ -256,9 +257,15 @@
           let elements = document.getElementsByClassName("buttonStyle");
           for(let i = 0;i < 3;i++){
             if(i == index) {
-              elements[i].style.backgroundColor = "#ff6d6d";
+              elements[i].style.backgroundColor = "#BE4123";
+              if(elements[i].classList.contains("anation")){
+                elements[i].classList.remove("anation");
+              }
             }else{
               elements[i].style.backgroundColor = "unset";
+              if(!elements[i].classList.contains("anation")){
+                elements[i].classList.add("anation");
+              }
             }
           }
         },100);
@@ -401,8 +408,10 @@
   >>>.el-button--danger{
     background-color: unset;
     border: none;
+    color: #E3E1DB;
   }
-  .el-button--danger:hover {
+
+  .anation:hover {
     animation: change 1s linear 0s;
     animation-iteration-count: 1;
     animation-fill-mode:forwards;
@@ -423,6 +432,7 @@
     }
     100% {color: rgba(248,81,35,1);}
   }
+
   .BoldItalic{
     font-family: DIN-BoldItalic;
     font-style: italic
@@ -445,6 +455,10 @@
   .imgDiv {
     background-size: cover;
     background-repeat: no-repeat;
+  }
+
+  .imgDiv:hover {
+    filter: grayscale(0)!important;
   }
 
   .buttonStyle {

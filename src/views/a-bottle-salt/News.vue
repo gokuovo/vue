@@ -17,8 +17,8 @@
             <div class="divBase selfDefineScroll" style="overflow-y: auto;padding-left: 7rem">
 
               <div v-for="(item) in newsData"  style="display: inline-block;width: 50%;height: 25%;position: relative;margin-bottom: 3%">
-                <img style="width: 25%;height: 100%;position: absolute" :src="item.url" />
-                <div style="width: 60%;height: 100%;position: absolute;left: 30%">
+                <img style="width: 28%;height: 100%;position: absolute" :src="item.url" />
+                <div style="width: 60%;height: 100%;position: absolute;left: 32%">
                   <table class="divBase">
                     <tr>
                       <td class="divBase BoldItalic" style="vertical-align: middle">
@@ -43,11 +43,11 @@
     </div>
 
     <div style="height: 10%;width: 100%;color: #F5F5F5;">
-      <el-button @click="changeShowNewsData(1)" class="buttonStyle" type="danger">
+      <el-button @click="changeShowNewsData(1)" class="buttonStyle anation" type="danger">
         <span style="font-size: 0.875rem;" class="BoldItalic">NEWS</span>
       </el-button>
 
-      <el-button @click="changeShowNewsData(2)" class="buttonStyle" type="danger">
+      <el-button @click="changeShowNewsData(2)" class="buttonStyle anation" type="danger">
         <span style="font-size: 0.875rem;" class="BoldItalic">WORKLOGS</span>
       </el-button>
     </div>
@@ -120,9 +120,15 @@
           let elements = document.getElementsByClassName("buttonStyle");
           for(let i = 1;i < 3;i++){
             if(i == index) {
-              elements[i-1].style.backgroundColor = "#ff6d6d";
+              elements[i-1].style.backgroundColor = "#BE4123";
+              if(elements[i-1].classList.contains("anation")){
+                elements[i-1].classList.remove("anation");
+              }
             }else{
               elements[i-1].style.backgroundColor = "unset";
+              if(!elements[i-1].classList.contains("anation")){
+                elements[i-1].classList.add("anation");
+              }
             }
           }
         },100);
@@ -142,7 +148,8 @@
         size: boxElement.offsetWidth
       });
       let elements = document.getElementsByClassName("buttonStyle");
-      elements[0].style.backgroundColor = "#ff6d6d";
+      elements[0].style.backgroundColor = "#BE4123";
+      elements[0].classList.remove("anation");
     }
   }
 </script>
@@ -164,8 +171,9 @@
   >>>.el-button--danger{
     background-color: unset;
     border: none;
+    color: #E3E1DB;
   }
-  .el-button--danger:hover {
+  .anation:hover {
     animation: change 1s linear 0s;
     animation-iteration-count: 1;
     animation-fill-mode:forwards;

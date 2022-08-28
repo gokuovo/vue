@@ -1,8 +1,8 @@
 <template>
   <div ref="alignCenter" class="alignCenter" style="width: 90rem;height: 100%">
 
-    <div @click="bigVideoDivClick" v-show="showBigVideo" style="position: absolute;width: 100%;height: 100%;z-index: 2;">
-      <video :src="firstVideo.videoUrl" @click="bigVideoClick" ref="bigVideo" style="position: absolute;width: 60%;left: 15%;top: 20%;height: 70%;object-fit: fill;" controlslist="nofullscreen" controls>
+    <div @click="bigVideoDivClick" v-if="showBigVideo" style="position: absolute;width: 100%;height: 100%;z-index: 2;">
+      <video :src="firstVideo.videoUrl" @click="bigVideoClick" ref="bigVideo" style="position: absolute;width: 60%;left: 20%;top: 15%;height: 70%;object-fit: fill;" controlslist="nofullscreen" controls>
         <source type="video/mp4">
       </video>
     </div>
@@ -43,10 +43,10 @@
               <div style="width: 100%;height: 10%;color: #F5F5F5;font-size: 20px;font-style:oblique;">
                 <table class="divBase" v-show="!showVideo">
                   <tr @click="showVideo = !showVideo" class="divBase" style="position: relative">
-                    <td @click="fontButtonClick(0)" class="fontButton BoldItalic" style="position: absolute;left: 7rem;top: 2rem">MUSIC</td>
-                    <td @click="fontButtonClick(1)" class="fontButton BoldItalic" style="position: absolute;left: 15rem;top: 2rem">SOUND DESIGN</td>
-                    <td @click="fontButtonClick(2)" class="fontButton BoldItalic" style="position: absolute;left: 28rem;top: 2rem">VOICE ACTING</td>
-                    <td @click="fontButtonClick(3)" class="fontButton BoldItalic" style="position: absolute;left: 40rem;top: 2rem">GAME AUDIO PIPELINE</td>
+                    <td @click="fontButtonClick(0)" class="fontButton BoldItalic anation" style="position: absolute;left: 7rem;top: 2rem">MUSIC</td>
+                    <td @click="fontButtonClick(1)" class="fontButton BoldItalic anation" style="position: absolute;left: 15rem;top: 2rem">SOUND DESIGN</td>
+                    <td @click="fontButtonClick(2)" class="fontButton BoldItalic anation" style="position: absolute;left: 28rem;top: 2rem">VOICE ACTING</td>
+                    <td @click="fontButtonClick(3)" class="fontButton BoldItalic anation" style="position: absolute;left: 40rem;top: 2rem">GAME AUDIO PIPELINE</td>
                   </tr>
                 </table>
               </div>
@@ -57,15 +57,15 @@
                     <td style="width: 70%;height: 100%;position: relative">
                       <div style="width: 40%;height: 100%;display: inline-block;position: absolute;left: 5rem;top: 0rem;">
                         <ul class="divAnimate" ref="childTr" v-show="showVideo">
-                          <li @click="fontButtonClick(0)" class="fontButton BoldItalic">MUSIC</li>
-                          <li @click="fontButtonClick(1)" class="fontButton BoldItalic">SOUND DESIGN</li>
-                          <li @click="fontButtonClick(2)" class="fontButton BoldItalic">VOICE ACTING</li>
-                          <li @click="fontButtonClick(3)" class="fontButton BoldItalic">GAME AUDIO PIPELINE</li>
+                          <li @click="fontButtonClick(0)" class="fontButton BoldItalic anation">MUSIC</li>
+                          <li @click="fontButtonClick(1)" class="fontButton BoldItalic anation">SOUND DESIGN</li>
+                          <li @click="fontButtonClick(2)" class="fontButton BoldItalic anation">VOICE ACTING</li>
+                          <li @click="fontButtonClick(3)" class="fontButton BoldItalic anation">GAME AUDIO PIPELINE</li>
                         </ul>
                       </div>
 
 
-                      <video v-show="showVideo" class="divAnimate" :src="firstVideo.videoUrl" @click="clickVideo"
+                      <video v-if="showVideo && !showBigVideo" class="divAnimate" :src="firstVideo.videoUrl" @click="clickVideo"
                              style="object-fit: fill;position: absolute;width: 40%;height: 70%;top: 2rem;left: 25rem" controlslist="nofullscreen" controls>
                         <source type="video/mp4">
                       </video>
@@ -160,9 +160,15 @@
         let childrens = this.$refs.childTr.childNodes
         for (let i = 0; i < childrens.length; i++) {
           if (i == index) {
-            childrens[i].style.color = 'rgb(248,81,35,1)'
+            childrens[i].style.color = '#BE4123'
+            if(childrens[i].classList.contains("anation")){
+              childrens[i].classList.remove("anation");
+            }
           } else {
-            childrens[i].style.color = '#F5F5F5'
+            childrens[i].style.color = '#E3E1DB'
+            if(!childrens[i].classList.contains("anation")){
+              childrens[i].classList.add("anation");
+            }
           }
         }
 
@@ -250,7 +256,7 @@
     font-style: normal;
   }
 
-  .fontButton:hover {
+  .anation:hover {
     animation: change 1s linear 0s;
     animation-iteration-count: 1;
     animation-fill-mode:forwards;
@@ -261,15 +267,15 @@
       color: rgba(189,187,183,0.1)
     }
     30%{
-      color:rgba(248,197,182,0.3)
+      color:#9d6f44
     }
     50% {
-      color: rgba(247,149,123,0.5)
+      color: #a86627
     }
     80% {
-      color: rgba(255,101,59,0.8)
+      color: #be6732
     }
-    100% {color: rgba(248,81,35,1);}
+    100% {color: #BE4123;}
   }
 
   .divBase {

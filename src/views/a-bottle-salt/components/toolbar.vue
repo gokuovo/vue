@@ -137,6 +137,7 @@
 
   .barFont{
     font-family: DIN-BoldItalic;
+    font-size: 0.875rem;
   }
 
   .barFont:hover {
@@ -150,15 +151,15 @@
       color: rgba(189,187,183,0.1)
     }
     30%{
-      color:rgba(248,197,182,0.3)
+      color:#9d6f44
     }
     50% {
-      color: rgba(247,149,123,0.5)
+      color: #a86627
     }
     80% {
-      color: rgba(255,101,59,0.8)
+      color: #be6732
     }
-    100% {color: rgba(248,81,35,1);}
+    100% {color: #BE4123;}
   }
 
   .selfFont{

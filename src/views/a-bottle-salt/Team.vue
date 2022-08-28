@@ -114,12 +114,28 @@
         return Math.floor(Math.random() * (max - min) + min);
       },
       divFocus(id){
-        this.$refs[id+"_img"][0].style.display = 'none';
+        this.$refs[id+"_img"][0].classList.remove("xiaoshi");
+        this.$refs[id+"_img"][0].classList.remove("chuxian");
+
+        this.$refs[id+"_code"][0].classList.remove("xiaoshi");
+        this.$refs[id+"_code"][0].classList.remove("chuxian");
+
+        // this.$refs[id+"_img"][0].style.display = 'none';
+        this.$refs[id+"_img"][0].classList.add("xiaoshi");
         this.$refs[id+"_code"][0].style.display = 'block';
+        this.$refs[id+"_code"][0].classList.add("chuxian");
       },
       divLoseFocus(id){
+        this.$refs[id+"_img"][0].classList.remove("xiaoshi");
+        this.$refs[id+"_img"][0].classList.remove("chuxian");
+
+        this.$refs[id+"_code"][0].classList.remove("xiaoshi");
+        this.$refs[id+"_code"][0].classList.remove("chuxian");
+
         this.$refs[id+"_img"][0].style.display = 'block';
-        this.$refs[id+"_code"][0].style.display = 'none';
+        this.$refs[id+"_img"][0].classList.add("chuxian");
+        // this.$refs[id+"_code"][0].style.display = 'none';
+        this.$refs[id+"_code"][0].classList.add("xiaoshi");
       }
     }
   }
@@ -155,6 +171,28 @@
   }
 </style>
 <style scoped>
+
+  .chuxian{
+    animation: chuxian 3s linear 0s;
+    animation-iteration-count: 1;
+    animation-fill-mode:forwards;
+  }
+  @keyframes chuxian{
+    0%{opacity: 0;}
+    100%{opacity: 1;}
+  }
+
+  .xiaoshi{
+    animation: xiaoshi 3s linear 0s;
+    animation-iteration-count: 1;
+    animation-fill-mode:forwards;
+  }
+  @keyframes xiaoshi{
+    0%{opacity: 1;}
+    100%{opacity: 0;}
+  }
+
+
   .BoldItalic{
     font-family: DIN-BoldItalic;
     font-style: italic
