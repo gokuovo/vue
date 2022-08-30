@@ -47,7 +47,7 @@
         <span style="font-size: 0.875rem;" class="BoldItalic">NEWS</span>
       </el-button>
 
-      <el-button @click="changeShowNewsData(2)" class="buttonStyle anation" type="danger">
+      <el-button style="margin-left: 2.75rem" @click="changeShowNewsData(2)" class="buttonStyle anation" type="danger">
         <span style="font-size: 0.875rem;" class="BoldItalic">WORKLOGS</span>
       </el-button>
     </div>

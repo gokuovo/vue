@@ -19,19 +19,19 @@
               <div style="width: 100%;height: 50%">
                 <table class="divBase">
                   <tr>
-                    <td style="width: 40%;color: #F5F5F5;font-size: 28px;vertical-align: top;position: relative">
-                      <div class="BoldItalic" style="top: 5rem;left: 7rem;position: absolute;font-size: 2.625rem">
+                    <td style="width: 40%;font-size: 28px;vertical-align: top;position: relative">
+                      <div class="BoldItalic" style="top: 5rem;left: 7rem;position: absolute;font-size: 2.625rem;color: #B8B7B2;font-weight: 500">
                         {{this.whatWeDo}}
                       </div>
                     </td>
-                    <td style="width: 50%;color: #BAB9B6;vertical-align: top;font-size: 1.125rem;position: relative;text-align: left">
+                    <td style="width: 50%;color: #E3E1DB;font-weight: 200;vertical-align: top;font-size: 1.125rem;position: relative;text-align: left">
                       <div class="inter" style="top: 5.5rem;position: absolute;">
                         {{this.whatWeDoText1}}
                       </div>
-                      <div class="inter" style="top: 9rem;position: absolute;">
+                      <div class="inter" style="top: 7.93rem;position: absolute;line-height: 130%">
                         {{this.whatWeDoText2}}
                       </div>
-                      <div class="inter" style="top: 14rem;position: absolute;">
+                      <div class="inter" style="top: 12.12rem;position: absolute;line-height: 130%">
                         {{this.whatWeDoText3}}
                       </div>
                     </td>
@@ -44,9 +44,9 @@
                 <table class="divBase" v-show="!showVideo">
                   <tr @click="showVideo = !showVideo" class="divBase" style="position: relative">
                     <td @click="fontButtonClick(0)" class="fontButton BoldItalic anation" style="position: absolute;left: 7rem;top: 2rem">MUSIC</td>
-                    <td @click="fontButtonClick(1)" class="fontButton BoldItalic anation" style="position: absolute;left: 15rem;top: 2rem">SOUND DESIGN</td>
-                    <td @click="fontButtonClick(2)" class="fontButton BoldItalic anation" style="position: absolute;left: 28rem;top: 2rem">VOICE ACTING</td>
-                    <td @click="fontButtonClick(3)" class="fontButton BoldItalic anation" style="position: absolute;left: 40rem;top: 2rem">GAME AUDIO PIPELINE</td>
+                    <td @click="fontButtonClick(1)" class="fontButton BoldItalic anation" style="position: absolute;left: 14.5rem;top: 2rem">SOUND DESIGN</td>
+                    <td @click="fontButtonClick(2)" class="fontButton BoldItalic anation" style="position: absolute;left: 27.12rem;top: 2rem">VOICE ACTING</td>
+                    <td @click="fontButtonClick(3)" class="fontButton BoldItalic anation" style="position: absolute;left: 39rem;top: 2rem">GAME AUDIO PIPELINE</td>
                   </tr>
                 </table>
               </div>
@@ -57,10 +57,10 @@
                     <td style="width: 70%;height: 100%;position: relative">
                       <div style="width: 40%;height: 100%;display: inline-block;position: absolute;left: 5rem;top: 0rem;">
                         <ul class="divAnimate" ref="childTr" v-show="showVideo">
-                          <li @click="fontButtonClick(0)" class="fontButton BoldItalic anation">MUSIC</li>
-                          <li @click="fontButtonClick(1)" class="fontButton BoldItalic anation">SOUND DESIGN</li>
-                          <li @click="fontButtonClick(2)" class="fontButton BoldItalic anation">VOICE ACTING</li>
-                          <li @click="fontButtonClick(3)" class="fontButton BoldItalic anation">GAME AUDIO PIPELINE</li>
+                          <li style="height: 15%;" @click="fontButtonClick(0)" class="fontButton BoldItalic anation">MUSIC</li>
+                          <li style="height: 15%;" @click="fontButtonClick(1)" class="fontButton BoldItalic anation">SOUND DESIGN</li>
+                          <li style="height: 15%;" @click="fontButtonClick(2)" class="fontButton BoldItalic anation">VOICE ACTING</li>
+                          <li style="height: 15%;" @click="fontButtonClick(3)" class="fontButton BoldItalic anation">GAME AUDIO PIPELINE</li>
                         </ul>
                       </div>
 
@@ -243,6 +243,11 @@
     font-size: 1.375rem;
   }
 
+  .fontButton{
+    color: #E3E1DB;
+    font-weight: 500;
+  }
+
   .divAnimate{
     animation:animateNum 3s 1;
   }
@@ -264,7 +269,7 @@
 
   @keyframes change {
     0% {
-      color: rgba(189,187,183,0.1)
+      color: #E3E1DB
     }
     30%{
       color:#9d6f44

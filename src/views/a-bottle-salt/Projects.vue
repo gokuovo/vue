@@ -16,13 +16,13 @@
                 <div style="width: 100%;height: 60%;position: absolute;left: 7rem;top: 10rem">
                   <div class="selfDefineScroll" style="overflow-y: auto;height: 85%;width: 80%;">
                     <ul>
-                      <li style="width: 100%;height: 15%;position: relative" v-for="(item) in showAlbumMusic">
+                      <li style="width: 100%;height: 10%;position: relative" v-for="(item) in showAlbumMusic">
                         <div style="width: 100%;height: 100%;position: absolute;top: 0rem">
                           <div :ref="item.id+'_audio'" class="audioDiv" style="width: 100%;height :100%;display: none;">
                             <audioCom style="background-color: #383838;" :ref="item.id+'_children'" :key="item.id" :fileUrl="item"></audioCom>
                           </div>
 
-                          <div class="musicItem" :ref="item.id" @click="musicItemClick(item)" style="color: #8c939d;position: relative;padding-top: 1rem;font-size: 0.875rem">
+                          <div class="musicItem" :ref="item.id" @click="musicItemClick(item)" style="color: #8c939d;position: relative;margin-top: 1.25rem;font-size: 0.875rem">
                             <span class="BoldItalic">{{item.title}}</span>
                             <audio :src="item.url" v-show="false" :ref="item.title+item.id" controls @canplay="getDuration(item.title+item.id)">
                               <source type="audio/mpeg"/>
@@ -52,10 +52,10 @@
                 <el-button style="margin-left: 7rem;" @click="clickMusic(0)" class="buttonStyle anation" type="danger">
                   <span style="font-size: 0.875rem;" class="BoldItalic">MUSIC</span>
                 </el-button>
-                <el-button style="margin-left: 2rem;" @click="clickSfx(1)" class="buttonStyle anation" type="danger">
+                <el-button style="margin-left: 2.75rem;" @click="clickSfx(1)" class="buttonStyle anation" type="danger">
                   <span style="font-size: 0.875rem;" class="BoldItalic">SFX</span>
                 </el-button>
-                <el-button style="margin-left: 2rem;" @click="clickList(2)" class="buttonStyle anation" type="danger">
+                <el-button style="margin-left: 2.75rem;" @click="clickList(2)" class="buttonStyle anation" type="danger">
                   <span style="font-size: 0.875rem;" class="BoldItalic">LIST</span>
                 </el-button>
               </div>
@@ -106,10 +106,10 @@
                 <el-button style="margin-left: 7rem;" @click="clickMusic(0)" class="buttonStyle anation" type="danger">
                   <span style="font-size: 0.875rem;" class="BoldItalic">MUSIC</span>
                 </el-button>
-                <el-button style="margin-left: 2rem;" @click="clickSfx(1)" class="buttonStyle anation" type="danger">
+                <el-button style="margin-left: 2.75rem;" @click="clickSfx(1)" class="buttonStyle anation" type="danger">
                   <span style="font-size: 0.875rem;" class="BoldItalic">SFX</span>
                 </el-button>
-                <el-button style="margin-left: 2rem;" @click="clickList(2)" class="buttonStyle anation" type="danger">
+                <el-button style="margin-left: 2.75rem;" @click="clickList(2)" class="buttonStyle anation" type="danger">
                   <span style="font-size: 0.875rem;" class="BoldItalic">LIST</span>
                 </el-button>
               </div>
@@ -325,6 +325,7 @@
         let audioDiv = document.getElementsByClassName("audioDiv");
         for(let i = 0;i < audioDiv.length;i++){
           audioDiv[i].style.display = 'none';
+          audioDiv[i].parentElement.parentElement.style.marginTop = '0rem';
         }
         let musicItem = document.getElementsByClassName("musicItem");
         for(let i = 0;i < musicItem.length;i++){
@@ -332,6 +333,9 @@
         }
         if(this.$refs[item.id+"_audio"]) {
           this.$refs[item.id + "_audio"][0].style.display = 'block';
+          if(this.$refs[item.id + "_audio"][0].parentElement.parentElement.parentElement.firstChild !== this.$refs[item.id+"_audio"][0].parentElement.parentElement) {
+            this.$refs[item.id + "_audio"][0].parentElement.parentElement.style.marginTop = '1.25rem';
+          }
         }
         if(this.$refs[item.id]) {
           this.$refs[item.id][0].style.display = 'none';

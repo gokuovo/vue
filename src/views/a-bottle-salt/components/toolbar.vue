@@ -115,13 +115,17 @@
     padding: 0
   }
 
+  >>>.el-breadcrumb__separator{
+    margin: 0!important;
+  }
+
   >>>.el-breadcrumb{
     position: absolute;
     top: 40%;
   }
 
   >>>.el-breadcrumb__item{
-    padding-right: 2.06rem;
+    margin-right: 1.875rem;
   }
 
   >>>.el-dropdown{
@@ -138,6 +142,8 @@
   .barFont{
     font-family: DIN-BoldItalic;
     font-size: 0.875rem;
+    color: #E3E1DB;
+    font-weight: 500;
   }
 
   .barFont:hover {
