@@ -14,8 +14,8 @@
       <table class="divBase">
         <tr>
           <td style="width: 80%;height: 100%">
-            <div class="divBase selfDefineScroll" style="height: 60%;width: 80%;overflow-y: auto;margin-left: 7rem;margin-bottom: 3rem">
-              <div v-for="(item) in partners" style="display: inline-block;position: relative;width: 18%;height: 35%;margin-left: 1%;margin-top: 5%">
+            <div class="divBase selfDefineScroll" style="height: 60%;width: 95%;overflow-y: auto;margin-left: 7rem;margin-bottom: 10rem">
+              <div v-for="(item) in partners" style="display: inline-block;position: relative;width: 17%;height: 38%;margin-left: 1%;margin-top: 5%">
                 <a :href="item.partnerLink" :target="item.partnerLink.indexOf('http') != -1 ? '_blank' : '_self' ">
                   <img class="linkHover"  style="position: absolute;width: 100%;height: 100%" :src="item.partnerUrl" />
                 </a>
