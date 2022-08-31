@@ -173,7 +173,7 @@
 <style scoped>
 
   .chuxian{
-    animation: chuxian 3s linear 0s;
+    animation: chuxian 1.5s linear 0s;
     animation-iteration-count: 1;
     animation-fill-mode:forwards;
   }
@@ -183,7 +183,7 @@
   }
 
   .xiaoshi{
-    animation: xiaoshi 3s linear 0s;
+    animation: xiaoshi 1.5s linear 0s;
     animation-iteration-count: 1;
     animation-fill-mode:forwards;
   }
