@@ -1,7 +1,7 @@
 <template>
     <div style="width: 100%;height: 100%;position: relative">
         <div style="width: 15%;height: 15%;position: absolute;right: 5rem;margin-top: 40%" v-for="(item,index) in contacts" :style="{top : `${(index+1) * 10}%`}">
-            <a :href="item.contactUrl" target="_blank"><img :src="item.imageUrl"/></a>
+            <a :href="item.contactUrl" target="_blank"><img style="position: absolute;top: 0;" :src="item.imageUrl"/></a>
         </div>
     </div>
 </template>

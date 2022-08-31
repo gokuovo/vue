@@ -17,15 +17,15 @@
             <div class="divBase selfDefineScroll" style="overflow-y: auto;padding-left: 7rem">
 
               <div v-for="(item) in newsData"  style="display: inline-block;width: 50%;height: 25%;position: relative;margin-bottom: 3%">
-                <img style="width: 28%;height: 100%;position: absolute" :src="item.url" />
+                <img style="width: 27%;height: 103%;position: absolute" :src="item.url" />
                 <div style="width: 60%;height: 100%;position: absolute;left: 32%">
                   <table class="divBase">
                     <tr>
                       <td class="divBase BoldItalic" style="vertical-align: middle">
-                        <div style="width: 100%;height: auto;color: #BAB9B6;font-size: 16px;font-style: italic;margin-bottom: 3%">{{item['title'+$store.getters.getLanguage]}}</div>
-                        <div style="width: 100%;height: auto;color: rgb(140 140 140);font-size: 14px;font-style: italic;margin-bottom: 3%">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
+                        <div style="font-weight: 500;width: 100%;height: auto;color: #BAB9B6;font-size: 1.125rem;font-style: italic;margin-bottom: 3.5%">{{item['title'+$store.getters.getLanguage]}}</div>
+                        <div style="font-weight: 500;width: 100%;height: auto;color: rgb(140 140 140);font-size: 0.875rem;font-style: italic;margin-bottom: 7%">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
                         <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-style: italic;">
-                          <a class="linkHover" :href="item.link" :target="item.link.indexOf('http') != -1 ? '_blank' : '_self' "><span style="font-size: 13px">EXPLORE</span>&emsp;<i style="color: red" class="el-icon-top-right"></i></a>
+                          <a class="linkHover" :href="item.link" :target="item.link.indexOf('http') != -1 ? '_blank' : '_self' "><span style="font-size: 13px">EXPLORE</span>&emsp;<i style="color: #F24E1E;font-size: 1.2rem;font-weight: 900" class="el-icon-top-right"></i></a>
                         </div>
                       </td>
                     </tr>

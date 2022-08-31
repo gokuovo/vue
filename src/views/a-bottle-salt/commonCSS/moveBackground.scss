@@ -29,4 +29,5 @@
   pointer-events: none;/*鼠标点击事件可穿透该层元素*/
   background: #0D0D0D;
   opacity: 0.20;
+  z-index: -1;
 }

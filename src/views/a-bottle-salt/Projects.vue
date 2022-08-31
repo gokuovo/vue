@@ -16,10 +16,10 @@
                 <div style="width: 100%;height: 60%;position: absolute;left: 7rem;top: 10rem">
                   <div class="selfDefineScroll" style="overflow-y: auto;height: 85%;width: 80%;">
                     <ul>
-                      <li style="width: 100%;height: 10%;position: relative" v-for="(item) in showAlbumMusic">
+                      <li style="width: 100%;height: 12%;position: relative" v-for="(item) in showAlbumMusic">
                         <div style="width: 100%;height: 100%;position: absolute;top: 0rem">
                           <div :ref="item.id+'_audio'" class="audioDiv" style="width: 100%;height :100%;display: none;">
-                            <audioCom style="background-color: #383838;" :ref="item.id+'_children'" :key="item.id" :fileUrl="item"></audioCom>
+                            <audioCom :ref="item.id+'_children'" :key="item.id" :fileUrl="item"></audioCom>
                           </div>
 
                           <div class="musicItem" :ref="item.id" @click="musicItemClick(item)" style="color: #8c939d;position: relative;margin-top: 1.25rem;font-size: 0.875rem">
@@ -68,10 +68,10 @@
                 <div style="width: 100%;height: 75%;position: relative;padding-top: 2%">
                   <img style="width: 30%;height: 70%;position: absolute" :src="undefined == showingAlbum.imgSrc ? '' : showingAlbum.imgSrc.replaceAll('\\','\/')"/>
                   <div class="BoldItalic" style="width: 75%;height: 75%;position: absolute;left: 40%">
-                    <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">RELEASE：<span style="font-size: 12px">{{showingAlbum['release'+$store.getters.getLanguage]}}</span></div>
-                    <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">DEVELOPER：<span style="font-size: 12px">{{showingAlbum['developer'+$store.getters.getLanguage]}}</span></div>
-                    <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">PUBLISHER：<span style="font-size: 12px">{{showingAlbum['publisher'+$store.getters.getLanguage]}}</span></div>
-                    <div style="color: #F5F5F5;font-size: 14px;height: 25%;font-style: italic">PLATFORM：<span style="font-size: 12px">{{showingAlbum['platform'+$store.getters.getLanguage]}}</span></div>
+                    <div style="color: #F5F5F5;font-size: 14px;height: 24%;font-style: italic">RELEASE：<span style="font-size: 12px">{{showingAlbum['release'+$store.getters.getLanguage]}}</span></div>
+                    <div style="color: #F5F5F5;font-size: 14px;height: 24%;font-style: italic">DEVELOPER：<span style="font-size: 12px">{{showingAlbum['developer'+$store.getters.getLanguage]}}</span></div>
+                    <div style="color: #F5F5F5;font-size: 14px;height: 24%;font-style: italic">PUBLISHER：<span style="font-size: 12px">{{showingAlbum['publisher'+$store.getters.getLanguage]}}</span></div>
+                    <div style="color: #F5F5F5;font-size: 14px;height: 24%;font-style: italic">PLATFORM：<span style="font-size: 12px">{{showingAlbum['platform'+$store.getters.getLanguage]}}</span></div>
                   </div>
                 </div>
               </div>
@@ -89,14 +89,14 @@
             <div v-if="showLIST" class="divBase">
               <div class="selfDefineScroll" style="width: 100%;height: 80%;overflow-y: auto;">
                 <div v-for="(item) in albumList" style="width: 50%;height: 27%;display: inline-block;position: relative;padding-left: 7rem;margin-top: 2%;">
-                  <img style="width: 28%;height: 90%;position: absolute" :src="item.url" />
+                  <img style="width: 24.5%;height: 80%;position: absolute" :src="item.url" />
                   <div class="BoldItalic" style="width: 49%;height: 100%;position: absolute;left: 18rem">
-                    <div style="width: 100%;height: 20%;color: #BAB9B6;font-size: 1.125rem;font-style: italic;">{{item['title'+$store.getters.getLanguage]}}</div>
-                    <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 0.875rem;font-style: italic;">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
-                    <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 0.875rem;font-style: italic;">COMPANY:{{item['company'+$store.getters.getLanguage]}}</div>
+                    <div style="font-weight: 500;width: 100%;height: 16.5%;color: #BAB9B6;font-size: 1.125rem;font-style: italic;">{{item['title'+$store.getters.getLanguage]}}</div>
+                    <div style="width: 100%;height: 15%;color: rgb(140 140 140);font-size: 0.875rem;font-style: italic;">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
+                    <div style="width: 100%;height: 15%;color: rgb(140 140 140);font-size: 0.875rem;font-style: italic;">COMPANY:{{item['company'+$store.getters.getLanguage]}}</div>
                     <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 0.875rem;font-style: italic;">PLATFORM:{{item['platform'+$store.getters.getLanguage]}}</div>
                     <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-style: italic;">
-                      <a class="linkHover" :href="item.link" :target="null != item.link ? (item.link.indexOf('http') != -1 ? '_blank' : '_self') : '_blank' "><span style="font-size: 0.75rem">EXPLORE</span>&emsp;<i style="color: red;font-size: 1rem" class="el-icon-top-right"></i></a>
+                      <a class="linkHover" :href="item.link" :target="null != item.link ? (item.link.indexOf('http') != -1 ? '_blank' : '_self') : '_blank' "><span style="font-size: 0.75rem">EXPLORE</span>&emsp;<i style="color: #F24E1E;font-size: 1.2rem;font-weight: 900" class="el-icon-top-right"></i></a>
                     </div>
                   </div>
                 </div>
@@ -334,7 +334,7 @@
         if(this.$refs[item.id+"_audio"]) {
           this.$refs[item.id + "_audio"][0].style.display = 'block';
           if(this.$refs[item.id + "_audio"][0].parentElement.parentElement.parentElement.firstChild !== this.$refs[item.id+"_audio"][0].parentElement.parentElement) {
-            this.$refs[item.id + "_audio"][0].parentElement.parentElement.style.marginTop = '1.25rem';
+            this.$refs[item.id + "_audio"][0].parentElement.parentElement.style.marginTop = '1rem';
           }
         }
         if(this.$refs[item.id]) {

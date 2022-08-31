@@ -10,7 +10,7 @@
       <source :src="fileUrl.url" type="audio/mpeg"/>
       您的浏览器不支持音频播放
     </audio>
-    <table class="myAudio">
+    <table class="myAudio" style="background-color: #383838;" >
       <tr>
         <td style="vertical-align: bottom;">
           <div class="audioPanel">

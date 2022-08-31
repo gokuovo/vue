@@ -16,10 +16,10 @@
     </div>
 
     <div style="width: 100%;height: 20%;padding: 0 7rem">
-      <table class="divBase">
+      <table class="divBase" style="font-weight: 500">
         <tr>
           <td style="width: 33%;height: 100%">
-            <div class="BoldItalic" style="width: 60%;height: 30%;color: #BAB9B6;font-size: 14px;">
+            <div class="BoldItalic" style="width: 60%;height: 22%;color: #BAB9B6;font-size: 0.875rem;">
               PHONE NUMBER：<span style="font-size: 0.875rem;color: #8c939d">{{contacts.tel}}</span>
             </div>
             <div class="BoldItalic" style="width: 60%;height: 70%;color: #8c939d;font-size: 0.875rem;">
@@ -27,7 +27,7 @@
             </div>
           </td>
           <td style="width: 33%;height: 100%">
-            <div class="BoldItalic" style="width: 60%;height: 30%;color: #BAB9B6;font-size: 0.875rem;">
+            <div class="BoldItalic" style="width: 60%;height: 23%;color: #BAB9B6;font-size: 0.875rem;">
               OUR SOCIAL：
             </div>
             <div style="width: 100%;height: 70%;color: #8c939d;font-size: 12px;font-style: italic;">
@@ -37,7 +37,7 @@
             </div>
           </td>
           <td style="width: 33%;height: 100%">
-            <div class="BoldItalic" style="width: 60%;height: 30%;color: #BAB9B6;font-size: 0.875rem;">
+            <div class="BoldItalic" style="width: 60%;height: 23%;color: #BAB9B6;font-size: 0.875rem;">
               E-MAIL：
             </div>
             <div class="BoldItalic" style="width: 60%;height: 70%;color: #8c939d;font-size: 0.875rem">
