@@ -136,6 +136,7 @@
   import toolbar from './components/toolbar'
   import contacts from './components/contacts'
   import audioCom from './components/audioCom'
+  import boxes from './commonScripts/moveBackground'
 
   import {getAlbum,getProject,getList,getImagesByImageCode} from './requestScript/Project'
 
