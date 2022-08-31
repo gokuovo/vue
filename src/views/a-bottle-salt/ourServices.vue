@@ -1,6 +1,12 @@
 <template>
   <div ref="alignCenter" class="alignCenter" style="width: 90rem;height: 100%">
 
+    <div ref="backGroundBox" class="box">
+      <div class="image-wrap">
+        <div class="image" :style="{backgroundImage: `url(${firstImg})`}"></div>
+      </div>
+    </div>
+
     <div @click="bigVideoDivClick" v-if="showBigVideo" style="position: absolute;width: 100%;height: 100%;z-index: 2;">
       <video :src="firstVideo.videoUrl" @click="bigVideoClick" ref="bigVideo" style="position: absolute;width: 60%;left: 20%;top: 15%;height: 70%;object-fit: fill;" controlslist="nofullscreen" controls>
         <source type="video/mp4">
@@ -98,13 +104,14 @@
   import contacts from './components/contacts'
   import boxes from './commonScripts/moveBackground'
 
-  import { getRotation,getWord,getVideoList } from './requestScript/OurService'
+  import { getRotation,getWord,getVideoList,getImagesByImageCode } from './requestScript/OurService'
 
   export default {
     name: 'ourServices',
     components: { toolbar, contacts },
     data() {
       return {
+        firstImg:'',
         whatWeDo:'',
         whatWeDoText1:'',
         whatWeDoText2:'',
@@ -122,6 +129,11 @@
       }
     },
     created() {
+      getImagesByImageCode({imageCode:'04'}).then(resp =>{
+        if(resp.data.length > 0){
+          this.firstImg = resp.data[0].imageUrl.replaceAll('\\','\/');
+        }
+      })
       getWord().then(resp =>{
         if(resp.data.length > 0){
           for(let i = 0;i < resp.data.length;i++){
@@ -151,8 +163,19 @@
           }
           carouselImages[carouselIndex].style.display = 'block'
         }
-      }, 5000)
+      }, 5000);
 
+      let boxElement = this.$refs.backGroundBox;
+      boxes.push({
+        el: boxElement,
+        targetX: 0,
+        targetY: 0,
+        x: 0,
+        y: 0,
+        left: boxElement.offsetLeft,
+        top: boxElement.offsetTop,
+        size: boxElement.offsetWidth
+      });
     },
     methods: {
       fontButtonClick(index) {

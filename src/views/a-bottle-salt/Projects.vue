@@ -1,5 +1,11 @@
 <template>
   <div ref="alignCenter" class="alignCenter" style="width: 90rem;height: 100%">
+    <div ref="backGroundBox" class="box">
+      <div class="image-wrap">
+        <div class="image" :style="{backgroundImage: `url(${firstImg})`}"></div>
+      </div>
+    </div>
+
     <div style="width: 90rem;height: 10%;">
       <toolbar></toolbar>
     </div>
@@ -75,9 +81,9 @@
                   </div>
                 </div>
               </div>
-              <div v-if="!showLIST" class="selfDefineScroll" style="overflow-y: scroll;height: 75%;width: 90%;">
+              <div v-if="!showLIST" class="selfDefineScroll" style="overflow-y: scroll;height: 75%;width: 95%;">
                 <ul>
-                  <li style="width: 100%;height: 33.3%" v-for="(item,index) in albums">
+                  <li style="width: 95.5%;height: 33.3%" v-for="(item,index) in albums">
                     <div :ref="'imgDiv_'+index" @click="albumsClick(item,index)" class="divBase imgDiv"
                          :style="{backgroundImage: `url(${undefined == item.imgSrc ? '' : item.imgSrc.replaceAll('\\','\/')})`}">
                     </div>
@@ -96,7 +102,7 @@
                     <div style="width: 100%;height: 15%;color: rgb(140 140 140);font-size: 0.875rem;font-style: italic;">COMPANY:{{item['company'+$store.getters.getLanguage]}}</div>
                     <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 0.875rem;font-style: italic;">PLATFORM:{{item['platform'+$store.getters.getLanguage]}}</div>
                     <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-style: italic;">
-                      <a class="linkHover" :href="item.link" :target="null != item.link ? (item.link.indexOf('http') != -1 ? '_blank' : '_self') : '_blank' "><span style="font-size: 0.75rem">EXPLORE</span>&emsp;<i style="color: #F24E1E;font-size: 1.2rem;font-weight: 900" class="el-icon-top-right"></i></a>
+                      <a class="linkHover" :href="item.link" :target="null != item.link ? (item.link.indexOf('http') != -1 ? '_blank' : '_self') : '_blank' "><span style="font-size: 0.75rem;text-decoration: underline;font-weight: 500">EXPLORE</span>&emsp;<i style="color: #ec7856;font-size: 1.2rem;font-weight: 900" class="el-icon-top-right"></i></a>
                     </div>
                   </div>
                 </div>
@@ -131,13 +137,14 @@
   import contacts from './components/contacts'
   import audioCom from './components/audioCom'
 
-  import {getAlbum,getProject,getList} from './requestScript/Project'
+  import {getAlbum,getProject,getList,getImagesByImageCode} from './requestScript/Project'
 
   export default {
     name: 'Projects',
     components: { toolbar, contacts, audioCom },
     data() {
       return {
+        firstImg:'',
         albums: [
         ],
         albumDetail: {
@@ -171,6 +178,11 @@
         this.showingAlbum = this.albums[0]
       }
 
+      getImagesByImageCode({imageCode:'05'}).then(resp =>{
+        if(resp.data.length > 0){
+          this.firstImg = resp.data[0].imageUrl.replaceAll('\\','\/');
+        }
+      })
       getAlbum().then(resp =>{
         if(resp.data.length > 0){
           //过滤出来音乐专辑
@@ -226,6 +238,18 @@
       let elements = document.getElementsByClassName("buttonStyle");
       elements[0].style.backgroundColor = "#BE4123";
       elements[0].classList.remove("anation");
+
+      let boxElement = this.$refs.backGroundBox;
+      boxes.push({
+        el: boxElement,
+        targetX: 0,
+        targetY: 0,
+        x: 0,
+        y: 0,
+        left: boxElement.offsetLeft,
+        top: boxElement.offsetTop,
+        size: boxElement.offsetWidth
+      });
     },
     methods: {
       fullStyle(index){
@@ -397,6 +421,7 @@
 </script>
 
 <style scoped>
+  @import './commonCSS/moveBackground.scss';
 
   .alignCenter{
     position: absolute;

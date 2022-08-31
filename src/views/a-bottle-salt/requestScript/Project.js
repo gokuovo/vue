@@ -29,3 +29,11 @@ export function getList() {
     method: 'get'
   })
 }
+
+export function getImagesByImageCode(query) {
+  return request({
+    url: '/SaltHomepage/getImagesByImageCode',
+    method: 'get',
+    params: query,
+  })
+}

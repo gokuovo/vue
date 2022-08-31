@@ -25,7 +25,7 @@
                         <div style="font-weight: 500;width: 100%;height: auto;color: #BAB9B6;font-size: 1.125rem;font-style: italic;margin-bottom: 3.5%">{{item['title'+$store.getters.getLanguage]}}</div>
                         <div style="font-weight: 500;width: 100%;height: auto;color: rgb(140 140 140);font-size: 0.875rem;font-style: italic;margin-bottom: 7%">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
                         <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-style: italic;">
-                          <a class="linkHover" :href="item.link" :target="item.link.indexOf('http') != -1 ? '_blank' : '_self' "><span style="font-size: 13px">EXPLORE</span>&emsp;<i style="color: #F24E1E;font-size: 1.2rem;font-weight: 900" class="el-icon-top-right"></i></a>
+                          <a class="linkHover" :href="item.link" :target="item.link.indexOf('http') != -1 ? '_blank' : '_self' "><span style="font-size: 0.75rem;text-decoration: underline;font-weight: 500">EXPLORE</span>&emsp;<i style="color: #ec7856;font-size: 1.2rem;font-weight: 900" class="el-icon-top-right"></i></a>
                         </div>
                       </td>
                     </tr>

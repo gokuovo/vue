@@ -42,3 +42,11 @@ export function getWordOne(id) {
     params: id
   })
 }
+
+export function getImagesByImageCode(query) {
+  return request({
+    url: '/SaltHomepage/getImagesByImageCode',
+    method: 'get',
+    params: query,
+  })
+}
