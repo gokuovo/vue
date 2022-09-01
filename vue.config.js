@@ -32,7 +32,7 @@ module.exports = {
   devServer: {
     proxy: {
       '*/back_api/': {
-        target: '101.43.132.47:5000',
+        target: 'http://101.43.132.47:5000',
         changeOrigin: true,
         pathRewrite: {
           '*/back_api/': '/'
