@@ -68,7 +68,7 @@
                   </div>
                 </div>
 
-                <div style="position: absolute;width: 21.875rem;height: 18.75rem;top: 0;left: 20.6rem" @mouseover="divFocus(4)" @mouseout="divLoseFocus(4)">
+                <div style="position: absolute;width: 21.875rem;height: 18.75rem;top: 0;left: 19.6rem" @mouseover="divFocus(4)" @mouseout="divLoseFocus(4)">
                   <img ref="4_img" :src="teamImages[3].staffImage" style="position: absolute;width: 100%;height: 100%"/>
                   <div ref="4_code" style="position: absolute;width: 100%;height: 100%;display: none;background: #0D0D0D">
                     <table class="divBase">
@@ -83,7 +83,7 @@
                   </div>
                 </div>
 
-                <div style="position: absolute;width: 15.62rem;height: 21.87rem;top: 18.75rem;left: 27rem" @mouseover="divFocus(5)" @mouseout="divLoseFocus(5)">
+                <div style="position: absolute;width: 15.62rem;height: 21.87rem;top: 18.75rem;left: 26rem" @mouseover="divFocus(5)" @mouseout="divLoseFocus(5)">
                   <img ref="5_img" :src="teamImages[4].staffImage" style="position: absolute;width: 100%;height: 100%"/>
                   <div ref="5_code" style="position: absolute;width: 100%;height: 100%;display: none;background: #0D0D0D">
                     <table class="divBase">
@@ -98,7 +98,7 @@
                   </div>
                 </div>
 
-                <div style="position: absolute;width: 22.5rem;height: 15rem;top: 39.7rem;left: 27rem" @mouseover="divFocus(6)" @mouseout="divLoseFocus(6)">
+                <div style="position: absolute;width: 22.5rem;height: 15rem;top: 39.7rem;left: 26rem" @mouseover="divFocus(6)" @mouseout="divLoseFocus(6)">
                   <img ref="6_img" :src="teamImages[5].staffImage" style="position: absolute;width: 100%;height: 100%"/>
                   <div ref="6_code" style="position: absolute;width: 100%;height: 100%;display: none;background: #0D0D0D">
                     <table class="divBase">
@@ -113,7 +113,7 @@
                   </div>
                 </div>
 
-                <div style="position: absolute;width: 22.5rem;height: 26.55rem;top: 54.7rem;left: 27rem" @mouseover="divFocus(7)" @mouseout="divLoseFocus(7)">
+                <div style="position: absolute;width: 22.5rem;height: 26.55rem;top: 54.7rem;left: 26rem" @mouseover="divFocus(7)" @mouseout="divLoseFocus(7)">
                   <img ref="7_img" :src="teamImages[6].staffImage" style="position: absolute;width: 100%;height: 100%"/>
                   <div ref="7_code" style="position: absolute;width: 100%;height: 100%;display: none;background: #0D0D0D">
                     <table class="divBase">
@@ -129,7 +129,7 @@
                 </div>
 
 
-                <div style="position: absolute;width: 18.75rem;height: 28.12rem;top: 0;left: 42.5rem" @mouseover="divFocus(8)" @mouseout="divLoseFocus(8)">
+                <div style="position: absolute;width: 18.75rem;height: 28.12rem;top: 0;left: 41.5rem" @mouseover="divFocus(8)" @mouseout="divLoseFocus(8)">
                   <img ref="8_img" :src="teamImages[7].staffImage" style="position: absolute;width: 100%;height: 100%"/>
                   <div ref="8_code" style="position: absolute;width: 100%;height: 100%;display: none;background: #0D0D0D">
                     <table class="divBase">
@@ -144,7 +144,7 @@
                   </div>
                 </div>
 
-                <div style="position: absolute;width: 18.75rem;height: 11.58rem;top: 28.12rem;left: 42.5rem" @mouseover="divFocus(9)" @mouseout="divLoseFocus(9)">
+                <div style="position: absolute;width: 18.75rem;height: 11.58rem;top: 28.12rem;left: 41.5rem" @mouseover="divFocus(9)" @mouseout="divLoseFocus(9)">
                   <img ref="9_img" :src="teamImages[10].staffImage" style="position: absolute;width: 100%;height: 100%"/>
                   <div ref="9_code" style="position: absolute;width: 100%;height: 100%;display: none;background: #0D0D0D">
                     <table class="divBase">
@@ -160,7 +160,7 @@
                 </div>
 
 
-                <div style="position: absolute;width: 30.75rem;height: 20rem;top: 39.7rem;left: 49.47rem" @mouseover="divFocus(10)" @mouseout="divLoseFocus(10)">
+                <div style="position: absolute;width: 30.75rem;height: 20rem;top: 39.7rem;left: 48.47rem" @mouseover="divFocus(10)" @mouseout="divLoseFocus(10)">
                   <img ref="10_img" :src="teamImages[8].staffImage" style="position: absolute;width: 100%;height: 100%"/>
                   <div ref="10_code" style="position: absolute;width: 100%;height: 100%;display: none;background: #0D0D0D">
                     <table class="divBase">
@@ -175,7 +175,7 @@
                   </div>
                 </div>
 
-                <div style="position: absolute;width: 30.75rem;height: 21.7rem;top: 59.7rem;left: 49.47rem" @mouseover="divFocus(11)" @mouseout="divLoseFocus(11)">
+                <div style="position: absolute;width: 30.75rem;height: 21.7rem;top: 59.7rem;left: 48.47rem" @mouseover="divFocus(11)" @mouseout="divLoseFocus(11)">
                   <img ref="11_img" :src="teamImages[9].staffImage" style="position: absolute;width: 100%;height: 100%"/>
                   <div ref="11_code" style="position: absolute;width: 100%;height: 100%;display: none;background: #0D0D0D">
                     <table class="divBase">
@@ -190,13 +190,13 @@
                   </div>
                 </div>
 
-                <div style="position: absolute;width: 18.87rem;height: 12.5rem;top: 0;left: 61.3rem;">
+                <div style="position: absolute;width: 18.87rem;height: 12.5rem;top: 0;left: 60.3rem;">
                   <div class="firstFont">
                     we always keep high standards in terms of aesthetic and creative idea. we Respect <span style="color: #F24E1E">art, creation</span> and the contribution to art through <span style="color: #F24E1E">technology.</span>
                   </div>
                 </div>
 
-                <div style="position: absolute;width: 18.87rem;height: 27.2rem;top: 12.5rem;left: 61.3rem" @mouseover="divFocus(12)" @mouseout="divLoseFocus(12)">
+                <div style="position: absolute;width: 18.87rem;height: 27.2rem;top: 12.5rem;left: 60.3rem" @mouseover="divFocus(12)" @mouseout="divLoseFocus(12)">
                   <img ref="12_img" :src="teamImages[11].staffImage" style="position: absolute;width: 100%;height: 100%"/>
                   <div ref="12_code" style="position: absolute;width: 100%;height: 100%;display: none;background: #0D0D0D">
                     <table class="divBase">
