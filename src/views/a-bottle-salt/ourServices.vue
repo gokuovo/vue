@@ -26,7 +26,7 @@
                 <table class="divBase">
                   <tr>
                     <td style="width: 40%;font-size: 28px;vertical-align: top;position: relative">
-                      <div class="BoldItalic" style="top: 5rem;left: 7rem;position: absolute;font-size: 2.625rem;color: #B8B7B2;font-weight: 500">
+                      <div class="BoldItalic" style="top: 5rem;left: 6rem;position: absolute;font-size: 2.625rem;color: #B8B7B2;font-weight: 500">
                         {{this.whatWeDo}}
                       </div>
                     </td>
@@ -49,7 +49,7 @@
               <div style="width: 100%;height: 10%;color: #F5F5F5;font-size: 20px;font-style:oblique;">
                 <table class="divBase" v-show="!showVideo">
                   <tr @click="showVideo = !showVideo" class="divBase" style="position: relative">
-                    <td @click="fontButtonClick(0)" class="fontButton BoldItalic anation" style="position: absolute;left: 7rem;top: 2rem">MUSIC</td>
+                    <td @click="fontButtonClick(0)" class="fontButton BoldItalic anation" style="position: absolute;left: 6rem;top: 2rem">MUSIC</td>
                     <td @click="fontButtonClick(1)" class="fontButton BoldItalic anation" style="position: absolute;left: 14.5rem;top: 2rem">SOUND DESIGN</td>
                     <td @click="fontButtonClick(2)" class="fontButton BoldItalic anation" style="position: absolute;left: 27.12rem;top: 2rem">VOICE ACTING</td>
                     <td @click="fontButtonClick(3)" class="fontButton BoldItalic anation" style="position: absolute;left: 39rem;top: 2rem">GAME AUDIO PIPELINE</td>

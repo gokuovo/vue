@@ -16,10 +16,10 @@
           <td style="height: 100%;width: 80%;position: relative">
             <div v-if="!showLIST" style="height: 100%;width: 60%;display: inline-block;">
               <div v-if="showMusic" style="width: 100%;height: 80%;position: relative">
-                <div style="width: 100%;height: 30%;color: #F5F5F5;font-size: 2.625rem;position: absolute;left: 7rem;top: 4rem">
+                <div style="width: 100%;height: 30%;color: #F5F5F5;font-size: 2.625rem;position: absolute;left: 6rem;top: 4rem">
                   <div class="BoldItalic" style="width: 100%;">{{this.showingAlbum['title'+$store.getters.getLanguage]}}</div>
                 </div>
-                <div style="width: 100%;height: 60%;position: absolute;left: 7rem;top: 10rem">
+                <div style="width: 100%;height: 60%;position: absolute;left: 6rem;top: 10rem">
                   <div class="selfDefineScroll" style="overflow-y: auto;height: 85%;width: 80%;">
                     <ul>
                       <li style="width: 100%;height: 12%;position: relative" v-for="(item) in showAlbumMusic">
@@ -55,7 +55,7 @@
               </div>
 
               <div style="width: 100%;height: 20%;color: #E3E1DB;font-size: 1rem;padding-top: 1rem">
-                <el-button style="margin-left: 7rem;" @click="clickMusic(0)" class="buttonStyle anation" type="danger">
+                <el-button style="margin-left: 6rem;" @click="clickMusic(0)" class="buttonStyle anation" type="danger">
                   <span style="font-size: 0.875rem;" class="BoldItalic">MUSIC</span>
                 </el-button>
                 <el-button style="margin-left: 2.75rem;" @click="clickSfx(1)" class="buttonStyle anation" type="danger">
@@ -94,7 +94,7 @@
 
             <div v-if="showLIST" class="divBase">
               <div class="selfDefineScroll" style="width: 100%;height: 80%;overflow-y: auto;">
-                <div v-for="(item) in albumList" style="width: 50%;height: 27%;display: inline-block;position: relative;padding-left: 7rem;margin-top: 2%;">
+                <div v-for="(item) in albumList" style="width: 50%;height: 27%;display: inline-block;position: relative;padding-left: 6rem;margin-top: 2%;">
                   <img style="width: 24.5%;height: 80%;position: absolute" :src="item.url" />
                   <div class="BoldItalic" style="width: 49%;height: 100%;position: absolute;left: 18rem">
                     <div style="font-weight: 500;width: 100%;height: 16.5%;color: #BAB9B6;font-size: 1.125rem;font-style: italic;">{{item['title'+$store.getters.getLanguage]}}</div>
@@ -109,7 +109,7 @@
 
               </div>
               <div class="BoldItalic" style="width: 70%;height: 20%;color: #E3E1DB;font-size: 1rem;padding-top: 1rem">
-                <el-button style="margin-left: 7rem;" @click="clickMusic(0)" class="buttonStyle anation" type="danger">
+                <el-button style="margin-left: 6rem;" @click="clickMusic(0)" class="buttonStyle anation" type="danger">
                   <span style="font-size: 0.875rem;" class="BoldItalic">MUSIC</span>
                 </el-button>
                 <el-button style="margin-left: 2.75rem;" @click="clickSfx(1)" class="buttonStyle anation" type="danger">

@@ -14,7 +14,7 @@
       <table class="divBase">
         <tr>
           <td style="width: 80%;height: 100%;padding: 6% 0">
-            <div class="divBase selfDefineScroll" style="overflow-y: auto;padding-left: 7rem">
+            <div class="divBase selfDefineScroll" style="overflow-y: auto;padding-left: 6rem">
 
               <div v-for="(item) in newsData"  style="display: inline-block;width: 50%;height: 25%;position: relative;margin-bottom: 3%">
                 <img style="width: 27%;height: 103%;position: absolute" :src="item.url" />
@@ -202,7 +202,7 @@
 
   .buttonStyle {
     padding: 5px 5px;
-    margin-left: 7rem;
+    margin-left: 6rem;
     font-size: 0.875rem;
   }
 

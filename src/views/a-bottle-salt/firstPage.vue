@@ -1,16 +1,20 @@
 <template>
-  <div ref="alignCenter" class="alignCenter" style="width: 90rem;height: 100%">
+  <div ref="alignCenter" class="alignCenter" style="width: 90rem;height: 100%;overflow: hidden">
 
 <!--    <video ref="firstVideo" class="backGroundStyle">-->
 <!--      <source :src="firstVideo"  type="video/mp4">-->
 <!--    </video>-->
     <div ref="backGroundBox" class="box">
-      <div class="image-wrap">
-        <div class="image" :style="{backgroundImage: `url(${firstPage})`}"></div>
+      <div class="image-wrap" style="opacity: 1">
+        <div class="image" :style="{backgroundImage: `url(${firstPage2})`}"></div>
       </div>
     </div>
 
-    <div style="height: 10%;width: 90rem;background-color: #0D0D0D;">
+    <img :src="thirdImg" style="position: absolute;width: 38rem;;height: 14.5rem;left: 0;bottom: 4.43rem;" />
+
+    <img class="rollAni" :src="secondImg" style="position: absolute;width: 90rem;height: 100%;" />
+
+    <div style="height: 10%;width: 90rem;">
       <toolbar></toolbar>
     </div>
 
@@ -18,12 +22,8 @@
       <table style="width: 100%;height: 100%">
         <tr>
           <td style="width: 80%;text-align: center">
-            <div style="width: 100%;height: 80%;position: relative">
-              <img :src="secondImg" style="position: absolute;width: 80%;height: 100%;left: 7rem" />
-              <img :src="thirdImg" style="position: absolute;width: 20%;;height: 15%;left: 10rem;bottom: 3rem;" />
-            </div>
           </td>
-          <td style="width: 20%;">
+          <td style="width: 10%;">
             <contacts></contacts>
           </td>
         </tr>
@@ -47,7 +47,7 @@
     data() {
       return {
         firstVideo: '',
-        firstPage:'',
+        firstPage2:'',
         secondImg:'',
         thirdImg:'',
         fontFamily:'',
@@ -79,7 +79,7 @@
       //首页背景动图
       getImagesByImageCode({imageCode:'16'}).then(resp =>{
         if(resp.data.length > 0){
-          this.firstPage = resp.data[0].imageUrl.replaceAll('\\','\/');
+          this.firstPage2 = resp.data[0].imageUrl.replaceAll('\\','\/');
         }
       })
     },
@@ -125,6 +125,39 @@
 
 <style scoped>
   @import './commonCSS/moveBackground.scss';
+
+  .image{
+    filter: grayscale(1);
+  }
+
+  .rollAni{
+    animation: rotate 2s linear infinite;
+    animation-iteration-count: 1;
+    animation-fill-mode:forwards;
+  }
+
+  @keyframes rotate{
+    0%{
+      transform: rotateZ(340deg);/*从0度开始*/
+      opacity: 0;
+    }
+    25%{
+      transform: rotateZ(345deg);
+      opacity: 0.25;
+    }
+    50%{
+      transform: rotateZ(350deg);
+      opacity: 0.5;
+    }
+    75%{
+      transform: rotateZ(355deg);
+      opacity: 0.75;
+    }
+    100%{
+      transform: rotateZ(360deg);/*360度结束*/
+      opacity: 1;
+    }
+  }
 
   .alignCenter{
     position: absolute;

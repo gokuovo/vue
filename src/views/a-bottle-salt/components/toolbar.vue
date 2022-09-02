@@ -1,10 +1,12 @@
 <template>
   <div style="width: 90rem;height: 100%">
+
+    <img @click="backToFirstPage" :src="$store.getters.getLogo" style="position: absolute;left: 6rem;top: 2.18rem;width: 7.81rem;height: 2.5rem;" />
+
     <table style="width: 90rem;height: 100%">
       <tr>
-        <td style="width: 18.75rem;" @click="backToFirstPage">
-          <div style="margin-left: 4rem;height: 100%;background-repeat: no-repeat;background-size: 100% 100%;"  :style="{backgroundImage:`url(${$store.getters.getLogo})`}">
-          </div>
+        <td style="width: 18.75rem;">
+          <div style="width: 100%;height: 100%"></div>
         </td>
         <td style="width: 60rem;height: 100%;position: relative">
           <el-breadcrumb separator="   ">
@@ -121,7 +123,7 @@
 
   >>>.el-breadcrumb{
     position: absolute;
-    top: 40%;
+    top: 50%;
   }
 
   >>>.el-breadcrumb__item{
@@ -130,7 +132,7 @@
 
   >>>.el-dropdown{
     position: absolute;
-    top: 40%;
+    top: 50%;
     right: 6rem;
   }
 

@@ -7,15 +7,17 @@
       </div>
     </div>
 
-    <div style="height: 10%;width: 100%;background-color: #0D0D0D;">
+    <div style="height: 10%;width: 90rem;">
       <toolbar></toolbar>
     </div>
 
+    <img style="top: 17.37rem;width: 78.06rem;left: 6rem;height: 14.12rem;position: absolute" :src="secondImg"/>
+
     <div style="width: 100%;height: 70%;position: relative">
-      <img style="width: 100%;height: 100%;position: absolute" :src="secondImg"/>
+
     </div>
 
-    <div style="width: 100%;height: 20%;padding: 0 7rem">
+    <div style="width: 100%;height: 20%;padding: 0 6rem">
       <table class="divBase" style="font-weight: 500">
         <tr>
           <td style="width: 33%;height: 100%">
