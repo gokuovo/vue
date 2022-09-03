@@ -145,7 +145,8 @@
     font-family: DIN-BoldItalic;
     font-size: 0.875rem;
     color: #E3E1DB;
-    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
 
   .barFont:hover {
