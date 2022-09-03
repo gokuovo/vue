@@ -5,7 +5,7 @@
 <!--      <source :src="firstVideo"  type="video/mp4">-->
 <!--    </video>-->
     <div ref="backGroundBox" class="box">
-      <div class="image-wrap" style="opacity: 1">
+      <div class="backGroundStyle" >
         <div class="image" :style="{backgroundImage: `url(${firstPage2})`}"></div>
       </div>
     </div>
@@ -127,30 +127,30 @@
   @import './commonCSS/moveBackground.scss';
 
   .image{
-    filter: grayscale(1);
+    /*filter: grayscale(0.7);*/
   }
 
   .rollAni{
-    animation: rotate 2s linear infinite;
+    animation: rotate 800ms linear infinite;
     animation-iteration-count: 1;
     animation-fill-mode:forwards;
   }
 
   @keyframes rotate{
     0%{
-      transform: rotateZ(340deg);/*从0度开始*/
+      transform: rotateZ(356deg);/*从0度开始*/
       opacity: 0;
     }
     25%{
-      transform: rotateZ(345deg);
+      transform: rotateZ(357deg);
       opacity: 0.25;
     }
     50%{
-      transform: rotateZ(350deg);
+      transform: rotateZ(358deg);
       opacity: 0.5;
     }
     75%{
-      transform: rotateZ(355deg);
+      transform: rotateZ(359deg);
       opacity: 0.75;
     }
     100%{
@@ -186,7 +186,9 @@
     position: absolute;
     z-index:-1;
     object-fit:fill;
-    opacity: 0.9;
+    /*background: rgba(0, 0, 0, 0.7);*/
+    mix-blend-mode: luminosity;
+    /*filter: grayscale(1);*/
   }
 
 

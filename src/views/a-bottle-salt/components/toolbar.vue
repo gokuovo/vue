@@ -19,7 +19,7 @@
           <div style="position: relative;width: 11.25rem;height: 100%">
               <el-dropdown @command="handleCommand">
                 <el-button type="primary">
-                  <span class="selfFont">EN</span>
+                  <span class="selfFont">En</span>
                   <i class="el-icon-arrow-down el-icon--right"></i>
                 </el-button>
                 <el-dropdown-menu slot="dropdown">

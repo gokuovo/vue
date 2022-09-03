@@ -17,7 +17,7 @@
       <toolbar></toolbar>
     </div>
 
-    <div ref="selfOpacity" style="height: 85%;width: 90rem;">
+    <div ref="selfOpacity" style="height: 85%;width: 100rem;">
       <table class="divBase">
         <tr>
           <td style="width: 80%;text-align: center">
@@ -77,8 +77,8 @@
                       </video>
                     </td>
 
-                    <td style="width: 50%;height: 100%;position: relative">
-                      <div class="divAnimate" v-show="showVideo" style="width: 90%;height: 50%;position: absolute;left: 0;top: 3rem;overflow: hidden">
+                    <td style="width: 50%;height: 100%;left: -6%;position: relative">
+                      <div class="divAnimate" v-show="showVideo" style="width: 150%;height: 60%;position: absolute;top: 2rem;overflow: hidden">
                         <div ref="carouselImgBox" class="carouselImgBox">
                           <img class="imgStyle" v-for="item in carouselImgPaths" :src="item"/>
                         </div>
@@ -101,7 +101,7 @@
 
 <script>
   import toolbar from './components/toolbar'
-  import contacts from './components/contacts'
+  import contacts from './components/contactsOfOurservice'
   import boxes from './commonScripts/moveBackground'
 
   import { getRotation,getWord,getVideoList,getImagesByImageCode } from './requestScript/OurService'
@@ -251,14 +251,14 @@
     min-height: 687px;
   }
 
-  .imgStyle{
-    max-width: 100%;
-    max-height: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+  /*.imgStyle{*/
+  /*  max-width: 100%;*/
+  /*  max-height: 100%;*/
+  /*  position: absolute;*/
+  /*  top: 50%;*/
+  /*  left: 50%;*/
+  /*  transform: translate(-50%, -50%);*/
+  /*}*/
 
   .BoldItalic{
     font-family: DIN-BoldItalic;

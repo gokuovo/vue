@@ -11,6 +11,16 @@ export function getSocialSix() {
   })
 }
 
+/**
+ * 获取右侧联系图标
+ * @param query
+ */
+export function getSocialFour() {
+  return request({
+    url: '/SaltContactUs/getSocialFour',
+    method: 'get'
+  })
+}
 
 /**
  * 获取contact us的背景图片，移动背景图片，以及图标

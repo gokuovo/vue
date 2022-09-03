@@ -49,39 +49,39 @@
 
               <div v-if="showSFX" style="position: relative;width: 100%;height: 80%;">
                 <video :src="showAlbumVideo != undefined ? (showAlbumVideo[0] != undefined ? showAlbumVideo[0].url.replaceAll('\\','\/') : '') : ''"
-                       style="position: absolute;width: 50rem;height: 80%;top: 3rem;object-fit: fill;" controls>
+                       style="position: absolute;width: 45.9rem;height: 28em;top: 8rem;object-fit: fill;" controls>
                   <source type="video/mp4">
                 </video>
               </div>
 
               <div style="width: 100%;height: 20%;color: #E3E1DB;font-size: 1rem;padding-top: 1rem">
                 <el-button style="margin-left: 6rem;" @click="clickMusic(0)" class="buttonStyle anation" type="danger">
-                  <span style="font-size: 0.875rem;" class="BoldItalic">MUSIC</span>
+                  <span style="font-size: 14px;width: 4.785714285714286em;height: 2.142857142857143em" class="BoldItalic">MUSIC</span>
                 </el-button>
-                <el-button style="margin-left: 2.75rem;" @click="clickSfx(1)" class="buttonStyle anation" type="danger">
-                  <span style="font-size: 0.875rem;" class="BoldItalic">SFX</span>
+                <el-button style="margin-left: 1.4285714285714286em;" @click="clickSfx(1)" class="buttonStyle anation" type="danger">
+                  <span style="font-size: 14px;width: 4.785714285714286em;height: 2.142857142857143em" class="BoldItalic">SFX</span>
                 </el-button>
-                <el-button style="margin-left: 2.75rem;" @click="clickList(2)" class="buttonStyle anation" type="danger">
-                  <span style="font-size: 0.875rem;" class="BoldItalic">LIST</span>
+                <el-button style="margin-left: 1.4285714285714286em;" @click="clickList(2)" class="buttonStyle anation" type="danger">
+                  <span style="font-size: 14px;width: 4.785714285714286em;height: 2.142857142857143em" class="BoldItalic">LIST</span>
                 </el-button>
               </div>
 
             </div>
 
-            <div v-if="!showLIST" style="height: 100%;width: 40%;display: inline-block;position: absolute;left: 50rem;">
-              <div v-if="!showLIST" style="height: 25%;width: 90%;background-color: #383838;color: #F5F5F5;font-size: 16px;font-style: italic;padding-left: 1.5rem">
+            <div v-if="!showLIST" style="height: 50em;width: 31.625em;display: inline-block;position: absolute;left: 45.75em;">
+              <div v-if="!showLIST" style="height: 25%;width: 93%;background-color: #383838;color: #F5F5F5;font-size: 16px;font-style: italic;padding-left: 1.5rem">
                 <div class="BoldItalic" style="width: 100%;height: 25%;padding-top: 5%">{{showingAlbum['title'+$store.getters.getLanguage]}}</div>
                 <div style="width: 100%;height: 75%;position: relative;padding-top: 2%">
-                  <img style="width: 30%;height: 70%;position: absolute" :src="undefined == showingAlbum.imgSrc ? '' : showingAlbum.imgSrc.replaceAll('\\','\/')"/>
-                  <div class="BoldItalic" style="width: 75%;height: 75%;position: absolute;left: 40%">
-                    <div style="color: #F5F5F5;font-size: 14px;height: 24%;font-style: italic">RELEASE：<span style="font-size: 12px">{{showingAlbum['release'+$store.getters.getLanguage]}}</span></div>
-                    <div style="color: #F5F5F5;font-size: 14px;height: 24%;font-style: italic">DEVELOPER：<span style="font-size: 12px">{{showingAlbum['developer'+$store.getters.getLanguage]}}</span></div>
-                    <div style="color: #F5F5F5;font-size: 14px;height: 24%;font-style: italic">PUBLISHER：<span style="font-size: 12px">{{showingAlbum['publisher'+$store.getters.getLanguage]}}</span></div>
-                    <div style="color: #F5F5F5;font-size: 14px;height: 24%;font-style: italic">PLATFORM：<span style="font-size: 12px">{{showingAlbum['platform'+$store.getters.getLanguage]}}</span></div>
+                  <img style="width: 7.1em;height: 7.1em;position: absolute;" :src="undefined == showingAlbum.imgSrc ? '' : showingAlbum.imgSrc.replaceAll('\\','\/')"/>
+                  <div class="BoldItalic" style="width: 7.1em;height: 7.1em;position: absolute;left: 8em">
+                    <div style="color: #F5F5F5;font-size: 14px;height: 1.55em;width: 33.5em;font-style: italic;margin-bottom: 0.8em">RELEASE：<span style="font-size: 12px">{{showingAlbum['release'+$store.getters.getLanguage]}}</span></div>
+                    <div style="color: #F5F5F5;font-size: 14px;height: 1.55em;width: 33.5em;font-style: italic;margin-bottom: 0.75em">DEVELOPER：<span style="font-size: 12px">{{showingAlbum['developer'+$store.getters.getLanguage]}}</span></div>
+                    <div style="color: #F5F5F5;font-size: 14px;height: 1.55em;width: 33.5em;font-style: italic;margin-bottom: 0.75em">PUBLISHER：<span style="font-size: 12px">{{showingAlbum['publisher'+$store.getters.getLanguage]}}</span></div>
+                    <div style="color: #F5F5F5;font-size: 14px;height: 1.55em;width: 33.5em;font-style: italic;margin-bottom: 0em">PLATFORM：<span style="font-size: 12px">{{showingAlbum['platform'+$store.getters.getLanguage]}}</span></div>
                   </div>
                 </div>
               </div>
-              <div v-if="!showLIST" class="selfDefineScroll" style="overflow-y: scroll;height: 75%;width: 95%;">
+              <div v-if="!showLIST" class="selfDefineScroll" style="overflow-y: scroll;height: 75%;width: 98.4%;">
                 <ul>
                   <li style="width: 95.5%;height: 33.3%" v-for="(item,index) in albums">
                     <div :ref="'imgDiv_'+index" @click="albumsClick(item,index)" class="divBase imgDiv"
@@ -110,13 +110,13 @@
               </div>
               <div class="BoldItalic" style="width: 70%;height: 20%;color: #E3E1DB;font-size: 1rem;padding-top: 1rem">
                 <el-button style="margin-left: 6rem;" @click="clickMusic(0)" class="buttonStyle anation" type="danger">
-                  <span style="font-size: 0.875rem;" class="BoldItalic">MUSIC</span>
+                  <span style="font-size: 14px;width: 4.785714285714286em;height: 2.142857142857143em" class="BoldItalic">MUSIC</span>
                 </el-button>
-                <el-button style="margin-left: 2.75rem;" @click="clickSfx(1)" class="buttonStyle anation" type="danger">
-                  <span style="font-size: 0.875rem;" class="BoldItalic">SFX</span>
+                <el-button style="margin-left: 1.4285714285714286em;" @click="clickSfx(1)" class="buttonStyle anation" type="danger">
+                  <span style="font-size: 14px;width: 4.785714285714286em;height: 2.142857142857143em" class="BoldItalic">SFX</span>
                 </el-button>
-                <el-button style="margin-left: 2.75rem;" @click="clickList(2)" class="buttonStyle anation" type="danger">
-                  <span style="font-size: 0.875rem;" class="BoldItalic">LIST</span>
+                <el-button style="margin-left: 1.4285714285714286em;" @click="clickList(2)" class="buttonStyle anation" type="danger">
+                  <span style="font-size: 14px;width: 4.785714285714286em;height: 2.142857142857143em" class="BoldItalic">LIST</span>
                 </el-button>
               </div>
             </div>
