@@ -118,6 +118,11 @@ export const constantRoutes = [
     component: () => import('@/views/a-bottle-salt/Partners'),
     meta: {index: 7}
   },
+  {
+    path: '/meltingGames',
+    component: () => import('@/views/a-bottle-salt/meltingGames'),
+    meta: {index: 8}
+  },
   // {
   //   path: '/documentation',
   //   component: Layout,
