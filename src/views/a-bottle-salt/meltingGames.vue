@@ -150,7 +150,7 @@
     font-family: 'DIN-BoldItalic';
     font-style: italic;
     font-weight: 500;
-    font-size: 42px;
+    font-size: 2.62rem;
     line-height: 130%;
     letter-spacing: 0.02em;
     text-transform: uppercase;
@@ -161,7 +161,7 @@
     font-family: 'DIN-BoldItalic';
     font-style: italic;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 0.875rem;
     line-height: 110%;
     letter-spacing: 0.05em;
     text-transform: capitalize;
@@ -173,8 +173,8 @@
     font-family: 'DIN-BoldItalic';
     font-style: italic;
     font-weight: 500;
-    font-size: 12px;
-    line-height: 18px;
+    font-size: 0.75rem;
+    line-height: 1.125rem;
     letter-spacing: 0.05em;
     text-decoration-line: underline;
     text-transform: uppercase;
@@ -186,7 +186,7 @@
     font-family: 'Inter';
     font-style: normal;
     font-weight: 200;
-    font-size: 18px;
+    font-size: 1.125rem;
     line-height: 130%;
     color: #E3E1DB;
   }

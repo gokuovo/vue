@@ -83,9 +83,15 @@
               </div>
               <div v-if="!showLIST" class="selfDefineScroll" style="overflow-y: scroll;height: 75%;width: 98.4%;">
                 <ul>
-                  <li style="width: 95.5%;height: 33.3%" v-for="(item,index) in albums">
+                  <li style="width: 95.5%;height: 33.3%;position: relative" v-for="(item,index) in albums">
                     <div :ref="'imgDiv_'+index" @click="albumsClick(item,index)" class="divBase imgDiv"
                          :style="{backgroundImage: `url(${undefined == item.imgSrc ? '' : item.imgSrc.replaceAll('\\','\/')})`}">
+                    </div>
+                    <div class="titleFont" style="position: absolute;height: 1.43rem;top: 1.25rem;left: 1.875rem">
+                      {{item['title'+$store.getters.getLanguage]}}
+                    </div>
+                    <div class="titleDateFont" style="position: absolute;height: 1.43rem;top: 3.3rem;left: 1.875rem">
+                      {{item['release'+$store.getters.getLanguage]}}
                     </div>
                   </li>
                 </ul>
@@ -424,6 +430,30 @@
 <style scoped>
   @import './commonCSS/moveBackground.scss';
 
+  .titleFont{
+    font-family: 'DIN-BoldItalic';
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.125rem;
+    line-height: 130%;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #E3E1DB;
+  }
+
+  .titleDateFont{
+    font-family: 'DIN-BoldItalic';
+    font-style: italic;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 110%;
+    letter-spacing: 0.05em;
+    text-transform: capitalize;
+    color: #E3E1DB;
+    opacity: 0.8;
+
+  }
+
   .alignCenter{
     position: absolute;
     left: 0;
@@ -484,7 +514,7 @@
 
   .imgDiv {
     background-size: cover;
-    background-repeat: no-repeat;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
   }
 
   .imgDiv:hover {
