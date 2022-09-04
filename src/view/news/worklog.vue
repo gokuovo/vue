@@ -44,7 +44,7 @@
             </el-form-item>
             <el-form-item class="submit">
               <el-button v-if="worklog.id" type="primary" @click="submitForm">保 存</el-button>
-              <el-button v-else type="primary" @click="submitForm">新 增</el-button>
+              <el-button v-else type="primary" @click="submitForm">新增并添加图片</el-button>
               <el-button @click="resetForm">重 置</el-button>
               <el-button v-if="worklog.id" plain type="primary" @click="handleEdit(worklog.id)">更改配图</el-button>
             </el-form-item>
@@ -52,7 +52,7 @@
         </el-col>
       </el-row>
     </div>
-    <worklog-file v-else @editClose="editClose" :editWorklogId="editWorklogId"></worklog-file>
+    <worklog-file v-else @editClose="editClose" :worklogId="worklogId"></worklog-file>
   </div>
 </template>
 
@@ -89,6 +89,7 @@
       },
     },
     setup(props, context) {
+      const worklogId = ref(1)
       const showEdit = ref(false)
       const form = ref(null)
       const loading = ref(false)
@@ -123,7 +124,7 @@
 
       const handleEdit = id => {
         showEdit.value = true
-        editWorklogId.value = id
+        worklogId.value = id
       }
 
       const submitForm = async formName => {
@@ -161,6 +162,7 @@
         submitForm,
         handleEdit,
         showEdit,
+        worklogId,
       }
     },
   }

@@ -2,57 +2,65 @@
   <div class="container">
     <div class="title" v-if="!editNewsId">新增NEWS信息{{ editNewsId }}</div>
     <div class="title" v-else>
-      <span>修改NEWS信息</span> <span class="back" @click="back"> <i class="iconfont icon-fanhui"></i> 返回 </span>
+      <span>修改NEWSLINK信息</span> <span class="back" @click="back"> <i class="iconfont icon-fanhui"></i> 返回 </span>
     </div>
 
     <div class="wrap" v-if="!showEdit">
       <el-row>
         <el-col :lg="16" :md="20" :sm="24" :xs="24">
           <el-form :model="news" status-icon ref="form" label-width="100px" @submit.prevent :rules="rules">
-            <el-form-item label="标题En" prop="titleEn">
-              <el-input v-model="news.titleEn" placeholder="请输入标题En"></el-input>
+            <el-form-item label="标题" prop="title">
+              <el-input v-model="news.title" placeholder="请输入标题"></el-input>
             </el-form-item>
-            <el-form-item label="标题Chi" prop="titleChi">
-              <el-input v-model="news.titleChi" placeholder="请输入标题Chi"></el-input>
+            <el-form-item label="发布时间" prop="date">
+              <el-input v-model="news.date" placeholder="请输入发布时间"></el-input>
             </el-form-item>
-            <el-form-item label="标题Jap" prop="titleJap">
-              <el-input v-model="news.titleJap" placeholder="请输入标题Jap"></el-input>
+            <el-form-item label="newslink配图01" prop="img01">
+              <img :src="news.img01" style="width: 150px;height: 150px" />
+              <el-button style="margin-left: 5em" plain type="primary" @click="handleEdit(news.id,news.imgId01)">更改配图</el-button>
             </el-form-item>
-            <el-form-item label="标题Spa" prop="titleSpa">
-              <el-input v-model="news.titleSpa" placeholder="请输入标题Spa"></el-input>
+
+            <el-form-item label="newslink配图02" prop="img02">
+              <img :src="news.img02" style="width: 150px;height: 150px" />
+              <el-button style="margin-left: 5em" plain type="primary" @click="handleEdit(news.id,news.imgId02)">更改配图</el-button>
             </el-form-item>
-            <el-form-item label="发布时间En" prop="dateEn">
-              <el-input v-model="news.dateEn" placeholder="请输入发布时间En"></el-input>
+            <el-form-item label="newslink配图03" prop="img03">
+              <img :src="news.img03" style="width: 150px;height: 150px" />
+              <el-button style="margin-left: 5em" plain type="primary" @click="handleEdit(news.id,news.imgId02)">更改配图</el-button>
             </el-form-item>
-            <el-form-item label="发布时间Chi" prop="dateChi">
-              <el-input v-model="news.dateChi" placeholder="请输入发布时间Chi"></el-input>
+            <el-form-item label="文章01En" prop="textEn01">
+              <el-input v-model="news.textEn01" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请输入文章01En"></el-input>
             </el-form-item>
-            <el-form-item label="发布时间Jap" prop="dateJap">
-              <el-input v-model="news.dateJap" placeholder="请输入发布时间Jap"></el-input>
+            <el-form-item label="文章01Chi" prop="textChi01">
+              <el-input v-model="news.textChi01" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请输入文章01Chi"></el-input>
             </el-form-item>
-            <el-form-item label="发布时间Spa" prop="dateSpa">
-              <el-input v-model="news.dateSpa" placeholder="请输入发布时间Spa"></el-input>
+            <el-form-item label="文章01Jap" prop="textJap01">
+              <el-input v-model="news.textJap01" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请输入文章01Jap"></el-input>
             </el-form-item>
-            <el-form-item label="news配图" prop="url" v-if="news.id">
-              <img :src="news.url" style="width: 150px;height: 150px" />
+            <el-form-item label="文章01Spa" prop="textSpa01">
+              <el-input v-model="news.textSpa01" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请输入文章01Spa"></el-input>
             </el-form-item>
-            <el-form-item label="跳转链接" prop="image">
-              <el-input v-model="news.link" placeholder="请输入跳转链接"></el-input>
+            <el-form-item label="文章02En" prop="textEn02">
+              <el-input v-model="news.textEn02" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请输入文章02En"></el-input>
             </el-form-item>
-            <el-form-item label="排序" prop="image">
-              <el-input v-model="news.sort" placeholder="请输入排序(1,2,3....)"></el-input>
+            <el-form-item label="文章02Chi" prop="textChi02">
+              <el-input v-model="news.textChi02" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请输入文章02Chi"></el-input>
+            </el-form-item>
+            <el-form-item label="文章02Jap" prop="textJap02">
+              <el-input v-model="news.textJap02" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请输入文章02Jap"></el-input>
+            </el-form-item>
+            <el-form-item label="文章02Spa" prop="textSpa02">
+              <el-input v-model="news.textSpa02" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }" placeholder="请输入文章02Spa"></el-input>
             </el-form-item>
             <el-form-item class="submit">
-              <el-button v-if="news.id" type="primary" @click="submitForm">保 存</el-button>
-              <el-button v-else type="primary" @click="submitForm">新增并添加配图</el-button>
+              <el-button type="primary" @click="submitForm">保 存</el-button>
               <el-button @click="resetForm">重 置</el-button>
-              <el-button v-if="news.id" plain type="primary" @click="handleEdit(news.id)">更改配图</el-button>
             </el-form-item>
           </el-form>
         </el-col>
       </el-row>
     </div>
-    <news-file v-else @editClose="editClose" :newsId="newsId"></news-file>
+    <newslink-file v-else @editClose="editClose" :newsId="newsId" :imgId="imgId"></newslink-file>
   </div>
 </template>
 
@@ -61,10 +69,10 @@
   import { ElMessage } from 'element-plus'
   import { get, post } from '../../lin/plugin/axios'
   import UploadImgs from '../../component/base/homepage/logo/index'
-  import NewsFile from './news-file'
+  import NewslinkFile from './newslink-file'
 
   export default {
-    components: { NewsFile, UploadImgs },
+    components: { NewslinkFile, UploadImgs },
     methods:{
       //图片回显
       handleAvatarSuccess(res, file) {
@@ -90,10 +98,12 @@
     },
     setup(props, context) {
       const newsId = ref(1)
+      const imgId = ref(1)
       const showEdit = ref(false)
       const form = ref(null)
       const loading = ref(false)
-      const news = reactive({id:'',titleEn:'',titleChi:'',titleJap:'',titleSpa:'', dateEn:'',dateChi:'',dateJap:'',dateSpa:'', url:'',link:'',sort:''})
+      const news = reactive({id:'',title:'',date:'',img01:'',img02:'',img03:'',imgId01:'',imgId02:'',imgId03:'',textEn01:'',textChi01:'',
+        textJap01:'',textSpa01:'',textEn02:'',textChi02:'',textJap02:'',textSpa02:'' })
 
       const listAssign = (a, b) => Object.keys(a).forEach(key => {
         a[key] = b[key] || a[key]
@@ -112,8 +122,7 @@
 
       const getNews = async () => {
         loading.value = true
-        const res = await get("/SaltNews/getNewsOne?id="+props.editNewsId)
-        listAssign(news, res)
+        const news= await get("/SaltNewsLink/getNewsLinkOne?id="+props.editNewsId)
         console.log(news)
         loading.value = false
       }
@@ -122,9 +131,10 @@
       const resetForm = () => {
         form.value.resetFields()
       }
-      const handleEdit = id => {
+      const handleEdit = (id,img) => {
         showEdit.value = true
         newsId.value = id
+        imgId.Value = img
       }
 
       const submitForm = async formName => {
@@ -132,12 +142,8 @@
           if (valid) {
             let res = {}
             if (props.editNewsId) {
-              res = await post("/SaltNews/modifyNews", news)
+              res = await post("/SaltNewsLink/modifyNewsLink", news)
               context.emit('editClose')
-            } else {
-              res = await post("/SaltNews/addNews", news)
-              handleEdit(res.id)
-              resetForm(formName)
             }
             if (res.code < window.MAX_SUCCESS_CODE) {
               ElMessage.success(`${res.message}`)
@@ -163,6 +169,7 @@
         showEdit,
         handleEdit,
         newsId,
+        imgId,
 
       }
     },

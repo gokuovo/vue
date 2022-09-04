@@ -7,7 +7,9 @@
     <div class="lin-wrap">
       <el-form label-width="220px">
         <el-form-item label="当前配图" v-if="social.imageUrl">
-          <img :src="social.imageUrl" />
+          <div style="width: 320px;">
+            <img :src="social.imageUrl" />
+          </div>
         </el-form-item>
         <el-form-item label="当前配图" v-else>
           <span>当前无配图</span>

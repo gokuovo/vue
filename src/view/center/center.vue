@@ -40,14 +40,14 @@
               label-width="90px"
               label-position="left"
             >
-              <el-form-item label="原始密码" prop="old_password">
-                <el-input type="password" v-model="form.old_password" autocomplete="off"></el-input>
+              <el-form-item label="原始密码" prop="oldPassword">
+                <el-input type="password" v-model="form.oldPassword" autocomplete="off"></el-input>
               </el-form-item>
-              <el-form-item label="新密码" prop="new_password">
-                <el-input type="password" v-model="form.new_password" autocomplete="off"></el-input>
+              <el-form-item label="新密码" prop="newPassword">
+                <el-input type="password" v-model="form.newPassword" autocomplete="off"></el-input>
               </el-form-item>
-              <el-form-item label="确认密码" prop="confirm_password" label-position="top">
-                <el-input type="password" v-model="form.confirm_password" autocomplete="off"></el-input>
+              <el-form-item label="确认密码" prop="confirmPassword" label-position="top">
+                <el-input type="password" v-model="form.confirmPassword" autocomplete="off"></el-input>
               </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="submitForm('form')">保存</el-button>
@@ -88,7 +88,7 @@ export default {
         callback(new Error('密码长度不能少于6位数'))
       } else {
         if (this.form.checkPassword !== '') {
-          this.$refs.form.validateField('confirm_password')
+          this.$refs.form.validateField('confirmPassword')
         }
         callback()
       }
@@ -96,7 +96,7 @@ export default {
     const validatePassword2 = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请再次输入密码'))
-      } else if (value !== this.form.new_password) {
+      } else if (value !== this.form.newPassword) {
         callback(new Error('两次输入密码不一致!'))
       } else {
         callback()
@@ -109,14 +109,14 @@ export default {
       defaultAvatar,
       cropVisible: false,
       form: {
-        old_password: '',
-        new_password: '',
-        confirm_password: '',
+        oldPassword: '',
+        newPassword: '',
+        confirmPassword: '',
       },
       rules: {
-        old_password: [{ validator: oldPassword, trigger: 'blur', required: true }],
-        new_password: [{ validator: validatePassword, trigger: 'blur', required: true }],
-        confirm_password: [{ validator: validatePassword2, trigger: 'blur', required: true }],
+        oldPassword: [{ validator: oldPassword, trigger: 'blur', required: true }],
+        newPassword: [{ validator: validatePassword, trigger: 'blur', required: true }],
+        confirmPassword: [{ validator: validatePassword2, trigger: 'blur', required: true }],
       },
     }
   },
@@ -217,11 +217,11 @@ export default {
       this.nicknameChanged = false
     },
     submitForm(formName) {
-      if (this.form.old_password === '' && this.form.new_password === '' && this.form.confirm_password === '') {
+      if (this.form.oldPassword === '' && this.form.newPassword === '' && this.form.confirmPassword === '') {
         this.dialogFormVisible = false
         return
       }
-      if (this.form.old_password === this.form.new_password) {
+      if (this.form.oldPassword === this.form.newPassword) {
         this.$message.error('新密码不能与原始密码一样')
         return
       }

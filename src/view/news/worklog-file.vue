@@ -7,7 +7,9 @@
     <div class="lin-wrap">
       <el-form label-width="220px">
         <el-form-item label="当前配图" v-if="worklog.url">
-          <img :src="worklog.url" />
+          <div style="width: 320px;">
+            <img :src="worklog.url" />
+          </div>
         </el-form-item>
         <el-form-item label="当前配图" v-else>
           <span>当前无配图</span>
@@ -39,6 +41,7 @@
       },
 
       sendFileUpload(id,upLoadFileList) {
+        console.log(id)
         let formData = new window.FormData();
         formData.append('file', upLoadFileList[0]);
         formData.append('fileType', 'worklog');
@@ -55,7 +58,7 @@
       },
     },
     props: {
-      editWorklogId: {
+      worklogId: {
         type: Number,
         default: null,
       },
@@ -75,14 +78,14 @@
       const { rules } = getRules()
 
       onMounted(() => {
-        if (props.editWorklogId) {
+        if (props.worklogId) {
           getWorklog()
         }
       })
 
       const getWorklog = async () => {
         loading.value = true
-        const res = await get('/SaltNews/getWorklogOne?id='+props.editWorklogId)
+        const res = await get('/SaltNews/getWorklogOne?id='+props.worklogId)
         listAssign(worklog, res)
         loading.value = false
       }

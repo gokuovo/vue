@@ -50,7 +50,7 @@
 
     <!-- 编辑页面 -->
     <List v-if="page==1" @editClose="editClose" :editListId="editListId"></List>
-    <list-file v-else-if="page==2" @editClose="editClose" :editListId="editListId"></list-file>
+    <list-file v-else-if="page==2" @editClose="editClose" :listId="listId"></list-file>
 
     <div>
       <ImgPreview></ImgPreview>
@@ -73,6 +73,7 @@
       ImgPreview
     },
     setup() {
+      const listId = ref(1)
       const page = ref(null)
       const list = ref([])
       const editListId = ref(1)
@@ -103,7 +104,7 @@
       }
       const handleEdit2 = id => {
         showEdit.value = true
-        editListId.value = id
+        listId.value = id
         page.value = 2
       }
 
@@ -140,6 +141,7 @@
         handleDelete,
         handleEdit2,
         page,
+        listId,
       }
     },
     methods: {

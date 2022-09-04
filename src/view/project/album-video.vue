@@ -19,7 +19,7 @@
             </el-form-item>
             <el-form-item class="submit">
               <el-button v-if="albumVideo.id" type="primary" @click="submitForm">保 存</el-button>
-              <el-button v-else type="primary" @click="submitForm">新 增</el-button>
+              <el-button v-else type="primary" @click="submitForm">新增并添加视频</el-button>
               <el-button @click="resetForm">重 置</el-button>
             </el-form-item>
           </el-form>
@@ -112,7 +112,7 @@
       }
       const handleEdit = id => {
         showEdit.value = true
-        editAlbumVideoId.value = id
+        albumVideoId.value = id
       }
 
       const submitForm = async formName => {

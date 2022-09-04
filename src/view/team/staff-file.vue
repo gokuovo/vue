@@ -7,7 +7,9 @@
     <div class="lin-wrap">
       <el-form label-width="220px">
         <el-form-item label="当前配图" v-if="staff.staffImage">
-          <img :src="staff.staffImage" />
+          <div style="width: 320px;">
+            <img :src="staff.staffImage" />
+          </div>
         </el-form-item>
         <el-form-item label="当前配图" v-else>
           <span>当前无配图</span>
@@ -94,9 +96,8 @@
         form.value.resetFields()
       }
 
-      const back = () => {
+       async function back() {
         context.emit('editClose')
-        this.$router.go(-1);
       }
 
       return {

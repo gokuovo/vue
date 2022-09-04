@@ -31,6 +31,17 @@ const NewsRouter = {
       order: 2,
     },
     {
+      title: 'news内容查看',
+      type: 'view',
+      name: 'newslinkList',
+      route: '/newslink/newslinklist',
+      filePath: 'view/newslink/newslink-list.vue',
+      inNav: true,
+      icon: 'iconfont icon-jiemiansheji',
+      permission: null,
+      order: 3,
+    },
+    {
       title: '新增news',
       type: 'view',
       name: 'NewsAdd',
@@ -52,6 +63,7 @@ const NewsRouter = {
       permission: null,
       order: 4,
     },
+
   ],
 }
 

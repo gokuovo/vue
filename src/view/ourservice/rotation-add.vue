@@ -18,7 +18,7 @@
   import UploadImgs from '@/component/base/homepage/background'
   import { reactive, ref, onMounted } from 'vue'
   import { get, post } from '../../lin/plugin/axios'
-  import {fileUpload} from '@/utils/Partners'
+  import {fileUpload} from '@/utils/saltFile'
 
   export default {
     components: {
@@ -36,7 +36,8 @@
         console.log(imageCode)
         let formData = new window.FormData();
         formData.append('file', upLoadFileList[0]);
-        formData.append('imageType', imageCode);
+        formData.append('fileType', imageCode);
+        formData.append("id","")
         let that = this;
         //文件上传后台方法
         fileUpload(formData, {'Content-Type': 'multipart/form-data'}).then(resp => {
