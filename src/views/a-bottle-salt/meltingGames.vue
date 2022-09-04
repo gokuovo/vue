@@ -2,6 +2,12 @@
 
   <div ref="alignCenter" class="alignCenter" style="width: 90rem;height: 100%">
 
+    <div ref="backGroundBox" class="box">
+      <div class="image-wrap">
+        <div class="image" :style="{backgroundImage: `url(${firstImg})`}"></div>
+      </div>
+    </div>
+
     <div style="height: 10%;width: 90rem">
       <toolbar></toolbar>
     </div>
@@ -14,51 +20,51 @@
               <div style="height: 1500px;width: 100%;position: relative;padding-left: 6rem">
 
                 <div class="titleFont" style="position: absolute;width: 25rem;height: 6.87rem;top: 6.68rem;">
-                  MELTING GAMES COLLABORATION
+                  {{titleFont}}
                 </div>
 
-                <div class="dateFont" style="position: absolute;width: 5.37rem;height: 0.93rem;top: 16.35rem;">
-                  Date
+                <div class="dateFont" style="position: absolute;width: auto;height: 0.93rem;top: 16.35rem;">
+                  DATE：{{dateFont}}
                 </div>
 
-                <div class="backNewsFont" style="position: absolute;width: 7.12rem;height: 1.12rem;top: 28.9rem;">
+                <div class="backNewsFont" style="position: absolute;width: auto;height: 1.12rem;top: 28.9rem;">
                   <a href="/#/News">BACK TO THE NEWS</a>
                 </div>
 
                 <div style="position: absolute;width: 18.37rem;height: 10.25rem;top: 53.45rem;">
-                  <img  style="position: absolute;width: 100%;height: 100%"/>
+                  <img :src="img1" style="position: absolute;width: 100%;height: 100%"/>
                 </div>
 
                 <div style="position: absolute;width: 18.37rem;height: 10.25rem;top: 64.95rem;">
-                  <img  style="position: absolute;width: 100%;height: 100%"/>
+                  <img :src="img2" style="position: absolute;width: 100%;height: 100%"/>
                 </div>
 
                 <div class="contentFont" style="position: absolute;width: 39.31rem;height: 5.75rem;top: 6.68rem;left: 32.93rem;">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus.
+                  {{font1}}
                 </div>
 
                 <div class="contentFont" style="position: absolute;width: 39.31rem;height: 4.31rem;top: 13.68rem;left: 32.93rem;">
-                  Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar.
+                  {{font2}}
                 </div>
 
                 <div class="contentFont" style="position: absolute;width: 39.31rem;height: 4.31rem;top: 19.24rem;left: 32.93rem;">
-                  Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.
+                  {{font3}}
                 </div>
 
                 <div style="position: absolute;width: 35.87rem;height: 20rem;top: 28.11rem;left: 32.93rem;">
-                  <img  style="position: absolute;width: 100%;height: 100%"/>
+                  <img :src="img3" style="position: absolute;width: 100%;height: 100%"/>
                 </div>
 
                 <div class="contentFont" style="position: absolute;width: 39.31rem;height: 5.75rem;top: 55.11rem;left: 32.93rem;">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus.
+                  {{font4}}
                 </div>
 
                 <div class="contentFont" style="position: absolute;width: 39.31rem;height: 4.31rem;top: 62.11rem;left: 32.93rem;">
-                  Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar.
+                  {{font5}}
                 </div>
 
                 <div class="contentFont" style="position: absolute;width: 39.31rem;height: 4.31rem;top: 67.67rem;left: 32.93rem;">
-                  Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.
+                  {{font6}}
                 </div>
 
               </div>
@@ -78,14 +84,16 @@
 <script>
   import toolbar from './components/toolbar'
   import contacts from './components/contacts'
+  import boxes from './commonScripts/moveBackground'
 
-  import {getImagesByImageCode,getWord} from './requestScript/meltingGames'
+  import {getNewsLink,getImagesByImageCode} from './requestScript/meltingGames'
 
   export default {
     name: 'meltingGames',
     components: { toolbar,contacts },
     data(){
       return {
+        firstImg: '',
         backImg:'',
         img1:'',
         img2:'',
@@ -101,45 +109,84 @@
       }
     },
     created() {
+      let that = this;
 
-      getImagesByImageCode({imageCode:'111'}).then(resp =>{
-        if(resp.data.length > 0){
-          this.backImg = resp.data[0].imageUrl.replaceAll('\\','\/');
+      let resp = {};
+      let data = [];
+      resp.data = data;
+      resp.data[0] = {
+        date: "20 may, 2022",
+        img01: "http://101.43.132.47:5000/assets/2022\\08\\12\\b8834b5bca7748808a5a8548821d5af6.jpg".replaceAll('\\','\/'),
+        img02: "http://101.43.132.47:5000/assets/2022/09/02/e2acf3530e994517bfb54125ba5ff4aa.png".replaceAll('\\','\/'),
+        img03: "http://101.43.132.47:5000/assets/2022/09/03/b7782dc54fbd4a4582013a0a5bd3f523.jpg".replaceAll('\\','\/'),
+        textEn01: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus.\nClass aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar.\nDonec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.",
+        textEn02: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus.\nClass aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar.\nDonec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.",
+        title: "melting games collaboration"
+      }
+      this.img1 = resp.data[0].img01.replaceAll('\\','\/');
+      this.img2 = resp.data[0].img02.replaceAll('\\','\/');
+      this.img3 = resp.data[0].img03.replaceAll('\\','\/');
+      this.titleFont = resp.data[0].title;
+      this.dateFont = resp.data[0].date;
+      this.font1 = resp.data[0]['text'+that.$store.getters.getLanguage+'01'].split('\n')[0];
+      this.font2 = resp.data[0]['text'+that.$store.getters.getLanguage+'01'].split('\n')[1];
+      this.font3 = resp.data[0]['text'+that.$store.getters.getLanguage+'01'].split('\n')[2];
+      this.font4 = resp.data[0]['text'+that.$store.getters.getLanguage+'02'].split('\n')[0];
+      this.font5 = resp.data[0]['text'+that.$store.getters.getLanguage+'02'].split('\n')[1];
+      this.font6 = resp.data[0]['text'+that.$store.getters.getLanguage+'02'].split('\n')[2];
+
+
+      getNewsLink({id:'7a8b9554-f397-46d1-af2b-eb702945280b'}).then(resp =>{
+        if(resp.length > 0){
+          this.img1 = resp[0].img01.replaceAll('\\','\/');
+          this.img2 = resp[0].img02.replaceAll('\\','\/');
+          this.img3 = resp[0].img03.replaceAll('\\','\/');
+          this.titleFont = resp[0].title;
+          this.dateFont = resp[0].date;
+          this.font1 = resp[0]['textEn'+that.$store.getters.getLanguage+'01'].split('\n')[0];
+          this.font2 = resp[0]['textEn'+that.$store.getters.getLanguage+'01'].split('\n')[1];
+          this.font3 = resp[0]['textEn'+that.$store.getters.getLanguage+'01'].split('\n')[2];
+          this.font4 = resp[0]['textEn'+that.$store.getters.getLanguage+'02'].split('\n')[0];
+          this.font5 = resp[0]['textEn'+that.$store.getters.getLanguage+'02'].split('\n')[1];
+          this.font6 = resp[0]['textEn'+that.$store.getters.getLanguage+'02'].split('\n')[2];
         }
       })
-      getImagesByImageCode({imageCode:'112'}).then(resp =>{
+
+      getImagesByImageCode({imageCode:'08'}).then(resp =>{
         if(resp.data.length > 0){
-          this.img1 = resp.data[0].imageUrl.replaceAll('\\','\/');
-        }
-      })
-      getImagesByImageCode({imageCode:'113'}).then(resp =>{
-        if(resp.data.length > 0){
-          this.img2 = resp.data[0].imageUrl.replaceAll('\\','\/');
-        }
-      })
-      getImagesByImageCode({imageCode:'114'}).then(resp =>{
-        if(resp.data.length > 0){
-          this.img3 = resp.data[0].imageUrl.replaceAll('\\','\/');
+          this.firstImg = resp.data[0].imageUrl.replaceAll('\\','\/');
         }
       })
 
-      getWord({code:'114'}).then(resp =>{
-        if(resp.data.length > 0){
-          this.titleFont = resp.data[0].imageUrl.replaceAll('\\','\/');
-        }
-      })
-
-
-
-
-
-
-
+    },
+    mounted() {
+      //背景图移动起来
+      let boxElement = this.$refs.backGroundBox
+      boxes.push({
+        el: boxElement,
+        targetX: 0,
+        targetY: 0,
+        x: 0,
+        y: 0,
+        left: boxElement.offsetLeft,
+        top: boxElement.offsetTop,
+        size: boxElement.offsetWidth
+      });
+      let elements = document.getElementsByClassName("buttonStyle");
+      elements[0].style.backgroundColor = "#BE4123";
+      elements[0].classList.remove("anation");
     }
   }
 </script>
 
 <style scoped>
+  @import './commonCSS/moveBackground.scss';
+
+  >>> .el-button--primary{
+    color: #FFFFFF;
+    background-color: #0D0D0D;
+    border-color: #0D0D0D;
+  }
 
   .divBase {
     width: 100%;
