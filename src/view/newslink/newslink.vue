@@ -122,8 +122,8 @@
 
       const getNews = async () => {
         loading.value = true
-        const news= await get("/SaltNewsLink/getNewsLinkOne?id="+props.editNewsId)
-        console.log(news)
+        const res = await get("/SaltNewsLink/getNewsLinkOne?id="+props.editNewsId)
+        listAssign(news, res[0])
         loading.value = false
       }
 
