@@ -43,12 +43,12 @@
     </div>
 
     <div style="height: 10%;width: 100%;color: #F5F5F5;">
-      <el-button @click="changeShowNewsData(1)" style="margin-left: 6rem;" class="buttonStyle anation" type="danger">
-        <span style="font-size: 14px;width: 4.785714285714286em;height: 2.142857142857143em" class="BoldItalic">NEWS</span>
+      <el-button @click="changeShowNewsData(1)" class="buttonStyle anation" type="danger">
+        <span style="font-size: 0.875rem;" class="BoldItalic">NEWS</span>
       </el-button>
 
-      <el-button style="margin-left: 1.4285714285714286em" @click="changeShowNewsData(2)" class="buttonStyle anation" type="danger">
-        <span style="font-size: 14px;width: 4.785714285714286em;height: 2.142857142857143em" class="BoldItalic">WORKLOGS</span>
+      <el-button style="margin-left: 1.5rem" @click="changeShowNewsData(2)" class="buttonStyle anation" type="danger">
+        <span style="font-size: 0.875rem;" class="BoldItalic">WORKLOGS</span>
       </el-button>
     </div>
 
