@@ -26,7 +26,7 @@
                   </div>
                 </div>
 
-                <div style="position: absolute;width: 20rem;height: 12.5rem;top: 18.75rem">
+                <div style="position: absolute;width: 20rem;height: 12.5rem;top: 18.75rem;background: #121212;">
                   <div class="firstFont">
                     in 2015 in Beijing, we established <span style="color: #F24E1E">Salt Sound Studio</span>, offering sound design, sound effects, music, voice over, & sound implantation for games.
                   </div>
@@ -47,7 +47,7 @@
                   </div>
                 </div>
 
-                <div style="position: absolute;width: 20rem;height: 12.5rem;top: 54.68rem">
+                <div style="position: absolute;width: 20rem;height: 12.5rem;top: 54.68rem;background: #121212;">
                   <div class="firstFont">
                     Our works are frequently displayed on Weplay, E3, PAX, TGS, Gamescom, and won many <span style="color: #F24E1E">AWARDS</span> in IGF, GMGC, IMGA and Indieplay.
                   </div>
@@ -190,7 +190,7 @@
                   </div>
                 </div>
 
-                <div style="position: absolute;width: 18.87rem;height: 12.5rem;top: 0;left: 60.3rem;">
+                <div style="position: absolute;width: 18.87rem;height: 12.5rem;top: 0;left: 60.3rem;background: #121212;">
                   <div class="firstFont">
                     we always keep high standards in terms of aesthetic and creative idea. we Respect <span style="color: #F24E1E">art, creation</span> and the contribution to art through <span style="color: #F24E1E">technology.</span>
                   </div>

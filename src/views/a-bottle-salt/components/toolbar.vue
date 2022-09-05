@@ -147,6 +147,7 @@
     color: #E3E1DB;
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    font-weight: 500;
   }
 
   .barFont:hover {

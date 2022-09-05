@@ -188,6 +188,8 @@
     letter-spacing: 0.02em;
     text-transform: uppercase;
     color: #B8B7B2;
+    font-family: inter;
+    font-style: normal;
   }
 
   .dateFont{
@@ -200,6 +202,8 @@
     text-transform: capitalize;
     color: #B7B5B0;
     opacity: 0.8;
+    font-family: inter;
+    font-style: normal;
   }
 
   .backNewsFont{
@@ -213,6 +217,8 @@
     text-transform: uppercase;
     color: #E3E1DB;
     opacity: 0.5;
+    font-family: inter;
+    font-style: normal;
   }
 
   .contentFont{
@@ -222,6 +228,8 @@
     font-size: 1.125rem;
     line-height: 130%;
     color: #E3E1DB;
+    font-family: inter;
+    font-style: normal;
   }
 
 

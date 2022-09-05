@@ -72,7 +72,7 @@
               <div v-if="!showLIST" style="height: 25%;width: 29.37rem;background-color: #383838;color: #F5F5F5;font-size: 1rem;font-style: italic;padding-left: 1.5rem">
                 <div class="BoldItalic" style="width: 100%;height: 25%;padding-top: 5%">{{showingAlbum['title'+$store.getters.getLanguage]}}</div>
                 <div style="width: 100%;height: 75%;position: relative;padding-top: 2%">
-                  <img style="width: 7.1rem;height: 7.1rem;position: absolute;font-size: 1rem" :src="undefined == showingAlbum.imgSrc ? '' : showingAlbum.imgSrc.replaceAll('\\','\/')"/>
+                  <img style="width: 7.1rem;height: 7.1rem;position: absolute;font-size: 1rem;object-fit: cover;" :src="undefined == showingAlbum.imgSrc ? '' : showingAlbum.imgSrc.replaceAll('\\','\/')"/>
                   <div class="BoldItalic" style="width: 7.1rem;height: 7.1rem;position: absolute;left: 8rem">
                     <div style="color: #F5F5F5;font-size: 0.875rem;height: 1.55em;width: 33.5em;font-style: italic;margin-bottom: 0.8em">RELEASE：<span style="font-size: 0.75rem">{{showingAlbum['release'+$store.getters.getLanguage]}}</span></div>
                     <div style="color: #F5F5F5;font-size: 0.875rem;height: 1.55em;width: 33.5em;font-style: italic;margin-bottom: 0.75em">DEVELOPER：<span style="font-size: 0.75rem">{{showingAlbum['developer'+$store.getters.getLanguage]}}</span></div>
