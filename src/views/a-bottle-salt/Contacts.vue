@@ -21,26 +21,26 @@
       <table class="divBase" style="font-weight: 500">
         <tr>
           <td style="width: 33%;height: 100%;">
-            <div class="BoldItalic" style="width: 21em;height: 1.2857142857142858em;color: #E3E1DB;font-size: 14px;margin-bottom: 1.4285714285714286em">
+            <div class="BoldItalic" style="width: 21em;height: 1.2857142857142858em;color: #E3E1DB;font-size: 0.875rem;margin-bottom: 1.4285714285714286em">
               PHONE NUMBER：
-              <span style="font-size: 14px;color: #71706E">{{contacts.tel}}</span>
+              <span style="font-size: 0.875rem;color: #71706E">{{contacts.tel}}</span>
             </div>
-            <div class="BoldItalic" style="width: 21em;height: 6.957142857142857em;color: #71706E!important;font-size: 14px;">
+            <div class="BoldItalic" style="width: 21em;height: 6.957142857142857em;color: #71706E!important;font-size: 0.875rem;">
               {{contacts['address'+$store.getters.getLanguage]}}
             </div>
           </td>
           <td style="width: 33%;height: 100%;padding-left: 9%">
-            <div class="BoldItalic" style="width: 21em;height: 1.2857142857142858em;color: #E3E1DB;font-size: 14px;margin-bottom: 1.4285714285714286em">
+            <div class="BoldItalic" style="width: 21em;height: 1.2857142857142858em;color: #E3E1DB;font-size: 0.875rem;margin-bottom: 1.4285714285714286em">
               OUR SOCIAL：
             </div>
-            <div style="width: 100%;height: 70%;color: #71706E;font-size: 14px;font-style: italic;">
+            <div style="width: 100%;height: 70%;color: #71706E;font-size: 0.875rem;font-style: italic;">
                 <div v-for="(item,index) in contactImages" style="width: 2rem;height: 20%;position: relative;display: inline-block;" :style="index != 0 ? 'margin-left: 0.75rem':''">
                   <a :href="item.contactUrl" target="_blank"><img style="position: absolute;width: 1.7142857142857142em;height: 1.7142857142857142em" :src="item.imageUrl"/></a>
                 </div>
             </div>
           </td>
           <td style="width: 33%;height: 100%;padding-left: 15%">
-            <div class="BoldItalic" style="width: 21em;height: 1.2857142857142858em;color: #E3E1DB;font-size: 14px;margin-bottom: 1.4285714285714286em">
+            <div class="BoldItalic" style="width: 21em;height: 1.2857142857142858em;color: #E3E1DB;font-size: 0.875rem;margin-bottom: 1.4285714285714286em">
               E-MAIL：
             </div>
             <div class="BoldItalic" style="width: 11.571428571428571em;height: 70%;color: #71706E;font-size: 0.875rem">

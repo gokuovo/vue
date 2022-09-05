@@ -110,45 +110,20 @@
     },
     created() {
       let that = this;
-
-      let resp = {};
-      let data = [];
-      resp.data = data;
-      resp.data[0] = {
-        date: "20 may, 2022",
-        img01: "http://101.43.132.47:5000/assets/2022\\08\\12\\b8834b5bca7748808a5a8548821d5af6.jpg".replaceAll('\\','\/'),
-        img02: "http://101.43.132.47:5000/assets/2022/09/02/e2acf3530e994517bfb54125ba5ff4aa.png".replaceAll('\\','\/'),
-        img03: "http://101.43.132.47:5000/assets/2022/09/03/b7782dc54fbd4a4582013a0a5bd3f523.jpg".replaceAll('\\','\/'),
-        textEn01: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus.\nClass aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar.\nDonec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.",
-        textEn02: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus.\nClass aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar.\nDonec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna. Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.",
-        title: "melting games collaboration"
-      }
-      this.img1 = resp.data[0].img01.replaceAll('\\','\/');
-      this.img2 = resp.data[0].img02.replaceAll('\\','\/');
-      this.img3 = resp.data[0].img03.replaceAll('\\','\/');
-      this.titleFont = resp.data[0].title;
-      this.dateFont = resp.data[0].date;
-      this.font1 = resp.data[0]['text'+that.$store.getters.getLanguage+'01'].split('\n')[0];
-      this.font2 = resp.data[0]['text'+that.$store.getters.getLanguage+'01'].split('\n')[1];
-      this.font3 = resp.data[0]['text'+that.$store.getters.getLanguage+'01'].split('\n')[2];
-      this.font4 = resp.data[0]['text'+that.$store.getters.getLanguage+'02'].split('\n')[0];
-      this.font5 = resp.data[0]['text'+that.$store.getters.getLanguage+'02'].split('\n')[1];
-      this.font6 = resp.data[0]['text'+that.$store.getters.getLanguage+'02'].split('\n')[2];
-
-
       getNewsLink({id:'7a8b9554-f397-46d1-af2b-eb702945280b'}).then(resp =>{
-        if(resp.length > 0){
+        if(resp.data.length > 0){
+          resp = resp.data;
           this.img1 = resp[0].img01.replaceAll('\\','\/');
           this.img2 = resp[0].img02.replaceAll('\\','\/');
           this.img3 = resp[0].img03.replaceAll('\\','\/');
           this.titleFont = resp[0].title;
           this.dateFont = resp[0].date;
-          this.font1 = resp[0]['textEn'+that.$store.getters.getLanguage+'01'].split('\n')[0];
-          this.font2 = resp[0]['textEn'+that.$store.getters.getLanguage+'01'].split('\n')[1];
-          this.font3 = resp[0]['textEn'+that.$store.getters.getLanguage+'01'].split('\n')[2];
-          this.font4 = resp[0]['textEn'+that.$store.getters.getLanguage+'02'].split('\n')[0];
-          this.font5 = resp[0]['textEn'+that.$store.getters.getLanguage+'02'].split('\n')[1];
-          this.font6 = resp[0]['textEn'+that.$store.getters.getLanguage+'02'].split('\n')[2];
+          this.font1 = resp[0]['text'+that.$store.getters.getLanguage+'01'].split('\n')[0];
+          this.font2 = resp[0]['text'+that.$store.getters.getLanguage+'01'].split('\n')[1];
+          this.font3 = resp[0]['text'+that.$store.getters.getLanguage+'01'].split('\n')[2];
+          this.font4 = resp[0]['text'+that.$store.getters.getLanguage+'02'].split('\n')[0];
+          this.font5 = resp[0]['text'+that.$store.getters.getLanguage+'02'].split('\n')[1];
+          this.font6 = resp[0]['text'+that.$store.getters.getLanguage+'02'].split('\n')[2];
         }
       })
 
@@ -181,6 +156,17 @@
 
 <style scoped>
   @import './commonCSS/moveBackground.scss';
+
+  .alignCenter{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    min-width: 1100px;
+    min-height: 687px;
+  }
 
   >>> .el-button--primary{
     color: #FFFFFF;

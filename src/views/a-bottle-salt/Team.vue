@@ -17,9 +17,9 @@
                     <table class="divBase">
                       <tr>
                         <td class="BoldItalic" style="text-align: center;">
-                          <div style="color: #F88E5A;font-size: 16px">{{teamImages[0]['staffName'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[0]['staffPost'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[0]['staffDesc'+$store.getters.getLanguage]}}</div>
+                          <div style="color: #F88E5A;font-size: 1rem">{{teamImages[0]['staffName'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[0]['staffPost'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[0]['staffDesc'+$store.getters.getLanguage]}}</div>
                         </td>
                       </tr>
                     </table>
@@ -38,9 +38,9 @@
                     <table class="divBase">
                       <tr>
                         <td class="BoldItalic" style="text-align: center;">
-                          <div style="color: #F88E5A;font-size: 16px">{{teamImages[1]['staffName'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[1]['staffPost'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[1]['staffDesc'+$store.getters.getLanguage]}}</div>
+                          <div style="color: #F88E5A;font-size: 1rem">{{teamImages[1]['staffName'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[1]['staffPost'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[1]['staffDesc'+$store.getters.getLanguage]}}</div>
                         </td>
                       </tr>
                     </table>
@@ -59,9 +59,9 @@
                     <table class="divBase">
                       <tr>
                         <td class="BoldItalic" style="text-align: center;">
-                          <div style="color: #F88E5A;font-size: 16px">{{teamImages[2]['staffName'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[2]['staffPost'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[2]['staffDesc'+$store.getters.getLanguage]}}</div>
+                          <div style="color: #F88E5A;font-size: 1rem">{{teamImages[2]['staffName'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[2]['staffPost'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[2]['staffDesc'+$store.getters.getLanguage]}}</div>
                         </td>
                       </tr>
                     </table>
@@ -74,9 +74,9 @@
                     <table class="divBase">
                       <tr>
                         <td class="BoldItalic" style="text-align: center;">
-                          <div style="color: #F88E5A;font-size: 16px">{{teamImages[3]['staffName'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[3]['staffPost'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[3]['staffDesc'+$store.getters.getLanguage]}}</div>
+                          <div style="color: #F88E5A;font-size: 1rem">{{teamImages[3]['staffName'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[3]['staffPost'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[3]['staffDesc'+$store.getters.getLanguage]}}</div>
                         </td>
                       </tr>
                     </table>
@@ -89,9 +89,9 @@
                     <table class="divBase">
                       <tr>
                         <td class="BoldItalic" style="text-align: center;">
-                          <div style="color: #F88E5A;font-size: 16px">{{teamImages[4]['staffName'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[4]['staffPost'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[4]['staffDesc'+$store.getters.getLanguage]}}</div>
+                          <div style="color: #F88E5A;font-size: 1rem">{{teamImages[4]['staffName'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[4]['staffPost'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[4]['staffDesc'+$store.getters.getLanguage]}}</div>
                         </td>
                       </tr>
                     </table>
@@ -104,9 +104,9 @@
                     <table class="divBase">
                       <tr>
                         <td class="BoldItalic" style="text-align: center;">
-                          <div style="color: #F88E5A;font-size: 16px">{{teamImages[5]['staffName'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[5]['staffPost'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[5]['staffDesc'+$store.getters.getLanguage]}}</div>
+                          <div style="color: #F88E5A;font-size: 1rem">{{teamImages[5]['staffName'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[5]['staffPost'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[5]['staffDesc'+$store.getters.getLanguage]}}</div>
                         </td>
                       </tr>
                     </table>
@@ -119,9 +119,9 @@
                     <table class="divBase">
                       <tr>
                         <td class="BoldItalic" style="text-align: center;">
-                          <div style="color: #F88E5A;font-size: 16px">{{teamImages[6]['staffName'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[6]['staffPost'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[6]['staffDesc'+$store.getters.getLanguage]}}</div>
+                          <div style="color: #F88E5A;font-size: 1rem">{{teamImages[6]['staffName'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[6]['staffPost'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[6]['staffDesc'+$store.getters.getLanguage]}}</div>
                         </td>
                       </tr>
                     </table>
@@ -135,9 +135,9 @@
                     <table class="divBase">
                       <tr>
                         <td class="BoldItalic" style="text-align: center;">
-                          <div style="color: #F88E5A;font-size: 16px">{{teamImages[7]['staffName'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[7]['staffPost'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[7]['staffDesc'+$store.getters.getLanguage]}}</div>
+                          <div style="color: #F88E5A;font-size: 1rem">{{teamImages[7]['staffName'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[7]['staffPost'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[7]['staffDesc'+$store.getters.getLanguage]}}</div>
                         </td>
                       </tr>
                     </table>
@@ -150,9 +150,9 @@
                     <table class="divBase">
                       <tr>
                         <td class="BoldItalic" style="text-align: center;">
-                          <div style="color: #F88E5A;font-size: 16px">{{teamImages[10]['staffName'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[10]['staffPost'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[10]['staffDesc'+$store.getters.getLanguage]}}</div>
+                          <div style="color: #F88E5A;font-size: 1rem">{{teamImages[10]['staffName'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[10]['staffPost'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[10]['staffDesc'+$store.getters.getLanguage]}}</div>
                         </td>
                       </tr>
                     </table>
@@ -166,9 +166,9 @@
                     <table class="divBase">
                       <tr>
                         <td class="BoldItalic" style="text-align: center;">
-                          <div style="color: #F88E5A;font-size: 16px">{{teamImages[8]['staffName'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[8]['staffPost'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[8]['staffDesc'+$store.getters.getLanguage]}}</div>
+                          <div style="color: #F88E5A;font-size: 1rem">{{teamImages[8]['staffName'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[8]['staffPost'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[8]['staffDesc'+$store.getters.getLanguage]}}</div>
                         </td>
                       </tr>
                     </table>
@@ -181,9 +181,9 @@
                     <table class="divBase">
                       <tr>
                         <td class="BoldItalic" style="text-align: center;">
-                          <div style="color: #F88E5A;font-size: 16px">{{teamImages[9]['staffName'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[9]['staffPost'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[9]['staffDesc'+$store.getters.getLanguage]}}</div>
+                          <div style="color: #F88E5A;font-size: 1rem">{{teamImages[9]['staffName'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[9]['staffPost'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[9]['staffDesc'+$store.getters.getLanguage]}}</div>
                         </td>
                       </tr>
                     </table>
@@ -202,9 +202,9 @@
                     <table class="divBase">
                       <tr>
                         <td class="BoldItalic" style="text-align: center;">
-                          <div style="color: #F88E5A;font-size: 16px">{{teamImages[11]['staffName'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[11]['staffPost'+$store.getters.getLanguage]}}</div>
-                          <div style="font-size: 13px;color:#BAB9B6;padding-top: 5%">{{teamImages[11]['staffDesc'+$store.getters.getLanguage]}}</div>
+                          <div style="color: #F88E5A;font-size: 1rem">{{teamImages[11]['staffName'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[11]['staffPost'+$store.getters.getLanguage]}}</div>
+                          <div style="font-size: 0.875rem;color:#BAB9B6;padding-top: 5%">{{teamImages[11]['staffDesc'+$store.getters.getLanguage]}}</div>
                         </td>
                       </tr>
                     </table>
@@ -346,13 +346,13 @@
 
   .firstFont{
     position: absolute;
-    width: 213px;
-    height: 108px;
+    width: 13.31rem;
+    height: 6.75rem;
     font-family: 'DIN-BoldItalic';
     font-style: italic;
     font-weight: 500;
-    font-size: 14px;
-    line-height: 18px;
+    font-size: 0.875rem;
+    line-height: 1.125rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: #E3E1DB;

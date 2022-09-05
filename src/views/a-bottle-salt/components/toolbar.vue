@@ -27,7 +27,7 @@
                     <span class="selfFont">CN</span>
                   </el-dropdown-item>
                   <el-dropdown-item command="En">
-                    <span style="font-style: italic">EN</span>
+                    <span class="selfFont">EN</span>
                   </el-dropdown-item>
                   <el-dropdown-item command="Spa">
                     <span class="selfFont">SPA</span>
@@ -173,10 +173,11 @@
 
   .selfFont{
     font-family: DIN-BoldItalic;
-    font-style: italic
+    font-style: italic;
+    font-size: 0.875rem;
   }
 
   .el-breadcrumb{
-    font-size: 18px!important;
+    font-size: 1.125rem!important;
   }
 </style>
