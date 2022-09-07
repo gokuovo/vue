@@ -16,7 +16,8 @@
       </video>
     </div>
     <div @click="clickVideo" class="videoButton">
-      <span @click="clickVideo" class="videoFont">PLAY INTRO</span><i class="el-icon-caret-right" style="color: #E3E1DB;font-size: 1rem"></i>
+      <span @click="clickVideo" class="videoFont">PLAY INTRO</span>
+      <img src="../../assets/images/Polygon.png" style="width: 1rem;height: 1rem;object-fit: contain;margin-left: 0.3rem">
     </div>
 
 
