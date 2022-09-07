@@ -157,6 +157,11 @@
 <style scoped>
   @import './commonCSS/moveBackground.scss';
 
+  .image{
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9));
+    opacity: 0.3;
+  }
+
   .alignCenter{
     position: absolute;
     left: 0;
@@ -180,21 +185,17 @@
   }
 
   .titleFont{
-    font-family: 'DIN-BoldItalic';
-    font-style: italic;
     font-weight: 500;
     font-size: 2.62rem;
     line-height: 130%;
     letter-spacing: 0.02em;
     text-transform: uppercase;
     color: #B8B7B2;
-    font-family: inter;
-    font-style: normal;
+    font-family: DIN-BoldItalic;
+    font-style: italic;
   }
 
   .dateFont{
-    font-family: 'DIN-BoldItalic';
-    font-style: italic;
     font-weight: 500;
     font-size: 0.875rem;
     line-height: 110%;
@@ -202,13 +203,11 @@
     text-transform: capitalize;
     color: #B7B5B0;
     opacity: 0.8;
-    font-family: inter;
-    font-style: normal;
+    font-family: DIN-BoldItalic;
+    font-style: italic;
   }
 
   .backNewsFont{
-    font-family: 'DIN-BoldItalic';
-    font-style: italic;
     font-weight: 500;
     font-size: 0.75rem;
     line-height: 1.125rem;
@@ -217,13 +216,11 @@
     text-transform: uppercase;
     color: #E3E1DB;
     opacity: 0.5;
-    font-family: inter;
-    font-style: normal;
+    font-family: DIN-BoldItalic;
+    font-style: italic;
   }
 
   .contentFont{
-    font-family: 'Inter';
-    font-style: normal;
     font-weight: 200;
     font-size: 1.125rem;
     line-height: 130%;

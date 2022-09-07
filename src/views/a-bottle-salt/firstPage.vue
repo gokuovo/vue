@@ -10,9 +10,19 @@
       </div>
     </div>
 
+    <div @click="bigVideoDivClick" v-if="showBigVideo" style="position: absolute;width: 100%;height: 100%;z-index: 2;">
+      <video :src="firstVideo.videoUrl" @click="bigVideoClick" ref="bigVideo" style="position: absolute;width: 60%;left: 20%;top: 15%;height: 70%;object-fit: fill;" controlslist="nofullscreen" controls>
+        <source type="video/mp4">
+      </video>
+    </div>
+    <div @click="clickVideo" class="videoButton">
+      <span @click="clickVideo" class="videoFont">PLAY INTRO</span><i class="el-icon-caret-right" style="color: #E3E1DB;font-size: 1rem"></i>
+    </div>
+
+
     <img :src="thirdImg" style="position: absolute;width: 38rem;;height: 14.5rem;left: 0;bottom: 4.43rem;" />
 
-    <img class="rollAni" :src="secondImg" style="position: absolute;width: 90rem;height: 100%;" />
+    <img ref="selfOpacity" class="rollAni" :src="secondImg" style="position: absolute;width: 90rem;height: 100%;z-index: -2" />
 
     <div style="height: 10%;width: 90rem;">
       <toolbar></toolbar>
@@ -46,7 +56,9 @@
     components: { toolbar,contacts },
     data() {
       return {
-        firstVideo: '',
+        showBigVideo:false,
+        bigVideoIsClicked:false,
+        firstVideo: {videoUrl:'http://101.43.132.47:5000/assets/2022/08/11/994978918c554b93a068ce2cd9fd391c.mp4'},
         firstPage2:'',
         secondImg:'',
         thirdImg:'',
@@ -118,7 +130,26 @@
       });
     },//end of mounted
     methods:{
+      clickVideo(){
+        this.showBigVideo = true;
+        this.$refs.selfOpacity.style.filter= 'brightness(23%)';
+      },
 
+      bigVideoClick(){
+        this.bigVideoIsClicked = true;
+        let video = this.$refs.bigVideo;
+        if (video.paused || video.ended) video.play();
+        else video.pause();
+      },
+
+      bigVideoDivClick(){
+        if(!this.bigVideoIsClicked){
+          this.showBigVideo = false;
+          this.$refs.selfOpacity.style.filter= 'brightness(100%)';
+          this.$refs.bigVideo.pause();
+        }
+        this.bigVideoIsClicked = false;
+      }
     }//end methods
   }
 </script>
@@ -126,8 +157,37 @@
 <style scoped>
   @import './commonCSS/moveBackground.scss';
 
+  .videoButton{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0.375rem 0.5rem 0.375rem 0.75rem;
+    gap: 0.125rem;
+    position: absolute;
+    width: 7.875rem;
+    height: 2.25rem;
+    left: 76.125rem;
+    top: 49rem;
+    background: #BE4123;
+    border-radius: 0.3125rem;
+  }
+
+  .videoFont{
+    font-family: DIN-BoldItalic;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.125rem;
+    text-align: right;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #E3E1DB;
+  }
+
   .image{
-    /*filter: grayscale(0.7);*/
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+    background-blend-mode: normal, luminosity;
   }
 
   .rollAni{

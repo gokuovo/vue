@@ -17,7 +17,7 @@
             <div class="divBase selfDefineScroll" style="overflow-y: auto;padding-left: 6rem">
 
               <div v-for="(item) in newsData"  style="display: inline-block;width: 50%;height: 25%;position: relative;margin-bottom: 3%">
-                <img style="width: 27%;height: 103%;position: absolute" :src="item.url" />
+                <img style="width: 27%;height: 103%;position: absolute;object-fit: cover;" :src="item.url" />
                 <div style="width: 60%;height: 100%;position: absolute;left: 32%">
                   <table class="divBase">
                     <tr>
@@ -174,25 +174,16 @@
     color: #E3E1DB;
   }
   .anation:hover {
-    animation: change 1s linear 0s;
+    animation: change 0.5s linear 0s;
     animation-iteration-count: 1;
     animation-fill-mode:forwards;
   }
 
   @keyframes change {
     0% {
-      color: rgba(189,187,183,0.1)
+      color: #E3E1DB;
     }
-    30%{
-      color:rgba(248,197,182,0.3)
-    }
-    50% {
-      color: rgba(247,149,123,0.5)
-    }
-    80% {
-      color: rgba(255,101,59,0.8)
-    }
-    100% {color: rgba(248,81,35,1);}
+    100% {color: #BE4123;}
   }
 
   .BoldItalic{

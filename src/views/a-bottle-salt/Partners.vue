@@ -13,11 +13,11 @@
     <div style="height: 90%;width: 100%">
       <table class="divBase">
         <tr>
-          <td style="width: 80%;height: 100%">
-            <div class="divBase selfDefineScroll" style="height: 60%;width: 95%;overflow-y: auto;margin-left: 6rem;margin-bottom: 10rem">
-              <div v-for="(item) in partners" style="display: inline-block;position: relative;width: 17%;height: 38%;margin-left: 1%;margin-top: 5%">
+          <td style="width: 80%;height: 100%;vertical-align: top;padding-top: 6.06rem">
+            <div class="divBase selfDefineScroll" style="height: 70%;width: 95%;overflow-y: auto;margin-left: 6rem;margin-bottom: 10rem">
+              <div v-for="(item) in partners" style="display: inline-block;position: relative;width: 17%;height: 38%;margin-left: 2.2%;margin-top: 4.6%">
                 <a :href="item.partnerLink" :target="item.partnerLink.indexOf('http') != -1 ? '_blank' : '_self' ">
-                  <img class="linkHover"  style="position: absolute;width: 100%;height: 100%" :src="item.partnerUrl" />
+                  <img class="linkHover"  style="position: absolute;width: 11.75rem;height: 11.75rem;object-fit: cover;" :src="item.partnerUrl" />
                 </a>
               </div>
             </div>
@@ -54,6 +54,9 @@
       }
     },
     created(){
+
+    },
+    mounted() {
       getAllPartners().then(resp =>{
         resp = resp.data;
         if(resp.length > 0){
@@ -67,8 +70,6 @@
           this.firstImg = resp[0].imageUrl.replaceAll('\\','\/');
         }
       });
-    },
-    mounted() {
 
       //背景图移动起来
       let boxElement = this.$refs.backGroundBox

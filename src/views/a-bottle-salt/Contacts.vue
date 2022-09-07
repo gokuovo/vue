@@ -79,6 +79,8 @@
       }
     },
     created(){
+    },
+    mounted() {
       //可动背景图
       getContactImage_back({imageCode:'10'}).then(resp =>{
         resp = resp.data;
@@ -109,9 +111,6 @@
           this.contactImages = resp;
         }
       });
-
-    },
-    mounted() {
 
       //背景图移动起来
       let boxElement = this.$refs.backGroundBox

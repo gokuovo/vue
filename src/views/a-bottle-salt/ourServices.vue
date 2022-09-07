@@ -25,19 +25,18 @@
               <div style="width: 100%;height: 50%">
                 <table class="divBase">
                   <tr>
-                    <td style="width: 40%;font-size: 28px;vertical-align: top;position: relative">
-                      <div class="BoldItalic" style="top: 5rem;left: 6rem;position: absolute;font-size: 2.625rem;color: #B8B7B2;font-weight: 500">
+                    <td style="width: 90%;font-size: 28px;vertical-align: top;position: relative">
+                      <div class="BoldItalic" style="top: 6.25rem;left: 6rem;position: absolute;font-size: 2.625rem;color: #B8B7B2;font-weight: 500">
                         {{this.whatWeDo}}
                       </div>
-                    </td>
-                    <td style="width: 50%;color: #E3E1DB;font-weight: 200;vertical-align: top;font-size: 1.125rem;position: relative;text-align: left">
-                      <div class="inter" style="top: 5.5rem;position: absolute;">
+
+                      <div class="inter" style="top: 6.25rem;left: 26.75rem;width: 44rem;height: 1.43rem;text-align: left;position: absolute;line-height: 130%;color: #E3E1DB;font-weight: 200;font-size: 1.125rem;">
                         {{this.whatWeDoText1}}
                       </div>
-                      <div class="inter" style="top: 7.93rem;position: absolute;line-height: 130%">
+                      <div class="inter" style="top: 8.93rem;left: 26.75rem;width: 44rem;height: 2.87rem;text-align: left;position: absolute;line-height: 130%;color: #E3E1DB;font-weight: 200;font-size: 1.125rem;">
                         {{this.whatWeDoText2}}
                       </div>
-                      <div class="inter" style="top: 12.12rem;position: absolute;line-height: 130%">
+                      <div class="inter" style="top: 13.05rem;left: 26.75rem;width: 44rem;height: 2.87rem;text-align: left;position: absolute;line-height: 130%;color: #E3E1DB;font-weight: 200;font-size: 1.125rem;">
                         {{this.whatWeDoText3}}
                       </div>
                     </td>
@@ -47,22 +46,22 @@
               </div>
 
               <div style="width: 100%;height: 10%;color: #F5F5F5;font-size: 20px;font-style:oblique;">
-                <table class="divBase" v-show="!showVideo">
-                  <tr @click="showVideo = !showVideo" class="divBase" style="position: relative">
-                    <td @click="fontButtonClick(0)" class="fontButton BoldItalic anation" style="position: absolute;left: 6rem;top: 2rem">MUSIC</td>
-                    <td @click="fontButtonClick(1)" class="fontButton BoldItalic anation" style="position: absolute;left: 14.5rem;top: 2rem">SOUND DESIGN</td>
-                    <td @click="fontButtonClick(2)" class="fontButton BoldItalic anation" style="position: absolute;left: 27.12rem;top: 2rem">VOICE ACTING</td>
-                    <td @click="fontButtonClick(3)" class="fontButton BoldItalic anation" style="position: absolute;left: 39rem;top: 2rem">GAME AUDIO PIPELINE</td>
+                <table class="divBase" v-if="!showVideo">
+                  <tr @click="showVideo = !showVideo" class="divBase">
+                    <td @click="fontButtonClick(0)" class="fontButton BoldItalic anation" style="position: absolute;left: 6rem;top: 36.31rem">MUSIC</td>
+                    <td @click="fontButtonClick(1)" class="fontButton BoldItalic anation" style="position: absolute;left: 13.62rem;top: 36.31rem">SOUND DESIGN</td>
+                    <td @click="fontButtonClick(2)" class="fontButton BoldItalic anation" style="position: absolute;left: 26.56rem;top: 36.31rem">VOICE ACTING</td>
+                    <td @click="fontButtonClick(3)" class="fontButton BoldItalic anation" style="position: absolute;left: 38.75rem;top: 36.31rem">GAME AUDIO PIPELINE</td>
                   </tr>
                 </table>
               </div>
 
-              <div style="width: 100%;height: 40%;">
+              <div v-if="showVideo" style="width: 100%;height: 40%;">
                 <table class="divBase">
                   <tr>
                     <td style="width: 70%;height: 100%;position: relative">
                       <div style="width: 40%;height: 100%;display: inline-block;position: absolute;left: 5rem;top: 0rem;">
-                        <ul class="divAnimate" ref="childTr" v-show="showVideo">
+                        <ul class="divAnimate" ref="childTr" v-if="showVideo">
                           <li style="height: 15%;" @click="fontButtonClick(0)" class="fontButton BoldItalic anation">MUSIC</li>
                           <li style="height: 15%;" @click="fontButtonClick(1)" class="fontButton BoldItalic anation">SOUND DESIGN</li>
                           <li style="height: 15%;" @click="fontButtonClick(2)" class="fontButton BoldItalic anation">VOICE ACTING</li>
@@ -78,7 +77,7 @@
                     </td>
 
                     <td style="width: 50%;height: 100%;left: -6%;position: relative">
-                      <div class="divAnimate" v-show="showVideo" style="width: 150%;height: 60%;position: absolute;top: 2rem;overflow: hidden">
+                      <div class="divAnimate" v-if="showVideo" style="width: 120%;height: 60%;position: absolute;top: 2rem;overflow: hidden">
                         <div ref="carouselImgBox" class="carouselImgBox">
                           <img class="imgStyle" v-for="item in carouselImgPaths" :src="item"/>
                         </div>
@@ -101,7 +100,7 @@
 
 <script>
   import toolbar from './components/toolbar'
-  import contacts from './components/contactsOfOurservice'
+  import contacts from './components/contacts'
   import boxes from './commonScripts/moveBackground'
 
   import { getRotation,getWord,getVideoList,getImagesByImageCode } from './requestScript/OurService'
@@ -179,38 +178,41 @@
     },
     methods: {
       fontButtonClick(index) {
-        //还要切换视频内容
-        let childrens = this.$refs.childTr.childNodes
-        for (let i = 0; i < childrens.length; i++) {
-          if (i == index) {
-            childrens[i].style.color = '#BE4123'
-            if(childrens[i].classList.contains("anation")){
-              childrens[i].classList.remove("anation");
-            }
-          } else {
-            childrens[i].style.color = '#E3E1DB'
-            if(!childrens[i].classList.contains("anation")){
-              childrens[i].classList.add("anation");
-            }
-          }
-        }
-
-        getVideoList().then(resp =>{
-          if(resp.data != ""){
-            for(let i = 0;i < resp.data.length;i++){
-              if(index+1 == resp.data[i].id){
-                this.firstVideo = resp.data[i];
+        let that = this;
+        window.setTimeout(function() {
+          //还要切换视频内容
+          let childrens = that.$refs.childTr.childNodes
+          for (let i = 0; i < childrens.length; i++) {
+            if (i == index) {
+              childrens[i].style.color = '#BE4123'
+              if(childrens[i].classList.contains("anation")){
+                childrens[i].classList.remove("anation");
+              }
+            } else {
+              childrens[i].style.color = '#E3E1DB'
+              if(!childrens[i].classList.contains("anation")){
+                childrens[i].classList.add("anation");
               }
             }
-
           }
-        });
 
-        getRotation({code:index}).then(resp =>{
-          if(resp.data.length > 0){
-            this.carouselImgPaths = resp.data;
-          }
-        })
+          getVideoList().then(resp =>{
+            if(resp.data != ""){
+              for(let i = 0;i < resp.data.length;i++){
+                if(index+1 == resp.data[i].id){
+                  that.firstVideo = resp.data[i];
+                }
+              }
+
+            }
+          });
+
+          getRotation({code:index}).then(resp =>{
+            if(resp.data.length > 0){
+              that.carouselImgPaths = resp.data;
+            }
+          })
+        },100);
       },
 
       clickVideo(){
@@ -240,6 +242,11 @@
 <style scoped>
   @import './commonCSS/moveBackground.scss';
 
+  .image{
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+    opacity: 0.5;
+  }
+
   .alignCenter{
     position: absolute;
     left: 0;
@@ -251,14 +258,10 @@
     min-height: 687px;
   }
 
-  /*.imgStyle{*/
-  /*  max-width: 100%;*/
-  /*  max-height: 100%;*/
-  /*  position: absolute;*/
-  /*  top: 50%;*/
-  /*  left: 50%;*/
-  /*  transform: translate(-50%, -50%);*/
-  /*}*/
+  .imgStyle{
+    max-width: 100%;
+    max-height: 100%;
+  }
 
   .BoldItalic{
     font-family: DIN-BoldItalic;
@@ -285,23 +288,14 @@
   }
 
   .anation:hover {
-    animation: change 1s linear 0s;
+    animation: change 0.5s linear 0s;
     animation-iteration-count: 1;
     animation-fill-mode:forwards;
   }
 
   @keyframes change {
     0% {
-      color: #E3E1DB
-    }
-    30%{
-      color:#9d6f44
-    }
-    50% {
-      color: #a86627
-    }
-    80% {
-      color: #be6732
+      color: #E3E1DB;
     }
     100% {color: #BE4123;}
   }

@@ -8,15 +8,15 @@
         <td style="width: 18.75rem;">
           <div style="width: 100%;height: 100%"></div>
         </td>
-        <td style="width: 60rem;height: 100%;position: relative">
+        <td style="width: 60rem;height: 100%;position: relative;vertical-align: top;">
           <el-breadcrumb separator="   ">
             <el-breadcrumb-item :to="item.url" v-for="item in breadcrumbs" :key="item.url">
               <span class="barFont" style="font-style: italic">{{item['menuName'+$store.getters.getLanguage]}}</span>
             </el-breadcrumb-item>
           </el-breadcrumb>
         </td>
-        <td style="width: 11.25rem">
-          <div style="position: relative;width: 11.25rem;height: 100%">
+        <td style="width: 11.25rem;position: relative;vertical-align: top;">
+          <div>
               <el-dropdown @command="handleCommand">
                 <el-button type="primary">
                   <span class="selfFont">En</span>
@@ -123,7 +123,7 @@
 
   >>>.el-breadcrumb{
     position: absolute;
-    top: 50%;
+    top: 2.81rem;
   }
 
   >>>.el-breadcrumb__item{
@@ -132,7 +132,7 @@
 
   >>>.el-dropdown{
     position: absolute;
-    top: 50%;
+    top: 2.812rem;
     right: 6rem;
   }
 
@@ -144,30 +144,21 @@
   .barFont{
     font-family: DIN-BoldItalic;
     font-size: 0.875rem;
-    color: #E3E1DB;
+    color: #9D9E9A;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     font-weight: 500;
   }
 
   .barFont:hover {
-    animation: change 1s linear 0s;
+    animation: change 0.5s linear 0s;
     animation-iteration-count: 1;
     animation-fill-mode:forwards;
   }
 
   @keyframes change {
     0% {
-      color: rgba(189,187,183,0.1)
-    }
-    30%{
-      color:#9d6f44
-    }
-    50% {
-      color: #a86627
-    }
-    80% {
-      color: #be6732
+      color: #9F9E9A;
     }
     100% {color: #BE4123;}
   }

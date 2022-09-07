@@ -1,8 +1,12 @@
 <template>
-    <div style="width: 100%;height: 100%;position: relative">
-        <div style="width: 15%;height: 15%;position: absolute;right: 5rem;margin-top: 40%" v-for="(item,index) in contacts" :style="{top : `${(index+1) * 10}%`}">
-            <a :href="item.contactUrl" target="_blank"><img style="position: absolute;top: 0;width: 1.5em;height: 1.5em" :src="item.imageUrl"/></a>
-        </div>
+    <div style="width: 100%;height: 100%;">
+      <div v-for="(item,index) in contacts">
+        <a :href="item.contactUrl" target="_blank">
+          <div class="contactsImg" :style="{top : `${13.07+(index+1) * 4.89}rem`}">
+              <img :src="item.imageUrl" style="width: 1.218rem;height: 0.99rem;object-fit: cover;"/>
+          </div>
+        </a>
+      </div>
     </div>
 </template>
 
@@ -35,6 +39,15 @@
 </script>
 
 <style scoped>
+
+  .contactsImg{
+    width: 1.218rem;
+    height: 1rem;
+    position: absolute;
+    right: 6.06rem;
+    background-blend-mode: normal, luminosity;background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7))
+  }
+
   img {
     width: auto;
     height: auto;
