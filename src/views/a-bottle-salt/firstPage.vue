@@ -4,7 +4,7 @@
 <!--    <video ref="firstVideo" class="backGroundStyle">-->
 <!--      <source :src="firstVideo"  type="video/mp4">-->
 <!--    </video>-->
-    <div ref="backGroundBox" class="box">
+    <div ref="backGroundBox" class="box" style="opacity: 0.2">
       <div class="backGroundStyle" >
         <div class="image" :style="{backgroundImage: `url(${firstPage2})`}"></div>
       </div>
