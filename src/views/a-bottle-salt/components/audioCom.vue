@@ -18,15 +18,15 @@
               <table style="height: 2.875rem;">
                 <tr>
                   <td style="vertical-align: bottom">
-                    <i style="color: #8c939d;font-size: 1.5rem" v-show="audioStatus == 1" class="el-icon-video-pause el-icon--right"></i>
-                    <i style="color: #8c939d;font-size: 1.5rem" v-show="audioStatus == 0" class="el-icon-video-play el-icon--right"></i>
+                    <img v-show="audioStatus == 1" src="../../../assets/images/play.png" style="width: 0.75rem;height: 0.75rem;object-fit: contain;">
+                    <img v-show="audioStatus == 0" src="../../../assets/images/pause.png" style="width: 0.75rem;height: 0.75rem;object-fit: contain;">
                   </td>
                 </tr>
               </table>
             </div>
             <div class="slidList">
               <span class="songName BoldItalic" style="color: rgb(245, 245, 245);">{{fileUrl.title}}</span>
-              <span class="timers BoldItalic">{{ videoStart }}/{{ transTime(duration) }}</span>
+              <span class="timers iterFont">{{ videoStart }}/{{ transTime(duration) }}</span>
             </div>
           </div>
           <div class="duration">
@@ -148,6 +148,17 @@
     font-family: DIN-BoldItalic;
     font-style: italic;
     font-size: 1rem;
+  }
+
+  .iterFont{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 0.893rem;
+    text-transform: capitalize;
+    color: #D9D4D2;
+    opacity: 0.5;
   }
 
   .myAudio{

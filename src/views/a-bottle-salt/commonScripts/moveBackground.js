@@ -14,14 +14,14 @@
     mousePos.x = e.pageX;
     mousePos.y = e.pageY;
     if(document.getElementsByClassName("image-wrap").length > 0) {
-      document.getElementsByClassName("image-wrap")[0].style.transform = 'scale(0.94)';
+      document.getElementsByClassName("image-wrap")[0].style.transform = 'scale(1.2)';
     }
   }
 
   function mouseout(e) {
     // update mouse position
     if(document.getElementsByClassName("image-wrap").length > 0) {
-      document.getElementsByClassName("image-wrap")[0].style.transform = 'scale(0.8)';
+      document.getElementsByClassName("image-wrap")[0].style.transform = 'scale(1)';
     }
     mousePos.x = 0;
     mousePos.y = 0;
