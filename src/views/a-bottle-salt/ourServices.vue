@@ -2,7 +2,7 @@
   <div ref="alignCenter" class="alignCenter" style="width: 90rem;height: 100%">
 
     <div ref="backGroundBox" class="box">
-      <div class="image-wrap">
+      <div class="image-wrap" style="opacity: 1">
         <div class="image" :style="{backgroundImage: `url(${firstImg})`}"></div>
       </div>
     </div>
@@ -59,25 +59,25 @@
               <div v-if="showVideo" style="width: 100%;height: 40%;">
                 <table class="divBase">
                   <tr>
-                    <td style="width: 70%;height: 100%;position: relative">
-                      <div style="width: 40%;height: 100%;display: inline-block;position: absolute;left: 5rem;top: 0rem;">
+                    <td>
+                      <div>
                         <ul class="divAnimate" ref="childTr" v-if="showVideo">
-                          <li style="height: 15%;" @click="fontButtonClick(0)" class="fontButton BoldItalic anation">MUSIC</li>
-                          <li style="height: 15%;" @click="fontButtonClick(1)" class="fontButton BoldItalic anation">SOUND DESIGN</li>
-                          <li style="height: 15%;" @click="fontButtonClick(2)" class="fontButton BoldItalic anation">VOICE ACTING</li>
-                          <li style="height: 15%;" @click="fontButtonClick(3)" class="fontButton BoldItalic anation">GAME AUDIO PIPELINE</li>
+                          <li style="width: 4.062rem;height: 1.812rem;position: absolute;left: 6rem;top: 36.31rem;" @click="fontButtonClick(0)" class="fontButton BoldItalic anation">MUSIC</li>
+                          <li style="width: 9.5rem;height: 1.812rem;position: absolute;left: 6rem;top: 39.37rem;" @click="fontButtonClick(1)" class="fontButton BoldItalic anation">SOUND DESIGN</li>
+                          <li style="width: 8.75rem;height: 1.812rem;position: absolute;left: 6rem;top: 42.43rem;" @click="fontButtonClick(2)" class="fontButton BoldItalic anation">VOICE ACTING</li>
+                          <li style="width: 14.187rem;height: 1.812rem;position: absolute;left: 6rem;top: 45.5rem;" @click="fontButtonClick(3)" class="fontButton BoldItalic anation">GAME AUDIO PIPELINE</li>
                         </ul>
                       </div>
 
 
                       <video v-if="showVideo && !showBigVideo" class="divAnimate" :src="firstVideo.videoUrl" @click="clickVideo"
-                             style="object-fit: fill;position: absolute;width: 40%;height: 70%;top: 2rem;left: 25rem" controlslist="nofullscreen" controls>
+                             style="object-fit: fill;position: absolute;width: 16.25rem;height: 12.5rem;top: 36.31rem;left: 26.56rem" controlslist="nofullscreen" controls>
                         <source type="video/mp4">
                       </video>
                     </td>
 
-                    <td style="width: 50%;height: 100%;left: -6%;position: relative">
-                      <div class="divAnimate" v-if="showVideo" style="width: 120%;height: 60%;position: absolute;top: 2rem;overflow: hidden">
+                    <td>
+                      <div class="divAnimate" v-if="showVideo" style="width: 31.37rem;height: 11.5rem;position: absolute;top: 36.31rem;right: 11.12rem;overflow: hidden">
                         <div ref="carouselImgBox" class="carouselImgBox">
                           <img class="imgStyle" v-for="item in carouselImgPaths" :src="item"/>
                         </div>
@@ -322,17 +322,7 @@
   }
 
   ul {
-    position: absolute;
-    top: 5%;
-    left: 12%;
-    padding: 0;
     list-style-type: none;
-    height: 100%;
-    width: 100%;
-    text-align: left;
-    color: #F5F5F5;
-    font-size: 18px;
-    font-style: oblique;
   }
 
   li {

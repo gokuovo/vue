@@ -4,7 +4,7 @@
 <!--    <video ref="firstVideo" class="backGroundStyle">-->
 <!--      <source :src="firstVideo"  type="video/mp4">-->
 <!--    </video>-->
-    <div ref="backGroundBox" class="box">
+    <div ref="backGroundBox" class="box" style="opacity: 0.2">
       <div class="backGroundStyle" >
         <div class="image" :style="{backgroundImage: `url(${firstPage2})`}"></div>
       </div>
@@ -16,7 +16,8 @@
       </video>
     </div>
     <div @click="clickVideo" class="videoButton">
-      <span @click="clickVideo" class="videoFont">PLAY INTRO</span><i class="el-icon-caret-right" style="color: #E3E1DB;font-size: 1rem"></i>
+      <span @click="clickVideo" class="videoFont">PLAY INTRO</span>
+      <img src="../../assets/images/Polygon.png" style="width: 1rem;height: 1rem;object-fit: contain;margin-left: 0.3rem">
     </div>
 
 
