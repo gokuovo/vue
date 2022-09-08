@@ -64,15 +64,16 @@
       </div>
 
       <div v-if="!showLIST" style="height: 50em;width: 31.625em;display: inline-block;position: absolute;left: 45.75em;top: 7.4375rem;">
-        <div v-if="!showLIST" style="height: 12.5rem;width: 31.625rem;background-color: #383838;color: #E3E1DB;font-size: 1rem;font-style: italic;padding-left: 1.5rem">
-          <div class="BoldItalic" style="width: 100%;height: 25%;padding-top: 5%">{{showingAlbum['title'+$store.getters.getLanguage]}}</div>
-          <div style="width: 100%;height: 75%;position: relative;padding-top: 2%">
-            <img style="width: 7.1rem;height: 7.1rem;position: absolute;font-size: 1rem;object-fit: cover;" :src="undefined == showingAlbum.imgSrc ? '' : showingAlbum.imgSrc.replaceAll('\\','\/')"/>
+        <div v-if="!showLIST" style="height: 12.5rem;width: 31.625rem;background-color: #252525;color: #E3E1DB;font-size: 1rem;font-style: italic;padding-left: 1.5rem">
+          <div class="BoldItalic" style="width: 100%;height: 1.4375rem;padding-top: 1.25rem">{{showingAlbum['title'+$store.getters.getLanguage]}}</div>
+          <div style="width: 100%;height: 75%;position: relative;padding-top: 2.875rem">
+            <img v-if="showSFX" src="../../assets/images/videoPlay.png" style="width: 1.875rem;height: 1.875rem;position: absolute;z-index: 2;left: 2.1875rem;top: 5.06rem;">
+            <img style="width: 6.25rem;height: 6.25rem;position: absolute;font-size: 1rem;object-fit: cover;" :src="undefined == showingAlbum.imgSrc ? '' : showingAlbum.imgSrc.replaceAll('\\','\/')"/>
             <div class="BoldItalic" style="width: 7.1rem;height: 7.1rem;position: absolute;left: 8rem">
-              <div style="color: #E3E1DB;font-size: 0.875rem;height: 1.55em;width: 33.5em;font-style: italic;margin-bottom: 0.8em">RELEASE：<span style="font-size: 0.75rem">{{showingAlbum['release'+$store.getters.getLanguage]}}</span></div>
-              <div style="color: #E3E1DB;font-size: 0.875rem;height: 1.55em;width: 33.5em;font-style: italic;margin-bottom: 0.75em">DEVELOPER：<span style="font-size: 0.75rem">{{showingAlbum['developer'+$store.getters.getLanguage]}}</span></div>
-              <div style="color: #E3E1DB;font-size: 0.875rem;height: 1.55em;width: 33.5em;font-style: italic;margin-bottom: 0.75em">PUBLISHER：<span style="font-size: 0.75rem">{{showingAlbum['publisher'+$store.getters.getLanguage]}}</span></div>
-              <div style="color: #E3E1DB;font-size: 0.875rem;height: 1.55em;width: 33.5em;font-style: italic;margin-bottom: 0em">PLATFORM：<span style="font-size: 0.75rem">{{showingAlbum['platform'+$store.getters.getLanguage]}}</span></div>
+              <div style="opacity: 0.8;color: #E3E1DB;font-size: 0.875rem;height: 1.125rem;width: 33.5rem;font-style: italic;margin-bottom: 0.625rem">RELEASE：<span style="font-size: 0.875rem">{{showingAlbum['release'+$store.getters.getLanguage]}}</span></div>
+              <div style="opacity: 0.8;color: #E3E1DB;font-size: 0.875rem;height: 1.125rem;width: 33.5rem;font-style: italic;margin-bottom: 0.625rem">DEVELOPER：<span style="font-size: 0.875rem">{{showingAlbum['developer'+$store.getters.getLanguage]}}</span></div>
+              <div style="opacity: 0.8;color: #E3E1DB;font-size: 0.875rem;height: 1.125rem;width: 33.5rem;font-style: italic;margin-bottom: 0.625rem">PUBLISHER：<span style="font-size: 0.875rem">{{showingAlbum['publisher'+$store.getters.getLanguage]}}</span></div>
+              <div style="opacity: 0.8;color: #E3E1DB;font-size: 0.875rem;height: 1.125rem;width: 33.5rem;font-style: italic;">PLATFORM：<span style="font-size: 0.875rem">{{showingAlbum['platform'+$store.getters.getLanguage]}}</span></div>
             </div>
           </div>
         </div>
