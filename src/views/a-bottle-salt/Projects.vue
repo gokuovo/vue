@@ -440,11 +440,7 @@
     color: #D9D4D2;
     opacity: 0.5;
   }
-
-  .image{
-    background: radial-gradient(94.34% 94.34% at 50% 5.66%,
-    rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85));
-  }
+  
 
 
   .titleFont{

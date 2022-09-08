@@ -243,7 +243,6 @@
   @import './commonCSS/moveBackground.scss';
 
   .image{
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
     opacity: 0.5;
   }
 
