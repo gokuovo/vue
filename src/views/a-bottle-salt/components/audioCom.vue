@@ -10,31 +10,21 @@
       <source :src="fileUrl.url" type="audio/mpeg"/>
       您的浏览器不支持音频播放
     </audio>
-    <table class="myAudio" style="background-color: #383838;" >
-      <tr>
-        <td style="vertical-align: bottom;">
-          <div class="audioPanel">
-            <div style="padding-right: 0.3rem;" class="playBtn" @click="playAudio">
-              <table style="height: 2.875rem;">
-                <tr>
-                  <td style="vertical-align: bottom">
-                    <img v-show="audioStatus == 1" src="../../../assets/images/play.png" style="width: 0.75rem;height: 0.75rem;object-fit: contain;">
-                    <img v-show="audioStatus == 0" src="../../../assets/images/pause.png" style="width: 0.75rem;height: 0.75rem;object-fit: contain;">
-                  </td>
-                </tr>
-              </table>
-            </div>
-            <div class="slidList">
-              <span class="songName BoldItalic" style="color: rgb(245, 245, 245);">{{fileUrl.title}}</span>
-              <span class="timers iterFont">{{ videoStart }}/{{ transTime(duration) }}</span>
-            </div>
-          </div>
-          <div class="duration">
-            <input type="range" ref="range" @input="onChange" @change="onChange" min="0" max="100" :value="value">
-          </div>
-        </td>
-      </tr>
-    </table>
+    <div class="myAudio" style="background-color: #252525;position: relative">
+      <div @click="playAudio" style="width: 0.75rem;height: 0.75rem;left: 0.6875rem;top: 1.06rem;position: absolute">
+        <img v-show="audioStatus == 1" src="../../../assets/images/play.png" style="width: 0.75rem;height: 0.75rem;object-fit: contain;">
+        <img v-show="audioStatus == 0" src="../../../assets/images/pause.png" style="width: 0.75rem;height: 0.75rem;object-fit: contain;">
+      </div>
+      <div style="width: 22.5rem;height: 1.31rem;position: absolute;left: 2.5rem;bottom: 0.6rem;">
+        <span class="songName BoldItalic" style="color: #E3E1DB;">{{fileUrl.title}}</span>
+      </div>
+      <div class="iterFont" style="width: 4.68rem;height: 0.8125rem;position: absolute;right: 0.75rem;top: 1rem;text-align: right">
+        {{ videoStart }}/{{ transTime(duration) }}
+      </div>
+      <div class="duration" style="position: absolute;bottom: 0.7rem;width: 31.625rem;height: 0.5rem">
+        <input type="range" ref="range" @input="onChange" @change="onChange" min="0" max="100" :value="value">
+      </div>
+    </div>
   </div>
 </template>
 
@@ -162,29 +152,8 @@
   }
 
   .myAudio{
-    width: 100%;
-    height: 100%;
-  }
-  .audioPanel {
-    display: flex;
-    align-items: center;
-    height: 20px;
-
-    .slidList {
-      position: relative;
-      flex: 1;
-
-      .timers {
-        color: #bdbdbd;
-        text-align: left;
-        position: absolute;
-        top: 5px;
-        right: 0px;
-      }
-      .songName{
-        position: absolute;
-      }
-    }
+    width: 31.62rem;
+    height: 2.875rem
   }
 
   [type="range"] {
