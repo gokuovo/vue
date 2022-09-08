@@ -94,16 +94,18 @@
       </div>
 
       <div v-if="showLIST" class="divBase">
-        <div class="selfDefineScroll" style="width: 100%;height: 80%;overflow-y: auto;">
-          <div v-for="(item) in albumList" style="width: 50%;height: 27%;display: inline-block;position: relative;padding-left: 6rem;margin-top: 2%;">
-            <img style="width: 24.5%;height: 80%;position: absolute" :src="item.url" />
-            <div class="BoldItalic" style="width: 49%;height: 100%;position: absolute;left: 18rem">
-              <div style="font-weight: 500;width: 100%;height: 16.5%;color: #BAB9B6;font-size: 1.125rem;font-style: italic;">{{item['title'+$store.getters.getLanguage]}}</div>
-              <div style="width: 100%;height: 15%;color: rgb(140 140 140);font-size: 0.875rem;font-style: italic;">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
-              <div style="width: 100%;height: 15%;color: rgb(140 140 140);font-size: 0.875rem;font-style: italic;">COMPANY:{{item['company'+$store.getters.getLanguage]}}</div>
-              <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-size: 0.875rem;font-style: italic;">PLATFORM:{{item['platform'+$store.getters.getLanguage]}}</div>
-              <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-style: italic;">
-                <a class="linkHover" :href="item.link" :target="null != item.link ? (item.link.indexOf('http') != -1 ? '_blank' : '_self') : '_blank' "><span style="font-size: 0.75rem;text-decoration: underline;font-weight: 500">EXPLORE</span>&emsp;<i style="color: #ec7856;font-size: 1.2rem;font-weight: 900" class="el-icon-top-right"></i></a>
+        <div class="selfDefineScroll" style="width: 78rem;height: 80%;overflow-y: auto;overflow-x: hidden">
+          <div v-for="(item) in albumList"
+               style="width: 31.625rem;height: 8.75rem;display: inline-block;position: relative;margin-left: 6rem;margin-top: 4.125rem;">
+            <img style="width: 8.75rem;height: 8.75rem;position: absolute" :src="item.url" />
+
+            <div class="BoldItalic" style="width: 49%;height: 8.75rem;position: absolute;left: 10.625rem;font-family: DIN-BoldItalic">
+              <div style="font-weight: 500;width: 21rem;height: 1.4375rem;color: #B7B5B0;font-size: 1.125rem;font-style: italic;text-transform: uppercase;">{{item['title'+$store.getters.getLanguage]}}</div>
+              <div style="opacity: 0.8;margin-top: 0.625rem;width: 21rem;;height: 1.125rem;color: #B7B5B0;font-size: 0.875rem;font-style: italic;">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
+              <div style="opacity: 0.8;margin-top: 0.625rem;width: 21rem;;height: 1.125rem;color: #B7B5B0;font-size: 0.875rem;font-style: italic;">COMPANY:{{item['company'+$store.getters.getLanguage]}}</div>
+              <div style="opacity: 0.8;margin-top: 0.625rem;width: 21rem;;height: 1.125rem;color: #B7B5B0;font-size: 0.875rem;font-style: italic;">PLATFORM:{{item['platform'+$store.getters.getLanguage]}}</div>
+              <div style="margin-top: 0.93rem;width: 21rem;;height: 1.125rem;color: #B7B5B0;font-style: italic;">
+                <a class="linkHover" :href="item.link" :target="null != item.link ? (item.link.indexOf('http') != -1 ? '_blank' : '_self') : '_blank' "><span style="font-size: 0.75rem;text-decoration: underline;font-weight: 500;opacity: 0.5;">EXPLORE</span>&emsp;<i style="color: #ec7856;font-size: 1.2rem;font-weight: 900" class="el-icon-top-right"></i></a>
               </div>
             </div>
           </div>
