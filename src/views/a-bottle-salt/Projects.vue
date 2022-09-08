@@ -36,7 +36,7 @@
                             <span class="BoldItalic" v-show="false">
                               {{addMusicId(item.title+item.id)}}
                             </span>
-                            <span class="BoldItalic" style="color: #8c939d;position: absolute;right: 0.5rem">
+                            <span class="iterFont" style="color: #8c939d;position: absolute;right: 0.5rem">
                               {{getMusicTime(item.title+item.id)}}
                             </span>
                           </div>
@@ -429,6 +429,23 @@
 
 <style scoped>
   @import './commonCSS/moveBackground.scss';
+
+  .iterFont{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 0.893rem;
+    text-transform: capitalize;
+    color: #D9D4D2;
+    opacity: 0.5;
+  }
+
+  .image{
+    background: radial-gradient(94.34% 94.34% at 50% 5.66%,
+    rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85));
+  }
+
 
   .titleFont{
     font-family: 'DIN-BoldItalic';
