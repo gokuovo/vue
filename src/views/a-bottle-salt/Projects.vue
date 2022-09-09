@@ -16,7 +16,7 @@
         {{this.showingAlbum['title'+$store.getters.getLanguage]}}
       </div>
 
-      <div v-if="!showLIST && showMusic" style="width: 31.62rem;height: 28.56rem;position: absolute;left: 6rem;top: 16.31rem">
+      <div v-if="!showLIST && showMusic" style="width: 31.62rem;height: 28.8rem;position: absolute;left: 6rem;top: 16.31rem">
         <div class="selfDefineScroll" style="overflow-y: auto;overflow-x: hidden;height: 100%;width: 100%;">
           <ul>
             <li style="width: 31.62rem;height: 2.875rem;" v-for="(item) in showAlbumMusic">
@@ -51,7 +51,7 @@
         </video>
       </div>
 
-      <div style="width: 100%;height: 1.875rem;color: #E3E1DB;font-size: 1rem;position: absolute;bottom: 5rem;left: 6rem">
+      <div v-if="!showLIST" style="width: 100%;height: 1.875rem;color: #E3E1DB;font-size: 1rem;position: absolute;bottom: 5rem;left: 6rem">
         <el-button @click="clickMusic(0)" class="buttonStyle anation buttonStyle1" type="danger">
           <span style="font-size: 0.875rem;width: 4.785714285714286em;height: 2.142857142857143em" class="BoldItalic">MUSIC</span>
         </el-button>
@@ -77,7 +77,7 @@
             </div>
           </div>
         </div>
-        <div v-if="!showLIST" class="selfDefineScroll" style="overflow-y: scroll;overflow-x: hidden;height: 75%;width: 33.06rem;">
+        <div v-if="!showLIST" class="selfDefineScroll" style="overflow-y: auto;overflow-x: hidden;height: 37.5rem;width: 33.06rem;">
           <ul>
             <li style="width: 31.625rem;height: 12.5rem;position: relative" v-for="(item,index) in albums">
               <div :ref="'imgDiv_'+index" @click="albumsClick(item,index)" class="divBase imgDiv"
@@ -106,7 +106,7 @@
               <div style="opacity: 0.8;margin-top: 0.625rem;width: 21rem;;height: 1.125rem;color: #B7B5B0;font-size: 0.875rem;font-style: italic;">COMPANY:{{item['company'+$store.getters.getLanguage]}}</div>
               <div style="opacity: 0.8;margin-top: 0.625rem;width: 21rem;;height: 1.125rem;color: #B7B5B0;font-size: 0.875rem;font-style: italic;">PLATFORM:{{item['platform'+$store.getters.getLanguage]}}</div>
               <div style="margin-top: 0.93rem;width: 21rem;;height: 1.125rem;color: #B7B5B0;font-style: italic;">
-                <a class="linkHover" :href="item.link" :target="null != item.link ? (item.link.indexOf('http') != -1 ? '_blank' : '_self') : '_blank' "><span style="font-size: 0.75rem;text-decoration: underline;font-weight: 500;opacity: 0.5;">EXPLORE</span>&emsp;<i style="color: #ec7856;font-size: 1.2rem;font-weight: 900" class="el-icon-top-right"></i></a>
+                <a :href="item.link" :target="null != item.link ? (item.link.indexOf('http') != -1 ? '_blank' : '_self') : '_blank' "><span style="font-size: 0.75rem;text-decoration: underline;font-weight: 500;opacity: 0.5;" @mouseout="mouseOut($event)" @mouseover="mouseOver($event)">EXPLORE</span>&emsp;<img style="width: 0.75rem;height: 0.75rem" src="../../assets/images/jiantou.png"/></a>
               </div>
             </div>
           </div>
@@ -259,6 +259,19 @@
       });
     },
     methods: {
+      mouseOut(event){
+        event.target.classList.remove("xiaoshi1");
+        event.target.classList.remove("chuxian1");
+
+        event.target.classList.add("xiaoshi1");
+      },
+      mouseOver(event){
+        event.target.classList.remove("xiaoshi1");
+        event.target.classList.remove("chuxian1");
+
+        event.target.classList.add("chuxian1");
+      },
+
       fullStyle(index){
         let that = this;
         window.setTimeout(function() {
@@ -430,6 +443,38 @@
 <style scoped>
   @import './commonCSS/moveBackground.scss';
 
+  .chuxian1{
+    animation: chuxian1 0.65s ease-in 0s;
+    animation-iteration-count: 1;
+    animation-fill-mode:forwards;
+  }
+  @keyframes chuxian1{
+    0%{
+      color: #B7B5B0;
+      opacity: 0.5;
+    }
+    100%{
+      color: #F24E1E;
+      opacity: 1;
+    }
+  }
+
+  .xiaoshi1{
+    animation: xiaoshi1 0.65s ease-in 0s;
+    animation-iteration-count: 1;
+    animation-fill-mode:forwards;
+  }
+  @keyframes xiaoshi1{
+    0%{
+      color: #F24E1E;
+      opacity: 1;
+    }
+    100%{
+      color: #B7B5B0;
+      opacity: 0.5;
+    }
+  }
+
   .iterFont{
     font-family: 'Inter';
     font-style: normal;
@@ -440,7 +485,7 @@
     color: #D9D4D2;
     opacity: 0.5;
   }
-  
+
 
 
   .titleFont{
@@ -551,16 +596,13 @@
   }
 
   .selfDefineScroll::-webkit-scrollbar {
-    width: 5px !important;
-    height: 5px !important;
+    width: 3px;
     background-color: #b5b1b1;
   }
 
   .selfDefineScroll::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    background-color: black;
-
+    background-color: #383838;
   }
 
   .selfDefineScroll::-webkit-scrollbar-thumb {
@@ -568,7 +610,6 @@
     height: 20px;
     background: #d1d8e6;
     border-radius: 19px;
-    border: 2px solid transparent;
     background-clip: content-box;
   }
 
@@ -589,8 +630,6 @@
 
   ul {
     list-style-type: none;
-    height: 100%;
-    width: 100%;
     text-align: left;
   }
 

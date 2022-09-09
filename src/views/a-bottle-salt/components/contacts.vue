@@ -47,7 +47,6 @@
     height: 1rem;
     position: absolute;
     right: 6.06rem;
-    background-blend-mode: normal, luminosity;background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7))
   }
 
   img {
