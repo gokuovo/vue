@@ -242,6 +242,7 @@
 <style scoped>
   @import './commonCSS/moveBackground.scss';
 
+
   .image{
     opacity: 0.5;
   }
