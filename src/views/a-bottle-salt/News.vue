@@ -1,7 +1,7 @@
 <template>
   <div ref="alignCenter" class="alignCenter" style="width: 90rem;height: 100%">
     <div ref="backGroundBox" class="box">
-      <div class="image-wrap">
+      <div class="image-wrap" style="opacity: 0.05">
         <div class="image" :style="{backgroundImage: `url(${firstImg})`}"></div>
       </div>
     </div>
@@ -13,19 +13,22 @@
     <div style="height: 80%;width: 90rem;">
       <table class="divBase">
         <tr>
-          <td style="width: 80%;height: 100%;padding: 6% 0">
-            <div class="divBase selfDefineScroll" style="overflow-y: auto;padding-left: 6rem">
+          <td style="width: 78.81rem;height: 100%;padding: 6% 0">
+            <div class="selfDefineScroll" style="overflow-y: auto;padding-left: 6rem;width: 78.81rem;height: 33.75rem">
 
-              <div v-for="(item) in newsData"  style="display: inline-block;width: 50%;height: 25%;position: relative;margin-bottom: 3%">
-                <img style="width: 27%;height: 103%;position: absolute;object-fit: cover;" :src="item.url" />
-                <div style="width: 60%;height: 100%;position: absolute;left: 32%">
+              <div v-for="(item) in newsData"  style="display: inline-block;width: 31.625rem;height: 8.75rem;position: relative;margin-bottom: 3.75rem">
+                <img style="width: 8.75rem;height: 8.75rem;position: absolute;object-fit: cover;" :src="item.url" />
+                <div style="width: 21rem;height: 100%;position: absolute;left: 10.625rem">
                   <table class="divBase">
                     <tr>
                       <td class="divBase BoldItalic" style="vertical-align: middle">
-                        <div style="font-weight: 500;width: 100%;height: auto;color: #BAB9B6;font-size: 1.125rem;font-style: italic;margin-bottom: 3.5%">{{item['title'+$store.getters.getLanguage]}}</div>
-                        <div style="font-weight: 500;width: 100%;height: auto;color: rgb(140 140 140);font-size: 0.875rem;font-style: italic;margin-bottom: 7%">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
-                        <div style="width: 100%;height: 20%;color: rgb(140 140 140);font-style: italic;">
-                          <a class="linkHover" :href="item.link" :target="item.link.indexOf('http') != -1 ? '_blank' : '_self' "><span style="font-size: 0.75rem;text-decoration: underline;font-weight: 500">EXPLORE</span>&emsp;<i style="color: #ec7856;font-size: 1.2rem;font-weight: 900" class="el-icon-top-right"></i></a>
+                        <div class="font1" style="margin-bottom: 0.625rem">{{item['title'+$store.getters.getLanguage]}}</div>
+                        <div class="font2"  style="margin-bottom: 1.3125rem">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
+                        <div style="font-style: italic;">
+                          <a :href="item.link" :target="item.link.indexOf('http') != -1 ? '_blank' : '_self' ">
+                            <span class="font3" style="text-decoration: underline;" @mouseout="mouseOut($event)" @mouseover="mouseOver($event)">EXPLORE</span>&emsp;
+                            <img style="width: 0.75rem;height: 0.75rem;opacity: 1" src="../../assets/images/jiantou.png"/>
+                          </a>
                         </div>
                       </td>
                     </tr>
@@ -92,6 +95,18 @@
       })
     },
     methods: {
+      mouseOut(event){
+        event.target.classList.remove("xiaoshi1");
+        event.target.classList.remove("chuxian1");
+
+        event.target.classList.add("xiaoshi1");
+      },
+      mouseOver(event){
+        event.target.classList.remove("xiaoshi1");
+        event.target.classList.remove("chuxian1");
+
+        event.target.classList.add("chuxian1");
+      },
       changeShowNewsData(type){
         this.newsData.sort(function() {
           return Math.random() > 0.5 ? -1 : 1;
@@ -157,6 +172,73 @@
 <style scoped>
   @import './commonCSS/moveBackground.scss';
 
+  .chuxian1{
+    animation: chuxian1 0.65s ease-in 0s;
+    animation-iteration-count: 1;
+    animation-fill-mode:forwards;
+  }
+  @keyframes chuxian1{
+    0%{
+      color: #B7B5B0;
+      opacity: 0.5;
+    }
+    100%{
+      color: #F24E1E;
+      opacity: 1;
+    }
+  }
+
+  .xiaoshi1{
+    animation: xiaoshi1 0.65s ease-in 0s;
+    animation-iteration-count: 1;
+    animation-fill-mode:forwards;
+  }
+  @keyframes xiaoshi1{
+    0%{
+      color: #F24E1E;
+      opacity: 1;
+    }
+    100%{
+      color: #B7B5B0;
+      opacity: 0.5;
+    }
+  }
+
+
+  .font1{
+    font-family: DIN-BoldItalic;
+    font-size: 1.125rem;
+    line-height: 1.4375rem;
+    letter-spacing: 2%;
+    color: #B7B5B0;
+  }
+
+  .font2{
+    font-family: DIN-BoldItalic;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.125rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #B7B5B0;
+    opacity: 0.8;
+  }
+
+  .font3{
+    font-family: DIN-BoldItalic;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 0.75rem;
+    line-height: 1.125rem;;
+    letter-spacing: 0.05em;
+    text-decoration-line: underline;
+    text-transform: uppercase;
+
+    color: #B7B5B0;
+    opacity: 0.5;
+  }
+
   .alignCenter{
     position: absolute;
     left: 0;
@@ -198,16 +280,13 @@
   }
 
   .selfDefineScroll::-webkit-scrollbar {
-    width: 5px !important;
-    height: 5px !important;
+    width: 3px;
     background-color: #b5b1b1;
   }
 
   .selfDefineScroll::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    background-color: black;
-
+    background-color: #383838;
   }
 
   .selfDefineScroll::-webkit-scrollbar-thumb {
@@ -215,13 +294,7 @@
     height: 20px;
     background: #d1d8e6;
     border-radius: 19px;
-    border: 2px solid transparent;
     background-clip: content-box;
-  }
-
-  .linkHover:hover{
-    background-color:rgba(115,178,230,0.4);
-    border: #0a76a4 1px solid;
   }
 
   .divBase {
