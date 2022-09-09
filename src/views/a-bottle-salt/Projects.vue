@@ -10,7 +10,9 @@
       <toolbar></toolbar>
     </div>
 
-    <div style="height: 90%;width: 90rem;">
+    <div v-loading="loading"
+         element-loading-background="rgba(0, 0, 0, 0.85)"
+         style="height: 90%;width: 90rem;">
 
       <div v-if="!showLIST && showMusic" class="BoldItalic" style="color: #E3E1DB;font-size: 2.625rem;width: 31.62rem;height: 3.43rem;position: absolute;left: 6rem;top: 11rem;">
         {{this.showingAlbum['title'+$store.getters.getLanguage]}}
@@ -80,7 +82,7 @@
         <div v-if="!showLIST" class="selfDefineScroll" style="overflow-y: auto;overflow-x: hidden;height: 37.5rem;width: 33.06rem;">
           <ul>
             <li style="width: 31.625rem;height: 12.5rem;position: relative" v-for="(item,index) in albums">
-              <div :ref="'imgDiv_'+index" @click="albumsClick(item,index)" class="divBase imgDiv"
+              <div :ref="'imgDiv_'+index" @click="albumsClick(item,index)" class="divBase imgDiv" @mouseout="imgDivOut($event)" @mouseover="imgDivOver($event)"
                    :style="{backgroundImage: `url(${undefined == item.imgSrc ? '' : item.imgSrc.replaceAll('\\','\/')})`}">
               </div>
               <div class="titleFont" style="position: absolute;height: 1.43rem;top: 1.25rem;left: 1.875rem">
@@ -151,6 +153,8 @@
     components: { toolbar, contacts, audioCom },
     data() {
       return {
+        musicNums:0,
+        loading:true,
         firstImg:'',
         albums: [
         ],
@@ -239,6 +243,7 @@
       });
     },
     mounted(){
+
       for(let i = 0;i < this.musicTimes.length;i++){
         this.musicTimes[i].value = this.transTime(this.musicTimes[i].key);
       }
@@ -259,6 +264,19 @@
       });
     },
     methods: {
+      imgDivOut(event){
+        if(event.target.classList.contains("imgDivGary")) {
+          event.target.classList.remove("imgDivAni");
+          event.target.classList.add("imgDivAniOut");
+        }
+      },
+      imgDivOver(event){
+        if(event.target.classList.contains("imgDivGary")) {
+          event.target.classList.remove("imgDivAniOut");
+          event.target.classList.add("imgDivAni");
+        }
+      },
+
       mouseOut(event){
         event.target.classList.remove("xiaoshi1");
         event.target.classList.remove("chuxian1");
@@ -284,14 +302,15 @@
 
           for(let i = 0;i < that.albums.length;i++){
             if(i != 0) {
-              that.$refs["imgDiv_" + i][0].style.filter = "grayscale(1)";
+              that.$refs["imgDiv_" + i][0].classList.add("imgDivGary");
             }
           }
           for(let i = 0;i < that.albums.length;i++){
             if(i != index) {
-              that.$refs["imgDiv_" + i][0].style.filter = "grayscale(1)";
+              that.$refs["imgDiv_" + i][0].classList.add("imgDivGary");
             }else{
-              that.$refs["imgDiv_" + i][0].style.filter = "grayscale(0)";
+              that.$refs["imgDiv_" + i][0].classList.remove("imgDivAni");
+              that.$refs["imgDiv_" + i][0].classList.remove("imgDivGary");
             }
           }
         },100);
@@ -361,6 +380,7 @@
           }else{
             this.showAlbumMusic = [];
             this.showAlbumVideo = [];
+            this.fullStyle(index);
           }
         });
       },
@@ -417,6 +437,7 @@
             this.musicTimes[i].value = this.transTime(this.$refs[refId][0].duration);
           }
         }
+        this.loading = false;
       },
 
       addMusicId(refId){
@@ -442,6 +463,10 @@
 
 <style scoped>
   @import './commonCSS/moveBackground.scss';
+
+  >>> .el-loading-spinner .path{
+    stroke: #8c939d;
+  }
 
   .chuxian1{
     animation: chuxian1 0.65s ease-in 0s;
@@ -537,18 +562,9 @@
 
   @keyframes change {
     0% {
-      color: rgba(189,187,183,0.1)
+      color: #E3E1DB;
     }
-    30%{
-      color:rgba(248,197,182,0.3)
-    }
-    50% {
-      color: rgba(247,149,123,0.5)
-    }
-    80% {
-      color: rgba(255,101,59,0.8)
-    }
-    100% {color: rgba(248,81,35,1);}
+    100% {color: #BE4123;}
   }
 
   .BoldItalic{
@@ -561,11 +577,6 @@
     height: 100%;
   }
 
-  .linkHover:hover{
-    background-color:rgba(115,178,230,0.4);
-    border: #0a76a4 1px solid;
-  }
-
   .musicItem:hover{
     color: rgb(245, 245, 245)!important;
   }
@@ -575,8 +586,36 @@
     background-repeat: no-repeat;
   }
 
-  .imgDiv:hover {
-    filter: grayscale(0)!important;
+  .imgDivGary{
+    filter: grayscale(1);
+  }
+
+  .imgDivAni{
+    animation: imgDivAni 1s linear 0s;
+    animation-iteration-count: 1;
+    animation-fill-mode:forwards;
+  }
+  @keyframes imgDivAni {
+    0% {
+      filter: grayscale(1);
+    }
+    100% {
+      filter: grayscale(0);
+    }
+  }
+
+  .imgDivAniOut{
+    animation: imgDivAniOut 1s linear 0s;
+    animation-iteration-count: 1;
+    animation-fill-mode:forwards;
+  }
+  @keyframes imgDivAniOut {
+    0% {
+      filter: grayscale(0);
+    }
+    100% {
+      filter: grayscale(1);
+    }
   }
 
   .buttonStyle1 {
