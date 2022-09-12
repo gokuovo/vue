@@ -1,7 +1,7 @@
 <template>
   <div ref="alignCenter" class="alignCenter" style="width: 90rem;height: 100%">
     <div ref="backGroundBox" class="box">
-      <div class="image-wrap">
+      <div class="image-wrap" style="opacity: 0.05">
         <div class="image" :style="{backgroundImage: `url(${firstImg})`}"></div>
       </div>
     </div>
@@ -14,8 +14,8 @@
       <table class="divBase">
         <tr>
           <td style="width: 80%;height: 100%;vertical-align: top;padding-top: 6.06rem">
-            <div class="divBase selfDefineScroll" style="height: 70%;width: 95%;overflow-y: auto;margin-left: 6rem;margin-bottom: 10rem">
-              <div v-for="(item) in partners" style="display: inline-block;position: relative;width: 17%;height: 38%;margin-left: 2.2%;margin-top: 4.6%">
+            <div class="divBase selfDefineScroll" style="height: 70%;width: 72.81rem;overflow-y: auto;margin-left: 6rem;margin-bottom: 10rem">
+              <div v-for="(item,index) in partners" class="divClass" :style="{marginLeft: `${index % 5 != 0 ? '1.5rem' : ''}`}">
                 <a :href="item.partnerLink" :target="item.partnerLink.indexOf('http') != -1 ? '_blank' : '_self' ">
                   <img class="linkHover"  style="position: absolute;width: 11.75rem;height: 11.75rem;object-fit: cover;" :src="item.partnerUrl" />
                 </a>
@@ -90,6 +90,14 @@
 <style scoped>
   @import './commonCSS/moveBackground.scss';
 
+  .divClass{
+    display: inline-block;
+    position: relative;
+    width: 11.75rem;
+    height: 11.75rem;
+    margin-top: 3.125rem
+  }
+
   .alignCenter{
     position: absolute;
     left: 0;
@@ -111,16 +119,13 @@
   }
 
   .selfDefineScroll::-webkit-scrollbar {
-    width: 5px !important;
-    height: 5px !important;
+    width: 3px;
     background-color: #b5b1b1;
   }
 
   .selfDefineScroll::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    background-color: black;
-
+    background-color: #383838;
   }
 
   .selfDefineScroll::-webkit-scrollbar-thumb {
@@ -128,7 +133,6 @@
     height: 20px;
     background: #d1d8e6;
     border-radius: 19px;
-    border: 2px solid transparent;
     background-clip: content-box;
   }
 
