@@ -2,7 +2,7 @@
 
   <div ref="alignCenter" class="alignCenter" style="width: 90rem;height: 100%">
 
-    <div ref="backGroundBox" class="box">
+    <div ref="backGroundBox" class="box" style="opacity: 0.1">
       <div class="image-wrap">
         <div class="image" :style="{backgroundImage: `url(${firstImg})`}"></div>
       </div>
