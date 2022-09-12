@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'SALT SOUND STUDIO',
+  title: 'salt sound studio',
 
   /**
    * @type {boolean} true | false
