@@ -21,10 +21,10 @@
       <div v-if="!showLIST && showMusic" style="width: 31.62rem;height: 28.8rem;position: absolute;left: 6rem;top: 16.31rem">
         <div class="selfDefineScroll" style="overflow-y: auto;overflow-x: hidden;height: 100%;width: 100%;">
           <ul>
-            <li style="width: 31.62rem;height: 2.875rem;" v-for="(item) in showAlbumMusic">
+            <li style="width: 31.62rem;height: 2.375rem;" v-for="(item) in showAlbumMusic">
               <div style="width: 100%;height: 100%;position: relative">
                 <div :ref="item.id+'_audio'" class="audioDiv" style="width: 100%;height :100%;display: none;">
-                  <audioCom :ref="item.id+'_children'" :key="item.id" :fileUrl="item"></audioCom>
+                  <audioCom :class="item.id+'_children'" :ref="item.id+'_children'" :key="item.id" :fileUrl="item"></audioCom>
                 </div>
 
                 <div class="musicItem" :ref="item.id" @click="musicItemClick(item)"
@@ -298,6 +298,7 @@
           if(audioDiv.length > 0 && musicItem.length > 0) {
             audioDiv[0].style.display = 'block';
             musicItem[0].style.display = 'none';
+            audioDiv[0].parentElement.parentElement.style.marginBottom = '0.375rem';
           }
 
           for(let i = 0;i < that.albums.length;i++){
@@ -389,7 +390,6 @@
         let audioDiv = document.getElementsByClassName("audioDiv");
         for(let i = 0;i < audioDiv.length;i++){
           audioDiv[i].style.display = 'none';
-          audioDiv[i].parentElement.parentElement.style.marginTop = '0rem';
         }
         let musicItem = document.getElementsByClassName("musicItem");
         for(let i = 0;i < musicItem.length;i++){
@@ -397,9 +397,6 @@
         }
         if(this.$refs[item.id+"_audio"]) {
           this.$refs[item.id + "_audio"][0].style.display = 'block';
-          if(this.$refs[item.id + "_audio"][0].parentElement.parentElement.parentElement.firstChild !== this.$refs[item.id+"_audio"][0].parentElement.parentElement) {
-            this.$refs[item.id + "_audio"][0].parentElement.parentElement.style.marginTop = '1.25rem';
-          }
         }
         if(this.$refs[item.id]) {
           this.$refs[item.id][0].style.display = 'none';
@@ -409,10 +406,14 @@
           let pauseItem = this.showAlbumMusic[i].id;
           if(undefined != this.$refs[pauseItem+"_children"] && this.$refs[pauseItem+"_children"].length > 0) {
             this.$refs[pauseItem + "_children"][0].pauseAudio();
+            document.getElementsByClassName(pauseItem+"_children")[0].parentElement.parentElement.parentElement.style.marginBottom = '0rem';
+            document.getElementsByClassName(pauseItem+"_children")[0].parentElement.parentElement.parentElement.style.marginTop = '0rem';
           }
         }
         if(undefined != this.$refs[item.id+"_children"] && this.$refs[item.id+"_children"].length > 0) {
           this.$refs[item.id + "_children"][0].playAudio();
+          document.getElementsByClassName(item.id+"_children")[0].parentElement.parentElement.parentElement.style.marginBottom = '0.375rem';
+          document.getElementsByClassName(item.id+"_children")[0].parentElement.parentElement.parentElement.style.marginTop = '1.25rem';
         }
       },
 
