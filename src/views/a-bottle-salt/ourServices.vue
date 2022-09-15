@@ -46,26 +46,26 @@
               </div>
 
               <div style="width: 100%;height: 10%;color: #F5F5F5;font-size: 20px;font-style:oblique;">
-                <table class="divBase" v-if="!showVideo">
-                  <tr @click="showVideo = !showVideo" class="divBase">
-                    <td @click="fontButtonClick(0)" class="fontButton BoldItalic anation" style="position: absolute;left: 6rem;top: 36.31rem">MUSIC</td>
-                    <td @click="fontButtonClick(1)" class="fontButton BoldItalic anation" style="position: absolute;left: 13.62rem;top: 36.31rem">SOUND DESIGN</td>
-                    <td @click="fontButtonClick(2)" class="fontButton BoldItalic anation" style="position: absolute;left: 26.56rem;top: 36.31rem">VOICE ACTING</td>
-                    <td @click="fontButtonClick(3)" class="fontButton BoldItalic anation" style="position: absolute;left: 38.75rem;top: 36.31rem">GAME AUDIO PIPELINE</td>
+                <table class="divBase" v-show="!showVideo">
+                  <tr @click="showVideoClick" class="divBase divAnimate2">
+                    <td @click="fontButtonClick(0,1)" class="fontButton BoldItalic anation" style="position: absolute;left: 6rem;top: 36.31rem">MUSIC</td>
+                    <td @click="fontButtonClick(1,1)" class="fontButton BoldItalic anation" style="position: absolute;left: 13.62rem;top: 36.31rem">SOUND DESIGN</td>
+                    <td @click="fontButtonClick(2,1)" class="fontButton BoldItalic anation" style="position: absolute;left: 26.56rem;top: 36.31rem">VOICE ACTING</td>
+                    <td @click="fontButtonClick(3,1)" class="fontButton BoldItalic anation" style="position: absolute;left: 38.75rem;top: 36.31rem">GAME AUDIO PIPELINE</td>
                   </tr>
                 </table>
               </div>
 
-              <div v-if="showVideo" style="width: 100%;height: 40%;">
+              <div v-show="showVideo" style="width: 100%;height: 40%;">
                 <table class="divBase">
                   <tr>
                     <td>
                       <div>
-                        <ul class="divAnimate" ref="childTr" v-if="showVideo">
-                          <li style="width: 4.062rem;height: 1.812rem;position: absolute;left: 6rem;top: 36.31rem;" @click="fontButtonClick(0)" class="fontButton BoldItalic anation">MUSIC</li>
-                          <li style="width: 9.5rem;height: 1.812rem;position: absolute;left: 6rem;top: 39.37rem;" @click="fontButtonClick(1)" class="fontButton BoldItalic anation">SOUND DESIGN</li>
-                          <li style="width: 8.75rem;height: 1.812rem;position: absolute;left: 6rem;top: 42.43rem;" @click="fontButtonClick(2)" class="fontButton BoldItalic anation">VOICE ACTING</li>
-                          <li style="width: 14.187rem;height: 1.812rem;position: absolute;left: 6rem;top: 45.5rem;" @click="fontButtonClick(3)" class="fontButton BoldItalic anation">GAME AUDIO PIPELINE</li>
+                        <ul class="divAnimate" ref="childTr" v-show="showVideo">
+                          <li style="width: 4.062rem;height: 1.812rem;position: absolute;left: 6rem;top: 36.31rem;" @click="fontButtonClick(0,2)" class="fontButton BoldItalic anation">MUSIC</li>
+                          <li style="width: 9.5rem;height: 1.812rem;position: absolute;left: 6rem;top: 39.37rem;" @click="fontButtonClick(1,2)" class="fontButton BoldItalic anation">SOUND DESIGN</li>
+                          <li style="width: 8.75rem;height: 1.812rem;position: absolute;left: 6rem;top: 42.43rem;" @click="fontButtonClick(2,2)" class="fontButton BoldItalic anation">VOICE ACTING</li>
+                          <li style="width: 14.187rem;height: 1.812rem;position: absolute;left: 6rem;top: 45.5rem;" @click="fontButtonClick(3,2)" class="fontButton BoldItalic anation">GAME AUDIO PIPELINE</li>
                         </ul>
                       </div>
 
@@ -77,7 +77,7 @@
                     </td>
 
                     <td>
-                      <div class="divAnimate" v-if="showVideo" style="width: 31.37rem;height: 11.5rem;position: absolute;top: 36.31rem;right: 11.12rem;overflow: hidden">
+                      <div class="divAnimate" v-show="showVideo" style="width: 31.37rem;height: 11.5rem;position: absolute;top: 36.31rem;right: 11.12rem;overflow: hidden">
                         <div ref="carouselImgBox" class="carouselImgBox">
                           <img class="imgStyle" v-for="item in carouselImgPaths" :src="item"/>
                         </div>
@@ -177,7 +177,21 @@
       });
     },
     methods: {
-      fontButtonClick(index) {
+      showVideoClick(){
+        this.showVideo = !this.showVideo;
+        document.getElementsByClassName("divAnimate2")[0].classList.remove("xiaoshi");
+        document.getElementsByClassName("divAnimate2")[0].classList.remove("chuxian");
+        document.getElementsByClassName("divAnimate2")[0].classList.add("xiaoshi");
+        window.setTimeout(function() {
+          let elements = document.getElementsByClassName("divAnimate");
+          for(let i = 0; i < elements.length;i++){
+            elements[i].classList.remove("xiaoshi");
+            elements[i].classList.remove("chuxian");
+            elements[i].classList.add("chuxian");
+          }
+        },100);
+      },
+      fontButtonClick(index,flag) {
         let that = this;
         window.setTimeout(function() {
           //还要切换视频内容
@@ -187,6 +201,21 @@
               childrens[i].style.color = '#BE4123'
               if(childrens[i].classList.contains("anation")){
                 childrens[i].classList.remove("anation");
+              }else{
+                if(flag === 2) {
+                  document.getElementsByClassName("divAnimate2")[0].classList.remove("xiaoshi");
+                  document.getElementsByClassName("divAnimate2")[0].classList.remove("chuxian");
+                  document.getElementsByClassName("divAnimate2")[0].classList.add("chuxian");
+                  window.setTimeout(function() {
+                    let elements = document.getElementsByClassName("divAnimate");
+                    for(let i = 0; i < elements.length;i++){
+                      elements[i].classList.remove("xiaoshi");
+                      elements[i].classList.remove("chuxian");
+                      elements[i].classList.add("xiaoshi");
+                    }
+                    that.showVideo = false;
+                  },100);
+                }
               }
             } else {
               childrens[i].style.color = '#E3E1DB'
@@ -242,6 +271,35 @@
 <style scoped>
   @import './commonCSS/moveBackground.scss';
 
+  .chuxian{
+    animation: chuxian 1.5s ease-in 0s;
+    animation-iteration-count: 1;
+    animation-fill-mode:forwards;
+  }
+  @keyframes chuxian{
+    0%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 1;
+    }
+  }
+
+  .xiaoshi{
+    animation: xiaoshi 1.5s ease-in 0s;
+    animation-iteration-count: 1;
+    animation-fill-mode:forwards;
+  }
+  @keyframes xiaoshi{
+    0%{
+      opacity: 1;
+    }
+    100%{
+      opacity: 0;
+    }
+  }
+
+
   .alignCenter{
     position: absolute;
     left: 0;
@@ -267,14 +325,6 @@
   .fontButton{
     color: #E3E1DB;
     font-weight: 500;
-  }
-
-  .divAnimate{
-    animation:animateNum 3s 1;
-  }
-  @keyframes animateNum{
-    0%{opacity: 0;}
-    100%{opacity: 1;}
   }
 
   .inter{
