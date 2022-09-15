@@ -4,8 +4,8 @@
 <!--    <video ref="firstVideo" class="backGroundStyle">-->
 <!--      <source :src="firstVideo"  type="video/mp4">-->
 <!--    </video>-->
-    <div ref="backGroundBox" class="box" style="opacity: 0.2">
-      <div class="backGroundStyle" >
+    <div ref="backGroundBox" class="box" style="opacity: 0.3">
+      <div class="backGroundStyle image-wrap" >
         <div class="image" :style="{backgroundImage: `url(${firstPage2})`}"></div>
       </div>
     </div>
@@ -21,9 +21,9 @@
     </div>
 
 
-    <img :src="thirdImg" style="position: absolute;width: 38rem;;height: 14.5rem;left: 0;bottom: 4.43rem;" />
+    <img :src="thirdImg" style="position: absolute;width: 38rem;;height: 14.5rem;left: 0;bottom: 4.43rem;z-index: -1" />
 
-    <img ref="selfOpacity" class="rollAni" :src="secondImg" style="position: absolute;width: 90rem;height: 100%;z-index: -2" />
+    <img ref="selfOpacity" class="rollAni" :src="secondImg" style="position: absolute;width: 90rem;height: 100%;z-index: -1" />
 
     <div style="height: 10%;width: 90rem;">
       <toolbar></toolbar>

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <transition :name="animate" mode="out-in">
+    <transition :name="animate">
       <router-view v-if="isRouterAlive"/>
     </transition>
   </div>
@@ -49,7 +49,7 @@ export default {
   .slide-left-enter-active,
   .slide-left-leave-active {
     will-change: transform;
-    transition: all 200ms;
+    transition: all 500ms;
     position: absolute;
   }
   .slide-right-enter {
