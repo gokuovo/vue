@@ -30,13 +30,13 @@
                         {{this.whatWeDo}}
                       </div>
 
-                      <div class="inter" style="top: 6.25rem;left: 26.75rem;width: 44rem;height: 1.43rem;text-align: left;position: absolute;line-height: 130%;color: #E3E1DB;font-weight: 200;font-size: 1.125rem;">
+                      <div class="inter" style="font-weight:400;top: 6.25rem;left: 26.75rem;width: 44rem;height: 1.43rem;text-align: left;position: absolute;line-height: 130%;color: #b0b0ae;font-weight: 200;font-size: 1.125rem;">
                         {{this.whatWeDoText1}}
                       </div>
-                      <div class="inter" style="top: 8.93rem;left: 26.75rem;width: 44rem;height: 2.87rem;text-align: left;position: absolute;line-height: 130%;color: #E3E1DB;font-weight: 200;font-size: 1.125rem;">
+                      <div class="inter" style="top: 8.93rem;left: 26.75rem;width: 44rem;height: 2.87rem;text-align: left;position: absolute;line-height: 130%;color: #b0b0ae;font-weight: 200;font-size: 1.125rem;">
                         {{this.whatWeDoText2}}
                       </div>
-                      <div class="inter" style="top: 13.05rem;left: 26.75rem;width: 44rem;height: 2.87rem;text-align: left;position: absolute;line-height: 130%;color: #E3E1DB;font-weight: 200;font-size: 1.125rem;">
+                      <div class="inter" style="top: 13.05rem;left: 26.75rem;width: 44rem;height: 2.87rem;text-align: left;position: absolute;line-height: 130%;color: #b0b0ae;font-weight: 200;font-size: 1.125rem;">
                         {{this.whatWeDoText3}}
                       </div>
                     </td>

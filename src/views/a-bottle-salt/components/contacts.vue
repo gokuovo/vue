@@ -3,8 +3,8 @@
       <div v-for="(item,index) in contacts">
         <a :href="item.contactUrl" target="_blank">
           <div class="contactsImg" :style="{top : `${13.07+(index+1) * 4.89}rem`,
-                width: `${index == 0 ? 1.218 : (index == 1 ? 1.125 : (index == 2 ? 0.777 : 0.656)) }rem`,
-                height: `${index == 0 ? 0.99 : (index == 1 ? 0.687 : (index == 2 ? 1.119 : 1.5)) }rem`}">
+                width: `1.5rem`,
+                height: `1.5rem`}">
               <img :src="item.imageUrl" style="object-fit: contain;"/>
           </div>
         </a>

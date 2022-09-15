@@ -19,7 +19,7 @@
           <div>
               <el-dropdown @command="handleCommand">
                 <el-button type="primary">
-                  <span class="selfFont">En</span>
+                  <span class="selfFont">EN</span>
                   <i class="el-icon-arrow-down el-icon--right"></i>
                 </el-button>
                 <el-dropdown-menu slot="dropdown">
@@ -145,9 +145,9 @@
     font-family: DIN-BoldItalic;
     font-size: 0.875rem;
     color: #9D9E9A;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.8px;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 100;
   }
 
   .barFont:hover {

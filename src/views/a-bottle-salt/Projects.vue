@@ -57,10 +57,10 @@
         <el-button @click="clickMusic(0)" class="buttonStyle anation buttonStyle1" type="danger">
           <span style="font-size: 0.875rem;width: 4.785714285714286em;height: 2.142857142857143em" class="BoldItalic">MUSIC</span>
         </el-button>
-        <el-button style="margin-left: 2.75rem;" @click="clickSfx(1)" class="buttonStyle anation buttonStyle2" type="danger">
+        <el-button style="margin-left: 1.4285714285714286em;" @click="clickSfx(1)" class="buttonStyle anation buttonStyle2" type="danger">
           <span style="font-size: 0.875rem;width: 4.785714285714286em;height: 2.142857142857143em" class="BoldItalic">SFX</span>
         </el-button>
-        <el-button style="margin-left: 2.75em;" @click="clickList(2)" class="buttonStyle anation buttonStyle2" type="danger">
+        <el-button style="margin-left: 1.4285714285714286em;" @click="clickList(2)" class="buttonStyle anation buttonStyle2" type="danger">
           <span style="font-size: 0.875rem;width: 4.785714285714286em;height: 2.142857142857143em" class="BoldItalic">LIST</span>
         </el-button>
       </div>
@@ -72,10 +72,10 @@
             <img v-if="showSFX" src="../../assets/images/videoPlay.png" style="width: 1.875rem;height: 1.875rem;position: absolute;z-index: 2;left: 2.1875rem;top: 5.06rem;">
             <img style="width: 6.25rem;height: 6.25rem;position: absolute;font-size: 1rem;object-fit: cover;" :src="undefined == showingAlbum.imgSrc ? '' : showingAlbum.imgSrc.replaceAll('\\','\/')"/>
             <div class="BoldItalic" style="width: 7.1rem;height: 7.1rem;position: absolute;left: 8rem">
-              <div style="opacity: 0.8;color: #E3E1DB;font-size: 0.875rem;height: 1.125rem;width: 33.5rem;font-style: italic;margin-bottom: 0.625rem">RELEASE：<span style="font-size: 0.875rem">{{showingAlbum['release'+$store.getters.getLanguage]}}</span></div>
-              <div style="opacity: 0.8;color: #E3E1DB;font-size: 0.875rem;height: 1.125rem;width: 33.5rem;font-style: italic;margin-bottom: 0.625rem">DEVELOPER：<span style="font-size: 0.875rem">{{showingAlbum['developer'+$store.getters.getLanguage]}}</span></div>
-              <div style="opacity: 0.8;color: #E3E1DB;font-size: 0.875rem;height: 1.125rem;width: 33.5rem;font-style: italic;margin-bottom: 0.625rem">PUBLISHER：<span style="font-size: 0.875rem">{{showingAlbum['publisher'+$store.getters.getLanguage]}}</span></div>
-              <div style="opacity: 0.8;color: #E3E1DB;font-size: 0.875rem;height: 1.125rem;width: 33.5rem;font-style: italic;">PLATFORM：<span style="font-size: 0.875rem">{{showingAlbum['platform'+$store.getters.getLanguage]}}</span></div>
+              <div style="font-weight:100;opacity: 0.8;color: #E3E1DB;font-size: 0.875rem;height: 1.125rem;width: 33.5rem;font-style: italic;margin-bottom: 0.625rem;letter-spacing: 0.8px">RELEASE：<span style="letter-spacing: 0.8px;font-size: 0.875rem">{{showingAlbum['release'+$store.getters.getLanguage]}}</span></div>
+              <div style="font-weight:100;opacity: 0.8;color: #E3E1DB;font-size: 0.875rem;height: 1.125rem;width: 33.5rem;font-style: italic;margin-bottom: 0.625rem;letter-spacing: 0.8px">DEVELOPER：<span style="letter-spacing: 0.8px;font-size: 0.875rem">{{showingAlbum['developer'+$store.getters.getLanguage]}}</span></div>
+              <div style="font-weight:100;letter-spacing: 0.8px;opacity: 0.8;color: #E3E1DB;font-size: 0.875rem;height: 1.125rem;width: 33.5rem;font-style: italic;margin-bottom: 0.625rem">PUBLISHER：<span style="letter-spacing: 0.8px;font-size: 0.875rem">{{showingAlbum['publisher'+$store.getters.getLanguage]}}</span></div>
+              <div style="font-weight:100;letter-spacing: 0.8px;opacity: 0.8;color: #E3E1DB;font-size: 0.875rem;height: 1.125rem;width: 33.5rem;font-style: italic;">PLATFORM：<span style="letter-spacing: 0.8px;font-size: 0.875rem">{{showingAlbum['platform'+$store.getters.getLanguage]}}</span></div>
             </div>
           </div>
         </div>
@@ -117,10 +117,10 @@
           <el-button @click="clickMusic(0)" class="buttonStyle anation buttonStyle1" type="danger">
             <span style="font-size: 0.875rem;width: 4.785714285714286em;height: 2.142857142857143em" class="BoldItalic">MUSIC</span>
           </el-button>
-          <el-button style="margin-left: 2.75rem;" @click="clickSfx(1)" class="buttonStyle anation buttonStyle2" type="danger">
+          <el-button style="margin-left: 1.4285714285714286;" @click="clickSfx(1)" class="buttonStyle anation buttonStyle2" type="danger">
             <span style="font-size: 0.875rem;width: 4.785714285714286em;height: 2.142857142857143em" class="BoldItalic">SFX</span>
           </el-button>
-          <el-button style="margin-left: 2.75rem;" @click="clickList(2)" class="buttonStyle anation buttonStyle2" type="danger">
+          <el-button style="margin-left: 1.4285714285714286;" @click="clickList(2)" class="buttonStyle anation buttonStyle2" type="danger">
             <span style="font-size: 0.875rem;width: 4.785714285714286em;height: 2.142857142857143em" class="BoldItalic">LIST</span>
           </el-button>
         </div>

@@ -224,7 +224,7 @@
     font-weight: 200;
     font-size: 1.125rem;
     line-height: 130%;
-    color: #E3E1DB;
+    color: #b0b0ae;
     font-family: inter;
     font-style: normal;
   }
