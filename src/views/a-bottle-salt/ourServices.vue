@@ -46,8 +46,8 @@
               </div>
 
               <div style="width: 100%;height: 10%;color: #F5F5F5;font-size: 20px;font-style:oblique;">
-                <table class="divBase" v-show="!showVideo">
-                  <tr @click="showVideoClick" class="divBase divAnimate2">
+                <table class="divBase divAnimate2" v-show="showMenu">
+                  <tr @click="showVideoClick" class="divBase">
                     <td @click="fontButtonClick(0,1)" class="fontButton BoldItalic anation" style="position: absolute;left: 6rem;top: 36.31rem">MUSIC</td>
                     <td @click="fontButtonClick(1,1)" class="fontButton BoldItalic anation" style="position: absolute;left: 13.62rem;top: 36.31rem">SOUND DESIGN</td>
                     <td @click="fontButtonClick(2,1)" class="fontButton BoldItalic anation" style="position: absolute;left: 26.56rem;top: 36.31rem">VOICE ACTING</td>
@@ -56,12 +56,12 @@
                 </table>
               </div>
 
-              <div v-show="showVideo" style="width: 100%;height: 40%;">
+              <div v-show="showVideo" class="divAnimate" style="width: 100%;height: 40%;opacity: 0">
                 <table class="divBase">
                   <tr>
                     <td>
                       <div>
-                        <ul class="divAnimate" ref="childTr" v-show="showVideo">
+                        <ul ref="childTr">
                           <li style="width: 4.062rem;height: 1.812rem;position: absolute;left: 6rem;top: 36.31rem;" @click="fontButtonClick(0,2)" class="fontButton BoldItalic anation">MUSIC</li>
                           <li style="width: 9.5rem;height: 1.812rem;position: absolute;left: 6rem;top: 39.37rem;" @click="fontButtonClick(1,2)" class="fontButton BoldItalic anation">SOUND DESIGN</li>
                           <li style="width: 8.75rem;height: 1.812rem;position: absolute;left: 6rem;top: 42.43rem;" @click="fontButtonClick(2,2)" class="fontButton BoldItalic anation">VOICE ACTING</li>
@@ -70,14 +70,14 @@
                       </div>
 
 
-                      <video v-if="showVideo && !showBigVideo" class="divAnimate" :src="firstVideo.videoUrl" @click="clickVideo"
+                      <video v-if="!showBigVideo" :src="firstVideo.videoUrl" @click="clickVideo"
                              style="object-fit: fill;position: absolute;width: 16.25rem;height: 12.5rem;top: 36.31rem;left: 26.56rem" controlslist="nofullscreen" controls>
                         <source type="video/mp4">
                       </video>
                     </td>
 
                     <td>
-                      <div class="divAnimate" v-show="showVideo" style="width: 31.37rem;height: 11.5rem;position: absolute;top: 36.31rem;right: 11.12rem;overflow: hidden">
+                      <div style="width: 31.37rem;height: 11.5rem;position: absolute;top: 36.31rem;right: 11.12rem;overflow: hidden">
                         <div ref="carouselImgBox" class="carouselImgBox">
                           <img class="imgStyle" v-for="item in carouselImgPaths" :src="item"/>
                         </div>
@@ -86,6 +86,7 @@
                   </tr>
                 </table>
               </div>
+
             </div>
           </td>
 
@@ -115,6 +116,7 @@
         whatWeDoText1:'',
         whatWeDoText2:'',
         whatWeDoText3:'',
+        showMenu:true,
         showVideo: false,
         bigVideoIsClicked:false,
         showBigVideo: false,
@@ -178,18 +180,25 @@
     },
     methods: {
       showVideoClick(){
-        this.showVideo = !this.showVideo;
+        let that = this;
+        this.showVideo = true;
         document.getElementsByClassName("divAnimate2")[0].classList.remove("xiaoshi");
         document.getElementsByClassName("divAnimate2")[0].classList.remove("chuxian");
         document.getElementsByClassName("divAnimate2")[0].classList.add("xiaoshi");
         window.setTimeout(function() {
-          let elements = document.getElementsByClassName("divAnimate");
-          for(let i = 0; i < elements.length;i++){
-            elements[i].classList.remove("xiaoshi");
-            elements[i].classList.remove("chuxian");
-            elements[i].classList.add("chuxian");
-          }
-        },100);
+          document.getElementsByClassName("divAnimate")[0].classList.remove("xiaoshi");
+          document.getElementsByClassName("divAnimate")[0].classList.remove("chuxian");
+          document.getElementsByClassName("divAnimate")[0].classList.add("chuxian");
+        },10);
+        window.setTimeout(function() {
+          that.showMenu = false;
+          document.getElementsByClassName("divAnimate2")[0].classList.remove("xiaoshi");
+          document.getElementsByClassName("divAnimate2")[0].classList.remove("chuxian");
+          document.getElementsByClassName("divAnimate")[0].classList.remove("xiaoshi");
+          document.getElementsByClassName("divAnimate")[0].classList.remove("chuxian");
+          document.getElementsByClassName("divAnimate")[0].style.opacity = 1;
+          document.getElementsByClassName("divAnimate2")[0].style.opacity = 0;
+        },300);
       },
       fontButtonClick(index,flag) {
         let that = this;
@@ -206,15 +215,21 @@
                   document.getElementsByClassName("divAnimate2")[0].classList.remove("xiaoshi");
                   document.getElementsByClassName("divAnimate2")[0].classList.remove("chuxian");
                   document.getElementsByClassName("divAnimate2")[0].classList.add("chuxian");
+                  that.showMenu = true;
                   window.setTimeout(function() {
-                    let elements = document.getElementsByClassName("divAnimate");
-                    for(let i = 0; i < elements.length;i++){
-                      elements[i].classList.remove("xiaoshi");
-                      elements[i].classList.remove("chuxian");
-                      elements[i].classList.add("xiaoshi");
-                    }
+                    document.getElementsByClassName("divAnimate")[0].classList.remove("xiaoshi");
+                    document.getElementsByClassName("divAnimate")[0].classList.remove("chuxian");
+                    document.getElementsByClassName("divAnimate")[0].classList.add("xiaoshi");
+                  },10);
+                  window.setTimeout(function() {
                     that.showVideo = false;
-                  },100);
+                    document.getElementsByClassName("divAnimate2")[0].classList.remove("xiaoshi");
+                    document.getElementsByClassName("divAnimate2")[0].classList.remove("chuxian");
+                    document.getElementsByClassName("divAnimate")[0].classList.remove("xiaoshi");
+                    document.getElementsByClassName("divAnimate")[0].classList.remove("chuxian");
+                    document.getElementsByClassName("divAnimate")[0].style.opacity = 0;
+                    document.getElementsByClassName("divAnimate2")[0].style.opacity = 1;
+                  },300);
                 }
               }
             } else {
@@ -272,7 +287,7 @@
   @import './commonCSS/moveBackground.scss';
 
   .chuxian{
-    animation: chuxian 1.5s ease-in 0s;
+    animation: chuxian 0.3s ease-in 0s;
     animation-iteration-count: 1;
     animation-fill-mode:forwards;
   }
@@ -286,7 +301,7 @@
   }
 
   .xiaoshi{
-    animation: xiaoshi 1.5s ease-in 0s;
+    animation: xiaoshi 0.3s ease-in 0s;
     animation-iteration-count: 1;
     animation-fill-mode:forwards;
   }

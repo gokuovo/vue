@@ -158,6 +158,10 @@
 <style scoped>
   @import './commonCSS/moveBackground.scss';
 
+  .pointer{
+    pointer-events: none;
+  }
+
   .videoButton{
     display: flex;
     flex-direction: row;
@@ -167,6 +171,7 @@
     gap: 0.125rem;
     position: absolute;
     width: 7.875rem;
+    min-width: 108px;
     height: 2.25rem;
     left: 76.125rem;
     top: 49rem;
