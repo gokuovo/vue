@@ -54,7 +54,7 @@ export default {
   }
   .slide-right-enter {
     opacity: 0;
-    transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0),scale(0.8);
   }
 
   .slide-right-leave-active {
@@ -64,7 +64,7 @@ export default {
 
   .slide-left-enter {
     opacity: 0;
-    transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0),scale(0.8);
   }
 
   .slide-left-leave-active {
