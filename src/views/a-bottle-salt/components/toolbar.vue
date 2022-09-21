@@ -1,7 +1,7 @@
 <template>
   <div style="width: 90rem;height: 100%">
 
-    <img @click="backToFirstPage" :src="$store.getters.getLogo" style="position: absolute;left: 6rem;top: 2.18rem;width: 7.81rem;height: 2.5rem;" />
+    <img class="hand" @click="backToFirstPage" :src="$store.getters.getLogo" style="position: absolute;left: 6rem;top: 2.18rem;width: 7.81rem;height: 2.5rem;" />
 
     <table style="width: 90rem;height: 100%">
       <tr>
@@ -154,6 +154,11 @@
     animation: change 0.5s linear 0s;
     animation-iteration-count: 1;
     animation-fill-mode:forwards;
+    cursor: pointer;
+  }
+
+  .hand:hover{
+    cursor: pointer;
   }
 
   @keyframes change {

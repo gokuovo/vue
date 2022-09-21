@@ -191,6 +191,10 @@
     color: #E3E1DB;
   }
 
+  .videoFont:hover{
+    cursor: pointer;
+  }
+
   .image{
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
     background-blend-mode: normal, luminosity;
