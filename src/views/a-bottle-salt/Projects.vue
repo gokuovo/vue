@@ -83,7 +83,9 @@
           <ul>
             <li style="width: 31.625rem;height: 12.5rem;position: relative" v-for="(item,index) in albums">
               <div :ref="'imgDiv_'+index" @click="albumsClick(item,index)" class="divBase imgDiv" @mouseout="imgDivOut($event)" @mouseover="imgDivOver($event)"
-                   :style="{backgroundImage: `url(${undefined == item.imgSrc ? '' : item.imgSrc.replaceAll('\\','\/')})`}">
+                   :style="{
+                   background:`linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(${undefined == item.imgSrc ? '' : item.imgSrc.replaceAll('\\','\/')}) no-repeat`
+                   }">
               </div>
               <div class="titleFont" style="position: absolute;height: 1.43rem;top: 1.25rem;left: 1.875rem">
                 {{item['title'+$store.getters.getLanguage]}}
@@ -155,6 +157,7 @@
     components: { toolbar, contacts, audioCom },
     data() {
       return {
+        selfOpacity:0.4,
         musicNums:0,
         loading:true,
         firstImg:'',
@@ -267,16 +270,18 @@
     },
     methods: {
       imgDivOut(event){
-        if(event.target.classList.contains("imgDivGary")) {
+        // if(event.target.classList.contains("imgDivGary")) {
+          event.target.style.background = event.target.style.background.replaceAll('0.2','0.4');
           event.target.classList.remove("imgDivAni");
           event.target.classList.add("imgDivAniOut");
-        }
+        // }
       },
       imgDivOver(event){
-        if(event.target.classList.contains("imgDivGary")) {
+        event.target.style.background = event.target.style.background.replaceAll('0.4','0.2');
+        // if(event.target.classList.contains("imgDivGary")) {
           event.target.classList.remove("imgDivAniOut");
           event.target.classList.add("imgDivAni");
-        }
+        // }
       },
 
       mouseOut(event){
@@ -304,16 +309,16 @@
           }
 
           for(let i = 0;i < that.albums.length;i++){
-            if(i != 0) {
+            // if(i != 0) {
               that.$refs["imgDiv_" + i][0].classList.add("imgDivGary");
-            }
+            // }
           }
           for(let i = 0;i < that.albums.length;i++){
             if(i != index) {
               that.$refs["imgDiv_" + i][0].classList.add("imgDivGary");
             }else{
               that.$refs["imgDiv_" + i][0].classList.remove("imgDivAni");
-              that.$refs["imgDiv_" + i][0].classList.remove("imgDivGary");
+              // that.$refs["imgDiv_" + i][0].classList.remove("imgDivGary");
             }
           }
         },100);
@@ -472,7 +477,7 @@
   }
 
   .chuxian1{
-    animation: chuxian1 0.65s ease-in 0s;
+    animation: chuxian1 0.3s ease-in 0s;
     animation-iteration-count: 1;
     animation-fill-mode:forwards;
   }
@@ -488,7 +493,7 @@
   }
 
   .xiaoshi1{
-    animation: xiaoshi1 0.65s ease-in 0s;
+    animation: xiaoshi1 0.3s ease-in 0s;
     animation-iteration-count: 1;
     animation-fill-mode:forwards;
   }
@@ -525,6 +530,7 @@
     letter-spacing: 0.02em;
     text-transform: uppercase;
     color: #E3E1DB;
+    pointer-events: none;
   }
 
   .titleDateFont{
@@ -537,6 +543,7 @@
     text-transform: capitalize;
     color: #E3E1DB;
     opacity: 0.8;
+    pointer-events: none;
 
   }
 
@@ -585,8 +592,7 @@
   }
 
   .imgDiv {
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-size: cover !important;
   }
 
   .imgDivGary{
@@ -594,7 +600,7 @@
   }
 
   .imgDivAni{
-    animation: imgDivAni 1s linear 0s;
+    animation: imgDivAni 0.3s linear 0s;
     animation-iteration-count: 1;
     animation-fill-mode:forwards;
   }
@@ -608,7 +614,7 @@
   }
 
   .imgDivAniOut{
-    animation: imgDivAniOut 1s linear 0s;
+    animation: imgDivAniOut 0.3s linear 0s;
     animation-iteration-count: 1;
     animation-fill-mode:forwards;
   }
