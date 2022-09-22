@@ -113,17 +113,19 @@
             </div>
           </div>
         </div>
+
         <div style="width: 100%;height: 1.875rem;color: #E3E1DB;font-size: 1rem;position: absolute;bottom: 5rem;left: 6rem">
           <el-button @click="clickMusic(0)" class="buttonStyle anation buttonStyle1" type="danger">
             <span style="font-size: 0.875rem;width: 4.785714285714286em;height: 2.142857142857143em" class="BoldItalic">MUSIC</span>
           </el-button>
-          <el-button style="margin-left: 1.4285714285714286;" @click="clickSfx(1)" class="buttonStyle anation buttonStyle2" type="danger">
+          <el-button style="margin-left: 1.4285714285714286em;" @click="clickSfx(1)" class="buttonStyle anation buttonStyle2" type="danger">
             <span style="font-size: 0.875rem;width: 4.785714285714286em;height: 2.142857142857143em" class="BoldItalic">SFX</span>
           </el-button>
-          <el-button style="margin-left: 1.4285714285714286;" @click="clickList(2)" class="buttonStyle anation buttonStyle2" type="danger">
+          <el-button style="margin-left: 1.4285714285714286em;" @click="clickList(2)" class="buttonStyle anation buttonStyle2" type="danger">
             <span style="font-size: 0.875rem;width: 4.785714285714286em;height: 2.142857142857143em" class="BoldItalic">LIST</span>
           </el-button>
         </div>
+
       </div>
 
       <table class="divBase">
