@@ -556,7 +556,7 @@
   }
 
   .anation:hover {
-    animation: change 1s linear 0s;
+    animation: change 0.3s linear 0s;
     animation-iteration-count: 1;
     animation-fill-mode:forwards;
   }
