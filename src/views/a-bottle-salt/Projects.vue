@@ -19,6 +19,7 @@
       </div>
 
       <div v-if="!showLIST && showMusic" style="width: 31.62rem;height: 28.8rem;position: absolute;left: 6rem;top: 16.31rem">
+
         <div class="selfDefineScroll" style="overflow-y: auto;overflow-x: hidden;height: 100%;width: 100%;">
           <ul>
             <li style="width: 31.62rem;height: 2.375rem;" v-for="(item) in showAlbumMusic">
@@ -44,6 +45,7 @@
             </li>
           </ul>
         </div>
+
       </div>
 
       <div v-if="showSFX" style="position: relative;width: 100%;height: 80%;">
@@ -79,41 +81,48 @@
             </div>
           </div>
         </div>
-        <div v-if="!showLIST" class="selfDefineScroll" style="overflow-y: auto;overflow-x: hidden;height: 37.5rem;width: 33.06rem;">
-          <ul>
-            <li style="width: 31.625rem;height: 12.5rem;position: relative" v-for="(item,index) in albums">
-              <div :ref="'imgDiv_'+index" @click="albumsClick(item,index)" class="divBase imgDiv" @mouseout="imgDivOut($event)" @mouseover="imgDivOver($event)"
-                   :style="{
-                   background:`linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(${undefined == item.imgSrc ? '' : item.imgSrc.replaceAll('\\','\/')}) no-repeat`
-                   }">
-              </div>
-              <div class="titleFont" style="position: absolute;height: 1.43rem;top: 1.25rem;left: 1.875rem">
-                {{item['title'+$store.getters.getLanguage]}}
-              </div>
-              <div class="titleDateFont" style="position: absolute;height: 1.43rem;top: 3.3rem;left: 1.875rem">
-                {{item['release'+$store.getters.getLanguage]}}
-              </div>
-            </li>
-          </ul>
+
+        <div v-if="!showLIST" style="height: 37.5rem;width: 33.06rem;">
+          <vue-custom-scrollbar ref="childScrollbar" class="scroll-area musicList" :settings="settings" style="height: 37.5rem;width: 33.06rem;">
+            <ul>
+              <li style="width: 31.625rem;height: 12.5rem;position: relative" v-for="(item,index) in albums">
+                <div :ref="'imgDiv_'+index" @click="albumsClick(item,index)" class="divBase imgDiv" @mouseout="imgDivOut($event)" @mouseover="imgDivOver($event)"
+                     :style="{
+                     background:`linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url(${undefined == item.imgSrc ? '' : item.imgSrc.replaceAll('\\','\/')}) no-repeat`
+                     }">
+                </div>
+                <div class="titleFont" style="position: absolute;height: 1.43rem;top: 1.25rem;left: 1.875rem">
+                  {{item['title'+$store.getters.getLanguage]}}
+                </div>
+                <div class="titleDateFont" style="position: absolute;height: 1.43rem;top: 3.3rem;left: 1.875rem">
+                  {{item['release'+$store.getters.getLanguage]}}
+                </div>
+              </li>
+            </ul>
+          </vue-custom-scrollbar>
         </div>
+
       </div>
 
       <div v-if="showLIST" class="divBase">
-        <div class="selfDefineScroll" style="width: 78rem;height: 80%;overflow-y: auto;overflow-x: hidden">
-          <div v-for="(item) in albumList"
-               style="width: 31.625rem;height: 8.75rem;display: inline-block;position: relative;margin-left: 6rem;margin-top: 4.125rem;">
-            <img style="width: 8.75rem;height: 8.75rem;position: absolute" :src="item.url" />
 
-            <div class="BoldItalic" style="width: 49%;height: 8.75rem;position: absolute;left: 10.625rem;font-family: DIN-BoldItalic">
-              <div style="font-weight: 500;width: 21rem;height: 1.4375rem;color: #B7B5B0;font-size: 1.125rem;font-style: italic;text-transform: uppercase;">{{item['title'+$store.getters.getLanguage]}}</div>
-              <div style="opacity: 0.8;margin-top: 0.625rem;width: 21rem;;height: 1.125rem;color: #B7B5B0;font-size: 0.875rem;font-style: italic;">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
-              <div style="opacity: 0.8;margin-top: 0.625rem;width: 21rem;;height: 1.125rem;color: #B7B5B0;font-size: 0.875rem;font-style: italic;">COMPANY:{{item['company'+$store.getters.getLanguage]}}</div>
-              <div style="opacity: 0.8;margin-top: 0.625rem;width: 21rem;;height: 1.125rem;color: #B7B5B0;font-size: 0.875rem;font-style: italic;">PLATFORM:{{item['platform'+$store.getters.getLanguage]}}</div>
-              <div style="margin-top: 0.93rem;width: 21rem;;height: 1.125rem;color: #B7B5B0;font-style: italic;">
-                <a :href="item.link" :target="null != item.link ? (item.link.indexOf('http') != -1 ? '_blank' : '_self') : '_blank' "><span style="font-size: 0.75rem;text-decoration: underline;font-weight: 500;opacity: 0.5;" @mouseout="mouseOut($event)" @mouseover="mouseOver($event)">EXPLORE</span>&emsp;<img style="width: 0.75rem;height: 0.75rem" src="../../assets/images/jiantou.png"/></a>
+        <div style="width: 78rem;height: 40rem;">
+          <vue-custom-scrollbar ref="childScrollbar2" class="scroll-area justList" :settings="settings" style="width: 78rem;height: 40rem;">
+            <div v-for="(item) in albumList"
+                 style="width: 31.625rem;height: 8.75rem;display: inline-block;position: relative;margin-left: 6rem;margin-top: 4.125rem;">
+              <img style="width: 8.75rem;height: 8.75rem;position: absolute" :src="item.url" />
+
+              <div class="BoldItalic" style="width: 49%;height: 8.75rem;position: absolute;left: 10.625rem;font-family: DIN-BoldItalic">
+                <div style="font-weight: 500;width: 21rem;height: 1.4375rem;color: #B7B5B0;font-size: 1.125rem;font-style: italic;text-transform: uppercase;">{{item['title'+$store.getters.getLanguage]}}</div>
+                <div style="opacity: 0.8;margin-top: 0.625rem;width: 21rem;;height: 1.125rem;color: #B7B5B0;font-size: 0.875rem;font-style: italic;">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
+                <div style="opacity: 0.8;margin-top: 0.625rem;width: 21rem;;height: 1.125rem;color: #B7B5B0;font-size: 0.875rem;font-style: italic;">COMPANY:{{item['company'+$store.getters.getLanguage]}}</div>
+                <div style="opacity: 0.8;margin-top: 0.625rem;width: 21rem;;height: 1.125rem;color: #B7B5B0;font-size: 0.875rem;font-style: italic;">PLATFORM:{{item['platform'+$store.getters.getLanguage]}}</div>
+                <div style="margin-top: 0.93rem;width: 21rem;;height: 1.125rem;color: #B7B5B0;font-style: italic;">
+                  <a :href="item.link" :target="null != item.link ? (item.link.indexOf('http') != -1 ? '_blank' : '_self') : '_blank' "><span style="font-size: 0.75rem;text-decoration: underline;font-weight: 500;opacity: 0.5;" @mouseout="mouseOut($event)" @mouseover="mouseOver($event)">EXPLORE</span>&emsp;<img style="width: 0.75rem;height: 0.75rem" src="../../assets/images/jiantou.png"/></a>
+                </div>
               </div>
             </div>
-          </div>
+          </vue-custom-scrollbar>
         </div>
 
         <div style="width: 100%;height: 1.875rem;color: #E3E1DB;font-size: 1rem;position: absolute;bottom: 5rem;left: 6rem">
@@ -149,12 +158,14 @@
   import contacts from './components/contacts'
   import audioCom from './components/audioCom'
   import boxes from './commonScripts/moveBackground'
+  import vueCustomScrollbar from 'vue-custom-scrollbar'
+  import "vue-custom-scrollbar/dist/vueScrollbar.css"
 
   import {getAlbum,getProject,getList,getImagesByImageCode} from './requestScript/Project'
 
   export default {
     name: 'Projects',
-    components: { toolbar, contacts, audioCom },
+    components: { toolbar, contacts, audioCom,vueCustomScrollbar },
     data() {
       return {
         selfOpacity:0.4,
@@ -182,6 +193,12 @@
         showAudio:false,
         musicAlbum: [],
         videoAlbum: [],
+        settings: {
+          suppressScrollY: false,
+          suppressScrollX: true,
+          wheelPropagation: false,
+          maxScrollbarLength:50,
+        },
       }
     },
     watch:{
@@ -266,6 +283,16 @@
         left: boxElement.offsetLeft,
         top: boxElement.offsetTop,
         size: boxElement.offsetWidth
+      });
+
+      let that = this;
+      window.addEventListener('resize', function() {
+        if(that.$refs.childScrollbar){
+          that.$refs.childScrollbar.__init();
+        }
+        if(that.$refs.childScrollbar2){
+          that.$refs.childScrollbar2.__init();
+        }
       });
     },
     methods: {
@@ -471,6 +498,48 @@
 
 <style scoped>
   @import './commonCSS/moveBackground.scss';
+
+  /*新滚动条样式*/
+  >>> .ps--active-y>.ps__rail-y{
+    background-color: #383838!important;
+  }
+
+  >>> .ps__rail-y{
+    width: 3px;
+    opacity: 1;
+  }
+
+  .musicList >>> .ps__rail-y{
+    margin: 0 0 20rem 0;
+  }
+
+  .justList >>> .ps__rail-y{
+    margin: 14rem 0 10.5rem 0;
+  }
+
+  >>> .ps .ps__rail-y:focus, >>> .ps .ps__rail-y:hover{
+    background-color: #383838;
+    opacity: 1;
+  }
+
+  >>> .ps:hover>.ps__rail-y{
+    opacity: 1;
+  }
+
+  >>> .ps__thumb-y {
+    background: #d1d8e6;
+    border-radius: 19px;
+    background-clip: content-box;
+    position: absolute;
+    width: 3px;
+    right: 0;
+  }
+
+  >>> .ps__rail-y.ps--clicking .ps__thumb-y, >>> .ps__rail-y:focus>.ps__thumb-y, >>> .ps__rail-y:hover>.ps__thumb-y {
+    background-color: #d1d8e6;
+    width: 3px;
+  }
+  /*新滚动条样式*/
 
   >>> .el-loading-spinner .path{
     stroke: #8c939d;

@@ -14,28 +14,30 @@
       <table class="divBase">
         <tr>
           <td style="width: 78.81rem;height: 100%;padding: 6% 0">
-            <div class="selfDefineScroll" style="overflow-y: auto;padding-left: 6rem;width: 78.81rem;height: 33.75rem">
+            <div style="padding-left: 6rem;width: 78.81rem;height: 33.75rem">
+              <vue-custom-scrollbar ref="childScrollbar" class="scroll-area" :settings="settings" style="width: 72.81rem;height: 33.75rem">
 
-              <div v-for="(item) in newsData"  style="display: inline-block;width: 31.625rem;height: 8.75rem;position: relative;margin-bottom: 3.75rem">
-                <img style="width: 8.75rem;height: 8.75rem;position: absolute;object-fit: cover;" :src="item.url" />
-                <div style="width: 21rem;height: 100%;position: absolute;left: 10.625rem">
-                  <table class="divBase">
-                    <tr>
-                      <td class="divBase BoldItalic" style="vertical-align: middle">
-                        <div class="font1" style="margin-bottom: 0.625rem">{{item['title'+$store.getters.getLanguage]}}</div>
-                        <div class="font2"  style="margin-bottom: 1.3125rem">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
-                        <div style="font-style: italic;">
-                          <a :href="item.link" :target="item.link.indexOf('http') != -1 ? '_blank' : '_self' ">
-                            <span class="font3" style="text-decoration: underline;" @mouseout="mouseOut($event)" @mouseover="mouseOver($event)">EXPLORE</span>&emsp;
-                            <img style="width: 0.75rem;height: 0.75rem;opacity: 1" src="../../assets/images/jiantou.png"/>
-                          </a>
-                        </div>
-                      </td>
-                    </tr>
-                  </table>
+                <div v-for="(item) in newsData"  style="display: inline-block;width: 31.625rem;height: 8.75rem;position: relative;margin-bottom: 3.75rem">
+                  <img style="width: 8.75rem;height: 8.75rem;position: absolute;object-fit: cover;" :src="item.url" />
+                  <div style="width: 21rem;height: 100%;position: absolute;left: 10.625rem">
+                    <table class="divBase">
+                      <tr>
+                        <td class="divBase BoldItalic" style="vertical-align: middle">
+                          <div class="font1" style="margin-bottom: 0.625rem">{{item['title'+$store.getters.getLanguage]}}</div>
+                          <div class="font2"  style="margin-bottom: 1.3125rem">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
+                          <div style="font-style: italic;">
+                            <a :href="item.link" :target="item.link.indexOf('http') != -1 ? '_blank' : '_self' ">
+                              <span class="font3" style="text-decoration: underline;" @mouseout="mouseOut($event)" @mouseover="mouseOver($event)">EXPLORE</span>&emsp;
+                              <img style="width: 0.75rem;height: 0.75rem;opacity: 1" src="../../assets/images/jiantou.png"/>
+                            </a>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
                 </div>
-              </div>
 
+              </vue-custom-scrollbar>
             </div>
           </td>
           <td style="width: 20%;">
@@ -62,17 +64,25 @@
   import toolbar from './components/toolbar'
   import contacts from './components/contacts'
   import boxes from './commonScripts/moveBackground'
+  import vueCustomScrollbar from 'vue-custom-scrollbar'
+  import "vue-custom-scrollbar/dist/vueScrollbar.css"
 
   import {getNews,getWorkLogNews,getImagesByImageCode} from './requestScript/News'
 
   export default {
     name: 'News',
-    components: { toolbar,contacts },
+    components: { toolbar,contacts,vueCustomScrollbar },
     data(){
       return {
         firstImg: '',
         newsData:[
-        ]
+        ],
+        settings: {
+          suppressScrollY: false,
+          suppressScrollX: true,
+          wheelPropagation: false,
+          maxScrollbarLength:50,
+        },
       }
     },
     watch:{
@@ -165,12 +175,52 @@
       let elements = document.getElementsByClassName("buttonStyle");
       elements[0].style.backgroundColor = "#BE4123";
       elements[0].classList.remove("anation");
+
+      let that = this;
+      window.addEventListener('resize', function() {
+        that.$refs.childScrollbar.__init();
+      });
     }
   }
 </script>
 
 <style scoped>
   @import './commonCSS/moveBackground.scss';
+
+  /*新滚动条样式*/
+  >>> .ps--active-y>.ps__rail-y{
+    background-color: #383838!important;
+  }
+
+  >>> .ps__rail-y{
+    width: 3px;
+    opacity: 1;
+    margin: 7rem 0 11rem 0;
+  }
+
+  >>> .ps .ps__rail-y:focus, >>> .ps .ps__rail-y:hover{
+    background-color: #383838;
+    opacity: 1;
+  }
+
+  >>> .ps:hover>.ps__rail-y{
+    opacity: 1;
+  }
+
+  >>> .ps__thumb-y {
+    background: #d1d8e6;
+    border-radius: 19px;
+    background-clip: content-box;
+    position: absolute;
+    width: 3px;
+    right: 0;
+  }
+
+  >>> .ps__rail-y.ps--clicking .ps__thumb-y, >>> .ps__rail-y:focus>.ps__thumb-y, >>> .ps__rail-y:hover>.ps__thumb-y {
+    background-color: #d1d8e6;
+    width: 3px;
+  }
+  /*新滚动条样式*/
 
   .chuxian1{
     animation: chuxian1 0.65s ease-in 0s;

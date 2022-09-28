@@ -23,7 +23,7 @@
 <!--            </div>-->
 
             <div style="height: 32rem;width: 72.81rem;margin-left: 6rem;margin-bottom: 10rem">
-              <vue-custom-scrollbar class="scroll-area" :settings="settings" style="height: 32rem;width: 72.81rem;" @ps-scroll-y="endY">
+              <vue-custom-scrollbar ref="childScrollbar" class="scroll-area" :settings="settings" style="height: 32rem;width: 72.81rem;" @ps-scroll-y="endY">
                 <div v-for="(item,index) in partners" class="divClass" :style="{marginLeft: `${index % 5 !== 0 ? '1.5rem' : ''}`}">
                   <a :href="item.partnerLink" :target="item.partnerLink.indexOf('http') !== -1 ? '_blank' : '_self' ">
                     <img class="linkHover"  style="position: absolute;width: 11.75rem;height: 11.75rem;object-fit: cover;" :src="item.partnerUrl" />
@@ -102,6 +102,11 @@
         top: boxElement.offsetTop,
         size: boxElement.offsetWidth
       })
+
+      let that = this;
+      window.addEventListener('resize', function() {
+        that.$refs.childScrollbar.__init();
+      });
     },
     methods:{
       endY(evt){
@@ -122,6 +127,7 @@
   >>> .ps__rail-y{
     width: 3px;
     opacity: 1;
+    margin: 6.25rem 0 9.375rem 0;
   }
 
    >>> .ps .ps__rail-y:focus, >>> .ps .ps__rail-y:hover{
