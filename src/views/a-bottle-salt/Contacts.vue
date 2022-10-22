@@ -35,7 +35,20 @@
             </div>
             <div style="width: 19em;height: 70%;color: #71706E;font-size: 0.875rem;font-style: italic;">
                 <div v-for="(item,index) in contactImages" style="width: 1.7142857142857142em;height: 1.7142857142857142em;margin-right: 0.35em;position: relative;display: inline-block;" :style="index != 0 ? 'margin-left: 0.75rem':''">
-                  <a :href="item.contactUrl" target="_blank"><img style="position: absolute;width: 1.7142857142857142em;height: 1.7142857142857142em;" :src="item.imageUrl"/></a>
+                  <el-popover :disabled="(item.connectType != '微信' && item.connectType != 'skype')" placement="top" width="175" trigger="hover">
+                    <div style="width:150px;height:150px;">
+                      <img
+                        style="width:150px;height:150px;object-fit: cover;"
+                        :src="item.contactUrl"
+                        alt
+                      />
+                    </div>
+                      <div style="width: 1.7142857142857142em;height: 1.7142857142857142em;" slot="reference">
+                          <a :style="(item.connectType != '微信' && item.connectType != 'skype') ? '':'pointer-events:none'" :href="item.contactUrl" target="_blank">
+                            <img slot="reference" style="position: absolute;width: 1.7142857142857142em;height: 1.7142857142857142em;" :src="item.imageUrl"/>
+                          </a>
+                      </div>
+                  </el-popover>
                 </div>
             </div>
           </td>
@@ -49,6 +62,23 @@
           </td>
         </tr>
       </table>
+
+      <el-popover placement="top" title width="200" trigger="hover">
+        <div style="width:200px;height:200px;">
+          <img
+            style="width:100%;height:100%;object-fit: cover;"
+            :src="firstImg"
+            alt
+          />
+        </div>
+        <div style="width:80px;height:80px;" slot="reference">
+          <img
+            style="width:100%;height:100%;object-fit: cover;"
+            :src="firstImg"
+            alt
+          />
+        </div>
+      </el-popover>
     </div>
   </div>
 </template>
@@ -128,9 +158,17 @@
   }
 </script>
 
+<style>
+
+  .el-popover{
+    background-color: #383838 !important;
+    border-color: #383838 !important;
+  }
+
+</style>
+
 <style scoped>
   @import './commonCSS/moveBackground.scss';
-
   .alignCenter{
     position: absolute;
     left: 0;
