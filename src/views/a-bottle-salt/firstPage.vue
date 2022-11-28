@@ -21,7 +21,7 @@
     </div>
 
 
-    <img :src="thirdImg" style="position: absolute;width: 38rem;;height: 14.5rem;left: 0;bottom: 4.43rem;z-index: -1" />
+    <img :src="thirdImg" style="position: absolute;width: 38rem;;height: 14.5rem;left: 0;bottom: 4.43rem;z-index: 1" />
 
     <img ref="selfOpacity" class="rollAni" :src="secondImg" style="position: absolute;width: 90rem;height: 100%;z-index: -1" />
 

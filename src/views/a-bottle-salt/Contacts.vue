@@ -35,10 +35,10 @@
             </div>
             <div style="width: 19em;height: 70%;color: #71706E;font-size: 0.875rem;font-style: italic;">
                 <div v-for="(item,index) in contactImages" style="width: 1.7142857142857142em;height: 1.7142857142857142em;margin-right: 0.35em;position: relative;display: inline-block;" :style="index != 0 ? 'margin-left: 0.75rem':''">
-                  <el-popover :disabled="(item.connectType != '微信' && item.connectType != 'skype')" placement="top" width="175" trigger="hover">
+                  <el-popover :disabled="(item.connectType != '微信' && item.connectType != 'skype')" placement="top" width="150" trigger="hover">
                     <div style="width:150px;height:150px;">
                       <img
-                        style="width:150px;height:150px;object-fit: cover;"
+                        style="width:150px;height:150px;object-fit: fill;"
                         :src="item.contactUrl"
                         alt
                       />
@@ -163,6 +163,7 @@
   .el-popover{
     background-color: #383838 !important;
     border-color: #383838 !important;
+    padding: 0;
   }
 
 </style>
