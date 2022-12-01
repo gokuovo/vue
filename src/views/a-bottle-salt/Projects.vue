@@ -30,7 +30,7 @@
 
                 <div class="musicItem" :ref="item.id" @click="musicItemClick(item)"
                      style="color: #E3E1DB;position: absolute;font-size: 0.875rem;height: 1.125rem;width: 31.62rem;bottom: 0rem">
-                  <span class="BoldItalic">{{item.title}}</span>
+                  <span class="BoldItalic turnHand">{{item.title}}</span>
                   <audio :src="item.url" v-show="false" :ref="item.title+item.id" controls @canplay="getDuration(item.title+item.id)">
                     <source type="audio/mpeg"/>
                   </audio>
@@ -297,18 +297,18 @@
     },
     methods: {
       imgDivOut(event){
-        // if(event.target.classList.contains("imgDivGary")) {
+        if(event.target.classList.contains("imgDivGary")) {
           event.target.style.background = event.target.style.background.replaceAll('0.2','0.4');
           event.target.classList.remove("imgDivAni");
           event.target.classList.add("imgDivAniOut");
-        // }
+        }
       },
       imgDivOver(event){
         event.target.style.background = event.target.style.background.replaceAll('0.4','0.2');
-        // if(event.target.classList.contains("imgDivGary")) {
+        if(event.target.classList.contains("imgDivGary")) {
           event.target.classList.remove("imgDivAniOut");
           event.target.classList.add("imgDivAni");
-        // }
+        }
       },
 
       mouseOut(event){
@@ -345,7 +345,7 @@
               that.$refs["imgDiv_" + i][0].classList.add("imgDivGary");
             }else{
               that.$refs["imgDiv_" + i][0].classList.remove("imgDivAni");
-              // that.$refs["imgDiv_" + i][0].classList.remove("imgDivGary");
+              that.$refs["imgDiv_" + i][0].classList.remove("imgDivGary");
             }
           }
         },100);
@@ -499,7 +499,12 @@
 <style scoped>
   @import './commonCSS/moveBackground.scss';
 
-  /*新滚动条样式*/
+  .turnHand:hover{
+    cursor: pointer
+  }
+
+
+    /*新滚动条样式*/
   >>> .ps--active-y>.ps__rail-y{
     background-color: #383838!important;
   }

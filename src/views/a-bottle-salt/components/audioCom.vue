@@ -134,6 +134,10 @@
 </script>
 
 <style lang="scss" scoped>
+  .songName:hover{
+    cursor: pointer
+  }
+
   .BoldItalic{
     font-family: DIN-BoldItalic;
     font-style: italic;
