@@ -19,53 +19,54 @@
             <div class="selfDefineScroll" style="overflow-y: auto;overflow-x: hidden;height: 100%;width: 100%;min-width: 900px">
               <div style="height: 1500px;width: 100%;position: relative;padding-left: 6rem">
 
-                <div class="titleFont" style="position: absolute;width: 25rem;height: 6.87rem;top: 6.68rem;">
-                  {{titleFont}}
-                </div>
+                <div class="fontColor" style="position: absolute;width: 70rem;height: 1500px;top: 6.68rem;" v-html="textHtml"></div>
+<!--                <div class="titleFont" style="position: absolute;width: 25rem;height: 6.87rem;top: 6.68rem;">-->
+<!--                  {{titleFont}}-->
+<!--                </div>-->
 
-                <div class="dateFont" style="position: absolute;width: auto;height: 0.93rem;top: 16.35rem;">
-                  DATE：{{dateFont}}
-                </div>
+<!--                <div class="dateFont" style="position: absolute;width: auto;height: 0.93rem;top: 16.35rem;">-->
+<!--                  DATE：{{dateFont}}-->
+<!--                </div>-->
 
-                <div class="backNewsFont" style="position: absolute;width: auto;height: 1.12rem;top: 28.9rem;">
-                  <a href="/#/News">BACK TO THE NEWS</a>
-                </div>
+<!--                <div class="backNewsFont" style="position: absolute;width: auto;height: 1.12rem;top: 28.9rem;">-->
+<!--                  <a href="/#/News">BACK TO THE NEWS</a>-->
+<!--                </div>-->
 
-                <div style="position: absolute;width: 18.37rem;height: 10.25rem;top: 53.45rem;">
-                  <img :src="img1" style="position: absolute;width: 100%;height: 100%"/>
-                </div>
+<!--                <div style="position: absolute;width: 18.37rem;height: 10.25rem;top: 53.45rem;">-->
+<!--                  <img :src="img1" style="position: absolute;width: 100%;height: 100%"/>-->
+<!--                </div>-->
 
-                <div style="position: absolute;width: 18.37rem;height: 10.25rem;top: 64.95rem;">
-                  <img :src="img2" style="position: absolute;width: 100%;height: 100%"/>
-                </div>
+<!--                <div style="position: absolute;width: 18.37rem;height: 10.25rem;top: 64.95rem;">-->
+<!--                  <img :src="img2" style="position: absolute;width: 100%;height: 100%"/>-->
+<!--                </div>-->
 
-                <div class="contentFont" style="position: absolute;width: 39.31rem;height: 5.75rem;top: 6.68rem;left: 32.93rem;">
-                  {{font1}}
-                </div>
+<!--                <div class="contentFont" style="position: absolute;width: 39.31rem;height: 5.75rem;top: 6.68rem;left: 32.93rem;">-->
+<!--                  {{font1}}-->
+<!--                </div>-->
 
-                <div class="contentFont" style="position: absolute;width: 39.31rem;height: 4.31rem;top: 13.68rem;left: 32.93rem;">
-                  {{font2}}
-                </div>
+<!--                <div class="contentFont" style="position: absolute;width: 39.31rem;height: 4.31rem;top: 13.68rem;left: 32.93rem;">-->
+<!--                  {{font2}}-->
+<!--                </div>-->
 
-                <div class="contentFont" style="position: absolute;width: 39.31rem;height: 4.31rem;top: 19.24rem;left: 32.93rem;">
-                  {{font3}}
-                </div>
+<!--                <div class="contentFont" style="position: absolute;width: 39.31rem;height: 4.31rem;top: 19.24rem;left: 32.93rem;">-->
+<!--                  {{font3}}-->
+<!--                </div>-->
 
-                <div style="position: absolute;width: 35.87rem;height: 20rem;top: 28.11rem;left: 32.93rem;">
-                  <img :src="img3" style="position: absolute;width: 100%;height: 100%"/>
-                </div>
+<!--                <div style="position: absolute;width: 35.87rem;height: 20rem;top: 28.11rem;left: 32.93rem;">-->
+<!--                  <img :src="img3" style="position: absolute;width: 100%;height: 100%"/>-->
+<!--                </div>-->
 
-                <div class="contentFont" style="position: absolute;width: 39.31rem;height: 5.75rem;top: 55.11rem;left: 32.93rem;">
-                  {{font4}}
-                </div>
+<!--                <div class="contentFont" style="position: absolute;width: 39.31rem;height: 5.75rem;top: 55.11rem;left: 32.93rem;">-->
+<!--                  {{font4}}-->
+<!--                </div>-->
 
-                <div class="contentFont" style="position: absolute;width: 39.31rem;height: 4.31rem;top: 62.11rem;left: 32.93rem;">
-                  {{font5}}
-                </div>
+<!--                <div class="contentFont" style="position: absolute;width: 39.31rem;height: 4.31rem;top: 62.11rem;left: 32.93rem;">-->
+<!--                  {{font5}}-->
+<!--                </div>-->
 
-                <div class="contentFont" style="position: absolute;width: 39.31rem;height: 4.31rem;top: 67.67rem;left: 32.93rem;">
-                  {{font6}}
-                </div>
+<!--                <div class="contentFont" style="position: absolute;width: 39.31rem;height: 4.31rem;top: 67.67rem;left: 32.93rem;">-->
+<!--                  {{font6}}-->
+<!--                </div>-->
 
               </div>
             </div>
@@ -106,6 +107,7 @@
         font4:'',
         font5:'',
         font6:'',
+        textHtml:'',
       }
     },
     created() {
@@ -124,6 +126,7 @@
           this.font4 = resp[0]['text'+that.$store.getters.getLanguage+'02'].split('\n')[0];
           this.font5 = resp[0]['text'+that.$store.getters.getLanguage+'02'].split('\n')[1];
           this.font6 = resp[0]['text'+that.$store.getters.getLanguage+'02'].split('\n')[2];
+          this.textHtml = resp[0]['text'];
         }
       })
 
@@ -193,6 +196,10 @@
     color: #B8B7B2;
     font-family: DIN-BoldItalic;
     font-style: italic;
+  }
+
+  .fontColor{
+    color: #B8B7B2;
   }
 
   .dateFont{
