@@ -19,26 +19,31 @@
             <div class="selfDefineScroll" style="overflow-y: auto;overflow-x: hidden;height: 100%;width: 100%;min-width: 900px">
               <div style="height: 1500px;width: 100%;position: relative;padding-left: 6rem">
 
-                <div class="fontColor" style="position: absolute;width: 70rem;height: 1500px;top: 6.68rem;" v-html="textHtml"></div>
-<!--                <div class="titleFont" style="position: absolute;width: 25rem;height: 6.87rem;top: 6.68rem;">-->
-<!--                  {{titleFont}}-->
-<!--                </div>-->
+                <div style="position: absolute; width: 25rem; height: auto; top: 6.68rem;">
+                  <div class="titleFont" style="width: 25rem;height: auto;">
+                    {{titleFont}}
+                  </div>
 
-<!--                <div class="dateFont" style="position: absolute;width: auto;height: 0.93rem;top: 16.35rem;">-->
-<!--                  DATE：{{dateFont}}-->
-<!--                </div>-->
+                  <div class="dateFont" style="width: auto;height: 0.93rem;margin-top: 3rem;">
+                    DATE：{{dateFont}}
+                  </div>
 
-<!--                <div class="backNewsFont" style="position: absolute;width: auto;height: 1.12rem;top: 28.9rem;">-->
-<!--                  <a href="/#/News">BACK TO THE NEWS</a>-->
-<!--                </div>-->
+                  <div class="backNewsFont" style="width: auto;height: 1.12rem;margin-top: 10rem;">
+                    <a href="/News">BACK TO THE NEWS</a>
+                  </div>
 
-<!--                <div style="position: absolute;width: 18.37rem;height: 10.25rem;top: 53.45rem;">-->
-<!--                  <img :src="img1" style="position: absolute;width: 100%;height: 100%"/>-->
-<!--                </div>-->
+                  <div style="position: absolute;width: 18.37rem;height: 10.25rem;top: 47.45rem;">
+                    <img :src="img1" style="position: absolute;width: 100%;height: 100%"/>
+                  </div>
 
-<!--                <div style="position: absolute;width: 18.37rem;height: 10.25rem;top: 64.95rem;">-->
-<!--                  <img :src="img2" style="position: absolute;width: 100%;height: 100%"/>-->
-<!--                </div>-->
+                  <div style="position: absolute;width: 18.37rem;height: 10.25rem;top: 58.95rem;">
+                    <img :src="img2" style="position: absolute;width: 100%;height: 100%"/>
+                  </div>
+                </div>
+
+                <div v-html="textHtml" class="fontColor" style="position: absolute;width: 39.31rem;height: 1500px;top: 6.68rem;left: 32.93rem;">
+
+                </div>
 
 <!--                <div class="contentFont" style="position: absolute;width: 39.31rem;height: 5.75rem;top: 6.68rem;left: 32.93rem;">-->
 <!--                  {{font1}}-->
@@ -112,27 +117,27 @@
     },
     created() {
       let that = this;
-      getNewsLink({id:'7a8b9554-f397-46d1-af2b-eb702945280b'}).then(resp =>{
-        if(resp.data.length > 0){
+      getNewsLink({id:this.$route.query.id}).then(resp =>{
+        if(resp.data && resp.data.length > 0){
           resp = resp.data;
-          this.img1 = resp[0].img01.replaceAll('\\','\/');
-          this.img2 = resp[0].img02.replaceAll('\\','\/');
-          this.img3 = resp[0].img03.replaceAll('\\','\/');
+          this.img1 = resp[0].img01 ? resp[0].img01.replaceAll('\\','\/') : "";
+          this.img2 = resp[0].img02 ? resp[0].img02.replaceAll('\\','\/') : "";
+          this.img3 = resp[0].img03 ? resp[0].img03.replaceAll('\\','\/') : "";
           this.titleFont = resp[0].title;
           this.dateFont = resp[0].date;
-          this.font1 = resp[0]['text'+that.$store.getters.getLanguage+'01'].split('\n')[0];
-          this.font2 = resp[0]['text'+that.$store.getters.getLanguage+'01'].split('\n')[1];
-          this.font3 = resp[0]['text'+that.$store.getters.getLanguage+'01'].split('\n')[2];
-          this.font4 = resp[0]['text'+that.$store.getters.getLanguage+'02'].split('\n')[0];
-          this.font5 = resp[0]['text'+that.$store.getters.getLanguage+'02'].split('\n')[1];
-          this.font6 = resp[0]['text'+that.$store.getters.getLanguage+'02'].split('\n')[2];
+          this.font1 = resp[0]['text'+that.$store.getters.getLanguage+'01'] ? resp[0]['text'+that.$store.getters.getLanguage+'01'].split('\n')[0] : "";
+          this.font2 = resp[0]['text'+that.$store.getters.getLanguage+'01'] ? resp[0]['text'+that.$store.getters.getLanguage+'01'].split('\n')[1] : "";
+          this.font3 = resp[0]['text'+that.$store.getters.getLanguage+'01'] ? resp[0]['text'+that.$store.getters.getLanguage+'01'].split('\n')[2] : "";
+          this.font4 = resp[0]['text'+that.$store.getters.getLanguage+'02'] ? resp[0]['text'+that.$store.getters.getLanguage+'02'].split('\n')[0] : "";
+          this.font5 = resp[0]['text'+that.$store.getters.getLanguage+'02'] ? resp[0]['text'+that.$store.getters.getLanguage+'02'].split('\n')[1] : "";
+          this.font6 = resp[0]['text'+that.$store.getters.getLanguage+'02'] ? resp[0]['text'+that.$store.getters.getLanguage+'02'].split('\n')[2] : "";
           this.textHtml = resp[0]['text'];
         }
       })
 
       getImagesByImageCode({imageCode:'08'}).then(resp =>{
         if(resp.data.length > 0){
-          this.firstImg = resp.data[0].imageUrl.replaceAll('\\','\/');
+          this.firstImg = resp.data[0].imageUrl ? resp.data[0].imageUrl.replaceAll('\\','\/') : "";
         }
       })
 

@@ -14,7 +14,7 @@
     mousePos.x = e.pageX;
     mousePos.y = e.pageY;
     if(document.getElementsByClassName("image-wrap").length > 0) {
-      document.getElementsByClassName("image-wrap")[0].style.transform = 'scale(1.2)';
+      document.getElementsByClassName("image-wrap")[0].style.transform = 'scale(1.1)';//放大大小
     }
   }
 
@@ -33,8 +33,8 @@
       // the mouse is in the space over the box - update the box image target
       // position dependent on how far the mouse position is from the center
       // of the box (box size/2)
-      box.targetX = (box.size / 2 - (mousePos.x - box.left)) * 0.05;
-      box.targetY = (box.size / 2 - (mousePos.y - box.top)) * 0.05;
+      box.targetX = (box.size / 2 - (mousePos.x - box.left)) * 0.025;//移动速率
+      box.targetY = (box.size / 2 - (mousePos.y - box.top)) * 0.025;//移动速率
     } else {
       // otherwise the box isn't being hovered, its target is 0
       box.targetX = 0;

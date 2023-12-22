@@ -49,10 +49,14 @@
       </div>
 
       <div v-if="showSFX" style="position: relative;width: 100%;height: 80%;">
-        <video :src="showAlbumVideo != undefined ? (showAlbumVideo[0] != undefined ? showAlbumVideo[0].url.replaceAll('\\','\/') : '') : ''"
+        <video v-show="showAlbumVideo[0] != undefined ? showAlbumVideo[0].isBlibli != 1 : true" :src="showAlbumVideo != undefined ? (showAlbumVideo[0] != undefined ? showAlbumVideo[0].url.replaceAll('\\','\/') : '') : ''"
                style="position: absolute;width: 45.75rem;height: 24.875em;top: 10.06rem;object-fit: fill;" controls>
           <source type="video/mp4">
         </video>
+        <iframe v-show="showAlbumVideo[0] != undefined ? showAlbumVideo[0].isBlibli == 1 : false" :src="showAlbumVideo != undefined ? (showAlbumVideo[0] != undefined ? showAlbumVideo[0].url.replaceAll('\\','\/') : '') : ''"
+                style="position: absolute;width: 45.75rem;height: 24.875em;top: 10.06rem;object-fit: fill;">
+
+        </iframe>
       </div>
 
       <div v-if="!showLIST" style="width: 100%;height: 1.875rem;color: #E3E1DB;font-size: 1rem;position: absolute;bottom: 5rem;left: 6rem">
@@ -168,9 +172,13 @@
     components: { toolbar, contacts, audioCom,vueCustomScrollbar },
     data() {
       return {
+        playingMusic:{},
+        backImgCode: '05',
+        musicAlbumIndex: 0,
+        videoAlbumIndex: 0,
         selfOpacity:0.4,
         musicNums:0,
-        loading:true,
+        loading:false,
         firstImg:'',
         albums: [
         ],
@@ -207,11 +215,25 @@
       }
     },
     created() {
+      if(this.$route.query.index == undefined) {
+        this.$router.push({ query: { index: 0, which: 0 } });
+      }
+      this.musicAlbumIndex = this.$route.query.index < 0 ? 0 : this.$route.query.index;
+      this.videoAlbumIndex = this.musicAlbumIndex;
+      if(this.$route.query.which == 0){
+        this.showMusic = true;
+      }else if(this.$route.query.which == 1){
+        this.showSFX = true;
+        this.showMusic = false;
+      }else{
+        this.showLIST = true;
+        this.showMusic = false;
+      }
       if (null != this.albums && this.albums.length > 0) {
         this.showingAlbum = this.albums[0]
       }
 
-      getImagesByImageCode({imageCode:'05'}).then(resp =>{
+      getImagesByImageCode({imageCode:this.backImgCode}).then(resp =>{
         if(resp.data.length > 0){
           this.firstImg = resp.data[0].imageUrl.replaceAll('\\','\/');
         }
@@ -226,41 +248,59 @@
               this.videoAlbum.push(resp.data[i]);
             }
           }
-          this.albums = this.musicAlbum;
-          this.showingAlbum = this.albums[0];
-          //默认显示第一张专辑下面的音乐
-          let id = this.albums[0].id;
-          getProject(id).then(resp =>{
-            resp = resp.data;
-            if(resp.length > 0){
-              let musicList = [];
-              for(let i = 0;i < resp.length;i++){
-                musicList.push(resp[i]);
+          if(this.showMusic) {
+            this.albums = this.musicAlbum;
+            this.showingAlbum = this.albums[Math.min(this.musicAlbumIndex,this.albums.length-1)];
+            //默认显示第一张专辑下面的音乐
+            let id = this.albums[Math.min(this.musicAlbumIndex,this.albums.length-1)].id;
+            //获取背景壁纸
+            this.backImgCode = id;
+            this.getBackImg();
+            getProject(id).then(resp => {
+              resp = resp.data;
+              if (resp.length > 0) {
+                let musicList = [];
+                for (let i = 0; i < resp.length; i++) {
+                  musicList.push(resp[i]);
+                }
+                this.showAlbumMusic = musicList;
+                //样式补全
+                this.fullStyle(Math.min(this.musicAlbumIndex,2));
+                this.musicItemClick(this.showAlbumMusic);
               }
-              this.showAlbumMusic = musicList;
-              //样式补全
-              this.fullStyle(0);
-              this.musicItemClick(this.showAlbumMusic);
-            }
-          });
-          //获取视频专辑的视频
-          let vId = this.videoAlbum[0].id;
-          getProject(vId).then(resp =>{
-            resp = resp.data;
-            if(resp.length > 0){
-              let videoList = [];
-              for(let i = 0;i < resp.length;i++){
-                videoList.push(resp[i]);
+            });
+          }
+          if(this.showSFX) {
+            //获取视频专辑的视频
+            this.albums = this.videoAlbum;
+            this.showingAlbum = this.albums[Math.min(this.videoAlbumIndex,this.albums.length-1)];
+            let vId = this.videoAlbum[Math.min(this.videoAlbumIndex,this.albums.length-1)].id;
+            //获取背景壁纸
+            this.backImgCode = vId;
+            this.getBackImg();
+            getProject(vId).then(resp => {
+              resp = resp.data;
+              if (resp.length > 0) {
+                let videoList = [];
+                for (let i = 0; i < resp.length; i++) {
+                  videoList.push(resp[i]);
+                }
+                this.showAlbumVideo = videoList;
+                //样式补全
+                this.fullStyle(Math.min(this.videoAlbumIndex,2));
+                this.loading = false;
               }
-              this.showAlbumVideo = videoList;
-            }
-          });
+            });
+          }
         }
       });
 
       getList().then(resp =>{
         if(resp.data.length > 0){
           this.albumList = resp.data;
+          if(this.showLIST){
+            this.loading = false;
+          }
         }
       });
     },
@@ -269,9 +309,6 @@
       for(let i = 0;i < this.musicTimes.length;i++){
         this.musicTimes[i].value = this.transTime(this.musicTimes[i].key);
       }
-      let elements = document.getElementsByClassName("buttonStyle");
-      elements[0].style.backgroundColor = "#BE4123";
-      elements[0].classList.remove("anation");
 
       let boxElement = this.$refs.backGroundBox;
       boxes.push({
@@ -294,8 +331,23 @@
           that.$refs.childScrollbar2.__init();
         }
       });
+
+      window.setTimeout(function() {
+        let elements = document.getElementsByClassName("buttonStyle");
+        let eleIndex = that.$route.query.which;
+        elements[eleIndex].style.backgroundColor = "#BE4123";
+        elements[eleIndex].classList.remove("anation");
+      },100);
+
     },
     methods: {
+      getBackImg(){
+        getImagesByImageCode({imageCode:this.backImgCode}).then(resp =>{
+          if(resp.data.length > 0){
+            this.firstImg = resp.data[0].imageUrl.replaceAll('\\','\/');
+          }
+        });
+      },
       imgDivOut(event){
         if(event.target.classList.contains("imgDivGary")) {
           event.target.style.background = event.target.style.background.replaceAll('0.2','0.4');
@@ -385,6 +437,7 @@
         this.buttonStyle(index);
       },
       clickList(index){
+        this.$router.push({query: {index:-1,which:2}});
         this.showMusic = false;
         this.showSFX = false;
         this.showLIST = true
@@ -392,6 +445,7 @@
       },
 
       albumsClick(data,index) {
+        this.$router.push({query: {index:index,which:this.showMusic ? 0 : this.showSFX ? 1 : 2}});
         this.showingAlbum = data;
         let id = data.id;
         getProject(id).then(resp =>{
@@ -412,6 +466,9 @@
             this.showAlbumVideo = videoList;
             this.musicItemClick(this.showAlbumMusic);
             this.fullStyle(index);
+            //获取背景壁纸
+            this.backImgCode = id;
+            this.getBackImg();
           }else{
             this.showAlbumMusic = [];
             this.showAlbumVideo = [];
@@ -421,6 +478,17 @@
       },
 
       musicItemClick(item){
+        if(null == item){
+          let index = 0;
+          for(let i = 0;i < this.showAlbumMusic.length;i++){
+            if(this.playingMusic.id == this.showAlbumMusic[i].id){
+              index = i;
+              break;
+            }
+          }
+          item = (index == this.showAlbumMusic.length - 1) ? this.showAlbumMusic[0] : this.showAlbumMusic[index+1];
+        }
+        this.playingMusic = item;
         let audioDiv = document.getElementsByClassName("audioDiv");
         for(let i = 0;i < audioDiv.length;i++){
           audioDiv[i].style.display = 'none';
@@ -467,12 +535,12 @@
       },
 
       getDuration(refId){
+        this.loading = false;
         for(let i = 0;i < this.musicTimes.length;i++){
           if(this.musicTimes[i].key == refId){
             this.musicTimes[i].value = this.transTime(this.$refs[refId][0].duration);
           }
         }
-        this.loading = false;
       },
 
       addMusicId(refId){

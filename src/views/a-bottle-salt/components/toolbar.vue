@@ -10,8 +10,8 @@
         </td>
         <td style="width: 60rem;height: 100%;position: relative;vertical-align: top;">
           <el-breadcrumb separator="   ">
-            <el-breadcrumb-item :to="item.url" v-for="item in breadcrumbs" :key="item.url">
-              <span class="barFont" style="font-style: italic">{{item['menuName'+$store.getters.getLanguage]}}</span>
+            <el-breadcrumb-item ref="childSpan" :to="item.url" v-for="item in breadcrumbs" :key="item.url">
+              <span class="barFont anation" style="font-style: italic">{{item['menuName'+$store.getters.getLanguage]}}</span>
             </el-breadcrumb-item>
           </el-breadcrumb>
         </td>
@@ -94,6 +94,34 @@
         }
       })
     },
+    mounted(){
+      let that = this;
+      window.setTimeout(function() {
+        let arr = ['/ourServices','/Projects','/Team','/News','/Contacts','/Partners']
+        let index = -1;
+        for(let i = 0;i < arr.length;i++){
+          if(arr[i] == that.$route.path){
+            index = i;
+            break;
+          }
+        }
+        if(index != -1) {
+          for (let i = 0; i < that.$refs.childSpan.length; i++) {
+            if (i == index) {
+              if (that.$refs.childSpan[i].$el.children[0].children[0].classList.contains("anation")) {
+                that.$refs.childSpan[i].$el.children[0].children[0].classList.remove("anation");
+                that.$refs.childSpan[i].$el.children[0].children[0].style.color = '#BE4123'
+              }
+            } else {
+              if (!that.$refs.childSpan[i].$el.children[0].children[0].classList.contains("anation")) {
+                that.$refs.childSpan[i].$el.children[0].children[0].classList.add("anation");
+                that.$refs.childSpan[i].$el.children[0].children[0].style.color = '#9F9E9A'
+              }
+            }
+          }
+        }
+      },100);
+    },
     methods: {
 
       backToFirstPage() {
@@ -150,7 +178,7 @@
     font-weight: 100;
   }
 
-  .barFont:hover {
+  .anation:hover {
     animation: change 0.3s linear 0s;
     animation-iteration-count: 1;
     animation-fill-mode:forwards;

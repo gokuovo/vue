@@ -12,8 +12,8 @@ const name = defaultSettings.title || 'SALT SOUND STUDIO' // page title
 // use administrator privileges to execute the command line.
 // For example, Mac: sudo npm run
 // You can change the port by the following method:
-// port = 9527 npm run dev OR npm run dev --port = 9527
-const port = 9527 || process.env.port || process.env.npm_config_port // dev port
+// port = 80 npm run dev OR npm run dev --port = 80
+const port = 80 || process.env.port || process.env.npm_config_port // dev port
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {

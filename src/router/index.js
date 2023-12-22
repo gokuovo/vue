@@ -94,10 +94,10 @@ export const constantRoutes = [
     meta: {index: 2}
   },
   {
-    path: '/Projects',
+    path: '/Projects:path(.*)',
     component: () => import('@/views/a-bottle-salt/Projects'),
     meta: {index: 3}
-  },
+},
   {
     path: '/Team',
     component: () => import('@/views/a-bottle-salt/Team'),
@@ -429,7 +429,7 @@ export const asyncRoutes = [
 ]
 
 const createRouter = () => new Router({
-  // mode: 'history', // require service support
+  mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })

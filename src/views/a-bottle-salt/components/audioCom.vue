@@ -98,6 +98,7 @@
           this.videoStart = this.transTime(this.$refs.audioRef.currentTime)
         }
         if (e.target.ended) {//歌曲播放结束,重置状态
+          this.$parent.musicItemClick(null);
           this.audioStatus = 0
           this.videoStart = '00:00'
           this.value = 0
@@ -173,19 +174,19 @@
     height: 1px;
     background: #eee;
   }
-  /*[type="range"]::-webkit-slider-runnable-track:hover {*/
-  /*  height: 5px;*/
-  /*  background: #eee;*/
-  /*}*/
+  [type="range"]::-webkit-slider-runnable-track:hover {
+    height: 4px;
+    background: #eee;
+  }
 
   [type="range" i]::-webkit-slider-container {
     height: 1px;
     overflow: hidden;
   }
-  /*[type="range" i]::-webkit-slider-container:hover {*/
-  /*  height: 5px;*/
-  /*  overflow: hidden;*/
-  /*}*/
+  [type="range" i]::-webkit-slider-container:hover {
+    height: 4px;
+    overflow: hidden;
+  }
 
   [type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;

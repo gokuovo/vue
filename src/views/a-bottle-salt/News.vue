@@ -18,15 +18,15 @@
               <vue-custom-scrollbar ref="childScrollbar" class="scroll-area" :settings="settings" style="width: 72.81rem;height: 33.75rem">
 
                 <div v-for="(item) in newsData"  style="display: inline-block;width: 31.625rem;height: 8.75rem;position: relative;margin-bottom: 3.75rem">
-                  <img style="width: 8.75rem;height: 8.75rem;position: absolute;object-fit: cover;" :src="item.url" />
+                  <img @click="justClick(item)" style="width: 8.75rem;height: 8.75rem;position: absolute;object-fit: cover;" :src="item.url" />
                   <div style="width: 21rem;height: 100%;position: absolute;left: 10.625rem">
                     <table class="divBase">
                       <tr>
                         <td class="divBase BoldItalic" style="vertical-align: middle">
-                          <div class="font1" style="margin-bottom: 0.625rem">{{item['title'+$store.getters.getLanguage]}}</div>
+                          <div @click="justClick(item)" class="font1" style="margin-bottom: 0.625rem">{{item['title'+$store.getters.getLanguage]}}</div>
                           <div class="font2"  style="margin-bottom: 1.3125rem">DATE:{{item['date'+$store.getters.getLanguage]}}</div>
                           <div style="font-style: italic;">
-                            <a :href="item.link" :target="item.link.indexOf('http') != -1 ? '_blank' : '_self' ">
+                            <a :href="hrefSkip(item)" :target="item.link.indexOf('http') != -1 ? '_blank' : '_self' ">
                               <span class="font3" style="text-decoration: underline;" @mouseout="mouseOut($event)" @mouseover="mouseOver($event)">EXPLORE</span>&emsp;
                               <img style="width: 0.75rem;height: 0.75rem;opacity: 1" src="../../assets/images/jiantou.png"/>
                             </a>
@@ -105,6 +105,20 @@
       })
     },
     methods: {
+      hrefSkip(item){
+        let href = window.document.location.href.split("\/")[2];
+        if(item.link.indexOf('http') != -1){
+          return item.link;
+        }else{
+          return "http://"+href+item.link+"?id="+item.id;
+        }
+      },
+      justClick(item){
+        let href = window.document.location.href.split("\/")[2];
+        if(item.link.indexOf("meltingGames") != -1){
+          window.open('http://'+href+'/news/meltingGames.html','_blank');
+        }
+      },
       mouseOut(event){
         event.target.classList.remove("xiaoshi1");
         event.target.classList.remove("chuxian1");
