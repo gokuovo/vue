@@ -41,6 +41,10 @@
       </table>
     </div>
 
+    <div style="position: absolute;bottom: 2rem;left: 50%;color: #514f4f;">
+      <a href="https://beian.miit.gov.cn/" target="_blank">京ICP备20006697号-1</a>
+    </div>
+
   </div>
 </template>
 
